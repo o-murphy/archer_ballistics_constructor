@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+
+from PyQt5 import QtCore
+import libusb
+import usb.core
+import os
+
+
+class UsbStatusCode:
+    DRIVER_ERROR = 'Driver not installed'
+    DFU_NOT_CONNECTED = 'No DFU device found'
+    MULTIPLE_DFU = 'Multiple DFU devices found'
+    CONNECTED = 'Successfully Connected'
+
+
+class lpcRunThread(object):
+
+    def setupLpcTread(self):
+        self.thread = QtCore.QThread()
+        self.lpc_device_handler = lpcDeviceHandler()
+        self.lpc_device_handler.moveToThread(self.thread)
+        self.lpc_device_handler.newLpcDeviceStatus.connect(self.updateLpcDeviceStatus)
+        self.thread.started.connect(self.lpc_device_handler.run)
+        self.thread.start()
+
+    @QtCore.pyqtSlot(str)
+    def updateLpcDeviceStatus(self, status):
+        if hasattr(self, 'objectName'):
+            print(status, self.objectName())
+
+
+class lpcDeviceHandler(QtCore.QObject):
+    running = False
+    newLpcDeviceStatus = QtCore.pyqtSignal(str)  # *args
+    __VID = 0x1FC9
+    __PID = 0x000C
+    __dev = None
+
+    def run(self):
+        while True:
+            self.newLpcDeviceStatus.emit(str(self.check()))
+            QtCore.QThread.msleep(100)
+
+    @staticmethod
+    def get_dfu_devices(*args, **kwargs):
+        return list(usb.core.find(*args, find_all=True, **kwargs))
+
+    def check(self):
+        """Initializes the found DFU device so that we can program it."""
+        try:
+            devices = self.get_dfu_devices(idVendor=self.__VID, idProduct=self.__PID)
+
+            if not devices:
+                raise ValueError(UsbStatusCode.DFU_NOT_CONNECTED)
+            if len(devices) > 1:
+                raise ValueError(UsbStatusCode.MULTIPLE_DFU)
+
+        except ValueError as error:
+            return error
+        return UsbStatusCode.CONNECTED
+
+
+# def check_lpc_driver():
+#     try:
+#         lpc_driver_path = os.listdir(os.environ['PROGRAMFILES'] + r'\NXP\LPC Driver Installer\lpcdevice')
+#         if lpc_driver_path:
+#             if r'lpcdevice.cat' in lpc_driver_path:
+#                 return True
+#             else:
+#                 raise FileNotFoundError
+#     except FileNotFoundError:
+#         return False
+#
+#
+# def install_lpc_driver():
+#     os.system(r'start drv\lpc_driver_setup.exe')
+#     pass
+
+
+if __name__ == '__main__':
+    pass
