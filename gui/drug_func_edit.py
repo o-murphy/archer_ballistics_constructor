@@ -56,8 +56,9 @@ class DrugFuncEditDialog(QtWidgets.QDialog, Ui_DrugFuncEdit):
             self.distances.append((i+1)*100)
             vz = QtWidgets.QTableWidgetItem()
             self.tableWidget_2.setItem(i, 1, vz)
+        self.calculate_bullet_drop()
 
-        self.Calculate.clicked.connect(self.update_zeroing_table)
+        self.Calculate.clicked.connect(self.calculate_bullet_drop)
 
     def switch_plot_drop(self):
         self.drag_plot.setVisible(False)
@@ -69,7 +70,7 @@ class DrugFuncEditDialog(QtWidgets.QDialog, Ui_DrugFuncEdit):
         self.drop_plot.setVisible(False)
         pass
 
-    def update_zeroing_table(self):
+    def calculate_bullet_drop(self):
         self.current_drop.clear()
         self.current_drop = drop_by_drag.calculate(self.current_data, self.distances)
         for k, v in enumerate(self.current_drop):
@@ -96,7 +97,7 @@ class DrugFuncEditDialog(QtWidgets.QDialog, Ui_DrugFuncEdit):
         self.drag_plot.set_limits(self.dox, self.doy)
         self.drag_plot.set_text(self.dox[self.doy.index(max(self.doy))], max(self.doy), max(self.doy))
         self.drag_plot.current_point_text.setColor(color=(255, 255, 255))
-        self.update_zeroing_table()
+        self.calculate_bullet_drop()
 
     def append_updates(self):
         self.update_table()
@@ -106,7 +107,7 @@ class DrugFuncEditDialog(QtWidgets.QDialog, Ui_DrugFuncEdit):
         self.drag_plot.set_limits(ox + self.dox, oy + self.doy)
         self.drag_plot.set_text(ox[oy.index(max(oy))], max(oy), max(self.doy))
         self.drag_plot.current_point_text.setColor(color=(255, 170, 0))
-        self.update_zeroing_table()
+        self.calculate_bullet_drop()
 
     @staticmethod
     def parse_data(data: list) -> dict or None:
