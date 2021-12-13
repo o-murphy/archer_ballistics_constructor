@@ -67,12 +67,8 @@ class ProfilesTab(UiProfilesTab):
             rb.clicked.connect(self.update_current_profile)
 
     def drug_func_edit(self):
-        dialog = DrugFuncEditDialog()
-
-        if dialog.exec_():
-            pass
-        else:
-            pass
+        drug_func_dlg = DrugFuncEditDialog()
+        new_drug_func = drug_func_dlg.current_data if drug_func_dlg.exec_() else drug_func_dlg.default_data
 
     @staticmethod
     def get_datetime():
