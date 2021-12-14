@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtWidgets
-# from gui.templates import Ui_DragPlot
 import pyqtgraph as pg
 
 
-class DrugPlot(QtWidgets.QWidget):
+class DragPlot(QtWidgets.QWidget):
     def __init__(self, name):
         super().__init__()
         self.setObjectName(name)

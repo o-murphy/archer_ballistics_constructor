@@ -6,7 +6,7 @@ import math
 from datetime import datetime
 import os
 from modules.env_update import USER_RECENT, USER_BACKUP
-from gui import DrugFuncEditDialog
+from gui import DragFuncEditDialog
 from gui.recent_dlg import RecentDialog
 from gui.profile_item import WProfileItem
 
@@ -67,7 +67,7 @@ class ProfilesTab(UiProfilesTab):
             rb.clicked.connect(self.update_current_profile)
 
     def drug_func_edit(self):
-        drug_func_dlg = DrugFuncEditDialog()
+        drug_func_dlg = DragFuncEditDialog()
         new_drug_func = drug_func_dlg.current_data if drug_func_dlg.exec_() else drug_func_dlg.default_data
 
     @staticmethod
