@@ -1,25 +1,28 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 
 
 USER_PATH = rf'{os.environ["HOMEDRIVE"]}{os.environ["HOMEPATH"]}'
 USER_DOCS = rf'{USER_PATH}\Documents'
+
 USER_ARCHERBC = rf'{USER_DOCS}\ArcherBC'
 USER_RECENT = rf'{USER_ARCHERBC}\Recent'
 USER_BACKUP = rf'{USER_ARCHERBC}\Backup'
+MK_DIRS = [USER_ARCHERBC, USER_RECENT, USER_BACKUP]
+
+USER_TEMP = rf'{USER_ARCHERBC}\temp'
+RM_DIRS = [USER_TEMP]
 
 
 def main():
-    # if 'ArcherBC' not in os.listdir(USER_DOCS):
-    if not os.path.isdir(USER_ARCHERBC):
-        os.mkdir(USER_ARCHERBC)
-    # if 'Recent' not in os.listdir(USER_ARCHERBC):
-    if not os.path.isdir(USER_RECENT):
-        os.mkdir(USER_RECENT)
-    # if 'Backup' not in os.listdir(USER_ARCHERBC):
-    if not os.path.isdir(USER_BACKUP):
-        os.mkdir(USER_BACKUP)
+    for dir in MK_DIRS:
+        if not os.path.isdir(dir):
+            os.mkdir(dir)
+    for dir in RM_DIRS:
+        if os.path.isdir(dir):
+            shutil.rmtree(dir)
 
 
 if __name__ == '__main__':
