@@ -63,19 +63,22 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
 
     def check_updates(self):
         branch_url = 'https://api.github.com/repos/o-murphy/archer_ballistics_constructor/releases'
-        response = urllib.request.urlopen(branch_url)
-        if response.getcode() == 200:
-            j = json.loads(response.read().decode("utf-8"))
-            last_release = j[len(j)-1]
-            last_v = last_release['tag_name']
-            if last_v != self.current_v:
-                self.download_url = last_release['assets'][0]['browser_download_url']
-                self.download_filename = last_release['assets'][0]['name']
+        try:
+            response = urllib.request.urlopen(branch_url)
+            if response.getcode() == 200:
+                j = json.loads(response.read().decode("utf-8"))
+                last_release = j[len(j)-1]
+                last_v = last_release['tag_name']
+                if last_v != self.current_v:
+                    self.download_url = last_release['assets'][0]['browser_download_url']
+                    self.download_filename = last_release['assets'][0]['name']
 
-        if self.download_url:
-            self.label.setText('New version of ArcherBC found,\ndo you want to update?')
-            self.buttonBox.setVisible(True)
-        else:
+            if self.download_url:
+                self.label.setText('New version of ArcherBC found,\ndo you want to update?')
+                self.buttonBox.setVisible(True)
+            else:
+                self.reject()
+        except:
             self.reject()
 
     def accept(self):
