@@ -74,7 +74,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.current_drop.clear()
         self.current_drop = drop_by_drag.calculate(self.current_data, self.distances)
         for k, v in enumerate(self.current_drop):
-
             self.tableWidget_2.item(k, 1).setText(str(round(v, 2)))
 
     def update_table(self):
