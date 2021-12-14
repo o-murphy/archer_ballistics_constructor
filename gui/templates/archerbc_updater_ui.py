@@ -15,6 +15,11 @@ class Ui_ArcheBCUpdate(object):
     def setupUi(self, ArcheBCUpdate):
         ArcheBCUpdate.setObjectName("ArcheBCUpdate")
         ArcheBCUpdate.resize(516, 104)
+        ArcheBCUpdate.setMinimumSize(QtCore.QSize(516, 104))
+        ArcheBCUpdate.setMaximumSize(QtCore.QSize(516, 104))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui_templates\\../.rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        ArcheBCUpdate.setWindowIcon(icon)
         ArcheBCUpdate.setStyleSheet("QWidget {\n"
 "    background-color: rgb(51, 51, 51);\n"
 "    color: white;\n"

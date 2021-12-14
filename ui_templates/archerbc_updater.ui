@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>ArcherBC Update</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../.rsrc/Icon.ico</normaloff>../.rsrc/Icon.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
 	background-color: rgb(51, 51, 51);

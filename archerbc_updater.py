@@ -13,6 +13,11 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
         super().__init__()
         self.setupUi(self)
 
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(".rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.window().setWindowIcon(icon)
+
+
         self.current_file = None
         self.get_current_executable()
 
@@ -89,9 +94,8 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
         self.reject()
 
     def reject(self):
-        print('in')
-        # if self.current_file == r'archerbc.py':
-        #     os.system(fr'start venv\Scripts\python.exe {self.current_file}')
+        if self.current_file == r'archerbc.py':
+            os.system(fr'start venv\Scripts\python.exe {self.current_file}')
         if self.current_file == 'archerbc.exe':
             os.system(fr'start {self.current_file}')
         sys.exit()

@@ -33,9 +33,9 @@ StringFileInfo(
     StringStruct(u'FileDescription', u'archerbc'),
     StringStruct(u'FileVersion', u'v0.0.3-alpha'),
     StringStruct(u'InternalName', u'archerbc'),
-    StringStruct(u'LegalCopyright', u'Copyright (c) The Apache Software Foundation'),
+    StringStruct(u'LegalCopyright', u'Copyright (c) Thermal Vision Technologies'),
     StringStruct(u'OriginalFilename', u'archerbc.exe'),
-    StringStruct(u'ProductName', u'Subversion'),
+    StringStruct(u'ProductName', u'ArcherBC'),
     StringStruct(u'ProductVersion', u'v0.0.3-alpha')])
   ]),
 VarFileInfo([VarStruct(u'Translation', [1033, 1200])])

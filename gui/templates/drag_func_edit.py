@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_templates\drag_func_edit.ui'
+# Form implementation generated from reading ui file 'ui_templates\drug_func_edit.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -23,7 +23,7 @@ class Ui_Form(object):
         Form.setMinimumSize(QtCore.QSize(676, 493))
         Form.setMaximumSize(QtCore.QSize(572, 493))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui_templates\\../../.rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("ui_templates\\../.rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
 "    background-color: rgb(51, 51, 51);\n"
