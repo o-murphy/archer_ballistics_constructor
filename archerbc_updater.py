@@ -30,7 +30,7 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
     def get_current_executable(self):
         if os.path.isfile(r'archerbc.py'):
             self.current_file = r'archerbc.py'
-        elif os.path.isfile('archerbc.exe'):
+        if os.path.isfile('archerbc.exe'):
             self.current_file = r'archerbc.exe'
 
     def get_current_ver(self):
@@ -69,16 +69,18 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
                 j = json.loads(response.read().decode("utf-8"))
                 last_release = j[0]
                 last_v = last_release['tag_name']
+                print(self.current_file, self.current_v, last_v)
                 if last_v != self.current_v:
                     self.download_url = last_release['assets'][0]['browser_download_url']
                     self.download_filename = last_release['assets'][0]['name']
+        except Exception as err:
+            print(err)
+            self.reject()
 
-            if self.download_url:
-                self.label.setText('New version of ArcherBC found,\ndo you want to update?')
-                self.buttonBox.setVisible(True)
-            else:
-                self.reject()
-        except:
+        if self.download_url:
+            self.label.setText('New version of ArcherBC found,\ndo you want to update?')
+            self.buttonBox.setVisible(True)
+        else:
             self.reject()
 
     def accept(self):
@@ -87,9 +89,10 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
         self.reject()
 
     def reject(self):
-        if self.current_file == r'archerbc.py':
-            os.system(fr'start venv\Scripts\python.exe {self.current_file}')
-        elif self.current_file == 'archerbc.exe':
+        print('in')
+        # if self.current_file == r'archerbc.py':
+        #     os.system(fr'start venv\Scripts\python.exe {self.current_file}')
+        if self.current_file == 'archerbc.exe':
             os.system(fr'start {self.current_file}')
         sys.exit()
 
