@@ -67,7 +67,7 @@ class UpdaterApp(QtWidgets.QMainWindow, Ui_ArcheBCUpdate):
             response = urllib.request.urlopen(branch_url)
             if response.getcode() == 200:
                 j = json.loads(response.read().decode("utf-8"))
-                last_release = j[len(j)-1]
+                last_release = j[0]
                 last_v = last_release['tag_name']
                 if last_v != self.current_v:
                     self.download_url = last_release['assets'][0]['browser_download_url']
