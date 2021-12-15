@@ -2,6 +2,10 @@ from PyQt5 import QtCore, QtWidgets
 import pyqtgraph as pg
 
 
+def rnd4(val: float) -> float:
+    return round(val, 4)
+
+
 class DragPlot(QtWidgets.QWidget):
     def __init__(self, name):
         super().__init__()
@@ -12,6 +16,7 @@ class DragPlot(QtWidgets.QWidget):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(4)
         self.graphWidget = pg.PlotWidget()
+
         self.verticalLayout.addWidget(self.graphWidget)
 
         self.graphWidget.showGrid(x=True, y=True, alpha=0.3)
@@ -21,12 +26,19 @@ class DragPlot(QtWidgets.QWidget):
 
         self.current_point = self.graphWidget.plot()
         self.current_point_text = pg.TextItem(text="", color=(255, 255, 255), anchor=(0, 1))
+
         self.text_item = pg.TextItem(text="", color=(0, 255, 255), anchor=(1, 1))
         self.peak_line = pg.InfiniteLine(pen=pg.mkPen(color='w', style=QtCore.Qt.DotLine))
+
+        self.cd_at_distance = pg.InfiniteLine(pen=pg.mkPen(color='r', style=QtCore.Qt.DashLine))
+        self.cd_at_distance.setVisible(False)
+        self.cd_at_distance_text = pg.TextItem(text="", color='r', anchor=(0, 1))
 
         self.graphWidget.addItem(self.peak_line)
         self.graphWidget.addItem(self.text_item)
         self.graphWidget.addItem(self.current_point_text)
+        self.graphWidget.addItem(self.cd_at_distance)
+        self.graphWidget.addItem(self.cd_at_distance_text)
 
         self.setMouseTracking(True)
         self.graphWidget.scene().sigMouseMoved.connect(self.onMouseMoved)
@@ -44,11 +56,11 @@ class DragPlot(QtWidgets.QWidget):
             p = self.graphWidget.plotItem.vb.mapSceneToView(point)
             ox, oy = self.parent().parse_data(self.parent().current_data)  # !!! temporary
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
-            text = 'x: {}, y: {}'.format(round(x, 4), round(oy[ix], 4))
-            self.current_point.setData(x=[round(x, 4)], y=[round(oy[ix], 4)],
+            text = 'x: {}, {}m/s, y: {}'.format(rnd4(x), rnd4(x)*343, rnd4(oy[ix]))
+            self.current_point.setData(x=[rnd4(x)], y=[rnd4(oy[ix])],
                                        symbolSize=10,
                                        symbolBrush=pg.mkBrush(100, 100, 255, 100))
-            self.current_point_text.setPos(round(x, 4), round(oy[ix], 4))
+            self.current_point_text.setPos(rnd4(x), rnd4(oy[ix]))
             self.current_point_text.setText(text)
 
     def set_limits(self, ox, oy):

@@ -1,11 +1,8 @@
 from bin import archer_ballistics
 
 
-def calculate(drag_function: list, distances: list) -> list:
-    drag_function_data = []
-    [[drag_function_data.append(j) for j in i] for i in drag_function[::-1]]
-    archer_ballistics.set_drag_function(drag_function_data)
-    return archer_ballistics.get_drop_at_distance(distances)
+def rnd4(val: float) -> float:
+    return round(val, 4)
 
 
 class ArcherBallistics(object):
@@ -23,21 +20,21 @@ class ArcherBallistics(object):
         self.drop_at_distance = self.ballistics.get_drop_at_distance(distances)
 
     def get_cd_at_distance(self, distance: list = None):
-        self.cd_at_distance = round(self.ballistics.get_cd_at_distance(distance), 4)
+        self.cd_at_distance = rnd4(self.ballistics.get_cd_at_distance(distance))
 
-    def calculate_drop(self, distances: list = None, drag_function: list = None) -> list:
+    def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
         if drag_function:
             self.set_drag_function(drag_function)
         self.get_drop_at_distance(distances)
         return self.drop_at_distance
 
-    def calculate_cd(self, distance: float = None, drag_function: list = None) -> float:
+    def calculate_cd(self, drag_function: list = None, distance: float = None) -> float:
         if drag_function:
             self.set_drag_function(drag_function)
         self.get_cd_at_distance(distance)
+        print(self.cd_at_distance)
         return self.cd_at_distance
 
 
 if __name__ == '__main__':
-    print(archer_ballistics.get_drop_at_distance([100, 200]))
     pass

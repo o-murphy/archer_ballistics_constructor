@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_templates\drug_func_edit.ui'
+# Form implementation generated from reading ui file 'ui_templates\drag_func_edit.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -210,8 +210,8 @@ class Ui_Form(object):
         self.Calculate.setText(_translate("Form", "Calculate"))
         self.Down.setText(_translate("Form", "Down"))
         item = self.tableWidget.verticalHeaderItem(0)
-        item.setText(_translate("Form", "v"))
+        item.setText(_translate("Form", "x"))
         item = self.tableWidget.verticalHeaderItem(1)
-        item.setText(_translate("Form", "i"))
+        item.setText(_translate("Form", "y"))
         self.label.setText(_translate("Form", "Step"))
         self.Step.setSuffix(_translate("Form", " %"))

@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../.rsrc/Icon.ico</normaloff>../../.rsrc/Icon.ico</iconset>
+    <normaloff>../.rsrc/Icon.ico</normaloff>../.rsrc/Icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
@@ -345,12 +345,12 @@ QGroupBox::title {
      </attribute>
      <row>
       <property name="text">
-       <string>v</string>
+       <string>x</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>i</string>
+       <string>y</string>
       </property>
      </row>
     </widget>

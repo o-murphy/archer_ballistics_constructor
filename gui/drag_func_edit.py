@@ -1,7 +1,11 @@
 from gui.templates import Ui_DragFuncEdit
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from gui.drag_func_plot import DragPlot
 from modules import drop_by_drag
+
+
+def rnd4(val: float) -> float:
+    return round(val, 4)
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
@@ -9,6 +13,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
+
+        self.ballistics = drop_by_drag.ArcherBallistics()
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DragPlot('drop_plot')
@@ -21,10 +27,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
 
         self.default_data = data
         self.current_data = data
+        self.current_distance = None
+
+
 
         self.update_table()
 
         self.dox, self.doy = self.parse_data(self.default_data)
+
+        drag_plot_axis = self.drag_plot.graphWidget.getPlotItem().getAxis('bottom')
+        drag_plot_axis.setScale(343)
+
         self.drag_plot.default_plot.setData(self.dox, self.doy)
 
         self.drag_plot.set_limits(self.dox, self.doy)
@@ -48,7 +61,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
 
         self.distances = []
         self.current_drop = []
-        for i in range(0, 10):
+        for i in range(0, 30):
             self.tableWidget_2.insertRow(i)
             dist = QtWidgets.QTableWidgetItem()
             dist.setText(str((i+1)*100))
@@ -57,8 +70,36 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
             vz = QtWidgets.QTableWidgetItem()
             self.tableWidget_2.setItem(i, 1, vz)
         self.calculate_bullet_drop()
-
         self.Calculate.clicked.connect(self.calculate_bullet_drop)
+        self.tableWidget_2.clicked.connect(lambda item: self.cd_at_distance(item))
+
+    # def wheelEvent(self, a0: QtGui.QWheelEvent) -> None:
+    #     self.scale()
+
+    # def scale(self):
+    #     # aspect_ratio = self.drag_plot.graphWidget.getPlotItem().vb
+    #     # print(int(aspect_ratio))
+    #
+    #
+    #     # drag_plot_axis = self.drag_plot.graphWidget.getPlotItem().getAxis('bottom')
+    #     # print(drag_plot_axis.tickValues(x1, x2, 1))
+    #     # print(drag_plot_axis.tickValues(x1, x2, 2))
+    #     # drag_plot_axis.setTicks(
+    #     #     [list(zip(self.dox, [str(int(x * 343)) for x in self.dox]))]
+    #     # )
+
+    def cd_at_distance(self, item=None):
+        if item:
+            self.current_distance = float(self.tableWidget_2.item(item.row(), 0).text())
+        self.ballistics.calculate_cd(distance=self.current_distance)
+
+        ox, oy = self.parse_data(self.current_data)
+        x, y = rnd4(self.ballistics.cd_at_distance), rnd4(min(oy))
+
+        self.drag_plot.cd_at_distance.setVisible(True)
+        self.drag_plot.cd_at_distance_text.setText(str(x*343))
+        self.drag_plot.cd_at_distance_text.setPos(x, y)
+        self.drag_plot.cd_at_distance.setPos((x, y))
 
     def switch_plot_drop(self):
         self.drag_plot.setVisible(False)
@@ -72,9 +113,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
 
     def calculate_bullet_drop(self):
         self.current_drop.clear()
-        self.current_drop = drop_by_drag.calculate(self.current_data, self.distances)
+        self.current_drop = self.ballistics.calculate_drop(self.current_data, self.distances)
         for k, v in enumerate(self.current_drop):
             self.tableWidget_2.item(k, 1).setText(str(round(v, 2)))
+        if self.current_distance:
+            self.cd_at_distance()
 
     def update_table(self):
         for i in range(self.tableWidget.columnCount()):
@@ -83,11 +126,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
             for k, v in enumerate(self.current_data):
                 self.tableWidget.insertColumn(k)
                 iv = QtWidgets.QTableWidgetItem()
-                iv.setText(str(round(v[0], 4)))
+                iv.setText(str(rnd4(v[0])))
                 self.tableWidget.setItem(0, k, iv)
                 ii = QtWidgets.QTableWidgetItem()
-                ii.setText(str(round(v[1], 4)))
+                ii.setText(str(rnd4(v[1])))
                 self.tableWidget.setItem(1, k, ii)
+        self.drag_plot.current_point.setData()
+        self.drag_plot.current_point_text.setText("")
 
     def reset(self):
         self.current_data = self.default_data
