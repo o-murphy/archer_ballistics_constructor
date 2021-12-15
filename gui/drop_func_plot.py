@@ -27,9 +27,12 @@ class DropPlot(DragPlot):
             self.current_point_text.setText(text)
 
     def set_limits(self, ox, oy):
-        self.graphWidget.getViewBox().setLimits(
+        vb = self.graphWidget.getViewBox()
+        vb.setXRange(0, 1100)
+        vb.setYRange(0, oy[ox.index(1100)])
+        vb.setLimits(
             xMin=-50, xMax=max(ox)+350,
-            yMin=-5000, yMax=max(oy)+1000,
+            yMin=min(oy)-5000, yMax=max(oy)+1000,
             minXRange=(max(ox)+500)/10, maxXRange=max(ox)+500,
-            minYRange=(max(oy)+6000)/10, maxYRange=max(oy)+6000
+            minYRange=(max(oy)+6000)/100, maxYRange=max(oy)+6000
         )

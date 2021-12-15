@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,12 +22,6 @@
   <property name="minimumSize">
    <size>
     <width>676</width>
-    <height>493</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>572</width>
     <height>493</height>
    </size>
   </property>
@@ -86,182 +83,19 @@ QGroupBox::title {
 	background-color: rgb(40, 40, 40);
 }</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0">
-   <item row="0" column="0">
-    <widget class="QTableWidget" name="tableWidget_3">
-     <property name="minimumSize">
-      <size>
-       <width>140</width>
-       <height>0</height>
-      </size>
-     </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>60</number>
-     </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>45</number>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>Speed</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>BC</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="1" column="5">
-    <widget class="QWidget" name="widget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="spacing">
-       <number>4</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QRadioButton" name="radioDrag">
-        <property name="text">
-         <string>Drag</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioDrop">
-        <property name="text">
-         <string>Drop</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="4">
-    <widget class="QPushButton" name="EndDown">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>End Down</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="PeakUp">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Peak Up</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="QPushButton" name="EndUp">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>End Up</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="Up">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Up</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3">
-    <widget class="QPushButton" name="PeakDown">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Peak Down</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="6">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Reset</set>
-     </property>
-     <property name="centerButtons">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0">
+   <item row="0" column="2">
     <widget class="QTableWidget" name="tableWidget_2">
      <property name="minimumSize">
       <size>
        <width>140</width>
        <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>16777215</height>
       </size>
      </property>
      <property name="verticalScrollBarPolicy">
@@ -291,33 +125,282 @@ QGroupBox::title {
      </column>
     </widget>
    </item>
-   <item row="2" column="5">
+   <item row="0" column="0">
+    <widget class="QTableWidget" name="tableWidget_3">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>60</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>45</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Speed</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>BC</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QSpinBox" name="Step">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>69</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="suffix">
+      <string> %</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QWidget" name="widget_2" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="Up">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Up</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="PeakUp">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Peak Up</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="EndUp">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>End Up</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>69</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Step</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QRadioButton" name="radioDrag">
+        <property name="text">
+         <string>Drag</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioDrop">
+        <property name="text">
+         <string>Drop</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QWidget" name="widget_3" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="Down">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Down</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="PeakDown">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Peak Down</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="EndDown">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>End Down</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="2">
     <widget class="QPushButton" name="Calculate">
      <property name="text">
       <string>Calculate</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QPushButton" name="Down">
-     <property name="minimumSize">
-      <size>
-       <width>116</width>
-       <height>0</height>
-      </size>
+   <item row="5" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Reset</set>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Down</string>
+     <property name="centerButtons">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="6">
+   <item row="4" column="0" colspan="3">
     <widget class="QTableWidget" name="tableWidget">
      <property name="maximumSize">
       <size>
@@ -353,41 +436,6 @@ QGroupBox::title {
        <string>y</string>
       </property>
      </row>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="minimumSize">
-      <size>
-       <width>69</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Step</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QSpinBox" name="Step">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>69</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="suffix">
-      <string> %</string>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
     </widget>
    </item>
   </layout>

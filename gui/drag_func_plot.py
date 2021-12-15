@@ -10,8 +10,9 @@ class DragPlot(QtWidgets.QWidget):
     def __init__(self, name):
         super().__init__()
         self.setObjectName(name)
-        self.setMaximumHeight(300)
-
+        # self.setMaximumHeight(300)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.setSizePolicy(sizePolicy)
         self.verticalLayout = QtWidgets.QHBoxLayout(self)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(4)
