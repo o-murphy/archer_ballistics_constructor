@@ -29,6 +29,7 @@ class DragPlot(QtWidgets.QWidget):
 
         self.text_item = pg.TextItem(text="", color=(0, 255, 255), anchor=(1, 1))
         self.peak_line = pg.InfiniteLine(pen=pg.mkPen(color='w', style=QtCore.Qt.DotLine))
+        self.peak_line.setVisible(False)
 
         self.cd_at_distance = pg.InfiniteLine(pen=pg.mkPen(color='r', style=QtCore.Qt.DashLine))
         self.cd_at_distance.setVisible(False)

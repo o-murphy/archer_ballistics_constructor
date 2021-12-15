@@ -1,6 +1,7 @@
 from gui.templates import Ui_DragFuncEdit
 from PyQt5 import QtWidgets, QtGui
 from gui.drag_func_plot import DragPlot
+from gui.drop_func_plot import DropPlot
 from modules import drop_by_drag
 
 
@@ -17,7 +18,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.ballistics = drop_by_drag.ArcherBallistics()
 
         self.drag_plot = DragPlot('drag_plot')
-        self.drop_plot = DragPlot('drop_plot')
+
+        self.drop_plot = DropPlot('drop_plot')
+        self.drop_plot.graphWidget.getPlotItem().vb.invertY(True)
+
 
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 1, 4)
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 1, 4)
@@ -29,20 +33,19 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.current_data = data
         self.current_distance = None
 
-
-
         self.update_table()
 
         self.dox, self.doy = self.parse_data(self.default_data)
 
-        drag_plot_axis = self.drag_plot.graphWidget.getPlotItem().getAxis('bottom')
-        drag_plot_axis.setScale(343)
+        # drag_plot_axis = self.drag_plot.graphWidget.getPlotItem().getAxis('bottom')
+        # drag_plot_axis.setScale(343)
 
         self.drag_plot.default_plot.setData(self.dox, self.doy)
 
         self.drag_plot.set_limits(self.dox, self.doy)
         self.drag_plot.set_text(self.dox[self.doy.index(max(self.doy))], max(self.doy), max(self.doy))
         self.drag_plot.peak_line.setPos((self.dox[self.doy.index(max(self.doy))], 0))
+        self.drag_plot.peak_line.setVisible(True)
 
         self.PeakUp.clicked.connect(lambda: self.set_coefficient('mid', 1))
         self.PeakDown.clicked.connect(lambda: self.set_coefficient('mid', -1))
@@ -70,23 +73,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
             vz = QtWidgets.QTableWidgetItem()
             self.tableWidget_2.setItem(i, 1, vz)
         self.calculate_bullet_drop()
+
+        self.default_drop = self.current_drop
+        self.drop_plot.set_limits(self.distances, self.default_drop)
+        self.drop_plot.default_plot.setData(self.distances, self.default_drop)
+
         self.Calculate.clicked.connect(self.calculate_bullet_drop)
         self.tableWidget_2.clicked.connect(lambda item: self.cd_at_distance(item))
-
-    # def wheelEvent(self, a0: QtGui.QWheelEvent) -> None:
-    #     self.scale()
-
-    # def scale(self):
-    #     # aspect_ratio = self.drag_plot.graphWidget.getPlotItem().vb
-    #     # print(int(aspect_ratio))
-    #
-    #
-    #     # drag_plot_axis = self.drag_plot.graphWidget.getPlotItem().getAxis('bottom')
-    #     # print(drag_plot_axis.tickValues(x1, x2, 1))
-    #     # print(drag_plot_axis.tickValues(x1, x2, 2))
-    #     # drag_plot_axis.setTicks(
-    #     #     [list(zip(self.dox, [str(int(x * 343)) for x in self.dox]))]
-    #     # )
 
     def cd_at_distance(self, item=None):
         if item:
@@ -100,6 +93,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.drag_plot.cd_at_distance_text.setText(str(x*343))
         self.drag_plot.cd_at_distance_text.setPos(x, y)
         self.drag_plot.cd_at_distance.setPos((x, y))
+
+        self.drop_plot.cd_at_distance.setVisible(True)
+        self.drop_plot.cd_at_distance_text.setText(str(self.current_distance))
+        self.drop_plot.cd_at_distance_text.setPos(rnd4(self.current_distance), rnd4(min(self.current_drop)))
+        self.drop_plot.cd_at_distance.setPos((rnd4(self.current_distance), rnd4(min(self.current_drop))))
 
     def switch_plot_drop(self):
         self.drag_plot.setVisible(False)
@@ -141,7 +139,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.drag_plot.set_limits(self.dox, self.doy)
         self.drag_plot.set_text(self.dox[self.doy.index(max(self.doy))], max(self.doy), max(self.doy))
         self.drag_plot.current_point_text.setColor(color=(255, 255, 255))
+
+        self.current_drop = self.default_drop
         self.calculate_bullet_drop()
+        self.drop_plot.current_plot.setData()
+        self.drop_plot.current_point_text.setColor(color=(255, 255, 255))
 
     def append_updates(self):
         self.update_table()
@@ -151,7 +153,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEdit):
         self.drag_plot.set_limits(ox + self.dox, oy + self.doy)
         self.drag_plot.set_text(ox[oy.index(max(oy))], max(oy), max(self.doy))
         self.drag_plot.current_point_text.setColor(color=(255, 170, 0))
+
         self.calculate_bullet_drop()
+        self.drop_plot.set_limits(self.distances, self.current_drop)
+        self.drop_plot.current_plot.setData(self.distances, self.current_drop)
+        self.drop_plot.current_point_text.setColor(color=(255, 170, 0))
 
     @staticmethod
     def parse_data(data: list) -> dict or None:
