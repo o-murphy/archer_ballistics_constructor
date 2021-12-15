@@ -20,7 +20,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=.\
-OutputBaseFilename=AcherBC_setup
+OutputBaseFilename=AcherBC_setup_x64
 SetupIconFile=.\.rsrc\Icon.ico
 Compression=none
 ;lzma2/ultra64

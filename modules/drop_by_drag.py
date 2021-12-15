@@ -1,4 +1,4 @@
-from archer_ballistics import archer_ballistics
+from bin import archer_ballistics
 
 
 def calculate(drag_function: list, distances: list) -> list:
@@ -39,4 +39,5 @@ class ArcherBallistics(object):
 
 
 if __name__ == '__main__':
+    print(archer_ballistics.get_drop_at_distance([100, 200]))
     pass
