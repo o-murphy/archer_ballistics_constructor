@@ -53,7 +53,7 @@ class ProfilesTab(UiProfilesTab):
         self.newFile.clicked.connect(self.new_file)
         self.closeFile.clicked.connect(self.close_file)
 
-        self.dragToolButton.clicked.connect(self.drug_func_edit)
+        self.dragToolButton.clicked.connect(self.drag_func_edit)
 
         for le in self.tabWidget_2.findChildren(QtWidgets.QLineEdit):
             le.textEdited.connect(self.update_current_profile)
@@ -66,9 +66,9 @@ class ProfilesTab(UiProfilesTab):
         for rb in self.findChildren(QtWidgets.QRadioButton):
             rb.clicked.connect(self.update_current_profile)
 
-    def drug_func_edit(self):
-        drug_func_dlg = DragFuncEditDialog()
-        new_drug_func = drug_func_dlg.current_data if drug_func_dlg.exec_() else drug_func_dlg.default_data
+    def drag_func_edit(self):
+        drag_func_dlg = DragFuncEditDialog()
+        new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
 
     @staticmethod
     def get_datetime():

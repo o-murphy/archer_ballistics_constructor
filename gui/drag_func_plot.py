@@ -10,7 +10,6 @@ class DragPlot(QtWidgets.QWidget):
     def __init__(self, name):
         super().__init__()
         self.setObjectName(name)
-        # self.setMaximumHeight(300)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.setSizePolicy(sizePolicy)
         self.verticalLayout = QtWidgets.QHBoxLayout(self)
@@ -56,7 +55,8 @@ class DragPlot(QtWidgets.QWidget):
         if self.parent():
             self.current_point.setData()
             p = self.graphWidget.plotItem.vb.mapSceneToView(point)
-            ox, oy = self.parent().parse_data(self.parent().current_data)  # !!! temporary
+            data = self.parent().current_data if self.parent().current_data else self.parent().default_data
+            ox, oy = self.parent().parse_data(data)  # !!! temporary
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
             text = 'x: {}, {}m/s, y: {}'.format(rnd4(x), rnd4(x)*343, rnd4(oy[ix]))
             self.current_point.setData(x=[rnd4(x)], y=[rnd4(oy[ix])],
