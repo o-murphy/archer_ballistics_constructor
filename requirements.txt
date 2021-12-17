@@ -1,4 +1,5 @@
 PyQt5~=5.15.6
 pyqtgraph~=0.12.3
-pywin32~=302
+pypiwin32==223
+pywin32==302
 pyinstaller~=4.7
