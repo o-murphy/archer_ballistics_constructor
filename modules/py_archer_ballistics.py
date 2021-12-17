@@ -43,8 +43,16 @@ class ArcherBallistics(object):
         print(self.cd_at_distance)
         return self.cd_at_distance
 
+    def set_atmo(self):
+        archer_ballistics.set_atmo(atmo)
 
-class Conditions(object):
+
+class Params(object):
+    def __init__(self, params):
+        self.params = params
+
+
+class Conditions(Params):
     """ params:
         z_temp        :   Atmosphere temperature
         z_powder_temp :   Powder temperature
@@ -56,7 +64,7 @@ class Conditions(object):
         z_slope_angle :   Slope Angle
     """
     def __init__(self, params):
-        self.params = params
+        super().__init__(params)
         self.Temperature = self.params['z_temp']
         self.P_Temperature = self.params['z_powder_temp']
         self.Humidity = self.params['z_humidity']
@@ -66,7 +74,7 @@ class Conditions(object):
         self.Latitude = self.params['z_latitude']
 
 
-class Bullet(object):
+class Bullet(Params):
     """ params:
             bcDoubleSpinBox       :   Ballistic Coefficient
             diameterDoubleSpinBox :   Bullet Diameter
@@ -76,7 +84,7 @@ class Bullet(object):
     """
 
     def __init__(self, params):
-        self.params = params
+        super().__init__(params)
         self.DragFunc = self.set_drag_func_type()
         self.BalCoef = self.params['bcDoubleSpinBox']
         self.Diameter = self.params['diameterDoubleSpinBox']
@@ -88,7 +96,7 @@ class Bullet(object):
         return drag_func_type[self.params['dragComboBox']]
 
 
-class Cartridge(object):
+class Cartridge(Params):
     """ params:
         mvSpinBox             :   Muzzle velocity
         temperatureSpinBox    :   Temperature on muzzle velocity
@@ -96,13 +104,13 @@ class Cartridge(object):
     """
 
     def __init__(self, params):
-        self.params = params
+        super().__init__(params)
         self.V0 = self.params['mvSpinBox']
         self.T0 = self.params['temperatureSpinBox']
         self.PowderSens = self.params['tsDoubleSpinBox']
 
 
-class Barrel(object):
+class Barrel(Params):
     """ params:
         SightHeight   :   Sight height
         Zero          :   Zero distance
@@ -113,7 +121,7 @@ class Barrel(object):
     """
 
     def __init__(self, params):
-        self.params = params
+        super().__init__(params)
         self.SightHeight = self.params['shSpinBox']
         self.Zero = self.params['shSpinBox']
         self.H_zero = self.params['doubleSpinBox_x']
@@ -126,26 +134,21 @@ class Barrel(object):
         return self.twist_value if self.is_right else -self.twist_value
 
 
-class Profile(Conditions, Barrel, Bullet, Cartridge):
-    def __init__(self, **params):
+class Profile(Conditions, Bullet, Cartridge):
+    def __init__(self, params):
         super().__init__(params)
 
 
 if __name__ == '__main__':
+
     import json
     with open(r"C:\Users\Sergey\Documents\ArcherBC\Recent\recent_21-12-17_11-41-48.json", 'r') as fp:
         cond = json.load(fp)
 
     atmo = Conditions(cond[0])
-    print(atmo.Temperature)
     archer_ballistics.set_atmo(atmo)
-    print(archer_ballistics.get_speed_of_sound())
+    print(archer_ballistics.get_atmo())
 
-    atmo.Temperature = 30
-    print(atmo.Temperature)
-    archer_ballistics.set_atmo(atmo)
     print(archer_ballistics.get_speed_of_sound())
-    # ret = archer_ballistics.get_atmo()
-    # print(ret)
 
     pass

@@ -301,54 +301,11 @@ QGroupBox::title {
      </column>
     </widget>
    </item>
-   <item row="0" column="3">
-    <widget class="QTableWidget" name="dropTable">
-     <property name="minimumSize">
-      <size>
-       <width>200</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>140</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
-     </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>60</number>
-     </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>50</number>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>dist</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>hold off</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>correction</string>
-      </property>
-     </column>
-    </widget>
-   </item>
    <item row="4" column="0" colspan="4">
     <widget class="QTableWidget" name="dragTable">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>

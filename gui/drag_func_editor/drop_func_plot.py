@@ -1,14 +1,12 @@
-from .drag_func_plot import DragPlot
-import pyqtgraph as pg
-from modules import BConverter
-
-rnd = BConverter.auto_rnd
+from .custom_plot import CustomPlot, pg, rnd, BConverter
 
 
-class DropPlot(DragPlot):
+class DropPlot(CustomPlot):
     def __init__(self, name):
         super().__init__(name)
         self.q_func = BConverter.nothing
+        self.graphWidget.getPlotItem().vb.invertY(True)
+
 
     def onMouseMoved(self, point):
         """
@@ -43,3 +41,25 @@ class DropPlot(DragPlot):
             minXRange=max(ox)*1.2/10, maxXRange=max(ox)*1.2,
             minYRange=max(oy)*1.2/100, maxYRange=max(oy)*1.2
         )
+
+    def set_hold_off_quantity(self, quantity, distances, default_drop, current_drop):
+        y_axis = self.graphWidget.getPlotItem().getAxis('left')
+        if quantity == 1:
+            self.y_q_label = 'MIL'
+            self.q_func = BConverter.cm2mil
+        elif quantity == 2:
+            self.y_q_label = 'MOA'
+            self.q_func = BConverter.cm2moa
+        else:
+            self.y_q_label = 'sm'
+            self.q_func = BConverter.nothing
+        y_axis.setLabel(self.y_q_label)
+
+        default = [self.q_func(v, distances[k]) for k, v in enumerate(default_drop)]
+        self.set_limits(distances, default)
+        self.default_plot.setData(distances, default)
+
+        if current_drop:
+            current = [self.q_func(v, distances[k]) for k, v in enumerate(current_drop)]
+            self.set_limits(distances, current + default)
+            self.current_plot.setData(distances, current)

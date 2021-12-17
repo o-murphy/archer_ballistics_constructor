@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
+class Ui_DragFuncEditDialog(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.setWindowModality(QtCore.Qt.NonModal)
@@ -145,25 +145,8 @@ class Ui_Form(object):
         self.bcTable.horizontalHeader().setDefaultSectionSize(60)
         self.bcTable.horizontalHeader().setMinimumSectionSize(45)
         self.gridLayout.addWidget(self.bcTable, 0, 0, 2, 1)
-        self.dropTable = QtWidgets.QTableWidget(Form)
-        self.dropTable.setMinimumSize(QtCore.QSize(200, 0))
-        self.dropTable.setMaximumSize(QtCore.QSize(140, 16777215))
-        self.dropTable.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.dropTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.dropTable.setObjectName("dropTable")
-        self.dropTable.setColumnCount(3)
-        self.dropTable.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.dropTable.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.dropTable.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.dropTable.setHorizontalHeaderItem(2, item)
-        self.dropTable.horizontalHeader().setDefaultSectionSize(60)
-        self.dropTable.horizontalHeader().setMinimumSectionSize(50)
-        self.dropTable.verticalHeader().setVisible(False)
-        self.gridLayout.addWidget(self.dropTable, 0, 3, 1, 1)
         self.dragTable = QtWidgets.QTableWidget(Form)
+        self.dragTable.setEnabled(True)
         self.dragTable.setMaximumSize(QtCore.QSize(16777215, 80))
         self.dragTable.setWordWrap(True)
         self.dragTable.setObjectName("dragTable")
@@ -233,12 +216,6 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Speed"))
         item = self.bcTable.horizontalHeaderItem(1)
         item.setText(_translate("Form", "BC"))
-        item = self.dropTable.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "dist"))
-        item = self.dropTable.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "hold off"))
-        item = self.dropTable.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "correction"))
         item = self.dragTable.verticalHeaderItem(0)
         item.setText(_translate("Form", "x"))
         item = self.dragTable.verticalHeaderItem(1)

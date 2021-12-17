@@ -1,4 +1,4 @@
-from .drag_func_edit import DragFuncEditDialog
+from .drag_func_editor import DragFuncEditDialog
 from .footer import FooterWidget
 from .profiles import ProfilesTab
 from .templates import Ui_MainWindow
