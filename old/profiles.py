@@ -3,7 +3,7 @@ from gui.profile_item import WProfileItem
 from gui.profiles_design import UiProfilesTab
 import math
 from datetime import datetime
-from gui.recent_dlg import RecentDialog
+from gui.recent_dialog.recent_dlg import RecentDialog
 import os
 from modules.env_update import USER_RECENT, USER_BACKUP
 

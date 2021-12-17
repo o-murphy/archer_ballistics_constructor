@@ -1,8 +1,9 @@
-from .templates import Ui_DragFuncEditDialog
 from PyQt5 import QtWidgets, QtCore
+from .templates import Ui_DragFuncEditDialog
 from .drag_func_plot import DragPlot
 from .drop_func_plot import DropPlot
 from .drop_table import DropTable
+from .drag_table import DragTable
 from modules import py_archer_ballistics
 from modules import BConverter
 
@@ -24,10 +25,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
         self.dropTable = DropTable()
+        self.dragTable = DragTable()
 
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 1, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 1, 2)
         self.gridLayout.addWidget(self.dropTable, 0, 3, 1, 1)
+        self.gridLayout.addWidget(self.dragTable, 4, 0, 1, 4)
+        self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 5)
 
         self.default_data = data if data else TEST_DATA
         self.current_data = None
@@ -38,12 +42,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.current_drop = None
         self.dox, self.doy = self.parse_data(self.default_data)
 
-        self.update_table()
-
         self.drag_plot.draw_default_plot(self.dox, self.doy)
         self.set_hold_off_quantity()
         self.set_distance_quantity()
-        self.dropTable.set_drop_table()
+        self.update_drag_table()
+        self.dropTable.set()
 
         self.PeakUp.clicked.connect(lambda: self.set_coefficient('mid', 1))
         self.PeakDown.clicked.connect(lambda: self.set_coefficient('mid', -1))
@@ -105,14 +108,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             rnd(max(self.current_drop if self.current_drop else self.default_drop))))
 
     def switch_plot_drop(self):
-        self.drag_plot.setVisible(False)
-        self.drop_plot.setVisible(True)
-        pass
+        self.drag_plot.setVisible(False), self.drop_plot.setVisible(True)
 
     def switch_plot_drag(self):
-        self.drag_plot.setVisible(True)
-        self.drop_plot.setVisible(False)
-        pass
+        self.drag_plot.setVisible(True), self.drop_plot.setVisible(False)
 
     def calculate_bullet_drop(self):
         if self.current_data:
@@ -120,25 +119,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         if self.current_distance:
             self.cd_at_distance()
 
-    def update_table(self):
-        for i in range(self.dragTable.columnCount()):
-            self.dragTable.removeColumn(0)
-        data = self.current_data if self.current_data else self.default_data
-        if data:
-            for k, v in enumerate(data):
-                self.dragTable.insertColumn(k)
-                iv = QtWidgets.QTableWidgetItem()
-                iv.setText(str(rnd(v[0])))
-                self.dragTable.setItem(0, k, iv)
-                ii = QtWidgets.QTableWidgetItem()
-                ii.setText(str(rnd(v[1])))
-                self.dragTable.setItem(1, k, ii)
+    def update_drag_table(self):
+        self.dragTable.set(self.current_data, self.default_data)
         self.drag_plot.current_point.setData()
         self.drag_plot.current_point_text.setText("")
 
     def reset(self):
         self.current_data = None  # self.default_data
-        self.update_table()
+        self.update_drag_table()
         self.drag_plot.reset_current_plot(self.dox, self.doy)
 
         self.current_drop = None  # self.default_drop
@@ -146,7 +134,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.reset_current_plot(*self.get_drop())
 
     def append_updates(self):
-        self.update_table()
+        self.update_drag_table()
         self.drag_plot.draw_current_plot(*self.parse_data(self.current_data))
 
         self.calculate_bullet_drop()

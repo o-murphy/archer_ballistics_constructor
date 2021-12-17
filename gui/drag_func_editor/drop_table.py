@@ -17,7 +17,7 @@ class DropTable(Ui_DropTable):
         super().__init__()
         self.setupUi()
 
-    def set_drop_table(self):
+    def set(self):
         for i in range(0, 10):
             self.insertRow(i)
             dist = QtWidgets.QTableWidgetItem()

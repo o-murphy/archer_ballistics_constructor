@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets, QtGui
 from gui import ProfilesTab, Ui_MainWindow, FooterWidget
 import sys
 from modules import env_update
-from gui.lpc_dlg import LPC_dialog
+from gui import LPC_dialog
 
 
 class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -46,7 +46,6 @@ def main():
 
 
 if __name__ == '__main__':
-
     main()
 
     # pyinstaller -w -i=.rsrc\Icon.ico --add-data=.rsrc;.rsrc\ --add-data=drv;drv\ run.py

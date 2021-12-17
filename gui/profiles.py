@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtWidgets, QtCore
-from gui.templates import UiProfilesTab
 import math
 from datetime import datetime
 import os
 from modules.env_update import USER_RECENT, USER_BACKUP
-from gui import DragFuncEditDialog
-from gui.recent_dlg import RecentDialog
-from gui.profile_item import WProfileItem
+from .templates import UiProfilesTab
+from .drag_func_editor import DragFuncEditDialog
+from .recent_dialog import RecentDialog
+from .profile_item import WProfileItem
 
 
 class CurrentState(object):
