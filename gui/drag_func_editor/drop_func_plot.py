@@ -42,7 +42,7 @@ class DropPlot(CustomPlot):
             minYRange=max(oy)*1.2/100, maxYRange=max(oy)*1.2
         )
 
-    def set_hold_off_quantity(self, quantity, distances, default_drop, current_drop):
+    def set_hold_off_quantity(self, quantity, distances, default_drop, current_drop, *args, **kwargs):
         y_axis = self.graphWidget.getPlotItem().getAxis('left')
         if quantity == 1:
             self.y_q_label = 'MIL'
@@ -63,3 +63,12 @@ class DropPlot(CustomPlot):
             current = [self.q_func(v, distances[k]) for k, v in enumerate(current_drop)]
             self.set_limits(distances, current + default)
             self.current_plot.setData(distances, current)
+
+    def reset_current_plot(self, quantity, distances, default_drop, current_drop):
+        self.current_plot.setData()
+        self.current_point_text.setColor(color=(255, 255, 255))
+        self.set_hold_off_quantity(quantity, distances, default_drop, current_drop)
+
+    def draw_custom_plot(self, quantity, distances, default_drop, current_drop):
+        self.current_point_text.setColor(color=(255, 170, 0))
+        self.set_hold_off_quantity(**{k: v for k, v in locals().items() if k != 'self'})

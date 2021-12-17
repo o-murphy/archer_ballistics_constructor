@@ -39,7 +39,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dox, self.doy = self.parse_data(self.default_data)
 
         self.update_table()
-        self.draw_default_plot()
+
+        self.drag_plot.draw_default_plot(self.dox, self.doy)
         self.set_hold_off_quantity()
         self.set_distance_quantity()
         self.dropTable.set_drop_table()
@@ -64,25 +65,27 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         # self.dropTable.clicked.connect(lambda item: self.cd_at_distance(item))
 
+    def get_drop(self):
+        return self.holdOffQuantity.currentIndex(),\
+               self.distances, self.default_drop, self.current_drop
+
     def set_hold_off_quantity(self):
-        self.drop_plot.set_hold_off_quantity(self.holdOffQuantity.currentIndex(),
-                                             self.distances, self.default_drop, self.current_drop)
+        self.drop_plot.set_hold_off_quantity(*self.get_drop())
 
     def set_distance_quantity(self):
         self.drag_plot.set_distance_quantity(self.distanceQuantity.currentIndex())
-
-    def draw_default_plot(self):
-        self.drag_plot.draw_default_plot(self.dox, self.doy)
 
     def set_distances(self):
         for i in range(25, 2500, 25):
             self.distances.append(i)
 
+    """ TEMPORARY """
     def cd_at_distance(self, item=None):
         if item:
             self.current_distance = float(self.dropTable.item(item.row(), 0).text())
         self.ballistics.calculate_cd(distance=self.current_distance)
 
+        """ TEMPORARY """
         ox, oy = self.parse_data(self.current_data)
         x, y = rnd(self.ballistics.cd_at_distance), rnd(min(oy))
 
@@ -91,10 +94,15 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.cd_at_distance_text.setPos(x, y)
         self.drag_plot.cd_at_distance.setPos((x, y))
 
+        """ TEMPORARY """
         self.drop_plot.cd_at_distance.setVisible(True)
         self.drop_plot.cd_at_distance_text.setText(str(self.current_distance))
-        self.drop_plot.cd_at_distance_text.setPos(rnd(self.current_distance), rnd(max(self.current_drop if self.current_drop else self.default_drop)))
-        self.drop_plot.cd_at_distance.setPos((rnd(self.current_distance), rnd(max(self.current_drop if self.current_drop else self.default_drop))))
+        self.drop_plot.cd_at_distance_text.setPos(
+            rnd(self.current_distance),
+            rnd(max(self.current_drop if self.current_drop else self.default_drop)))
+        self.drop_plot.cd_at_distance.setPos((
+            rnd(self.current_distance),
+            rnd(max(self.current_drop if self.current_drop else self.default_drop))))
 
     def switch_plot_drop(self):
         self.drag_plot.setVisible(False)
@@ -135,17 +143,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.current_drop = None  # self.default_drop
         self.calculate_bullet_drop()
-        self.drop_plot.current_plot.setData()
-        self.drop_plot.current_point_text.setColor(color=(255, 255, 255))
-        self.set_hold_off_quantity()
+        self.drop_plot.reset_current_plot(*self.get_drop())
 
     def append_updates(self):
         self.update_table()
         self.drag_plot.draw_current_plot(*self.parse_data(self.current_data))
 
         self.calculate_bullet_drop()
-        self.drop_plot.current_point_text.setColor(color=(255, 170, 0))
-        self.set_hold_off_quantity()
+        self.drop_plot.draw_custom_plot(*self.get_drop())
 
     @staticmethod
     def parse_data(data: list) -> dict or None:

@@ -68,7 +68,7 @@ class Conditions(Params):
         self.Temperature = self.params['z_temp']
         self.P_Temperature = self.params['z_powder_temp']
         self.Humidity = self.params['z_humidity']
-        self.Pressure = self.params['z_pressure']
+        # self.Pressure = self.params['z_pressure']
         self.Angle = self.params['z_angle']
         self.Azimuth = self.params['z_azimuth']
         self.Latitude = self.params['z_latitude']
@@ -142,13 +142,13 @@ class Profile(Conditions, Bullet, Cartridge):
 if __name__ == '__main__':
 
     import json
-    with open(r"C:\Users\Sergey\Documents\ArcherBC\Recent\recent_21-12-17_11-41-48.json", 'r') as fp:
+    with open(r"C:\Users\Sergey\Documents\ArcherBC\Recent\recent_21-12-17_17-13-18.json", 'r') as fp:
         cond = json.load(fp)
 
     atmo = Conditions(cond[0])
     archer_ballistics.set_atmo(atmo)
-    print(archer_ballistics.get_atmo())
-
-    print(archer_ballistics.get_speed_of_sound())
+    # print(archer_ballistics.get_atmo())
+    #
+    # print(archer_ballistics.get_speed_of_sound())
 
     pass
