@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from gui.templates import Ui_RecentDialog
 from PyQt5 import QtWidgets, QtCore
 import sys
+from .templates import Ui_RecentDialog
 
 
 class listWidget(QtWidgets.QListWidget):
