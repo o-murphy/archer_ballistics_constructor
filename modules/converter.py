@@ -17,3 +17,7 @@ class BConverter(object):
     @staticmethod
     def rnd4(val: float) -> float:
         return round(val, 4)
+
+    @staticmethod
+    def auto_rnd(val: float) -> float:
+        return round(val, 5 - len(str(int(val))))

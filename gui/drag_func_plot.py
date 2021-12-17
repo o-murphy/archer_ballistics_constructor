@@ -1,10 +1,9 @@
 from PyQt5 import QtCore, QtWidgets
 import pyqtgraph as pg
+from modules.converter import BConverter
 
 
-def rnd4(val: float) -> float:
-    return round(val, 4)
-
+rnd = BConverter.auto_rnd
 
 class DragPlot(QtWidgets.QWidget):
     def __init__(self, name):
@@ -16,6 +15,11 @@ class DragPlot(QtWidgets.QWidget):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(4)
         self.graphWidget = pg.PlotWidget()
+
+        self.x_quantity = None
+        self.x_q_label = None
+        self.y_quantity = None
+        self.y_q_label = None
 
         self.verticalLayout.addWidget(self.graphWidget)
 
@@ -58,19 +62,20 @@ class DragPlot(QtWidgets.QWidget):
             data = self.parent().current_data if self.parent().current_data else self.parent().default_data
             ox, oy = self.parent().parse_data(data)  # !!! temporary
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
-            text = 'x: {}, {}m/s, y: {}'.format(rnd4(x), rnd4(x)*343, rnd4(oy[ix]))
-            self.current_point.setData(x=[rnd4(x)], y=[rnd4(oy[ix])],
+
+            text = '{} {}, {}'.format(rnd(x * self.x_quantity), self.x_q_label, rnd(oy[ix]))
+            self.current_point.setData(x=[rnd(x)], y=[rnd(oy[ix])],
                                        symbolSize=10,
                                        symbolBrush=pg.mkBrush(100, 100, 255, 100))
-            self.current_point_text.setPos(rnd4(x), rnd4(oy[ix]))
+            self.current_point_text.setPos(rnd(x), rnd(oy[ix]))
             self.current_point_text.setText(text)
 
     def set_limits(self, ox, oy):
         self.graphWidget.getViewBox().setLimits(
-            xMin=min(ox)-0.1, xMax=max(ox)+0.1,
+            xMin=min(ox)-max(ox)*0.05, xMax=max(ox)*1.05,
             yMin=min(oy)-0.025, yMax=max(oy)+0.025,
-            minXRange=(max(ox)+0.2)/1000, maxXRange=max(ox)+0.2,
-            minYRange=(max(oy)+0.05)/1000, maxYRange=max(oy)+0.05
+            minXRange=(max(ox)*1.2)/1000, maxXRange=max(ox)*1.2,
+            minYRange=(max(oy)*1.2)/1000, maxYRange=max(oy)*1.2
         )
 
     def set_text(self, x, y, dy):

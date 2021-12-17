@@ -2,7 +2,7 @@ from .drag_func_plot import DragPlot
 import pyqtgraph as pg
 from modules import BConverter
 
-rnd = BConverter.rnd4
+rnd = BConverter.auto_rnd
 
 
 class DropPlot(DragPlot):
@@ -27,7 +27,8 @@ class DropPlot(DragPlot):
             oy = [self.q_func(v, ox[k]) for k, v in enumerate(data)]
 
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
-            text = 'x: {},\ny: {}'.format(rnd(x), rnd(oy[ix]))
+
+            text = '{} {},\n{} M'.format(rnd(x), self.y_q_label, rnd(oy[ix]))
             self.current_point.setData(x=[rnd(x)], y=[rnd(oy[ix])],
                                        symbolSize=10,
                                        symbolBrush=pg.mkBrush(100, 100, 255, 100))
@@ -37,7 +38,7 @@ class DropPlot(DragPlot):
     def set_limits(self, ox, oy):
         vb = self.graphWidget.getViewBox()
         vb.setLimits(
-            xMin=min(ox)-max(ox)*0.1, xMax=max(ox)*1.1,
+            xMin=min(ox)-max(ox)*0.05, xMax=max(ox)*1.05,
             yMin=min(oy)-max(oy)*0.1, yMax=max(oy)*1.1,
             minXRange=max(ox)*1.2/10, maxXRange=max(ox)*1.2,
             minYRange=max(oy)*1.2/100, maxYRange=max(oy)*1.2
