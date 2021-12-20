@@ -45,3 +45,22 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_up)
         self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_down)
+
+        for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
+            le.textEdited.connect(self.set_profile)
+            le.editingFinished.connect(self.set_profile)
+        for sb in self.profile_current.findChildren(QtWidgets.QSpinBox) + self.profile_current.findChildren(
+                QtWidgets.QDoubleSpinBox):
+            sb.valueChanged.connect(self.set_profile)
+        for cb in self.profile_current.findChildren(QtWidgets.QComboBox):
+            cb.currentIndexChanged.connect(self.set_profile)
+        for rb in self.profile_current.findChildren(QtWidgets.QRadioButton):
+            rb.clicked.connect(self.set_profile)
+
+    def set_profile(self):
+        item = self.profiles_table.tableWidget.cellWidget(
+            self.profiles_table.tableWidget.currentRow(),
+            self.profiles_table.tableWidget.currentColumn()
+        )
+        if item:
+            item.set_profile(self.profile_current.get_contents())

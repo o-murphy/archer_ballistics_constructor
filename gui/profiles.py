@@ -147,6 +147,7 @@ class ProfilesTab(UiProfilesTab):
         if fileName:
             self.save_profiles(fileName)
 
+    """refactored"""
     def move_profile_down(self):
         if self.state.cur_item:
             layout = self.scrollAreaWidgetContents.layout()
@@ -156,6 +157,7 @@ class ProfilesTab(UiProfilesTab):
                 for i in range(idx - 1, layout.count() - 2):
                     layout.addWidget(layout.itemAt(idx).widget())
 
+    """refactored"""
     def move_profile_up(self):
         if self.state.cur_item:
             layout = self.scrollAreaWidgetContents.layout()
@@ -165,6 +167,7 @@ class ProfilesTab(UiProfilesTab):
                 for i in range(idx, layout.count() - 1):
                     layout.addWidget(layout.itemAt(idx).widget())
 
+    """refactored"""
     def convert_muzzle_velocity(self):
         """velocity convertion"""
         if self.mvComboBox.currentIndex() == 0:
@@ -174,6 +177,7 @@ class ProfilesTab(UiProfilesTab):
             self.mvSpinBox.setValue(math.floor(self.mvSpinBox.value() / 3.28))
             self.mvComboBox.setCurrentIndex(0)
 
+    """refactored"""
     def convert_bullet_weight(self):
         """weight convertion"""
         if self.weightComboBox.currentIndex() == 0:
@@ -185,22 +189,27 @@ class ProfilesTab(UiProfilesTab):
             self.bulletWeight.setSingleStep(0.1)
             self.weightComboBox.setCurrentIndex(0)
 
+    """refactored"""
     @staticmethod
     def inch_to_mm(cur_val):
         return cur_val * 25.4
 
+    """refactored"""
     @staticmethod
     def mm_to_inch(cur_val):
         return cur_val / 25.4
 
+    """refactored"""
     @staticmethod
     def gr_to_g(cur_val):
         return round(cur_val * 0.06479891, 2)
 
+    """refactored"""
     @staticmethod
     def g_to_gr(cur_val):
         return round(cur_val / 0.06479891, 1)
 
+    """refactored"""
     def convert_bullet_length(self):
         if self.lengthComboBox.currentIndex() == 0:
             self.lengthDoubleSpinBox.setValue(self.inch_to_mm(self.lengthDoubleSpinBox.value()))
@@ -209,6 +218,7 @@ class ProfilesTab(UiProfilesTab):
             self.lengthDoubleSpinBox.setValue(self.mm_to_inch(self.lengthDoubleSpinBox.value()))
             self.lengthComboBox.setCurrentIndex(0)
 
+    """refactored"""
     def convert_bullet_diameter(self):
         if self.diameterComboBox.currentIndex() == 0:
             self.diameterDoubleSpinBox.setValue(self.inch_to_mm(self.diameterDoubleSpinBox.value()))
@@ -221,6 +231,7 @@ class ProfilesTab(UiProfilesTab):
         if self.state.cur_item:
             self.state.cur_item.update_profile()
 
+    """refactored"""
     def add_profile(self):
         """
         adding w_prifile_widget to scrollArea
@@ -235,6 +246,7 @@ class ProfilesTab(UiProfilesTab):
             item.set_current()
             item.update_profile()
 
+    """refactored"""
     def remove_profile(self):
         """
         :return:
@@ -252,6 +264,7 @@ class ProfilesTab(UiProfilesTab):
                 self.state.cur_item = None
             item.deleteLater()
 
+    """refactored"""
     def remove_all_profiles(self):
         for item in self.scrollArea.findChildren(WProfileItem):
             self.state.cur_item = None
