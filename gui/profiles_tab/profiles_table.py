@@ -28,6 +28,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
             if row_count > 0 and self.current_item >= 0:
                 self.tableWidget.removeRow(self.current_item)
                 self.current_item = None
+    # self.tableWidget.removeRow(self.tableWidget.currentRow)
 
     def remove_all(self):
         for i in range(self.tableWidget.rowCount(), -1, -1):
