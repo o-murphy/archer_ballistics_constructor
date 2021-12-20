@@ -34,4 +34,26 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
             self.tableWidget.removeRow(i)
         self.current_item = None
 
+    def move_up(self):
+        row = self.tableWidget.currentRow()
+        column = self.tableWidget.currentColumn();
+        if row > 0:
+            w = self.tableWidget.cellWidget(row, column)
+            self.tableWidget.insertRow(row-1)
+            for i in range(self.tableWidget.columnCount()):
+               self.tableWidget.setItem(row-1, i, self.tableWidget.takeItem(row+1, i))
+               self.tableWidget.setCellWidget(row-1, i, w)
+               self.tableWidget.setCurrentCell(row-1, column)
+            self.tableWidget.removeRow(row+1)
 
+    def move_down(self):
+        row = self.tableWidget.currentRow()
+        column = self.tableWidget.currentColumn();
+        if row < self.tableWidget.rowCount() - 1:
+            w = self.tableWidget.cellWidget(row, column)
+            self.tableWidget.insertRow(row + 2)
+            for i in range(self.tableWidget.columnCount()):
+                self.tableWidget.setItem(row + 2, i, self.tableWidget.takeItem(row, i))
+                self.tableWidget.setCellWidget(row + 2, i, w)
+                self.tableWidget.setCurrentCell(row + 2, column)
+            self.tableWidget.removeRow(row)

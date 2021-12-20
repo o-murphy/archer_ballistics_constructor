@@ -85,7 +85,7 @@ QGroupBox::title {
 }</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_6">
       <property name="sizePolicy">
@@ -117,7 +117,7 @@ QGroupBox::title {
         <number>3</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="rifleGroupBox_4">
+        <widget class="QGroupBox" name="rifleGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -166,7 +166,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="rifleName_4">
+           <widget class="QLineEdit" name="rifleName">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -241,7 +241,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QLineEdit" name="caliberName_4">
+              <widget class="QLineEdit" name="caliberName">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -289,7 +289,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="caliberShort_4">
+              <widget class="QLineEdit" name="caliberShort">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -370,7 +370,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="shSpinBox_4">
+              <widget class="QSpinBox" name="shSpinBox">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -476,7 +476,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="twistSpinBox_4">
+              <widget class="QSpinBox" name="twistSpinBox">
                <property name="maximumSize">
                 <size>
                  <width>70</width>
@@ -503,7 +503,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="rightTwist_4">
+              <widget class="QRadioButton" name="rightTwist">
                <property name="minimumSize">
                 <size>
                  <width>56</width>
@@ -530,7 +530,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="leftTwist_4">
+              <widget class="QRadioButton" name="leftTwist">
                <property name="minimumSize">
                 <size>
                  <width>56</width>
@@ -560,7 +560,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="cartridgeGroupBox_4">
+        <widget class="QGroupBox" name="cartridgeGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -622,7 +622,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="cartridgeName_4">
+           <widget class="QLineEdit" name="cartridgeName">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -730,7 +730,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="mvSpinBox_4">
+              <widget class="QSpinBox" name="mvSpinBox">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -760,7 +760,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="mvComboBox_4">
+              <widget class="QComboBox" name="mvComboBox">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -800,7 +800,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="mvToolButton_4">
+              <widget class="QToolButton" name="mvToolButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -865,7 +865,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="temperatureSpinBox_4">
+           <widget class="QSpinBox" name="temperatureSpinBox">
             <property name="maximumSize">
              <size>
               <width>100</width>
@@ -901,7 +901,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QDoubleSpinBox" name="tsDoubleSpinBox_4">
+           <widget class="QDoubleSpinBox" name="tsDoubleSpinBox">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -940,7 +940,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="bulletGroupBox_4">
+        <widget class="QGroupBox" name="bulletGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -978,7 +978,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="bulletName_4">
+           <widget class="QLineEdit" name="bulletName">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1059,7 +1059,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="bulletWeight_4">
+              <widget class="QDoubleSpinBox" name="bulletWeight">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1092,7 +1092,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="weightComboBox_4">
+              <widget class="QComboBox" name="weightComboBox">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1126,7 +1126,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="weightToolButton_4">
+              <widget class="QToolButton" name="weightToolButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1203,7 +1203,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="lengthDoubleSpinBox_4">
+              <widget class="QDoubleSpinBox" name="lengthDoubleSpinBox">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1233,7 +1233,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="lengthComboBox_4">
+              <widget class="QComboBox" name="lengthComboBox">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1261,7 +1261,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="lengthToolButton_4">
+              <widget class="QToolButton" name="lengthToolButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1338,7 +1338,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="diameterDoubleSpinBox_4">
+              <widget class="QDoubleSpinBox" name="diameterDoubleSpinBox">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1368,7 +1368,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="diameterComboBox_4">
+              <widget class="QComboBox" name="diameterComboBox">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1396,7 +1396,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="diameterToolButton_4">
+              <widget class="QToolButton" name="diameterToolButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1467,7 +1467,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QComboBox" name="dragComboBox_4">
+              <widget class="QComboBox" name="dragComboBox">
                <property name="maximumSize">
                 <size>
                  <width>177</width>
@@ -1503,7 +1503,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="dragToolButton_4">
+              <widget class="QToolButton" name="dragToolButton">
                <property name="font">
                 <font>
                  <pointsize>8</pointsize>
@@ -1530,7 +1530,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QDoubleSpinBox" name="bcDoubleSpinBox_4">
+           <widget class="QDoubleSpinBox" name="bcDoubleSpinBox">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -1662,7 +1662,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_temp_4">
+              <widget class="QSpinBox" name="z_temp">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -1774,7 +1774,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_powder_temp_4">
+              <widget class="QSpinBox" name="z_powder_temp">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -1884,7 +1884,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_humidity_4">
+              <widget class="QSpinBox" name="z_humidity">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -1994,7 +1994,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_pressure_4">
+              <widget class="QSpinBox" name="z_pressure">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -2107,7 +2107,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_altitude_4">
+              <widget class="QSpinBox" name="z_altitude">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
@@ -2220,7 +2220,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="z_angle_4">
+              <widget class="QSpinBox" name="z_angle">
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>

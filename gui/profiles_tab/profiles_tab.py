@@ -42,3 +42,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.newProfileButton.clicked.connect(self.profiles_table.add_row)
         self.profiles_tools.removeProfileButton.clicked.connect(self.profiles_table.remove_row)
         self.profiles_tools.clearAllProfiles.clicked.connect(self.profiles_table.remove_all)
+
+        self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_up)
+        self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_down)

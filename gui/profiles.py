@@ -37,6 +37,7 @@ class ProfilesTab(UiProfilesTab):
                 if recent_file:
                     self.open_file(rf'{USER_RECENT}\{recent_file}')
 
+        """refactored"""
         self.scrollAreaWidgetContents.layout().setAlignment(QtCore.Qt.AlignTop)
         self.mvToolButton.clicked.connect(self.convert_muzzle_velocity)
         self.weightToolButton.clicked.connect(self.convert_bullet_weight)
@@ -46,6 +47,7 @@ class ProfilesTab(UiProfilesTab):
         self.removeProfileButton.clicked.connect(self.remove_profile)
         self.clearAllProfiles.clicked.connect(self.remove_all_profiles)
 
+        """refactored"""
         self.downProfile.clicked.connect(self.move_profile_down)
         self.upProfile.clicked.connect(self.move_profile_up)
 
