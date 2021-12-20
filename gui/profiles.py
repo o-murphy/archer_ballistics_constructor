@@ -57,6 +57,7 @@ class ProfilesTab(UiProfilesTab):
         self.newFile.clicked.connect(self.new_file)
         self.closeFile.clicked.connect(self.close_file)
 
+        """refactored"""
         self.dragToolButton.clicked.connect(self.drag_func_edit)
 
         for le in self.tabWidget_2.findChildren(QtWidgets.QLineEdit):
