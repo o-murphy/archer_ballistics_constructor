@@ -36,13 +36,10 @@ class DragPlot(CustomPlot):
             minYRange=(max(oy)*1.2)/1000, maxYRange=max(oy)*1.2
         )
 
-    def set_distance_quantity(self, quantity):
+    def set_distance_quantity(self, label, quantity):
+        self.x_q_label = label
+        self.x_quantity = quantity
         x_axis = self.graphWidget.getPlotItem().getAxis('bottom')
-        self.x_quantity, self.x_q_label = 1, 'Mach'
-        if quantity == 1:
-            self.x_quantity, self.x_q_label = 343, 'm/s'
-        if quantity == 2:
-            self.x_quantity, self.x_q_label = 343 * 3.281, 'ft/s'
         x_axis.setScale(self.x_quantity)
         x_axis.setLabel(f"Velocity ({self.x_q_label})")
 
@@ -68,3 +65,9 @@ class DragPlot(CustomPlot):
     def reset_current_plot(self, ox, oy):
         self.draw_plot(self.current_plot, ox, oy, True)
         self.current_point_text.setColor(color=(255, 255, 255))
+
+    def set_cd_at_distance(self, x, y):
+        self.cd_at_distance.setVisible(True)
+        self.cd_at_distance.setPos((x, y))
+        self.cd_at_distance_text.setText(f'{str(x * self.x_quantity)} {self.x_q_label}')
+        self.cd_at_distance_text.setPos(x, y)

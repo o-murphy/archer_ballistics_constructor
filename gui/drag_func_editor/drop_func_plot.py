@@ -42,19 +42,11 @@ class DropPlot(CustomPlot):
             minYRange=max(oy)*1.2/100, maxYRange=max(oy)*1.2
         )
 
-    def set_hold_off_quantity(self, quantity, distances, default_drop, current_drop, *args, **kwargs):
+    def set_hold_off_quantity(self, lable, quantity, distances, default_drop, current_drop, *args, **kwargs):
         y_axis = self.graphWidget.getPlotItem().getAxis('left')
-        if quantity == 1:
-            self.y_q_label = 'MIL'
-            self.q_func = BConverter.cm2mil
-        elif quantity == 2:
-            self.y_q_label = 'MOA'
-            self.q_func = BConverter.cm2moa
-        else:
-            self.y_q_label = 'sm'
-            self.q_func = BConverter.nothing
+        self.y_q_label = lable
+        self.q_func = quantity
         y_axis.setLabel(self.y_q_label)
-
         default = [self.q_func(v, distances[k]) for k, v in enumerate(default_drop)]
         self.set_limits(distances, default)
         self.default_plot.setData(distances, default)
