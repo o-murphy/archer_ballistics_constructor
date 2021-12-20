@@ -15,13 +15,14 @@ class RecentDialog(QtWidgets.QDialog, Ui_RecentDialog):
     def __init__(self, recent_list):
         super().__init__()
         self.setupUi(self)
+        self.recent_list = recent_list
         self.setWindowTitle('ArcherBC (Recent files)')
         self.list_double_click = listWidget(self)
         self.list_double_click.setGeometry(QtCore.QRect(10, 41, 241, 161))
         self.list_double_click.setObjectName("listWidget")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok).setText("Open")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Cancel).setText("Empty")
-        self.list_double_click.addItems(recent_list)
+        self.list_double_click.addItems(self.recent_list)
 
     def get_filename(self):
             return self.list_double_click.currentIndex().data()

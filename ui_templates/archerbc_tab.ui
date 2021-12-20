@@ -76,7 +76,7 @@ color: white;</string>
       <property name="minimumSize">
        <size>
         <width>1000</width>
-        <height>650</height>
+        <height>630</height>
        </size>
       </property>
       <property name="sizeIncrement">

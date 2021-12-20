@@ -10,6 +10,8 @@ from .drag_func_editor import DragFuncEditDialog
 from .recent_dialog import RecentDialog
 from .profile_item import WProfileItem
 
+from .templates import Ui_profilesTab
+
 
 class CurrentState(object):
     def __init__(self,

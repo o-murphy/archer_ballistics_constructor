@@ -5,6 +5,7 @@ from .templates import Ui_MainWindow
 from .templates import Ui_ArcheBCUpdate
 from .lpc_install_dialog import LPC_dialog
 from .recent_dialog import RecentDialog
+from .profiles_tab import EmptyProfilesTab
 
 # from .recent_dlg import RecentDialog
 # from .profile_item import WProfileItem
