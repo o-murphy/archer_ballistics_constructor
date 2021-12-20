@@ -71,6 +71,7 @@ class ProfilesTab(UiProfilesTab):
         for rb in self.findChildren(QtWidgets.QRadioButton):
             rb.clicked.connect(self.update_current_profile)
 
+    '''refactored'''
     def drag_func_edit(self):
         drag_func_dlg = DragFuncEditDialog()
         new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
