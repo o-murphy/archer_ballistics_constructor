@@ -16,9 +16,6 @@ class DropTable(Ui_DropTable):
     def __init__(self):
         super().__init__()
         self.setupUi()
-        self.current_row = None
-
-        self.clicked.connect(lambda item: self.set_item(item))
 
     def set(self):
         for i in range(0, 2):
@@ -44,6 +41,3 @@ class DropTable(Ui_DropTable):
         self.setItem(row_index, 2, corr)
         sb = NoWheelDoubleSpinBox()
         self.setCellWidget(row_index, 2, sb)
-
-    def set_item(self, item):
-        self.current_row = item.row()

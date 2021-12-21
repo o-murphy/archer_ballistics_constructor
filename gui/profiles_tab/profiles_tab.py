@@ -45,21 +45,23 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_down)
         self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_up)
 
+        widget_connect_list = []
         for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
-            le.textEdited.connect(self.set_profile)
-            le.editingFinished.connect(self.set_profile)
-        for sb in self.profile_current.findChildren(QtWidgets.QSpinBox) + self.profile_current.findChildren(QtWidgets.QDoubleSpinBox):
-            sb.valueChanged.connect(self.set_profile)
-        for cb in self.profile_current.findChildren(QtWidgets.QComboBox):
-            cb.currentIndexChanged.connect(self.set_profile)
-        for rb in self.profile_current.findChildren(QtWidgets.QRadioButton):
-            rb.clicked.connect(self.set_profile)
+            widget_connect_list.append(le.textEdited)
+            widget_connect_list.append(le.editingFinished)
+        [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
+        [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
+        [widget_connect_list.append(cb.currentIndexChanged) for cb in self.profile_current.findChildren(QtWidgets.QComboBox)]
+        [widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
 
-    def set_profile(self):
-        item = self.profiles_table.tableWidget.cellWidget(
-            self.profiles_table.tableWidget.currentRow(),
-            self.profiles_table.tableWidget.currentColumn()
-        )
+        [i.connect(lambda: self.set_profile()) for i in widget_connect_list]
+
+    def set_profile(self, item=None):
+        if not item:
+            item = self.profiles_table.tableWidget.cellWidget(
+                self.profiles_table.tableWidget.currentRow(),
+                self.profiles_table.tableWidget.currentColumn()
+            )
         if item:
             item.set_profile(self.profile_current.get_rifle())
             item.set_profile(self.profile_current.get_bullet())

@@ -15,3 +15,6 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def set_profile(self, data: dict):
         for k, v in data.items():
             self.profile[k] = v
+
+    def init_data(self, data):
+        print(self.parent())

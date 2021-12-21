@@ -91,7 +91,7 @@ QGroupBox::title {
 }</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_6">
       <property name="sizePolicy">
@@ -235,7 +235,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="twistSpinBox">
+              <widget class="QSpinBox" name="twist">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -475,7 +475,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="shSpinBox">
+              <widget class="QSpinBox" name="sh">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -659,7 +659,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QSpinBox" name="mvSpinBox">
+              <widget class="QSpinBox" name="mv">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -689,7 +689,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="mvComboBox">
+              <widget class="QComboBox" name="mvQuantity">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -729,7 +729,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="mvToolButton">
+              <widget class="QToolButton" name="mvSwitch">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -776,7 +776,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="temperatureSpinBox">
+           <widget class="QSpinBox" name="temp">
             <property name="maximumSize">
              <size>
               <width>100</width>
@@ -914,7 +914,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="tsDoubleSpinBox">
+           <widget class="QDoubleSpinBox" name="ts">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -1109,7 +1109,7 @@ QGroupBox::title {
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QDoubleSpinBox" name="bcDoubleSpinBox">
+           <widget class="QDoubleSpinBox" name="bc">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -1196,7 +1196,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="bulletWeight">
+              <widget class="QDoubleSpinBox" name="weight">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1229,7 +1229,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="weightComboBox">
+              <widget class="QComboBox" name="weighQuantity">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1263,7 +1263,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="weightToolButton">
+              <widget class="QToolButton" name="weightSwitch">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1328,7 +1328,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="lengthDoubleSpinBox">
+              <widget class="QDoubleSpinBox" name="length">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1358,7 +1358,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="lengthComboBox">
+              <widget class="QComboBox" name="lengthQuantity">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1386,7 +1386,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="lengthToolButton">
+              <widget class="QToolButton" name="lengthSwitch">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1451,7 +1451,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QDoubleSpinBox" name="diameterDoubleSpinBox">
+              <widget class="QDoubleSpinBox" name="diameter">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -1481,7 +1481,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="diameterComboBox">
+              <widget class="QComboBox" name="diameterQuantity">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1509,7 +1509,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="diameterToolButton">
+              <widget class="QToolButton" name="diameterSwitch">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1568,7 +1568,7 @@ QGroupBox::title {
               <number>0</number>
              </property>
              <item>
-              <widget class="QComboBox" name="dragComboBox">
+              <widget class="QComboBox" name="dragType">
                <property name="maximumSize">
                 <size>
                  <width>177</width>
@@ -1604,7 +1604,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="dragToolButton">
+              <widget class="QToolButton" name="dragEditor">
                <property name="font">
                 <font>
                  <pointsize>8</pointsize>

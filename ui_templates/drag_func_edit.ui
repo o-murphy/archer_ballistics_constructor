@@ -81,7 +81,92 @@ QGroupBox::title {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	background-color: rgb(40, 40, 40);
-}</string>
+}
+
+QScrollBar:vertical {
+        background-color: #2A2929;
+        width: 16px;
+        margin: 15px 3px 15px 3px;
+        border: 1px transparent #2A2929;
+        border-radius: 4px;
+    }
+    QScrollBar::handle:vertical
+    {
+        background-color: rgb(78, 78, 78);         /* #605F5F; */
+        min-height: 5px;
+        border-radius: 4px;
+    }
+
+    QScrollBar::sub-line:vertical
+    {
+        margin: 3px 0px 0px 0px;
+		border: 1px solid rgb(78, 78, 78);
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		background-color: rgb(78, 78, 78);
+		color: white;
+        height: 8px;
+        width: 8px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+    }
+
+    QScrollBar::add-line:vertical
+    {
+        margin: 3px 0px 3px 0px;
+		border: 1px solid rgb(78, 78, 78);
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background-color: rgb(78, 78, 78);
+		color: white;
+        height: 8px;
+        width: 8px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+
+
+    QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+    {
+		margin: 2px 0px 0px 0px;
+       	border: 1px solid rgb(78, 78, 78);
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		background-color: rgb(78, 78, 78);
+        height: 8px;
+        width: 8px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+    }
+
+
+
+    QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+    {
+		margin: 3px 0px 2px 0px;
+		border: 1px solid rgb(78, 78, 78);
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background-color: rgb(78, 78, 78);
+        height: 8px;
+        width: 8px;
+		subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+
+    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+    {
+			        background: none;
+    }
+
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+    {
+        background: none;
+
+    }
+
+
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0">
    <item row="2" column="0">
