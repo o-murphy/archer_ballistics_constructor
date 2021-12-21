@@ -22,5 +22,5 @@ class DropTableEdit(QtWidgets.QWidget, Ui_dropTableEdit):
             self.drop_table.removeRow(row)
             if self.drop_table.item(row, 1):
                 self.drop_table.item(row, 1).setSelected(True)
-            elif self.drop_table.item(row-1, 1):
-                self.drop_table.item(row-1, 1).setSelected(True)
+            elif self.drop_table.item(row - 1, 1):
+                self.drop_table.item(row - 1, 1).setSelected(True)
