@@ -28,10 +28,10 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.__setattr__('footer_widget', footer_widget)
         self.gridLayout.addWidget(self.footer_widget, 1, 0, 1, 1)
 
-    # def closeEvent(self, event) -> None:
-    #     if hasattr(self, 'profiles_tab'):
-    #         self.profiles_tab.save_backup()
-    #     sys.exit()
+    def closeEvent(self, event) -> None:
+        # if hasattr(self, 'profiles_tab'):
+        #     self.profiles_tab.save_backup()
+        sys.exit()
 
 
 def main():
