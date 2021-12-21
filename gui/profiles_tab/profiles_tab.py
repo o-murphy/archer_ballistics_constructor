@@ -27,7 +27,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         # self.profiles_progress = ProfilesProgress()
 
         self.setupWidgets()
-
         self.setupConnects()
 
     def setupWidgets(self):
@@ -43,14 +42,13 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.removeProfileButton.clicked.connect(self.profiles_table.remove_row)
         self.profiles_tools.clearAllProfiles.clicked.connect(self.profiles_table.remove_all)
 
-        self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_up)
-        self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_down)
+        self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_down)
+        self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_up)
 
         for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
             le.textEdited.connect(self.set_profile)
             le.editingFinished.connect(self.set_profile)
-        for sb in self.profile_current.findChildren(QtWidgets.QSpinBox) + self.profile_current.findChildren(
-                QtWidgets.QDoubleSpinBox):
+        for sb in self.profile_current.findChildren(QtWidgets.QSpinBox) + self.profile_current.findChildren(QtWidgets.QDoubleSpinBox):
             sb.valueChanged.connect(self.set_profile)
         for cb in self.profile_current.findChildren(QtWidgets.QComboBox):
             cb.currentIndexChanged.connect(self.set_profile)
@@ -63,4 +61,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self.profiles_table.tableWidget.currentColumn()
         )
         if item:
-            item.set_profile(self.profile_current.get_contents())
+            item.set_profile(self.profile_current.get_rifle())
+            item.set_profile(self.profile_current.get_bullet())
+            item.set_profile(self.profile_current.get_cartridge())
+            item.set_profile(self.profile_current.get_conditions())

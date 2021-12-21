@@ -63,7 +63,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/arrowupbtn21a.png</normaloff>.rsrc/res/drawable/arrowupbtn21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/arrowupbtn21a.png</normaloff>../.rsrc/res/drawable/arrowupbtn21a.png</iconset>
      </property>
      <property name="shortcut">
       <string>Ctrl+Up</string>
@@ -92,7 +92,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/arrowupbtn21a.png</normaloff>.rsrc/res/drawable/arrowupbtn21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/arrowdownbtn21a.png</normaloff>../.rsrc/res/drawable/arrowdownbtn21a.png</iconset>
      </property>
      <property name="shortcut">
       <string>Ctrl+Up</string>
@@ -134,7 +134,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/copybtn21a.png</normaloff>.rsrc/res/drawable/copybtn21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/copybtn21a.png</normaloff>../.rsrc/res/drawable/copybtn21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -175,7 +175,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable-xhdpi-v4/savebtn_menu21a.png</normaloff>.rsrc/res/drawable-xhdpi-v4/savebtn_menu21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -210,7 +210,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable-xhdpi-v4/saveasbtn_menu21a.png</normaloff>.rsrc/res/drawable-xhdpi-v4/saveasbtn_menu21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/saveasbtn_menu21a.png</normaloff>../.rsrc/res/drawable/saveasbtn_menu21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -251,7 +251,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/openbtn_menu21a.png</normaloff>.rsrc/res/drawable/openbtn_menu21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/openbtn_menu21a.png</normaloff>../.rsrc/res/drawable/openbtn_menu21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -292,7 +292,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/openbtn_menu21b.png</normaloff>.rsrc/res/drawable/openbtn_menu21b.png</iconset>
+       <normaloff>../.rsrc/res/drawable/exitbtn_menu21a.png</normaloff>../.rsrc/res/drawable/exitbtn_menu21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -359,7 +359,7 @@ QPushButton::QToolTip {color: black}</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable/addnewbtn21a.png</normaloff>.rsrc/res/drawable/addnewbtn21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/addbtn_menu21a.png</normaloff>../.rsrc/res/drawable/addbtn_menu21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -390,11 +390,7 @@ QPushButton::QToolTip {color: black}</string>
       <string>&lt;font color=black&gt;Remove Profile (CTRL+Del)&lt;/font&gt;</string>
      </property>
      <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>.rsrc/res/drawable/removebtn_menu21a.png</normaloff>.rsrc/res/drawable/removebtn_menu21a.png</iconset>
+      <string>—</string>
      </property>
      <property name="iconSize">
       <size>
@@ -429,7 +425,7 @@ QPushButton::QToolTip {color: black}</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>.rsrc/res/drawable-xxxhdpi-v4/deletebtn21a.png</normaloff>.rsrc/res/drawable-xxxhdpi-v4/deletebtn21a.png</iconset>
+       <normaloff>../.rsrc/res/drawable/deletebtn21a.png</normaloff>../.rsrc/res/drawable/deletebtn21a.png</iconset>
      </property>
      <property name="iconSize">
       <size>

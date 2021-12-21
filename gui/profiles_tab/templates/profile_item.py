@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_profileItem(object):
     def setupUi(self, profileItem):
         profileItem.setObjectName("profileItem")
-        profileItem.resize(405, 60)
-        profileItem.setMinimumSize(QtCore.QSize(405, 60))
-        profileItem.setMaximumSize(QtCore.QSize(405, 60))
+        profileItem.resize(380, 60)
+        profileItem.setMinimumSize(QtCore.QSize(380, 60))
+        profileItem.setMaximumSize(QtCore.QSize(380, 60))
         profileItem.setStyleSheet("QWidget {\n"
 "    background-color: rgb(55, 52, 63);\n"
 "    border: 1px solid rgb(78, 78, 78);\n"

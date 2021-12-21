@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_profilesTable(object):
     def setupUi(self, profilesTable):
         profilesTable.setObjectName("profilesTable")
-        profilesTable.resize(426, 192)
+        profilesTable.resize(426, 166)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -22,6 +22,7 @@ class Ui_profilesTable(object):
         profilesTable.setSizePolicy(sizePolicy)
         profilesTable.setMinimumSize(QtCore.QSize(426, 1))
         profilesTable.setMaximumSize(QtCore.QSize(426, 16777215))
+        profilesTable.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profilesTable)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)
@@ -34,14 +35,22 @@ class Ui_profilesTable(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         self.tableWidget.setMinimumSize(QtCore.QSize(426, 0))
         self.tableWidget.setMaximumSize(QtCore.QSize(426, 16777215))
-        self.tableWidget.setStyleSheet("QTableWidget {\n"
+        self.tableWidget.setStyleSheet("QTableView {\n"
+"    border-color: rgb(76, 76, 76);\n"
+"}\n"
+"\n"
+"QTableWidget {\n"
 "    \n"
+"    border-color: rgb(76, 76, 76);\n"
 "    background-color: rgb(51, 51, 51);\n"
 "}\n"
 "\n"
 "QHeaderView::section {\n"
 "    background-color: rgb(51, 51, 51);\n"
+"        width: 22px;\n"
+"\n"
 "}\n"
+"\n"
 "\n"
 "QTableWidget::item:selected {\n"
 "    background-color: rgb(255, 170, 0);\n"
@@ -51,7 +60,95 @@ class Ui_profilesTable(object):
 "    background-color: rgb(255, 170, 0);\n"
 "}\n"
 "\n"
+"QTableView::item {\n"
+"    background-color: rgb(55, 52, 63);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"        background-color: #2A2929;\n"
+"        width: 16px;\n"
+"        margin: 15px 3px 15px 3px;\n"
+"        border: 1px transparent #2A2929;\n"
+"        border-radius: 4px;\n"
+"    }\n"
+"    QScrollBar::handle:vertical\n"
+"    {\n"
+"        background-color: rgb(78, 78, 78);         /* #605F5F; */\n"
+"        min-height: 5px;\n"
+"        border-radius: 4px;\n"
+"    }\n"
+"\n"
+"    QScrollBar::sub-line:vertical\n"
+"    {\n"
+"        margin: 3px 0px 0px 0px;\n"
+"        border: 1px solid rgb(78, 78, 78);\n"
+"        border-top-left-radius: 5px;\n"
+"        border-top-right-radius: 5px;\n"
+"        background-color: rgb(78, 78, 78);\n"
+"        color: white;\n"
+"        height: 8px;\n"
+"        width: 8px;\n"
+"        subcontrol-position: top;\n"
+"        subcontrol-origin: margin;\n"
+"    }\n"
+"\n"
+"    QScrollBar::add-line:vertical\n"
+"    {\n"
+"        margin: 3px 0px 3px 0px;\n"
+"        border: 1px solid rgb(78, 78, 78);\n"
+"        border-bottom-left-radius: 5px;\n"
+"        border-bottom-right-radius: 5px;\n"
+"        background-color: rgb(78, 78, 78);\n"
+"        color: white;\n"
+"        height: 8px;\n"
+"        width: 8px;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"    }\n"
+"\n"
+"\n"
+"    QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
+"    {\n"
+"        margin: 2px 0px 0px 0px;\n"
+"           border: 1px solid rgb(78, 78, 78);\n"
+"        border-top-left-radius: 5px;\n"
+"        border-top-right-radius: 5px;\n"
+"        background-color: rgb(78, 78, 78);\n"
+"        height: 8px;\n"
+"        width: 8px;\n"
+"        subcontrol-position: top;\n"
+"        subcontrol-origin: margin;\n"
+"    }\n"
+"\n"
+"\n"
+"\n"
+"    QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
+"    {\n"
+"        margin: 3px 0px 2px 0px;\n"
+"        border: 1px solid rgb(78, 78, 78);\n"
+"        border-bottom-left-radius: 5px;\n"
+"        border-bottom-right-radius: 5px;\n"
+"        background-color: rgb(78, 78, 78);\n"
+"        height: 8px;\n"
+"        width: 8px;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"    }\n"
+"\n"
+"    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
+"    {\n"
+"                    background: none;\n"
+"    }\n"
+"\n"
+"    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
+"    {\n"
+"        background: none;\n"
+"\n"
+"    }\n"
+"\n"
+"\n"
 "")
+        self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(1)
         self.tableWidget.setRowCount(0)

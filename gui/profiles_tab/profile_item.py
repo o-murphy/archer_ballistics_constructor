@@ -7,6 +7,10 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         super().__init__()
         self.setupUi(self)
         self.profile: dict = {}
+        self.setupConnects()
+
+    def setupConnects(self):
+        pass
 
     def set_profile(self, data: dict):
         for k, v in data.items():
