@@ -42,38 +42,47 @@ class Conditions(Params):
 
 class Bullet(Params):
     """ params:
-            bcDoubleSpinBox       :   Ballistic Coefficient
-            diameterDoubleSpinBox :   Bullet Diameter
-            lengthDoubleSpinBox   :   Bullet Length
-            weightComboBox        :   Bullet Weight
-            dragComboBox          :   Drag Func Type
+            bc       :   Ballistic Coefficient List
+            diameter :   Bullet Diameter
+            length   :   Bullet Length
+            weight   :   Bullet Weight
+            dragType :   Drag Func Type
     """
 
     def __init__(self, params):
         super().__init__(params)
         self.DragFunc = self.set_drag_func_type()
-        self.BalCoef = self.params['bcDoubleSpinBox']
-        self.Diameter = self.params['diameterDoubleSpinBox']
-        self.Length = self.params['lengthDoubleSpinBox']
-        self.Weight = self.params['weightComboBox']
+        # self.BalCoef = self.params['bc']
+        self.BalCoef = None
+        self.BVelocity = None
+        self.Diameter = self.params['diameter']
+        self.Length = self.params['length']
+        self.Weight = self.params['weight']
+        self.set_bc()
 
     def set_drag_func_type(self):
         drag_func_type = [1, 7, 11, 17, 10]
-        return drag_func_type[self.params['dragComboBox']]
+        return drag_func_type[self.params['dragType']]
+
+    def set_bc(self):
+        self.BalCoef = [0.0] * 5
+        self.BVelocity = [-1] * 5
+        self.BalCoef[0] = 0.3
+        self.BVelocity[0] = 800
 
 
 class Cartridge(Params):
     """ params:
-        mvSpinBox             :   Muzzle velocity
-        temperatureSpinBox    :   Temperature on muzzle velocity
-        tsDoubleSpinBox       :   Powder temperature sensitivity
+        mv      :   Muzzle velocity
+        temp    :   Temperature on muzzle velocity
+        ts      :   Powder temperature sensitivity
     """
 
     def __init__(self, params):
         super().__init__(params)
-        self.V0 = self.params['mvSpinBox']
-        self.T0 = self.params['temperatureSpinBox']
-        self.PowderSens = self.params['tsDoubleSpinBox']
+        self.V0 = int(self.params['mv'])
+        self.T0 = int(self.params['temp'])
+        self.PowderSens = self.params['ts']
 
 
 class Barrel(Params):
@@ -88,10 +97,10 @@ class Barrel(Params):
 
     def __init__(self, params):
         super().__init__(params)
-        self.SightHeight = self.params['shSpinBox']
-        self.Zero = self.params['shSpinBox']
-        self.H_zero = self.params['doubleSpinBox_x']
-        self.V_zero = self.params['doubleSpinBox_y']
+        self.SightHeight = int(self.params['sh'])
+        self.Zero = int(self.params['z_d'])
+        self.H_zero = int(self.params['z_x'] * 4)
+        self.V_zero = int(self.params['z_y'] * 4)
         self.twist_value = self.params['rightTwist']
         self.is_right = self.params['rightTwist']
         self.Twist = self.set_twist()
@@ -100,7 +109,7 @@ class Barrel(Params):
         return self.twist_value if self.is_right else -self.twist_value
 
 
-class Profile(Conditions, Bullet, Cartridge):
+class Profile(Conditions, Bullet, Cartridge, Barrel):
     def __init__(self, params):
         super().__init__(params)
 
@@ -140,7 +149,7 @@ class ArcherBallistics(object):
     def set_atmo(self, conditions: Conditions):
         self.atmo = conditions
         if self.atmo:
-            archer_ballistics.set_atmo(self.atmo)
+            return archer_ballistics.set_atmo(self.atmo)
 
     def get_atmo(self):
         return self.ballistics.get_atmo() if self.atmo else None
@@ -152,14 +161,11 @@ class ArcherBallistics(object):
 
 
 if __name__ == '__main__':
+    test_data = {'z_d': 100, 'z_y': 0, 'z_x': 0, 'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True, 'bulletName': '', 'weight': 69.0, 'length': 0.9, 'diameter': 0.224, 'weightTile': '69gr', 'dragType': 1, 'bc': 0.169, 'cartridgeName': '', 'mv': 868, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_angle': 0, 'z_pressure': 760, 'z_latitude': 0, 'z_humidity': 50, 'z_azimuth': 270, 'z_powder_temp': 15}
 
-    import json
-    with open(r"C:\Users\Sergey\Documents\ArcherBC\Recent\recent_21-12-17_17-13-18.json", 'r') as fp:
-        cond = json.load(fp)
     calc = ArcherBallistics()
 
-    atmo = Conditions(cond[0])
-    calc.set_atmo(atmo)
-    print(calc.get_atmo())
+    profile = Profile(test_data)
 
-    pass
+    archer_ballistics.set_profile(profile)
+    print(archer_ballistics.get_drag_function())

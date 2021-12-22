@@ -1229,7 +1229,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="weighQuantity">
+              <widget class="QComboBox" name="weightQuantity">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>

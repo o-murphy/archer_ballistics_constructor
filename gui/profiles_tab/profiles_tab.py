@@ -49,6 +49,9 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
             widget_connect_list.append(le.textEdited)
             widget_connect_list.append(le.editingFinished)
+
+        # [i.connect(self.set_current_tile) for i in widget_connect_list]
+
         [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
         [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
         [widget_connect_list.append(cb.currentIndexChanged) for cb in self.profile_current.findChildren(QtWidgets.QComboBox)]
@@ -67,3 +70,4 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             item.set_profile(self.profile_current.get_bullet())
             item.set_profile(self.profile_current.get_cartridge())
             item.set_profile(self.profile_current.get_conditions())
+            item.set_z_data()

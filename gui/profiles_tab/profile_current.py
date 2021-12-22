@@ -19,11 +19,16 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
         self.dragEditor.clicked.connect(self.drag_func_edit)
 
+        self.caliberShort.textEdited.connect(
+            lambda: self.caliberShort.setText(self.caliberShort.text().replace(' ', ''))
+            # lambda: self.caliberShort.setText(self.caliberName.text().replace(' ', '')[:8])
+        )
+
     def setConverter(self):
         self.mvQuantity.setItemData(0, self.convert.mps2fps)
         self.mvQuantity.setItemData(1, self.convert.fps2mps)
-        self.weighQuantity.setItemData(0, self.convert.gr_to_g)
-        self.weighQuantity.setItemData(1, self.convert.g_to_gr)
+        self.weightQuantity.setItemData(0, self.convert.gr_to_g)
+        self.weightQuantity.setItemData(1, self.convert.g_to_gr)
         self.lengthQuantity.setItemData(0, self.convert.inch_to_mm)
         self.lengthQuantity.setItemData(1, self.convert.mm_to_inch)
         self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
@@ -39,10 +44,10 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.mvQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
 
     def convert_bullet_weight(self):
-        cur_idx = self.weighQuantity.currentIndex()
-        self.weight.setValue(self.weighQuantity.itemData(cur_idx)(self.weight.value()))
+        cur_idx = self.weightQuantity.currentIndex()
+        self.weight.setValue(self.weightQuantity.itemData(cur_idx)(self.weight.value()))
         self.weight.setSingleStep(0.01 if cur_idx == 0 else 0.1)
-        self.weighQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
+        self.weightQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
 
     def convert_bullet_length(self):
         cur_idx = self.lengthQuantity.currentIndex()
@@ -70,8 +75,8 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.bulletName.objectName(): self.bulletName.text(),
 
             self.weight.objectName():
-                self.weight.value() if self.weighQuantity.currentIndex() == 0
-                else self.weighQuantity.currentData()(self.weight.value()),
+                self.weight.value() if self.weightQuantity.currentIndex() == 0
+                else self.weightQuantity.currentData()(self.weight.value()),
 
             self.length.objectName():
                 self.length.value() if self.lengthQuantity.currentIndex() == 0
@@ -81,6 +86,8 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                 self.diameter.value() if self.diameterQuantity.currentIndex() == 0
                 else self.diameterQuantity.currentData(self.diameter.value()),
 
+            "weightTile": str(int(round(self.weight.value(), 0))) + 'gr' if self.weightQuantity.currentIndex() == 0
+                              else str(round(self.weight.value(), 1)) + 'g',
             self.dragType.objectName(): self.dragType.currentIndex(),
             self.bc.objectName(): self.bc.value(),
         }
@@ -102,7 +109,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.caliberName.objectName(): self.caliberName.text(),
             self.sh.objectName(): self.sh.value(),
             self.twist.objectName(): self.twist.value(),
-            self.caliberShort.objectName(): self.twist.text(),
+            self.caliberShort.objectName(): self.caliberShort.text(),
             self.rightTwist.objectName(): self.rightTwist.isChecked(),
         }
 
@@ -119,10 +126,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                          else self.mvQuantity.currentData()(data[self.mv.objectName()]))
         self.temp.setValue(data[self.temp.objectName()])
         self.ts.setValue(data[self.ts.objectName()])
-
         self.bulletName.setText(data[self.bulletName.objectName()])
-        self.weight.setValue(data[self.weight.objectName()] if self.weighQuantity.currentIndex() == 0
-                             else self.weighQuantity.currentData()(data[self.weight.objectName()]))
+        self.weight.setValue(data[self.weight.objectName()] if self.weightQuantity.currentIndex() == 0
+                             else self.weightQuantity.currentData()(data[self.weight.objectName()]))
         self.length.setValue(data[self.length.objectName()] if self.lengthQuantity.currentIndex() == 0
                              else self.lengthQuantity.currentData()(data[self.length.objectName()]))
         self.diameter.setValue(data[self.diameter.objectName()] if self.diameterQuantity.currentIndex() == 0

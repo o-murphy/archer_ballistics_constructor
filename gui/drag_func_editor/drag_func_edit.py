@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_DragFuncEditDialog
 from .drag_func_plot import DragPlot
 from .drop_func_plot import DropPlot
-# from .drop_table import DropTable
 from .drag_table import DragTable
 from .bc_table import BCTable
 from .drop_table_edit import DropTableEdit
