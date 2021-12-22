@@ -59,7 +59,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def setDrag(self):
         self.default_data = self.ballistics.get_drag_function()[::-1] if self.profile else TEST_DATA
-        print(self.default_data)
         self.current_data = None
         self.dox, self.doy = self.parse_data(self.default_data)
         self.drag_plot.draw_default_plot(self.dox, self.doy)
