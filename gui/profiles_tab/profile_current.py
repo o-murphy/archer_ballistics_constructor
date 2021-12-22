@@ -71,6 +71,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         }
 
     def get_bullet(self):
+        print(self.dragType.currentIndex())
         return {
             self.bulletName.objectName(): self.bulletName.text(),
 

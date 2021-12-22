@@ -149,7 +149,7 @@ class ArcherBallistics(object):
     def set_atmo(self, conditions: Conditions):
         self.atmo = conditions
         if self.atmo:
-            return archer_ballistics.set_atmo(self.atmo)
+            return self.ballistics.set_atmo(self.atmo)
 
     def get_atmo(self):
         return self.ballistics.get_atmo() if self.atmo else None
@@ -158,6 +158,16 @@ class ArcherBallistics(object):
         if self.atmo:
             self.sound_speed = self.ballistics.get_speed_of_sound()
         return self.sound_speed
+
+    def set_profile(self, profile: Profile):
+        if profile:
+            return self.ballistics.set_profile(profile)
+
+    def get_profile(self):
+        return self.ballistics.get_profile()
+
+    def get_drag_function(self):
+        return self.ballistics.get_drag_function()
 
 
 if __name__ == '__main__':
