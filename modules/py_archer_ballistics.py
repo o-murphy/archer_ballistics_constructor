@@ -59,16 +59,18 @@ class Bullet(Params):
         self.Length = self.params['length']
         self.Weight = self.params['weight']
         self.set_bc()
+        self.df_data = self.params['df_data'] if 'df_data' in self.params else None
 
     def set_drag_func_type(self):
         drag_func_type = [1, 7, 11, 17, 10]
         return drag_func_type[self.params['dragType']]
 
+    """Temporary"""
     def set_bc(self):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
-        self.BalCoef[0] = 0.3
-        self.BVelocity[0] = 800
+        self.BalCoef[0] = self.params['bc']
+        self.BVelocity[0] = 0
 
 
 class Cartridge(Params):

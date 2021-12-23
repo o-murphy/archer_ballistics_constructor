@@ -55,8 +55,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setConnects()
 
     def setProfile(self):
-        self.profile = Profile(self.cur_prof) if self.cur_prof else  Profile(test_data)
+        self.profile = Profile(self.cur_prof) if self.cur_prof else Profile(test_data)
         self.ballistics.set_profile(self.profile)
+        if self.profile.DragFunc == 10 and self.profile.df_data:
+            self.ballistics.set_drag_function(self.profile.df_data)
         self.ballistics.set_atmo(self.profile)
         self.ballistics.get_sound_speed()
 

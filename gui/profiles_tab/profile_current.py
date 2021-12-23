@@ -1,6 +1,5 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileCurrent
-from ..drag_func_editor import DragFuncEditDialog
 from modules.converter import BConverter
 
 
@@ -11,17 +10,16 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.setupConnects()
         self.convert = BConverter()
         self.setConverter()
+        self.tab_6.layout().setAlignment(QtCore.Qt.AlignTop)
 
     def setupConnects(self):
         self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
         self.weightSwitch.clicked.connect(self.convert_bullet_weight)
         self.lengthSwitch.clicked.connect(self.convert_bullet_length)
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
-        self.dragEditor.clicked.connect(self.drag_func_edit)
 
         self.caliberShort.textEdited.connect(
             lambda: self.caliberShort.setText(self.caliberShort.text().replace(' ', ''))
-            # lambda: self.caliberShort.setText(self.caliberName.text().replace(' ', '')[:8])
         )
 
     def setConverter(self):
@@ -33,10 +31,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.lengthQuantity.setItemData(1, self.convert.mm_to_inch)
         self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
-
-    def drag_func_edit(self):
-        drag_func_dlg = DragFuncEditDialog()
-        new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
 
     def convert_muzzle_velocity(self):
         cur_idx = self.mvQuantity.currentIndex()
@@ -60,46 +54,29 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.diameterQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
 
     def get_conditions(self):
-        return {
-            self.z_temp.objectName(): self.z_temp.value(),
-            self.z_angle.objectName(): self.z_angle.value(),
-            self.z_pressure.objectName(): self.z_pressure.value(),
-            self.z_latitude.objectName(): self.z_latitude.value(),
-            self.z_humidity.objectName(): self.z_humidity.value(),
-            self.z_azimuth.objectName(): self.z_azimuth.value(),
-            self.z_powder_temp.objectName(): self.z_powder_temp.value(),
-        }
+        conditions = self.tab_7.findChildren(QtWidgets.QSpinBox)
+        return {w.objectName(): w.value() for w in conditions}
+
+    @staticmethod
+    def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
+        return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
 
     def get_bullet(self):
-        print(self.dragType.currentIndex())
         return {
             self.bulletName.objectName(): self.bulletName.text(),
-
-            self.weight.objectName():
-                self.weight.value() if self.weightQuantity.currentIndex() == 0
-                else self.weightQuantity.currentData()(self.weight.value()),
-
-            self.length.objectName():
-                self.length.value() if self.lengthQuantity.currentIndex() == 0
-                else self.lengthQuantity.currentData()(self.length.value()),
-
-            self.diameter.objectName():
-                self.diameter.value() if self.diameterQuantity.currentIndex() == 0
-                else self.diameterQuantity.currentData(self.diameter.value()),
-
-            "weightTile": str(int(round(self.weight.value(), 0))) + 'gr' if self.weightQuantity.currentIndex() == 0
-                              else str(round(self.weight.value(), 1)) + 'g',
+            self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
+            self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
+            self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
             self.dragType.objectName(): self.dragType.currentIndex(),
             self.bc.objectName(): self.bc.value(),
+            "weightTile": str(int(round(self.weight.value(), 0))) + 'gr' if self.weightQuantity.currentIndex() == 0
+            else str(round(self.weight.value(), 1)) + 'g',
         }
 
     def get_cartridge(self):
         return {
             self.cartridgeName.objectName(): self.cartridgeName.text(),
-            self.mv.objectName():
-                self.mv.value() if self.mvQuantity.currentIndex() == 0
-                else self.mvQuantity.currentData()(self.mv.value()),
-
+            self.mv.objectName(): self.get_cln(self.mv, self.mvQuantity),
             self.temp.objectName(): self.temp.value(),
             self.ts.objectName(): self.ts.value(),
         }
@@ -114,33 +91,28 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.rightTwist.objectName(): self.rightTwist.isChecked(),
         }
 
-    def set_data(self, data):
-        self.rifleName.setText(data[self.rifleName.objectName()])
-        self.caliberName.setText(data[self.caliberName.objectName()])
-        self.sh.setValue(data[self.sh.objectName()])
-        self.twist.setValue(data[self.twist.objectName()])
-        self.caliberShort.setText(data[self.caliberShort.objectName()])
-        self.rightTwist.setChecked(data[self.rightTwist.objectName()])
+    @staticmethod
+    def set_dirt(data, spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
+        spin.setValue(data[spin.objectName()]
+                      if combo.currentIndex() == 0
+                      else combo.currentData()(data[spin.objectName()]))
 
-        self.cartridgeName.setText(data[self.caliberName.objectName()])
-        self.mv.setValue(data[self.mv.objectName()] if self.mvQuantity.currentIndex() == 0
-                         else self.mvQuantity.currentData()(data[self.mv.objectName()]))
-        self.temp.setValue(data[self.temp.objectName()])
-        self.ts.setValue(data[self.ts.objectName()])
-        self.bulletName.setText(data[self.bulletName.objectName()])
-        self.weight.setValue(data[self.weight.objectName()] if self.weightQuantity.currentIndex() == 0
-                             else self.weightQuantity.currentData()(data[self.weight.objectName()]))
-        self.length.setValue(data[self.length.objectName()] if self.lengthQuantity.currentIndex() == 0
-                             else self.lengthQuantity.currentData()(data[self.length.objectName()]))
-        self.diameter.setValue(data[self.diameter.objectName()] if self.diameterQuantity.currentIndex() == 0
-                               else self.diameterQuantity.currentData()(data[self.diameter.objectName()]))
-        self.dragType.setCurrentIndex(data[self.dragType.objectName()])
-        self.bc.setValue(data[self.bc.objectName()])
+    def set_data(self, data: dict):
+        tab_data = {self.__getattribute__(k): v for k, v in data.items() if hasattr(self, k)}.items()
+        [k.setText(v) for k, v in tab_data if isinstance(v, str)]
+        [k.setValue(v) for k, v in tab_data
+         if isinstance(k, QtWidgets.QSpinBox) and not hasattr(self, f'{k.objectName()}Quantity')]
+        [self.set_dirt(data, k, self.__getattribute__(f'{k.objectName()}Quantity')) for k, v in tab_data
+         if isinstance(k, QtWidgets.QSpinBox) and hasattr(self, f'{k.objectName()}Quantity')]
+        [k.setCurrentIndex(v) for k, v in tab_data if isinstance(k, QtWidgets.QComboBox)]
 
-        self.z_temp.setValue(data[self.z_temp.objectName()])
-        self.z_angle.setValue(data[self.z_angle.objectName()])
-        self.z_pressure.setValue(data[self.z_pressure.objectName()])
-        self.z_latitude.setValue(data[self.z_latitude.objectName()])
-        self.z_humidity.setValue(data[self.z_humidity.objectName()])
-        self.z_azimuth.setValue(data[self.z_azimuth.objectName()])
-        self.z_powder_temp.setValue(data[self.z_powder_temp.objectName()])
+    def disable_tabs(self):
+        for tab in [self.tab_6, self.tab_7, self.tab_8]:
+            for w in tab.children():
+                w.setEnabled(False)
+
+    def enable_tabs(self):
+        for tab in [self.tab_6, self.tab_7, self.tab_8]:
+            for w in tab.children():
+                w.setEnabled(True)
+

@@ -67,6 +67,10 @@ class Ui_profileCurrent(object):
         self.tabWidget_2.setStyleSheet("QTabBar::tab {\n"
 "    height: 25px; width: 150px;\n"
 "    font-size: 15px;\n"
+"}\n"
+"\n"
+"QWidget::disabled {\n"
+"    color: rgb(160, 160, 160)\n"
 "}")
         self.tabWidget_2.setObjectName("tabWidget_2")
         self.tab_6 = QtWidgets.QWidget()
@@ -352,6 +356,7 @@ class Ui_profileCurrent(object):
         self.mvSwitch.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("ui_templates\\../.rsrc/res/drawable/secondarybtn21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("ui_templates\\../.rsrc/res/drawable/secondarybtn21b.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
         self.mvSwitch.setIcon(icon2)
         self.mvSwitch.setIconSize(QtCore.QSize(16, 16))
         self.mvSwitch.setObjectName("mvSwitch")
