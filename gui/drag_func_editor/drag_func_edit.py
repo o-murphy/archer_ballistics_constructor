@@ -47,15 +47,18 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.current_drop = None
         self.drop_table = None
 
-        self.setWidgets()
         self.setProfile()
+        self.setWidgets()
+
         self.setDrag()
         self.setDrops()
         self.setConnects()
 
     def setProfile(self):
-        self.profile = Profile(self.cur_prof) if self.cur_prof else None # Profile(test_data)
+        self.profile = Profile(self.cur_prof) if self.cur_prof else  Profile(test_data)
         self.ballistics.set_profile(self.profile)
+        self.ballistics.set_atmo(self.profile)
+        self.ballistics.get_sound_speed()
 
     def setDrag(self):
         self.default_data = self.ballistics.get_drag_function()[::-1] if self.profile else TEST_DATA
@@ -68,7 +71,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setDrops(self):
         self.drop_table = self.drop_table_edit.drop_table
         self.set_distances()
-        self.default_drop = self.ballistics.calculate_drop(self.default_data, self.distances)
+        self.default_drop = [rnd(i) for i in self.ballistics.calculate_drop(self.default_data, self.distances)]
+        self.drop_plot.draw_default_plot(self.distances, self.default_drop)
         self.set_hold_off_quantity()
         self.drop_table_edit.drop_table.set()
 
@@ -81,8 +85,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 4)
 
         self.distanceQuantity.setItemData(0, 1)
-        self.distanceQuantity.setItemData(1, 343)
-        self.distanceQuantity.setItemData(2, 343 * 3.281)
+        self.distanceQuantity.setItemData(1, self.ballistics.sound_speed)
+        self.distanceQuantity.setItemData(2, self.ballistics.sound_speed * 3.281)
 
         self.holdOffQuantity.setItemData(0, BConverter.nothing)
         self.holdOffQuantity.setItemData(1, BConverter.cm2mil)
@@ -109,10 +113,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table.clicked.connect(lambda item: self.cd_at_distance(item))
 
     def set_hold_off_quantity(self):
-        self.drop_plot.set_hold_off_quantity(*self.get_drop())
+        self.drop_plot.y_q_label = self.holdOffQuantity.currentText()
+        self.drop_plot.y_quantity = self.holdOffQuantity.currentData()
+        self.drop_plot.set_quantity()
 
     def set_distance_quantity(self):
-        self.drag_plot.set_distance_quantity(self.distanceQuantity.currentText(), self.distanceQuantity.currentData())
+        self.drag_plot.x_q_label = self.distanceQuantity.currentText()
+        self.drag_plot.x_quantity = self.distanceQuantity.currentData()
+        self.drag_plot.set_distance_quantity()
 
     def set_distances(self):
         for i in range(25, 2500, 25):
@@ -147,24 +155,20 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def reset(self):
         self.current_data = None  # self.default_data
         self.update_drag_table()
-        self.drag_plot.reset_current_plot(self.dox, self.doy)
+        self.drag_plot.reset_current_plot()
 
         self.current_drop = None  # self.default_drop
         self.calculate_bullet_drop()
-        self.drop_plot.reset_current_plot(*self.get_drop())
+        self.drop_plot.reset_current_plot()
 
     def append_updates(self):
         self.ballistics.drag_function = self.current_data
         self.ballistics.set_drag_function(self.ballistics.drag_function)
         self.update_drag_table()
-        self.drag_plot.draw_current_plot(*self.parse_data(self.current_data))
+        self.drag_plot.draw_current_plot(self.parse_data(self.current_data)[1])
 
         self.calculate_bullet_drop()
-        self.drop_plot.draw_custom_plot(*self.get_drop())
-
-    def get_drop(self):
-        return self.holdOffQuantity.currentText(), self.holdOffQuantity.currentData(), \
-               self.distances, self.default_drop, self.current_drop
+        self.drop_plot.draw_custom_plot(self.current_drop)
 
     @staticmethod
     def parse_data(data: list) -> dict or None:

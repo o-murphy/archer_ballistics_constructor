@@ -4,9 +4,8 @@ from .custom_plot import CustomPlot, pg, rnd, BConverter
 class DropPlot(CustomPlot):
     def __init__(self, name):
         super().__init__(name)
-        self.q_func = BConverter.nothing
+        self.y_quantity = BConverter.nothing
         self.graphWidget.getPlotItem().vb.invertY(True)
-
 
     def onMouseMoved(self, point):
         """
@@ -19,10 +18,10 @@ class DropPlot(CustomPlot):
         if self.parent():
             self.current_point.setData()
             p = self.graphWidget.plotItem.vb.mapSceneToView(point)
-            ox = self.parent().distances
-            data = self.parent().current_drop if self.parent().current_drop else self.parent().default_drop
+            ox = self.x
+            data = self.cur_y if self.cur_y else self.def_y
 
-            oy = [self.q_func(v, ox[k]) for k, v in enumerate(data)]
+            oy = [self.y_quantity(v, ox[k]) for k, v in enumerate(data)]
 
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
 
@@ -42,25 +41,36 @@ class DropPlot(CustomPlot):
             minYRange=max(oy)*1.2/100, maxYRange=max(oy)*1.2
         )
 
-    def set_hold_off_quantity(self, lable, quantity, distances, default_drop, current_drop):
+    def set_quantity(self):
+        # x_axis = self.graphWidget.getPlotItem().getAxis('bottom')
+        # x_axis.setScale(self.x_quantity)
+        # x_axis.setLabel(f"Velocity ({self.x_q_label})")
+
         y_axis = self.graphWidget.getPlotItem().getAxis('left')
-        self.y_q_label = lable
-        self.q_func = quantity
         y_axis.setLabel(self.y_q_label)
-        default = [self.q_func(v, distances[k]) for k, v in enumerate(default_drop)]
-        self.set_limits(distances, default)
-        self.default_plot.setData(distances, default)
+        y_def = [rnd(self.y_quantity(v, self.x[i])) for i, v in enumerate(self.def_y)]
 
-        if current_drop:
-            current = [self.q_func(v, distances[k]) for k, v in enumerate(current_drop)]
-            self.set_limits(distances, current + default)
-            self.current_plot.setData(distances, current)
+        if self.cur_y:
+            y_cur = [rnd(self.y_quantity(v, self.x[i])) for i, v in enumerate(self.cur_y)]
+            self.set_limits(self.x, y_def + y_cur)
+            self.current_plot.setData(self.x, y_cur)
 
-    def reset_current_plot(self, lable, quantity, distances, default_drop, current_drop):
+        else:
+            self.set_limits(self.x, y_def)
+        self.default_plot.setData(self.x, y_def)
+
+    def reset_current_plot(self):
         self.current_plot.setData()
+        self.cur_y = None
         self.current_point_text.setColor(color=(255, 255, 255))
-        self.set_hold_off_quantity(lable, quantity, distances, default_drop, current_drop)
+        self.set_quantity()
 
-    def draw_custom_plot(self, lable, quantity, distances, default_drop, current_drop):
+    def draw_custom_plot(self, current_drop):
+        self.cur_y = current_drop
         self.current_point_text.setColor(color=(255, 170, 0))
-        self.set_hold_off_quantity(lable, quantity, distances, default_drop, current_drop)
+        self.set_quantity()
+
+    def draw_default_plot(self, distances, default_drop):
+        self.x, self.def_y = distances, default_drop
+        self.current_point_text.setColor(color=(255, 255, 255))
+        self.set_quantity()

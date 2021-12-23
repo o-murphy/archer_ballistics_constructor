@@ -16,6 +16,10 @@ class CustomPlot(QtWidgets.QWidget):
         self.verticalLayout.setSpacing(4)
         self.graphWidget = pg.PlotWidget()
 
+        self.x = None
+        self.def_y = None
+        self.cur_y = None
+
         self.x_quantity = None
         self.x_q_label = None
         self.y_quantity = None
