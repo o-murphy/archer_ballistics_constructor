@@ -111,7 +111,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.distanceQuantity.currentIndexChanged.connect(self.set_distance_quantity)
         self.holdOffQuantity.currentIndexChanged.connect(self.set_hold_off_quantity)
-
         self.drop_table.clicked.connect(lambda item: self.cd_at_distance(item))
 
     def set_hold_off_quantity(self):

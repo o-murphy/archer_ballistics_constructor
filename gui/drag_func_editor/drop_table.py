@@ -1,15 +1,6 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_DropTable
-
-
-class NoWheelDoubleSpinBox(QtWidgets.QDoubleSpinBox):
-    def wheelEvent(self, event):
-        event.ignore()
-
-
-class NoWheelSpinBox(QtWidgets.QSpinBox):
-    def wheelEvent(self, event):
-        event.ignore()
+from ..single_custom_widgets.no_wheel_sb import NoWheelSpinBox, NoWheelDoubleSpinBox
 
 
 class DropTable(Ui_DropTable):
