@@ -25,7 +25,7 @@ class DropPlot(CustomPlot):
 
             ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
 
-            text = '{} {},\n{} M'.format(rnd(x), self.y_q_label, rnd(oy[ix]))
+            text = '{} M,\n{} {}'.format(rnd(x), rnd(oy[ix]), self.y_q_label)
             self.current_point.setData(x=[rnd(x)], y=[rnd(oy[ix])],
                                        symbolSize=10,
                                        symbolBrush=pg.mkBrush(100, 100, 255, 100))

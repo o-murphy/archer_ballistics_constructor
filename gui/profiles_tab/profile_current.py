@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileCurrent
 from modules.converter import BConverter
+from ..drag_func_editor.bc_table import BCTable
 
 
 class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
@@ -11,6 +12,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.convert = BConverter()
         self.setConverter()
         self.tab_6.layout().setAlignment(QtCore.Qt.AlignTop)
+        self.bc_table = BCTable()
+        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
+        self.bc_table.set()
 
     def setupConnects(self):
         self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)

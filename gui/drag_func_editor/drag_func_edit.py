@@ -79,12 +79,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit.drop_table.set()
 
     def setWidgets(self):
+        spacer = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addWidget(self.bc_table, 0, 0, 1, 1)
-        self.gridLayout.addWidget(self.drag_plot, 0, 1, 1, 2)
-        self.gridLayout.addWidget(self.drop_plot, 0, 1, 1, 2)
-        self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 1, 1)
-        self.gridLayout.addWidget(self.dragTable, 4, 0, 1, 4)
-        self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 4)
+        self.gridLayout.addItem(spacer, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
+        self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
+        self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
+        self.gridLayout.addWidget(self.dragTable, 5, 0, 1, 4)
+        self.gridLayout.addWidget(self.buttonBox, 6, 0, 1, 4)
 
         self.distanceQuantity.setItemData(0, 1)
         self.distanceQuantity.setItemData(1, self.ballistics.sound_speed)

@@ -16,6 +16,7 @@ class Ui_profilesTab(object):
         profilesTab.setObjectName("profilesTab")
         profilesTab.resize(1000, 604)
         profilesTab.setMinimumSize(QtCore.QSize(1000, 600))
+        profilesTab.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profilesTab)
         self.gridLayout.setContentsMargins(6, 6, 6, 6)
         self.gridLayout.setSpacing(6)
