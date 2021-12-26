@@ -18,6 +18,7 @@ class Ui_DragTable(QtWidgets.QTableWidget):
         self.horizontalHeader().setMinimumSectionSize(28)
         self.verticalHeader().setDefaultSectionSize(28)
         self.verticalHeader().setMinimumSectionSize(28)
+        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
         self.setStyleSheet("""
             QScrollBar:horizontal {

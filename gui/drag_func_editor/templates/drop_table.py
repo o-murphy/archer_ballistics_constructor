@@ -6,7 +6,7 @@ class Ui_DropTable(QtWidgets.QTableWidget):
         self.setGeometry(QtCore.QRect(20, 20, 200, 302))
         self.setMinimumSize(QtCore.QSize(200, 0))
         self.setMaximumSize(QtCore.QSize(200, 16777215))
-        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.setObjectName("dropTable")
         self.setColumnCount(3)
