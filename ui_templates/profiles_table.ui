@@ -101,7 +101,7 @@ QTableView::item {
 }
 
 QScrollBar:vertical {
-        background-color: #2A2929;
+        background-color: rgb(51, 51, 51); /*#2A2929;*/
         width: 14px;
         margin: 15px 6px 15px 6px;
         border: 1px transparent #2A2929;
@@ -109,7 +109,7 @@ QScrollBar:vertical {
     }
 
 QScrollBar:vertical:hover {
-        background-color: #2A2929;
+        background-color: rgb(51, 51, 51); /*#2A2929;*/
         width: 14px;
         margin: 15px 3px 15px 3px;
         border: 1px transparent #2A2929;
