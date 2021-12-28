@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
+    <width>518</width>
     <height>618</height>
    </rect>
   </property>
@@ -52,11 +52,6 @@ QGroupBox::title {
 	background-color: rgb(40, 40, 40);
 }
 
-QWidget {
-	background-color: rgb(51, 51, 51);
-	color: white;
-}
-
 QTableWidget {
 	
 	background-color: rgb(40, 40, 40);
@@ -93,10 +88,10 @@ QTableWidget::item:selected {
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0">
+   <item row="0" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
     <widget class="QTabWidget" name="tabWidget_2">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -122,7 +117,7 @@ QWidget::disabled {
      </property>
      <widget class="QWidget" name="tab_6">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -133,10 +128,7 @@ QWidget::disabled {
       <attribute name="title">
        <string>Current profile</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_10">
-       <property name="spacing">
-        <number>4</number>
-       </property>
+      <layout class="QGridLayout" name="gridLayout_5">
        <property name="leftMargin">
         <number>6</number>
        </property>
@@ -149,7 +141,7 @@ QWidget::disabled {
        <property name="bottomMargin">
         <number>3</number>
        </property>
-       <item>
+       <item row="0" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
         <widget class="QGroupBox" name="rifleGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -159,7 +151,7 @@ QWidget::disabled {
          </property>
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>500</width>
            <height>156</height>
           </size>
          </property>
@@ -186,57 +178,6 @@ QWidget::disabled {
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_22">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="rifleName">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="maxLength">
-             <number>20</number>
-            </property>
-            <property name="frame">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="1">
            <widget class="QWidget" name="widget_8" native="true">
             <property name="maximumSize">
@@ -360,6 +301,112 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QWidget" name="widget_38" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QSpinBox" name="sh">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="suffix">
+                <string> mm</string>
+               </property>
+               <property name="maximum">
+                <number>200</number>
+               </property>
+               <property name="value">
+                <number>90</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="lPushButton_28">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="rPushButton_28">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QWidget" name="widget_7" native="true">
             <property name="maximumSize">
@@ -471,112 +518,6 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QWidget" name="widget_38" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_10">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QSpinBox" name="sh">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="suffix">
-                <string> mm</string>
-               </property>
-               <property name="maximum">
-                <number>200</number>
-               </property>
-               <property name="value">
-                <number>90</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="lPushButton_28">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="rPushButton_28">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_67">
             <property name="font">
@@ -589,15 +530,54 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_68">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_22">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Twist:</string>
+             <string>Name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="rifleName">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="maxLength">
+             <number>20</number>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -613,34 +593,33 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_68">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
+            <property name="text">
+             <string>Twist:</string>
             </property>
-           </spacer>
+           </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
         <widget class="QGroupBox" name="cartridgeGroupBox">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>0</width>
-           <height>154</height>
+           <width>500</width>
+           <height>155</height>
           </size>
          </property>
          <property name="font">
@@ -803,6 +782,36 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_69">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Name:</string>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="1">
            <widget class="QSpinBox" name="temp">
             <property name="maximumSize">
@@ -881,66 +890,6 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_69">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_70">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Muzzle Velocity:</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="1">
            <widget class="QDoubleSpinBox" name="ts">
             <property name="minimumSize">
@@ -1007,34 +956,51 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_70">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
-           </spacer>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Muzzle Velocity:</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
         <widget class="QGroupBox" name="bulletGroupBox">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>0</width>
-           <height>214</height>
+           <width>500</width>
+           <height>217</height>
           </size>
          </property>
          <property name="font">
@@ -1049,12 +1015,12 @@ QWidget::disabled {
           <string>Bullet</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_75">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_73">
             <property name="maximumSize">
              <size>
               <width>105</width>
-              <height>25</height>
+              <height>21</height>
              </size>
             </property>
             <property name="font">
@@ -1063,29 +1029,11 @@ QWidget::disabled {
              </font>
             </property>
             <property name="text">
-             <string>Length:</string>
+             <string>Name:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_74">
-            <property name="maximumSize">
-             <size>
-              <width>105</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Weight:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
+          <item row="0" column="1">
            <widget class="QLineEdit" name="bulletName">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1124,8 +1072,8 @@ QWidget::disabled {
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_76">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_74">
             <property name="maximumSize">
              <size>
               <width>105</width>
@@ -1138,65 +1086,11 @@ QWidget::disabled {
              </font>
             </property>
             <property name="text">
-             <string>Diameter:</string>
+             <string>Weight:</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_78">
-            <property name="maximumSize">
-             <size>
-              <width>105</width>
-              <height>23</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>BC:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_73">
-            <property name="maximumSize">
-             <size>
-              <width>105</width>
-              <height>21</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_77">
-            <property name="maximumSize">
-             <size>
-              <width>105</width>
-              <height>23</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Drag Function:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QWidget" name="horizontalWidget_17" native="true">
             <property name="minimumSize">
              <size>
@@ -1329,7 +1223,25 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_75">
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Length:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
            <widget class="QWidget" name="horizontalWidget_18" native="true">
             <property name="minimumSize">
              <size>
@@ -1453,7 +1365,25 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_76">
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Diameter:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
            <widget class="QWidget" name="horizontalWidget_19" native="true">
             <property name="minimumSize">
              <size>
@@ -1577,7 +1507,25 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_77">
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Drag Function:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
            <widget class="QWidget" name="horizontalWidget_20" native="true">
             <property name="maximumSize">
              <size>
@@ -1652,7 +1600,25 @@ QWidget::disabled {
             </layout>
            </widget>
           </item>
-          <item row="8" column="1">
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_78">
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>BC:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
            <widget class="QWidget" name="bcWidget" native="true">
             <layout class="QHBoxLayout" name="horizontalLayout">
              <property name="spacing">
@@ -1704,7 +1670,7 @@ QWidget::disabled {
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="multiBC">
+              <widget class="QCheckBox" name="multiBC">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -1724,9 +1690,9 @@ QWidget::disabled {
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">            QRadioButton::indicator::checked {background: orange}
-            QRadioButton::indicator::unchecked {background: white}
-            QRadioButton {font-size: 15px;}</string>
+                <string notr="true">            QCheckButton::checked {background: orange}
+            QCheckButton::unchecked {background: white}
+            QCheckButton {font-size: 15px;}</string>
                </property>
                <property name="text">
                 <string>Multi BC</string>

@@ -51,8 +51,11 @@ class Bullet(Params):
 
     def __init__(self, params):
         super().__init__(params)
+
+        self.is_mbc = True if self.params['multiBC'] == 2 else False
+        self.mbc = self.params['bcTable']
         self.DragFunc = self.set_drag_func_type()
-        # self.BalCoef = self.params['bc']
+
         self.BalCoef = None
         self.BVelocity = None
         self.Diameter = self.params['diameter']
@@ -62,7 +65,9 @@ class Bullet(Params):
         self.df_data = self.params['df_data'] if 'df_data' in self.params else None
 
     def set_drag_func_type(self):
-        drag_func_type = [1, 7, 11, 17, 10]
+        drag_func_type = [1, 7, 10]
+        if self.is_mbc:
+            drag_func_type = [11, 17, 10]
         return drag_func_type[self.params['dragType']]
 
     """Temporary"""
@@ -70,7 +75,13 @@ class Bullet(Params):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
         self.BalCoef[0] = self.params['bc']
-        self.BVelocity[0] = 0
+        self.BVelocity[0] = self.params['mv']
+        if self.is_mbc:
+            for i, (v, bc) in enumerate(self.mbc):
+                if bc > 0 and v >= 0:
+                    self.BalCoef[i] = bc
+                    self.BVelocity[i] = v
+        print(self.BalCoef, self.BVelocity)
 
 
 class Cartridge(Params):

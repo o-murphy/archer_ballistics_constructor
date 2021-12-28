@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from .templates import Ui_profileCurrent
 from modules.converter import BConverter
 from ..drag_func_editor.bc_table import BCTable
@@ -11,7 +11,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.setupConnects()
         self.convert = BConverter()
         self.setConverter()
-        self.tab_6.layout().setAlignment(QtCore.Qt.AlignTop)
         self.bc_table = BCTable()
         self.bc_table.set()
         self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
@@ -39,6 +38,11 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
 
     def enable_multi_bc(self, is_true):
         self.bc_table.setEnabled(is_true)
+        self.bc.setDisabled(is_true)
+        if self.bc_table.cellWidget(0, 1).value() == -1:
+            self.bc_table.cellWidget(0, 1).setValue(self.bc.value())
+        if self.bc_table.cellWidget(0, 0).value() == 0:
+            self.bc_table.cellWidget(0, 0).setValue(self.get_cln(self.mv, self.mvQuantity))
 
     def convert_muzzle_velocity(self):
         cur_idx = self.mvQuantity.currentIndex()
@@ -69,6 +73,17 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
         return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
 
+    def get_multiBC(self):
+        return [(self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value())
+                for r in range(self.bc_table.rowCount())]
+
+    def set_multiBC(self, multi_bc):
+        print(multi_bc)
+        for i, (v, bc) in enumerate(multi_bc):
+            print(v, bc)
+            self.bc_table.cellWidget(i, 0).setValue(v)
+            self.bc_table.cellWidget(i, 1).setValue(bc)
+
     def get_bullet(self):
         return {
             self.bulletName.objectName(): self.bulletName.text(),
@@ -76,9 +91,12 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
             self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
             self.dragType.objectName(): self.dragType.currentIndex(),
-            self.bc.objectName(): self.bc.value(),
             "weightTile": str(int(round(self.weight.value(), 0))) + 'gr' if self.weightQuantity.currentIndex() == 0
             else str(round(self.weight.value(), 1)) + 'g',
+            self.multiBC.objectName(): self.multiBC.checkState(),
+
+            self.bc.objectName(): self.bc.value(),
+            self.bc_table.objectName(): self.get_multiBC()
         }
 
     def get_cartridge(self):
@@ -107,12 +125,22 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
 
     def set_data(self, data: dict):
         tab_data = {self.__getattribute__(k): v for k, v in data.items() if hasattr(self, k)}.items()
-        [k.setText(v) for k, v in tab_data if isinstance(v, str)]
-        [k.setValue(v) for k, v in tab_data
-         if isinstance(k, QtWidgets.QSpinBox) and not hasattr(self, f'{k.objectName()}Quantity')]
-        [self.set_dirt(data, k, self.__getattribute__(f'{k.objectName()}Quantity')) for k, v in tab_data
-         if isinstance(k, QtWidgets.QSpinBox) and hasattr(self, f'{k.objectName()}Quantity')]
-        [k.setCurrentIndex(v) for k, v in tab_data if isinstance(k, QtWidgets.QComboBox)]
+
+        for k, v in tab_data:
+            if isinstance(v, str):
+                k.setText(v)
+            if isinstance(k, QtWidgets.QSpinBox):
+                if hasattr(self, f'{k.objectName()}Quantity'):
+                    self.set_dirt(data, k, self.__getattribute__(f'{k.objectName()}Quantity'))
+                k.setValue(v)
+            if isinstance(k, QtWidgets.QComboBox):
+                k.setCurrentIndex(v)
+            if isinstance(k, QtWidgets.QCheckBox):
+                k.setCheckState(v)
+
+        self.rightTwist.click() if data['rightTwist'] else self.leftTwist.click()
+
+        self.set_multiBC(data['bcTable'])
 
     def disable_tabs(self):
         for tab in [self.tab_6, self.tab_7, self.tab_8]:

@@ -14,6 +14,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
         if self.tableWidget.currentItem():
             row = self.tableWidget.currentRow()
             column = self.tableWidget.currentColumn()
+            print(self.tableWidget.cellWidget(row, column).profile)
             self.parent().profile_current.set_data(
                 self.tableWidget.cellWidget(row, column).profile
             )
@@ -21,9 +22,10 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
     def add_row(self):
         row_count = self.tableWidget.rowCount()
         if row_count < 20:
+            w = ProfileItem()
             self.tableWidget.insertRow(self.tableWidget.rowCount())
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
-            self.tableWidget.setCellWidget(row_count, 0, ProfileItem())
+            self.tableWidget.setCellWidget(row_count, 0, w)
             self.parent().set_profile(self.tableWidget.cellWidget(row_count, 0))
 
     def remove_row(self):

@@ -50,3 +50,19 @@ class NoWheelSpinBox(QtWidgets.QSpinBox):
     def wheelEvent(self, event):
         if self.hasFocus():
             super().wheelEvent(event)
+
+
+class BCSpinBox(NoWheelDoubleSpinBox):
+    def __init__(self):
+        super(BCSpinBox, self).__init__()
+        self.setMaximum(1)
+        self.setMinimum(0)
+        self.setSingleStep(0.001)
+
+
+class BVSpinBox(NoWheelSpinBox):
+    def __init__(self):
+        super(BVSpinBox, self).__init__()
+        self.setMaximum(2000)
+        self.setMinimum(-1)
+        self.setSingleStep(1)

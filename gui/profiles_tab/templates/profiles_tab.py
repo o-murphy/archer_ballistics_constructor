@@ -14,8 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_profilesTab(object):
     def setupUi(self, profilesTab):
         profilesTab.setObjectName("profilesTab")
-        profilesTab.resize(1000, 604)
-        profilesTab.setMinimumSize(QtCore.QSize(1000, 600))
+        profilesTab.resize(463, 604)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(profilesTab.sizePolicy().hasHeightForWidth())
+        profilesTab.setSizePolicy(sizePolicy)
+        profilesTab.setMinimumSize(QtCore.QSize(0, 0))
         profilesTab.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profilesTab)
         self.gridLayout.setContentsMargins(6, 6, 6, 6)
