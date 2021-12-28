@@ -13,8 +13,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.setConverter()
         self.tab_6.layout().setAlignment(QtCore.Qt.AlignTop)
         self.bc_table = BCTable()
-        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
         self.bc_table.set()
+        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
+        self.enable_multi_bc(self.multiBC.isChecked())
 
     def setupConnects(self):
         self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
@@ -35,6 +36,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.lengthQuantity.setItemData(1, self.convert.mm_to_inch)
         self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
+
+    def enable_multi_bc(self, is_true):
+        self.bc_table.setEnabled(is_true)
 
     def convert_muzzle_velocity(self):
         cur_idx = self.mvQuantity.currentIndex()
