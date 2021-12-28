@@ -13,8 +13,8 @@ from PyQt5 import QtCore, QtWidgets
 
 class Ui_BCTable(QtWidgets.QTableWidget):
     def setupUi(self):
-        self.setMinimumSize(QtCore.QSize(122, 0))
-        self.setMaximumSize(QtCore.QSize(122, 16777215))
+        self.setMinimumSize(QtCore.QSize(140, 0))
+        self.setMaximumSize(QtCore.QSize(140, 16777215))
         self.setObjectName("bcTable")
         self.setColumnCount(2)
         self.setRowCount(0)
@@ -22,9 +22,17 @@ class Ui_BCTable(QtWidgets.QTableWidget):
         self.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.setHorizontalHeaderItem(1, item)
-        self.horizontalHeader().setDefaultSectionSize(60)
+        self.verticalHeader().setVisible(False)
+        self.verticalHeader().setDefaultSectionSize(26)
+        self.verticalHeader().setMinimumSectionSize(26)
+        self.verticalHeader().setMinimumHeight(26)
+        self.verticalHeader().setMaximumHeight(26)
+        self.setMaximumHeight(156)
+        self.setMinimumHeight(156)
+        self.horizontalHeader().setDefaultSectionSize(70)
         self.horizontalHeader().setMinimumSectionSize(45)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
         self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName()

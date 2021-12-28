@@ -20,14 +20,14 @@ rnd = BConverter.auto_rnd
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
-    def __init__(self, cur_prof=None):
+    def __init__(self, cur_prof=None, bc_table=None):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
         self.ballistics = ArcherBallistics()
 
-        self.bc_table = BCTable()
+        self.bc_table = bc_table if bc_table else BCTable()
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
         self.drop_table_edit = DropTableEdit()
@@ -57,6 +57,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setProfile(self):
         self.profile = Profile(self.cur_prof) if self.cur_prof else Profile(test_data)
         self.ballistics.set_profile(self.profile)
+        print('bar', self.ballistics.get_profile())
         if self.profile.DragFunc == 10 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
         self.ballistics.set_atmo(self.profile)

@@ -58,6 +58,7 @@ class BCSpinBox(NoWheelDoubleSpinBox):
         self.setMaximum(1)
         self.setMinimum(0)
         self.setSingleStep(0.001)
+        self.setDecimals(3)
 
 
 class BVSpinBox(NoWheelSpinBox):

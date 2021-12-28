@@ -7,6 +7,19 @@ from ..drag_func_editor import DragFuncEditDialog
 # from .profiles_progress import ProfilesProgress
 from ..profile_item import WProfileItem
 
+# {'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True,
+#  'bulletName': '', 'weight': 175.0, 'length': 1.2, 'diameter': 0.308, 'dragType': 0, 'weightTile': '175gr',
+#  'multiBC': 2, 'bc': 0.169, 'bcTable': [(853, 0.505), (549, 0.496), (0, 0.485), (-1, 0.0), (-1, 0.0)],
+#  'cartridgeName': '', 'mv': 800, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_powder_temp': 15, 'z_humidity': 50,
+#  'z_pressure': 750, 'z_latitude': 0, 'z_angle': 0, 'z_azimuth': 270, 'z_x': 0.0, 'z_y': 0.0, 'z_d': 100}
+
+
+# {'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True,
+#  'bulletName': '', 'weight': 175.0, 'length': 1.2, 'diameter': 0.308, 'dragType': 1, 'weightTile': '175gr',
+#  'multiBC': 2, 'bc': 0.169, 'bcTable': [(914, 0.244), (762, 0.243), (609, 0.24), (457, 0.242), (0, 0.246)],
+#  'cartridgeName': '', 'mv': 800, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_powder_temp': 15, 'z_humidity': 50,
+#  'z_pressure': 750, 'z_latitude': 0, 'z_angle': 0, 'z_azimuth': 270, 'z_x': 0.0, 'z_y': 0.0, 'z_d': 100}
+
 
 class CurrentState(object):
     def __init__(self,
@@ -53,8 +66,10 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             widget_connect_list.append(le.editingFinished)
 
         [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
-        [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
-        [widget_connect_list.append(cb.currentIndexChanged) for cb in self.profile_current.findChildren(QtWidgets.QComboBox)]
+        [widget_connect_list.append(sb.valueChanged) for sb in
+         self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
+        [widget_connect_list.append(cb.currentIndexChanged) for cb in
+         self.profile_current.findChildren(QtWidgets.QComboBox)]
         [widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
         [widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
         [widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
@@ -91,5 +106,12 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             item.set_z_data()
 
     def drag_func_edit(self):
-        drag_func_dlg = DragFuncEditDialog(self.profiles_table.get_current_item())
+        drag_func_dlg = DragFuncEditDialog(
+            self.profiles_table.get_current_item(),
+            self.profile_current.bc_table if self.profile_current.multiBC.isChecked() else self.profile_current.bc
+        )
         new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
+        if self.profile_current.multiBC.isChecked():
+            self.profile_current.bulletGroupBox.layout().addWidget(self.profile_current.bc_table, 0, 2, 6, 1)
+        else:
+            self.profile_current.bcWidget.layout().addWidget(self.profile_current.bc)
