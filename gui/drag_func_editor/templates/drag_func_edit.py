@@ -30,6 +30,8 @@ class Ui_DragFuncEditDialog(object):
 "    color: white;\n"
 "}\n"
 "\n"
+"QTableView{border : 1px solid rgb(78, 78, 78);}\n"
+"\n"
 "QTableWidget {\n"
 "    \n"
 "    background-color: rgb(40, 40, 40);\n"

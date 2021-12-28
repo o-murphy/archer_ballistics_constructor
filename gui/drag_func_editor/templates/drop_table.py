@@ -4,10 +4,10 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_DropTable(QtWidgets.QTableWidget):
     def setupUi(self):
         self.setGeometry(QtCore.QRect(20, 20, 200, 302))
-        self.setMinimumSize(QtCore.QSize(200, 0))
-        self.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.setMinimumSize(QtCore.QSize(196, 0))
+        self.setMaximumSize(QtCore.QSize(196, 16777215))
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setObjectName("dropTable")
         self.setColumnCount(3)
         self.setRowCount(0)

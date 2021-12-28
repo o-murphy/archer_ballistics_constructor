@@ -33,6 +33,7 @@ class Ui_BCTable(QtWidgets.QTableWidget):
         self.horizontalHeader().setMinimumSectionSize(45)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setStyleSheet("""QTableView{border : 1px solid rgb(78, 78, 78);}""")
 
         self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName()

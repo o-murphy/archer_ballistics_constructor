@@ -72,7 +72,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">QTableView {
-	border-color: rgb(76, 76, 76);
+	border : 2px solid rgb(78, 78, 78);
 }
 
 QTableWidget {

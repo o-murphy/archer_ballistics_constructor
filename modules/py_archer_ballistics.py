@@ -82,7 +82,8 @@ class Bullet(Params):
                     self.BalCoef[i] = bc
                     self.BVelocity[i] = v
 
-        print('foo', self.BalCoef, self.BVelocity)
+        # print('foo', self.BalCoef, self.BVelocity)
+
 
 class Cartridge(Params):
     """ params:

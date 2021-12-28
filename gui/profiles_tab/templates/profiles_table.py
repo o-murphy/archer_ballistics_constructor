@@ -36,7 +36,7 @@ class Ui_profilesTable(object):
         self.tableWidget.setMinimumSize(QtCore.QSize(426, 0))
         self.tableWidget.setMaximumSize(QtCore.QSize(426, 16777215))
         self.tableWidget.setStyleSheet("QTableView {\n"
-"    border-color: rgb(76, 76, 76);\n"
+"    border : 2px solid rgb(78, 78, 78);\n"
 "}\n"
 "\n"
 "QTableWidget {\n"

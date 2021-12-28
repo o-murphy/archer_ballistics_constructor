@@ -153,7 +153,7 @@ class Ui_profileCurrent(object):
         self.rightTwist.setMaximumSize(QtCore.QSize(56, 16777215))
         self.rightTwist.setStyleSheet("            QRadioButton::indicator::checked {background: orange}\n"
 "            QRadioButton::indicator::unchecked {background: white}\n"
-"            QRadioButton {font-size: 15px;}")
+"            QRadioButton {font-size: 15px; color: white}")
         self.rightTwist.setChecked(True)
         self.rightTwist.setObjectName("rightTwist")
         self.horizontalLayout_49.addWidget(self.rightTwist)
@@ -167,7 +167,7 @@ class Ui_profileCurrent(object):
         self.leftTwist.setMaximumSize(QtCore.QSize(56, 16777215))
         self.leftTwist.setStyleSheet("            QRadioButton::indicator::checked {background: orange}\n"
 "            QRadioButton::indicator::unchecked {background: white}\n"
-"            QRadioButton {font-size: 15px;}")
+"            QRadioButton {font-size: 15px; color: white}")
         self.leftTwist.setObjectName("leftTwist")
         self.horizontalLayout_49.addWidget(self.leftTwist)
         self.gridLayout_2.addWidget(self.widget_8, 3, 1, 1, 1)
@@ -724,6 +724,20 @@ class Ui_profileCurrent(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.multiBC = QtWidgets.QCheckBox(self.bcWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.multiBC.sizePolicy().hasHeightForWidth())
+        self.multiBC.setSizePolicy(sizePolicy)
+        self.multiBC.setMinimumSize(QtCore.QSize(0, 0))
+        self.multiBC.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.multiBC.setStyleSheet("            QCheckBox::indicator::checked {background: orange}\n"
+"            QCheckBox::indicator::unchecked {background: white}\n"
+"            QCheckBox {font-size: 15px; color: white;}")
+        self.multiBC.setChecked(False)
+        self.multiBC.setObjectName("multiBC")
+        self.horizontalLayout.addWidget(self.multiBC)
         self.bc = QtWidgets.QDoubleSpinBox(self.bcWidget)
         self.bc.setMinimumSize(QtCore.QSize(0, 0))
         self.bc.setMaximumSize(QtCore.QSize(100, 16777215))
@@ -736,20 +750,6 @@ class Ui_profileCurrent(object):
         self.bc.setProperty("value", 0.169)
         self.bc.setObjectName("bc")
         self.horizontalLayout.addWidget(self.bc)
-        self.multiBC = QtWidgets.QCheckBox(self.bcWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.multiBC.sizePolicy().hasHeightForWidth())
-        self.multiBC.setSizePolicy(sizePolicy)
-        self.multiBC.setMinimumSize(QtCore.QSize(0, 0))
-        self.multiBC.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.multiBC.setStyleSheet("            QCheckButton::checked {background: orange}\n"
-"            QCheckButton::unchecked {background: white}\n"
-"            QCheckButton {font-size: 15px;}")
-        self.multiBC.setChecked(False)
-        self.multiBC.setObjectName("multiBC")
-        self.horizontalLayout.addWidget(self.multiBC)
         self.gridLayout_4.addWidget(self.bcWidget, 5, 1, 1, 1)
         self.gridLayout_5.addWidget(self.bulletGroupBox, 2, 0, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.tabWidget_2.addTab(self.tab_6, "")

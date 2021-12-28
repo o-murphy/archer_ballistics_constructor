@@ -117,6 +117,7 @@ class ProfilesTab(UiProfilesTab):
         self.state.profiles_file = fileName
         self.progressBar.setValue(0)
 
+    """refactored"""
     def save_profiles(self, fileName):
         profiles = []
         for item in self.scrollArea.findChildren(WProfileItem):
@@ -127,6 +128,7 @@ class ProfilesTab(UiProfilesTab):
         self.window().setWindowTitle('ArcherBC'+10*' '+fileName)
         self.state.profiles_file = fileName
 
+    """refactored"""
     def save_file_dialog(self):
         """SaveAsDialog Native"""
         if self.state.profiles_file:
@@ -134,6 +136,7 @@ class ProfilesTab(UiProfilesTab):
         else:
             self.save_as_file_dialog()
 
+    """refactored"""
     def save_as_file_dialog(self, fileName=None):
         """SaveAsDialog Native"""
         options = QtWidgets.QFileDialog.Options()

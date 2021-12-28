@@ -10,7 +10,6 @@ class BCTable(Ui_BCTable):
         super().__init__()
         self.setupUi()
 
-
     def set(self):
         for i in range(5):
             self.insertRow(i)

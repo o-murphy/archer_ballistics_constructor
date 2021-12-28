@@ -258,7 +258,7 @@ QWidget::disabled {
                <property name="styleSheet">
                 <string notr="true">            QRadioButton::indicator::checked {background: orange}
             QRadioButton::indicator::unchecked {background: white}
-            QRadioButton {font-size: 15px;}</string>
+            QRadioButton {font-size: 15px; color: white}</string>
                </property>
                <property name="text">
                 <string>Right</string>
@@ -291,7 +291,7 @@ QWidget::disabled {
                <property name="styleSheet">
                 <string notr="true">            QRadioButton::indicator::checked {background: orange}
             QRadioButton::indicator::unchecked {background: white}
-            QRadioButton {font-size: 15px;}</string>
+            QRadioButton {font-size: 15px; color: white}</string>
                </property>
                <property name="text">
                 <string>Left</string>
@@ -1637,6 +1637,39 @@ QWidget::disabled {
               <number>0</number>
              </property>
              <item>
+              <widget class="QCheckBox" name="multiBC">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">            QCheckBox::indicator::checked {background: orange}
+            QCheckBox::indicator::unchecked {background: white}
+            QCheckBox {font-size: 15px; color: white;}</string>
+               </property>
+               <property name="text">
+                <string>Multi BC</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QDoubleSpinBox" name="bc">
                <property name="minimumSize">
                 <size>
@@ -1666,39 +1699,6 @@ QWidget::disabled {
                </property>
                <property name="value">
                 <double>0.169000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="multiBC">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">            QCheckButton::checked {background: orange}
-            QCheckButton::unchecked {background: white}
-            QCheckButton {font-size: 15px;}</string>
-               </property>
-               <property name="text">
-                <string>Multi BC</string>
-               </property>
-               <property name="checked">
-                <bool>false</bool>
                </property>
               </widget>
              </item>

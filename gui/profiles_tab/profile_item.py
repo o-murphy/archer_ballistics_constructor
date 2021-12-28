@@ -37,7 +37,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.profile[self.z_x.objectName()] = self.z_x.value()
         self.profile[self.z_y.objectName()] = self.z_y.value()
         self.profile[self.z_d.objectName()] = self.z_d.value()
-        print(self.profile)
+        # print(self.profile)
 
     def init_data(self, data):
-        print(self.parent())
+        pass
