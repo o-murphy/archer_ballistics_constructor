@@ -21,7 +21,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lpc_dialog = LPC_dialog()
 
     def setupWidgets(self):
-        self.profiles_tab = EmptyProfilesTab()
+        self.profiles_tab = EmptyProfilesTab(*sys.argv)
         self.tabWidget.addTab(self.profiles_tab, QtGui.QIcon(), 'Profiles')
 
         footer_widget = FooterWidget(self)
@@ -35,6 +35,9 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 def main():
+    import os
+    os.chdir(os.path.dirname(__file__))
+
     env_update.main()
     app = QtWidgets.QApplication(sys.argv)
     window = ExampleApp()

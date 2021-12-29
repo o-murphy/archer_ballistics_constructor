@@ -4,7 +4,10 @@
 #define MyAppName "Archer BC"
 #define MyAppVersion "v0.0.4-alpha"
 #define MyAppPublisher "Thermal Vision Technologies"
-#define MyAppExeName "archerbc_updater.exe"
+#define MyAppExeName "archerbc.exe"
+#define MyAppAssocName MyAppName + " File"
+#define MyAppAssocExt ".arbcp"
+#define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -32,6 +35,7 @@ DisableWelcomePage=yes
 DisableReadyMemo=yes
 DisableReadyPage=yes
 DisableStartupPrompt=yes
+ChangesAssociations = yes
 
 
 [Languages]
@@ -66,8 +70,15 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
 [Files]
 Source: ".\dist\archerbc\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: ".\dist\archerbc_updater\archerbc_updater.exe"; DestDir: "{app}";
+;Source: ".\dist\archerbc_updater\archerbc_updater.exe"; DestDir: "{app}";
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[Registry]
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\Applications\{#MyAppExeName}\SupportedTypes"; ValueType: string; ValueName: ".arbcp"; ValueData: ""
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

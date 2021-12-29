@@ -20,7 +20,7 @@ class CurrentState(object):
 
 
 class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
-    def __init__(self):
+    def __init__(self, *args):
         super().__init__()
         self.setupUi(self)
         self.current_file = ''
@@ -35,6 +35,14 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.setupWidgets()
         self.setupConnects()
+        print(args)
+        if len(args) > 1:
+            try:
+                self.open_file(args[1])
+            except FileExistsError:
+                pass
+            except FileNotFoundError:
+                pass
 
     def setupWidgets(self):
         self.profile_current.disable_tabs()
@@ -155,7 +163,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self,
             "QFileDialog.getSaveFileName()",
             rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_{self.get_datetime()}',
-            "JSON (*.json);;ArcherBC Profiles (*.arbcp);;All Files (*);;Text Files (*.txt)",
+            "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Text Files (*.txt)",
             options=options
         )
         if fileName:
@@ -184,7 +192,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self,
             "QFileDialog.getOpenFileName()",
             USER_RECENT,
-            "JSON (*.json);;ArcherBC Profiles (*.arbcp);;All Files (*);;Python Files (*.py)",
+            "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Python Files (*.py)",
             options=options
         )
         if fileName:
