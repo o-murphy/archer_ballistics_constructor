@@ -114,7 +114,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.distanceQuantity.currentIndexChanged.connect(self.set_distance_quantity)
         self.holdOffQuantity.currentIndexChanged.connect(lambda: (
-            self.set_hold_off_quantity(), self.cd_at_distance()))
+            self.set_hold_off_quantity(), self.cd_at_distance()
+        ))
         self.drop_table.clicked.connect(self.cd_at_distance)
         self.drop_table_edit.addRow.clicked.connect(lambda: (
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
