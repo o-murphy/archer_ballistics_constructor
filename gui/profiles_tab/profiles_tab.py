@@ -10,19 +10,6 @@ from datetime import datetime
 
 from modules.env_update import USER_RECENT
 
-# {'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True,
-#  'bulletName': '', 'weight': 175.0, 'length': 1.2, 'diameter': 0.308, 'dragType': 0, 'weightTile': '175gr',
-#  'multiBC': 2, 'bc': 0.169, 'bcTable': [(853, 0.505), (549, 0.496), (0, 0.485), (-1, 0.0), (-1, 0.0)],
-#  'cartridgeName': '', 'mv': 800, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_powder_temp': 15, 'z_humidity': 50,
-#  'z_pressure': 750, 'z_latitude': 0, 'z_angle': 0, 'z_azimuth': 270, 'z_x': 0.0, 'z_y': 0.0, 'z_d': 100}
-
-
-# {'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True,
-#  'bulletName': '', 'weight': 175.0, 'length': 1.2, 'diameter': 0.308, 'dragType': 1, 'weightTile': '175gr',
-#  'multiBC': 2, 'bc': 0.169, 'bcTable': [(914, 0.244), (762, 0.243), (609, 0.24), (457, 0.242), (0, 0.246)],
-#  'cartridgeName': '', 'mv': 800, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_powder_temp': 15, 'z_humidity': 50,
-#  'z_pressure': 750, 'z_latitude': 0, 'z_angle': 0, 'z_azimuth': 270, 'z_x': 0.0, 'z_y': 0.0, 'z_d': 100}
-
 
 class CurrentState(object):
     def __init__(self,
@@ -38,7 +25,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.setupUi(self)
         self.current_file = ''
 
-
+        self.widget_connect_list = []
         self.profiles_table = ProfilesTable()
 
         self.recent_table = self.get_recent_profile_table()
@@ -56,7 +43,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
 
     def setupConnects(self):
-        self.profiles_tools.newProfileButton.clicked.connect(self.profiles_table.add_row)
+        self.profiles_tools.newProfileButton.clicked.connect(self.add_profile)
         self.profiles_tools.removeProfileButton.clicked.connect(self.remove_profile_item)
         self.profiles_tools.clearAllProfiles.clicked.connect(self.remove_all_profiles)
         self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_down)
@@ -66,28 +53,41 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
         self.profiles_tools.openFile.clicked.connect(self.open_file_dialog)
 
-
-
-        self.profiles_table.tableWidget.clicked.connect(self.table_clicked)
+        self.profiles_table.tableWidget.clicked.connect(self.set_current)
         self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
 
         self.profile_current.multiBC.clicked.connect(self.enable_multi_bc)
 
-        widget_connect_list = []
         for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
-            widget_connect_list.append(le.textEdited)
-            widget_connect_list.append(le.editingFinished)
+            self.widget_connect_list.append(le.textEdited)
+            self.widget_connect_list.append(le.editingFinished)
 
-        [widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
-        [widget_connect_list.append(sb.valueChanged) for sb in
+        [self.widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
+        [self.widget_connect_list.append(sb.valueChanged) for sb in
          self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
-        [widget_connect_list.append(cb.currentIndexChanged) for cb in
+        [self.widget_connect_list.append(cb.currentIndexChanged) for cb in
          self.profile_current.findChildren(QtWidgets.QComboBox)]
-        [widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
-        [widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
-        [widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
+        [self.widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
+        [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
+        [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
 
-        [i.connect(lambda: self.set_profile()) for i in widget_connect_list]
+        self.connectEvts()
+
+    def connectEvts(self):
+        [i.connect(self.set_profile) for i in self.widget_connect_list]
+
+    def disconnectEvts(self):
+        for i in self.widget_connect_list:
+            try:
+                i.disconnect(self.set_profile)
+            except TypeError:
+                pass
+
+    def set_current(self):
+        self.disconnectEvts()
+        self.profile_current.set_data(self.profiles_table.select().profile)
+        self.enable_multi_bc()
+        self.connectEvts()
 
     def enable_multi_bc(self):
         self.profile_current.enable_multi_bc(self.profile_current.multiBC.isChecked())
@@ -101,19 +101,17 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_table.remove_all()
         self.profile_current.disable_tabs()
 
-    def table_clicked(self):
+    def enable_widgets(self):
         if self.profiles_table.get_current_item():
             self.profile_current.enable_tabs()
             self.enable_multi_bc()
 
-    def set_profile(self, item=None):
-
-        if not item:
+    def set_profile(self):
+        if self.profiles_table.tableWidget.currentItem():
             item = self.profiles_table.tableWidget.cellWidget(
                 self.profiles_table.tableWidget.currentRow(),
                 self.profiles_table.tableWidget.currentColumn()
             )
-        if item:
             item.set_profile(self.profile_current.get_rifle())
             item.set_profile(self.profile_current.get_bullet())
             item.set_profile(self.profile_current.get_cartridge())
@@ -141,6 +139,11 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             profiles.append(p)
         return profiles
 
+    def add_profile(self):
+        self.profiles_table.add_row()
+        self.set_profile()
+        self.enable_widgets()
+
     @staticmethod
     def get_datetime():
         return datetime.now().strftime("%y-%m-%d_%H-%M-%S")
@@ -152,7 +155,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self,
             "QFileDialog.getSaveFileName()",
             rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_{self.get_datetime()}',
-            "JSON (*.json);;Profiles (*.prof);;All Files (*);;Text Files (*.txt)",
+            "JSON (*.json);;ArcherBC Profiles (*.arbcp);;All Files (*);;Text Files (*.txt)",
             options=options
         )
         if fileName:
@@ -169,12 +172,10 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def save_file_dialog(self):
         """SaveAsDialog Native"""
-        print(self.current_file)
         if self.current_file != '':
             self.save_profiles(self.current_file)
         else:
             self.save_as_file_dialog()
-        # self.window().setWindowTitle('ArcherBC - ' + self.current_file)
 
     def open_file_dialog(self):
         """OpenFileDialog Native"""
@@ -183,7 +184,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self,
             "QFileDialog.getOpenFileName()",
             USER_RECENT,
-            "JSON (*.json);;Profiles (*.prof);;All Files (*);;Python Files (*.py)",
+            "JSON (*.json);;ArcherBC Profiles (*.arbcp);;All Files (*);;Python Files (*.py)",
             options=options
         )
         if fileName:
@@ -193,19 +194,14 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         with open(fileName, 'r') as fp:
             import json
             data = json.load(fp)
-        for i, d in enumerate(data):
-            # self.progressBar.setValue(int(100 * (i + 1) / len(data)))
-            # self.add_profile()
-            # item = self.scrollAreaWidgetContents.layout().itemAt(i).widget()
-            # for k, v in d.items():
-                # item.cst.__setattr__(k, v)
-            # item.mousePressEvent()
-            row = self.profiles_table.add_row()
-            if row:
-                item = self.profiles_table.tableWidget.cellWidget(row, 0)
-                item.profile = d
-                # self.profile_current.set_data(item.profile)
-                # self.set_profile(item)
+        for d in data:
+            self.disconnectEvts()
+            self.profiles_table.add_row()
+
+            self.profile_current.set_data(d)
+            self.set_profile()
+            self.connectEvts()
+            self.enable_widgets()
+
         self.current_file = fileName
         self.window().setWindowTitle('ArcherBC - ' + self.current_file)
-        # self.progressBar.setValue(0)

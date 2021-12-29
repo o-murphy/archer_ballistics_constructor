@@ -75,18 +75,16 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
 
     def get_multiBC(self):
-        return [(self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value())
+        return [[self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value()]
                 for r in range(self.bc_table.rowCount())]
 
     def set_multiBC(self, multi_bc):
-        print(multi_bc)
         for i, (v, bc) in enumerate(multi_bc):
-            print(v, bc)
             self.bc_table.cellWidget(i, 0).setValue(v)
             self.bc_table.cellWidget(i, 1).setValue(bc)
 
     def get_bullet(self):
-        return {
+        ret = {
             self.bulletName.objectName(): self.bulletName.text(),
             self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
             self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
@@ -99,6 +97,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.bc.objectName(): self.bc.value(),
             self.bc_table.objectName(): self.get_multiBC()
         }
+        return ret
 
     def get_cartridge(self):
         return {
@@ -125,6 +124,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                       else combo.currentData()(data[spin.objectName()]))
 
     def set_data(self, data: dict):
+
         tab_data = {self.__getattribute__(k): v for k, v in data.items() if hasattr(self, k)}.items()
 
         for k, v in tab_data:
@@ -140,7 +140,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                 k.setCheckState(v)
 
         self.rightTwist.click() if data['rightTwist'] else self.leftTwist.click()
-
         self.set_multiBC(data['bcTable'])
 
     def disable_tabs(self):

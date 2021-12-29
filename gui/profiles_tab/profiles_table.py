@@ -8,24 +8,25 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
         super().__init__()
         self.setupUi(self)
 
-        self.tableWidget.clicked.connect(self.select)
+        # self.tableWidget.clicked.connect(self.select)
 
     def select(self):
         if self.tableWidget.currentItem():
             row = self.tableWidget.currentRow()
             column = self.tableWidget.currentColumn()
-            self.parent().profile_current.set_data(
-                self.tableWidget.cellWidget(row, column).profile
-            )
+            return self.tableWidget.cellWidget(row, column)
 
     def add_row(self):
         row_count = self.tableWidget.rowCount()
         if row_count < 20:
-            w = ProfileItem()
-            self.tableWidget.insertRow(self.tableWidget.rowCount())
+            self.tableWidget.setCurrentItem(None)
+            self.tableWidget.insertRow(row_count)
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
-            self.tableWidget.setCellWidget(row_count, 0, w)
-            self.parent().set_profile(self.tableWidget.cellWidget(row_count, 0))
+            self.tableWidget.setCellWidget(row_count, 0, ProfileItem())
+
+            self.tableWidget.setCurrentItem(self.tableWidget.item(row_count, 0))
+
+
             return row_count
 
     def remove_row(self):
@@ -43,7 +44,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
 
     def move_up(self):
         row = self.tableWidget.currentRow()
-        column = self.tableWidget.currentColumn();
+        column = self.tableWidget.currentColumn()
         if row > 0:
             w = self.tableWidget.cellWidget(row, column)
             self.tableWidget.insertRow(row - 1)
