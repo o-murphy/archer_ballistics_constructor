@@ -35,7 +35,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.setupWidgets()
         self.setupConnects()
-        print(args)
         if len(args) > 1:
             try:
                 self.open_file(args[1])

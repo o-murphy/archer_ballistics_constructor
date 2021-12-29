@@ -74,3 +74,9 @@ class DropPlot(CustomPlot):
         self.x, self.def_y = distances, default_drop
         self.current_point_text.setColor(color=(255, 255, 255))
         self.set_quantity()
+
+    def set_cd_at_distance(self, x, y):
+        self.cd_at_distance.setVisible(True)
+        self.cd_at_distance.setPos((x, 0))
+        self.cd_at_distance_text.setText(f'{x} M\n{rnd(self.y_quantity(y, x))} {self.y_q_label}')
+        self.cd_at_distance_text.setPos(x, 0)

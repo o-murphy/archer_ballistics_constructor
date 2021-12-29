@@ -67,3 +67,50 @@ class BVSpinBox(NoWheelSpinBox):
         self.setMaximum(2000)
         self.setMinimum(-1)
         self.setSingleStep(1)
+
+
+class DSpinbox(NoWheelSpinBox):
+    def __init__(self):
+        super(DSpinbox, self).__init__()
+        self.setMinimum(0)
+        self.setMaximum(5000)
+        self.setSingleStep(1)
+        self.setStyleSheet("""
+            background: transparent;
+        """)
+
+
+class DropSpinBox(NoWheelDoubleSpinBox):
+    def __init__(self):
+        super(DropSpinBox, self).__init__()
+        self.setMaximum(9999.9)
+        self.setMinimum(0)
+        self.setDecimals(1)
+        self.setStyleSheet("""
+                    background: transparent;
+                """)
+
+
+class DropRoSpinBox(DropSpinBox):
+    def __init__(self):
+        super(DropRoSpinBox, self).__init__()
+        self.setDisabled(True)
+        self.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+
+
+class DropRoSBw(QtWidgets.QWidget):
+    def __init__(self):
+        super(DropRoSBw, self).__init__()
+        self.sb = DropRoSpinBox()
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.gridLayout)
+        self.layout().addWidget(self.sb)
+
+
+class DisabledDoubleSpinBox(NoWheelDoubleSpinBox):
+    def __init__(self):
+        super(DisabledDoubleSpinBox, self).__init__()
+        self.setDisabled(True)
+        self.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+

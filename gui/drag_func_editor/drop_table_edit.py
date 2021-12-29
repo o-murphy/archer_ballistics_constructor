@@ -9,8 +9,6 @@ class DropTableEdit(QtWidgets.QWidget, Ui_dropTableEdit):
         self.setupUi(self)
         self.drop_table = DropTable()
         self.gridLayout.addWidget(self.drop_table, 0, 0, 1, 2)
-
-        self.addRow.clicked.connect(self.add_row)
         self.removeRow.clicked.connect(self.remove_row)
 
     def add_row(self):
