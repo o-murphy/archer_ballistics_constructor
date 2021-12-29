@@ -9,8 +9,11 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.setupUi(self)
         self.profile: dict = {}
         self.z_x = NoWheelDoubleSpinBox()
+        self.z_x.setPrefix('X: ')
         self.z_y = NoWheelDoubleSpinBox()
+        self.z_y.setPrefix('Y: ')
         self.z_d = NoWheelSpinBox()
+        self.z_d.setSuffix(' M')
         self.setupWidgets()
         self.setupConnects()
 
