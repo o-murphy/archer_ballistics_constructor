@@ -11,6 +11,7 @@ class UsbStatusCode:
     DFU_NOT_CONNECTED = 'No DFU device found'
     MULTIPLE_DFU = 'Multiple DFU devices found'
     CONNECTED = 'Successfully Connected'
+    AUTO_SEARCH_OFF = ''
 
 
 class lpcRunThread(object):
@@ -21,7 +22,6 @@ class lpcRunThread(object):
         self.lpc_device_handler.moveToThread(self.thread)
         self.lpc_device_handler.newLpcDeviceStatus.connect(self.updateLpcDeviceStatus)
         self.thread.started.connect(self.lpc_device_handler.run)
-        # self.thread.start()
 
     def startLpcThread(self):
         self.lpc_device_handler.cont = True
@@ -30,7 +30,6 @@ class lpcRunThread(object):
     def stopLpcThread(self):
         self.lpc_device_handler.cont = False
         self.thread.exit()
-        pass
 
     @QtCore.pyqtSlot(str)
     def updateLpcDeviceStatus(self, status):
@@ -67,6 +66,7 @@ class lpcDeviceHandler(QtCore.QObject):
             return error
         return UsbStatusCode.CONNECTED
 
+
 def check_lpc_driver():
     try:
         if os.path.isfile(os.environ['PROGRAMFILES'] + r'\NXP\LPC Driver Installer\lpcdevice\lpcdevice.cat'):
@@ -75,6 +75,7 @@ def check_lpc_driver():
             raise FileNotFoundError
     except FileNotFoundError:
         return False
+
 
 def install_lpc_driver():
     if os.path.isfile(r'drv\lpc_driver_setup.exe'):

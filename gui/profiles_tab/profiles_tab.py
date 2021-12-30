@@ -47,8 +47,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def setupWidgets(self):
         self.profile_current.disable_tabs()
-        self.gridLayout.addWidget(self.profiles_table, 0, 0, 1, 1)
-        self.gridLayout.addWidget(self.profiles_tools, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.profiles_table, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.profiles_tools, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
 
     def setupConnects(self):

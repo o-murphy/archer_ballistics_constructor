@@ -64,6 +64,7 @@ class Ui_FooterWidget(object):
         self.gridLayout.addWidget(self.Preferences, 0, 3, 1, 1)
         self.autoConnect = QtWidgets.QCheckBox(FooterWidget)
         self.autoConnect.setStyleSheet("")
+        self.autoConnect.setChecked(True)
         self.autoConnect.setObjectName("autoConnect")
         self.gridLayout.addWidget(self.autoConnect, 0, 0, 1, 1)
 
@@ -75,5 +76,5 @@ class Ui_FooterWidget(object):
         FooterWidget.setWindowTitle(_translate("FooterWidget", "Form"))
         self.connectionStatus.setText(_translate("FooterWidget", "No DFU device found"))
         self.Preferences.setToolTip(_translate("FooterWidget", "<font color=black>Preferences</font>"))
-        self.autoConnect.setText(_translate("FooterWidget", "Auto Connect"))
+        self.autoConnect.setText(_translate("FooterWidget", "Auto search"))
 import res_rc

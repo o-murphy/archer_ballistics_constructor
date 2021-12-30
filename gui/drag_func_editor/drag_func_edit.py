@@ -5,6 +5,7 @@ from .drop_func_plot import DropPlot
 from .drag_table import DragTable
 from .bc_table import BCTable
 from .drop_table_edit import DropTableEdit
+from .current_atmo_dialog import CurrentAtmoDialog
 from modules.py_archer_ballistics import ArcherBallistics, Profile
 from modules import BConverter
 
@@ -33,6 +34,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit = DropTableEdit()
         self.dragTable = DragTable()
         self.drop_table = self.drop_table_edit.drop_table
+
+        self.current_atmo_dlg = CurrentAtmoDialog()
 
         self.cur_prof = cur_prof
         self.profile = None
@@ -121,6 +124,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
         ))
         self.Calculate.clicked.connect(self.custom_drop_at_distance)
+        self.SetConditions.clicked.connect(self.current_atmo_dialog)
 
     def custom_drop_at_distance(self):
         d = [self.drop_table.cellWidget(r, 0).value() for r in range(self.drop_table.rowCount())]
@@ -185,6 +189,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.calculate_bullet_drop()
         self.drop_plot.draw_custom_plot(self.current_drop)
+
+    def current_atmo_dialog(self):
+        ok = self.current_atmo_dlg.exec_()
+        if ok:
+            atmo = self.current_atmo_dlg.get_atmo()
 
     @staticmethod
     def parse_data(data: list) -> dict or None:

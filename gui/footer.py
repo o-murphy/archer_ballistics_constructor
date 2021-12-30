@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from gui.templates import Ui_FooterWidget
 from modules.lpc_check import lpcRunThread, UsbStatusCode, check_lpc_driver
 
@@ -12,13 +12,13 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
         self.conn_status = None
         if check_lpc_driver():
             self.setupLpcTread()
+            # self.setup_lpc_thread()
             self.autoConnect.clicked.connect(self.setup_lpc_thread)
 
         else:
             self.connectionStatus.setText(UsbStatusCode.DRIVER_ERROR)
 
     def setup_lpc_thread(self):
-
         if self.autoConnect.isChecked():
             self.startLpcThread()
         else:

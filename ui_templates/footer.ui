@@ -121,7 +121,10 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Auto Connect</string>
+      <string>Auto search</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

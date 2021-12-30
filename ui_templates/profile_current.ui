@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>518</width>
-    <height>580</height>
+    <height>582</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1604,7 +1604,12 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="text">
-                <string>...</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../.rsrc/res.qrc">
+                 <normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</normaloff>
+                 <disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21b.png</disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</iconset>
                </property>
               </widget>
              </item>

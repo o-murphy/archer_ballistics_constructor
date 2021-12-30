@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_profileCurrent(object):
     def setupUi(self, profileCurrent):
         profileCurrent.setObjectName("profileCurrent")
-        profileCurrent.resize(518, 580)
+        profileCurrent.resize(518, 582)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -719,6 +719,11 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.dragEditor.setFont(font)
+        self.dragEditor.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21b.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.dragEditor.setIcon(icon3)
         self.dragEditor.setObjectName("dragEditor")
         self.horizontalLayout_54.addWidget(self.dragEditor)
         self.gridLayout_4.addWidget(self.horizontalWidget_20, 4, 1, 1, 1)
@@ -1164,7 +1169,6 @@ class Ui_profileCurrent(object):
         self.dragType.setItemText(0, _translate("profileCurrent", "G1"))
         self.dragType.setItemText(1, _translate("profileCurrent", "G7"))
         self.dragType.setItemText(2, _translate("profileCurrent", "Custom"))
-        self.dragEditor.setText(_translate("profileCurrent", "..."))
         self.label_78.setText(_translate("profileCurrent", "BC:"))
         self.multiBC.setText(_translate("profileCurrent", "Multi BC"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), _translate("profileCurrent", "Current profile"))
