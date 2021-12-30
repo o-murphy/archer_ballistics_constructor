@@ -59,6 +59,9 @@ class BCSpinBox(NoWheelDoubleSpinBox):
         self.setMinimum(0)
         self.setSingleStep(0.001)
         self.setDecimals(3)
+        self.setStyleSheet("""
+                            background: transparent;
+                        """)
 
 
 class BVSpinBox(NoWheelSpinBox):
@@ -67,6 +70,9 @@ class BVSpinBox(NoWheelSpinBox):
         self.setMaximum(2000)
         self.setMinimum(-1)
         self.setSingleStep(1)
+        self.setStyleSheet("""
+                            background: transparent;
+                        """)
 
 
 class DSpinbox(NoWheelSpinBox):
