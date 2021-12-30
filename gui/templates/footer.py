@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'footer.ui'
+# Form implementation generated from reading ui file 'ui_templates\footer.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -12,40 +12,68 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_FooterWidget(object):
-    def setupUi(self, footerWidget):
-        footerWidget.setObjectName("footerWidget")
-        footerWidget.resize(1006, 26)
-        footerWidget.setMinimumSize(QtCore.QSize(1006, 26))
-        footerWidget.setMaximumSize(QtCore.QSize(16777215, 26))
-        self.horizontalLayout = QtWidgets.QHBoxLayout(footerWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(4)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.connectDevice = QtWidgets.QPushButton(footerWidget)
+    def setupUi(self, FooterWidget):
+        FooterWidget.setObjectName("FooterWidget")
+        FooterWidget.resize(1006, 26)
+        FooterWidget.setMinimumSize(QtCore.QSize(1006, 26))
+        FooterWidget.setMaximumSize(QtCore.QSize(16777215, 26))
+        FooterWidget.setStyleSheet("QWidget {font-size: 15px;}\n"
+"\n"
+"QCheckBox, QRadioButton {\n"
+"    padding-left: 5px;\n"
+"    padding-right: 5px;\n"
+"    font-size: 15px;\n"
+"    color: white;\n"
+"}\n"
+"QCheckBox::indicator, QRadioButton::indicator {\n"
+"     width: 15px;\n"
+"     height: 15px;\n"
+"}\n"
+"QCheckBox::indicator:checked, QRadioButton::indicator::checked {\n"
+"    background-color: rgb(255, 170, 0);\n"
+"    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);\n"
+"image-size: 20px, 20px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    image: null;\n"
+"}\n"
+"")
+        self.gridLayout = QtWidgets.QGridLayout(FooterWidget)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setObjectName("gridLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
+        self.connectionStatus = QtWidgets.QLabel(FooterWidget)
+        self.connectionStatus.setObjectName("connectionStatus")
+        self.gridLayout.addWidget(self.connectionStatus, 0, 1, 1, 1)
+        self.Preferences = QtWidgets.QPushButton(FooterWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.connectDevice.sizePolicy().hasHeightForWidth())
-        self.connectDevice.setSizePolicy(sizePolicy)
-        self.connectDevice.setMinimumSize(QtCore.QSize(26, 26))
-        self.connectDevice.setMaximumSize(QtCore.QSize(26, 26))
-        self.connectDevice.setText("")
+        sizePolicy.setHeightForWidth(self.Preferences.sizePolicy().hasHeightForWidth())
+        self.Preferences.setSizePolicy(sizePolicy)
+        self.Preferences.setMinimumSize(QtCore.QSize(26, 26))
+        self.Preferences.setMaximumSize(QtCore.QSize(26, 26))
+        self.Preferences.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("old/.rsrc/res/drawable/arrowdownbtn21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.connectDevice.setIcon(icon)
-        self.connectDevice.setObjectName("connectDevice")
-        self.horizontalLayout.addWidget(self.connectDevice)
-        self.connectionStatus = QtWidgets.QLabel(footerWidget)
-        self.connectionStatus.setObjectName("connectionStatus")
-        self.horizontalLayout.addWidget(self.connectionStatus)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
+        icon.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.Preferences.setIcon(icon)
+        self.Preferences.setObjectName("Preferences")
+        self.gridLayout.addWidget(self.Preferences, 0, 3, 1, 1)
+        self.autoConnect = QtWidgets.QCheckBox(FooterWidget)
+        self.autoConnect.setStyleSheet("")
+        self.autoConnect.setObjectName("autoConnect")
+        self.gridLayout.addWidget(self.autoConnect, 0, 0, 1, 1)
 
-        self.retranslateUi(footerWidget)
-        QtCore.QMetaObject.connectSlotsByName(footerWidget)
+        self.retranslateUi(FooterWidget)
+        QtCore.QMetaObject.connectSlotsByName(FooterWidget)
 
-    def retranslateUi(self, footerWidget):
+    def retranslateUi(self, FooterWidget):
         _translate = QtCore.QCoreApplication.translate
-        footerWidget.setWindowTitle(_translate("footerWidget", "Form"))
-        self.connectDevice.setToolTip(_translate("footerWidget", "<font color=black>Move down (CTRL+Down)</font>"))
-        self.connectionStatus.setText(_translate("footerWidget", "No DFU device found"))
+        FooterWidget.setWindowTitle(_translate("FooterWidget", "Form"))
+        self.connectionStatus.setText(_translate("FooterWidget", "No DFU device found"))
+        self.Preferences.setToolTip(_translate("FooterWidget", "<font color=black>Preferences</font>"))
+        self.autoConnect.setText(_translate("FooterWidget", "Auto Connect"))
+import res_rc

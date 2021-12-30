@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>footerWidget</class>
- <widget class="QWidget" name="footerWidget">
+ <class>FooterWidget</class>
+ <widget class="QWidget" name="FooterWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -25,10 +25,32 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
-   <property name="spacing">
-    <number>4</number>
-   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {font-size: 15px;}
+
+QCheckBox, QRadioButton {
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 15px;
+	color: white;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+     width: 15px;
+     height: 15px;
+}
+QCheckBox::indicator:checked, QRadioButton::indicator::checked {
+	background-color: rgb(255, 170, 0);
+    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);
+image-size: 20px, 20px;
+}
+
+QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
+	background-color: rgb(255, 255, 255);
+	image: null;
+}
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -41,8 +63,28 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="QPushButton" name="connectDevice">
+   <item row="0" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="connectionStatus">
+     <property name="text">
+      <string>No DFU device found</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="Preferences">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -62,39 +104,31 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Move down (CTRL+Down)&lt;/font&gt;</string>
+      <string>&lt;font color=black&gt;Preferences&lt;/font&gt;</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>old/.rsrc/res/drawable/arrowdownbtn21a.png</normaloff>old/.rsrc/res/drawable/arrowdownbtn21a.png</iconset>
+      <iconset resource="../.rsrc/res.qrc">
+       <normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</iconset>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLabel" name="connectionStatus">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="autoConnect">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
-      <string>No DFU device found</string>
+      <string>Auto Connect</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../.rsrc/res.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -9,6 +9,7 @@ from ..profile_item import WProfileItem
 from datetime import datetime
 
 from modules.env_update import USER_RECENT
+import os
 
 
 class CurrentState(object):
@@ -24,6 +25,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         super().__init__()
         self.setupUi(self)
         self.current_file = ''
+        self.is_saved = True
 
         self.widget_connect_list = []
         self.profiles_table = ProfilesTable()
@@ -59,6 +61,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.saveAsButton.clicked.connect(self.save_as_file_dialog)
         self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
         self.profiles_tools.openFile.clicked.connect(self.open_file_dialog)
+        self.profiles_tools.closeFile.clicked.connect(self.close_file)
+        self.profiles_tools.newFile.clicked.connect(self.new_file)
 
         self.profiles_table.tableWidget.clicked.connect(self.set_current)
         self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
@@ -127,6 +131,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         if self.recent_table != self.get_recent_profile_table():
             self.window().setWindowTitle('ArcherBC - *' + self.current_file)
+            self.is_saved = False
 
     def drag_func_edit(self):
         drag_func_dlg = DragFuncEditDialog(
@@ -166,6 +171,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             options=options
         )
         if fileName:
+            print('saving')
             self.save_profiles(fileName)
 
     def save_profiles(self, fileName):
@@ -175,16 +181,21 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             json.dump(self.get_recent_profile_table(), fp)
         self.current_file = fileName
         self.window().setWindowTitle('ArcherBC - ' + self.current_file)
+        self.is_saved = True
         self.recent_table = self.get_recent_profile_table()
 
     def save_file_dialog(self):
         """SaveAsDialog Native"""
         if self.current_file != '':
-            self.save_profiles(self.current_file)
+            if not self.current_file.startswith(fr'*{USER_RECENT}'):
+                self.save_as_file_dialog(self.current_file)
+            else:
+                self.save_profiles(self.current_file)
         else:
             self.save_as_file_dialog()
 
     def open_file_dialog(self):
+        self.close_file()
         """OpenFileDialog Native"""
         options = QtWidgets.QFileDialog.Options()
         fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
@@ -212,3 +223,35 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.current_file = fileName
         self.window().setWindowTitle('ArcherBC - ' + self.current_file)
+        self.is_saved = True
+
+    def close_file(self):
+        if not self.is_saved:
+            msgbox = QtWidgets.QMessageBox()
+            msgbox.setWindowTitle("File not saved!")
+            msgbox.setText('File not saved. Do you want to save changes?')
+            msgbox.addButton(QtWidgets.QMessageBox.Save)
+            msgbox.addButton(QtWidgets.QMessageBox.Cancel)
+            msgbox.addButton(QtWidgets.QMessageBox.Close)
+            # msgbox.addButton('Save', QtWidgets.QMessageBox.YesRole)
+            choice = msgbox.exec_()
+            if choice == QtWidgets.QMessageBox.Save:
+                self.save_file_dialog()
+                self.profiles_table.remove_all()
+                self.current_file = ''
+                self.window().setWindowTitle('ArcherBC')
+            if choice == QtWidgets.QMessageBox.Close:
+                self.profiles_table.remove_all()
+                self.current_file = ''
+                self.window().setWindowTitle('ArcherBC')
+                self.is_saved = True
+
+    def new_file(self):
+        self.close_file()
+        dialog = QtWidgets.QInputDialog()
+        # a, b = dialog.exec_()
+        filename, ok = dialog.getText(self, 'New file', 'Input new file name')
+        if filename and ok:
+            self.is_saved = False
+            self.current_file = fr'{filename}'
+            self.window().setWindowTitle('ArcherBC - *' + self.current_file)

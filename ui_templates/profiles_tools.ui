@@ -106,7 +106,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>39</width>
+       <width>30</width>
        <height>20</height>
       </size>
      </property>
@@ -321,7 +321,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>39</width>
+       <width>50</width>
        <height>20</height>
       </size>
      </property>
@@ -442,18 +442,31 @@ QPushButton::QToolTip {color: black}</string>
     <widget class="QPushButton" name="saveProfileButton">
      <property name="minimumSize">
       <size>
-       <width>70</width>
+       <width>30</width>
        <height>30</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>70</width>
+       <width>30</width>
        <height>30</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>&lt;font color=black&gt;Save to database&lt;/font&gt;</string>
+     </property>
      <property name="text">
-      <string>Store</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../.rsrc/res/drawable-hdpi-v4/bookmarksbtn_menu21a.png</normaloff>../.rsrc/res/drawable-hdpi-v4/bookmarksbtn_menu21a.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
      </property>
      <property name="checkable">
       <bool>false</bool>

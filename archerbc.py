@@ -33,7 +33,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #     self.profiles_tab.save_backup()
         sys.exit()
 
-
+    
 def main():
     import os
     os.chdir(os.path.dirname(__file__))

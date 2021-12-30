@@ -40,7 +40,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.bc_table.setEnabled(is_true)
         self.bc.setDisabled(is_true)
         if self.bc_table.cellWidget(0, 1).value() == 0:
-            print(self.bc.value())
             self.bc_table.cellWidget(0, 1).setValue(self.bc.value())
         if self.bc_table.cellWidget(0, 0).value() == -1:
             self.bc_table.cellWidget(0, 0).setValue(self.get_cln(self.mv, self.mvQuantity))

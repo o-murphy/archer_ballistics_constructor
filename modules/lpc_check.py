@@ -21,7 +21,16 @@ class lpcRunThread(object):
         self.lpc_device_handler.moveToThread(self.thread)
         self.lpc_device_handler.newLpcDeviceStatus.connect(self.updateLpcDeviceStatus)
         self.thread.started.connect(self.lpc_device_handler.run)
+        # self.thread.start()
+
+    def startLpcThread(self):
+        self.lpc_device_handler.cont = True
         self.thread.start()
+
+    def stopLpcThread(self):
+        self.lpc_device_handler.cont = False
+        self.thread.exit()
+        pass
 
     @QtCore.pyqtSlot(str)
     def updateLpcDeviceStatus(self, status):
@@ -31,13 +40,14 @@ class lpcRunThread(object):
 
 class lpcDeviceHandler(QtCore.QObject):
     running = False
+    cont = True
     newLpcDeviceStatus = QtCore.pyqtSignal(str)  # *args
     __VID = 0x1FC9
     __PID = 0x000C
     __dev = None
 
     def run(self):
-        while True:
+        while self.cont:
             self.newLpcDeviceStatus.emit(str(self.check()))
             QtCore.QThread.msleep(100)
 

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_profileCurrent(object):
     def setupUi(self, profileCurrent):
         profileCurrent.setObjectName("profileCurrent")
-        profileCurrent.resize(518, 618)
+        profileCurrent.resize(518, 580)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -65,11 +65,26 @@ class Ui_profileCurrent(object):
 "    background-color: rgb(51, 51, 51);\n"
 "}\n"
 "\n"
-"            QRadioButton::indicator::checked {background: orange;}\n"
-"            QRadioButton::indicator::unchecked {background: white;}\n"
-"            QRadioButton {font-size: 15px;}\n"
+"QCheckBox, QRadioButton {\n"
+"    padding-left: 0px;\n"
+"    padding-right: 0px;\n"
+"    font-size: 15px;\n"
+"    color: white;\n"
+"}\n"
+"QCheckBox::indicator, QRadioButton::indicator {\n"
+"     width: 15px;\n"
+"     height: 15px;\n"
+"}\n"
+"QCheckBox::indicator:checked, QRadioButton::indicator::checked {\n"
+"    background-color: rgb(255, 170, 0);\n"
+"    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);\n"
+"image-size: 20px, 20px;\n"
+"}\n"
 "\n"
-"\n"
+"QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    image: null;\n"
+"}\n"
 "")
         self.gridLayout = QtWidgets.QGridLayout(profileCurrent)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -151,9 +166,7 @@ class Ui_profileCurrent(object):
         self.rightTwist.setSizePolicy(sizePolicy)
         self.rightTwist.setMinimumSize(QtCore.QSize(56, 0))
         self.rightTwist.setMaximumSize(QtCore.QSize(56, 16777215))
-        self.rightTwist.setStyleSheet("            QRadioButton::indicator::checked {background: orange}\n"
-"            QRadioButton::indicator::unchecked {background: white}\n"
-"            QRadioButton {font-size: 15px; color: white}")
+        self.rightTwist.setStyleSheet("")
         self.rightTwist.setChecked(True)
         self.rightTwist.setObjectName("rightTwist")
         self.horizontalLayout_49.addWidget(self.rightTwist)
@@ -165,9 +178,7 @@ class Ui_profileCurrent(object):
         self.leftTwist.setSizePolicy(sizePolicy)
         self.leftTwist.setMinimumSize(QtCore.QSize(56, 0))
         self.leftTwist.setMaximumSize(QtCore.QSize(56, 16777215))
-        self.leftTwist.setStyleSheet("            QRadioButton::indicator::checked {background: orange}\n"
-"            QRadioButton::indicator::unchecked {background: white}\n"
-"            QRadioButton {font-size: 15px; color: white}")
+        self.leftTwist.setStyleSheet("")
         self.leftTwist.setObjectName("leftTwist")
         self.horizontalLayout_49.addWidget(self.leftTwist)
         self.gridLayout_2.addWidget(self.widget_8, 3, 1, 1, 1)
@@ -1174,3 +1185,4 @@ class Ui_profileCurrent(object):
         self.z_azimuth.setSuffix(_translate("profileCurrent", "°"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_7), _translate("profileCurrent", "Zeroing conditions"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_8), _translate("profileCurrent", "Distances"))
+import res_rc

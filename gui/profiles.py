@@ -89,6 +89,7 @@ class ProfilesTab(UiProfilesTab):
         self.state.profiles_file = None
         self.remove_all_profiles()
 
+    """refactored"""
     def open_file_dialog(self):
         """OpenFileDialog Native"""
         options = QtWidgets.QFileDialog.Options()
@@ -102,6 +103,7 @@ class ProfilesTab(UiProfilesTab):
         if fileName:
             self.open_file(fileName)
 
+    """refactored"""
     def open_file(self, fileName):
         with open(fileName, 'r') as fp:
             import json
