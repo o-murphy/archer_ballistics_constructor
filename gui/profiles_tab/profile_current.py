@@ -141,13 +141,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.rightTwist.click() if data['rightTwist'] else self.leftTwist.click()
         self.set_multiBC(data['bcTable'])
 
-    def disable_tabs(self):
+    def enable_tabs(self, e: bool):
         for tab in [self.tab_6, self.tab_7, self.tab_8]:
             for w in tab.children():
-                w.setEnabled(False)
+                w.setEnabled(e)
 
-    def enable_tabs(self):
-        for tab in [self.tab_6, self.tab_7, self.tab_8]:
-            for w in tab.children():
-                w.setEnabled(True)
 

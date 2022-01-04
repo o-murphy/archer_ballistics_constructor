@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>res/drawable-hdpi-v4/removebtn_menu21b.png</file>
+    <file>res/drawable-hdpi-v4/removebtn_menu21a.png</file>
     <file>res/drawable-hdpi-v4/addbtn_menu21a.png</file>
     <file>res/drawable-hdpi-v4/addbtn_menu21b.png</file>
     <file>res/drawable-hdpi-v4/ambilwarna_menjadi.png</file>
@@ -62,6 +64,14 @@
     <file>res/drawable-hdpi-v4/zipbtn21a.png</file>
     <file>res/drawable-hdpi-v4/zipbtn21b.png</file>
     <file>res/drawable-hdpi-v4/addbtn_menu21b.png</file>
+  </qresource>
+  <qresource prefix="custom">
+    <file>res/custom/tools.png</file>
+    <file>res/custom/caret-down-fill_8.png</file>
+    <file>res/custom/caret-up-fill_8.png</file>
+    <file>res/custom/caret-down-fill.png</file>
+    <file>res/custom/caret-up-fill.png</file>
+    <file>res/custom/check.png</file>
   </qresource>
   <qresource prefix="title">
     <file>Icon.png</file>

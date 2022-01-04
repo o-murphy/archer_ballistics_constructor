@@ -1,5 +1,6 @@
 pyuic5 ui_templates\profiles_table.ui -o gui\profiles_tab\templates\profiles_table.py
 pyuic5 ui_templates\profile_item.ui -o gui\profiles_tab\templates\profile_item.py
+pyuic5 ui_templates\add_btn.ui -o gui\profiles_tab\templates\add_btn.py
 pyuic5 ui_templates\profile_current.ui -o gui\profiles_tab\templates\profile_current.py
 pyuic5 ui_templates\profiles_tab.ui -o gui\profiles_tab\templates\profiles_tab.py
 pyuic5 ui_templates\profiles_tools.ui -o gui\profiles_tab\templates\profiles_tools.py

@@ -14,6 +14,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_y.setPrefix('Y: ')
         self.z_d = NoWheelSpinBox()
         self.z_d.setSuffix(' M')
+
         self.setupWidgets()
         self.setupConnects()
 
@@ -21,9 +22,11 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_x.setObjectName('z_x')
         self.z_y.setObjectName('z_y')
         self.z_d.setObjectName('z_d')
-        self.gridLayout.addWidget(self.z_x, 0, 2, 1, 1)
-        self.gridLayout.addWidget(self.z_y, 1, 2, 1, 1)
-        self.gridLayout.addWidget(self.z_d, 0, 5, 2, 1)
+        self.zWidget.setLayout(QtWidgets.QGridLayout())
+        self.zWidget.layout().setContentsMargins(0, 0, 0, 0)
+        self.zWidget.layout().addWidget(self.z_x, 0, 2, 1, 1)
+        self.zWidget.layout().addWidget(self.z_y, 1, 2, 1, 1)
+        self.zWidget.layout().addWidget(self.z_d, 0, 5, 2, 1)
 
     def setupConnects(self):
         self.z_x.valueChanged.connect(self.set_z_data)

@@ -24,13 +24,45 @@
 	background-color: rgb(51, 51, 51);
 }
 
-QSpinBox::up-button, QDoubleSpinBox::up-button { width: 20px; }
-QSpinBox::down-button, QDoubleSpinBox::down-button { width: 20px; }
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+	width: 20px;
+	image: url(:/custom/res/custom/caret-up-fill_8.png);
+}
+QSpinBox::down-button, QDoubleSpinBox::down-button { 
+	width: 20px;
+	image: url(:/custom/res/custom/caret-down-fill_8.png);
+}
+QSpinBox::down-button:hover, QSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
+		background-color: rgb(75, 75, 75);
+}
+QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,
+QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {
+		image: null;
+}
+
 QSpinBox, QDoubleSpinBox {
 	background-color: rgb(40, 40, 40);
-	alternate-background-color: rgb(40, 40, 40);
 	color: rgb(255, 255, 255);
 }
+
+QComboBox {
+	background-color: rgb(40, 40, 40);
+}
+
+QComboBox::drop-down {
+	background: transparent;
+	image: url(:/custom/res/custom/caret-down-fill_8.png);
+}
+
+QComboBox::drop-down:hover {
+	background-color: rgb(75, 75, 75);
+}
+
+QComboBox::drop-down:disabled {
+	image: null;
+}
+
 QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {
 	color: rgb(255, 255, 255);
 }
@@ -75,15 +107,35 @@ QCheckBox::indicator, QRadioButton::indicator {
      width: 15px;
      height: 15px;
 }
-QCheckBox::indicator:checked, QRadioButton::indicator::checked {
+QCheckBox::indicator:checked {
 	background-color: rgb(255, 170, 0);
-    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);
-image-size: 20px, 20px;
+    image: url(:/custom/res/custom/check.png);
 }
+
+QRadioButton::indicator::checked {
+		background-color: rgb(255, 170, 0);
+}
+
 
 QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
 	background-color: rgb(255, 255, 255);
 	image: null;
+}
+
+QCheckBox::disabled {
+	color: rgb(78, 78, 78);
+}
+
+QRadioButton::indicator::disabled, QRadioButton::indicator::unchecked:disabled {
+	background-color:rgb(98, 98, 98);
+}
+
+QPushButton, QToolButton {
+	border: 0px;
+}
+
+QPushButton::hover, QToolButton::hover {
+	border: 1px solid rgb(76, 76, 76);
 }
 </string>
   </property>
@@ -252,6 +304,9 @@ QWidget::disabled {
              </item>
              <item>
               <widget class="QRadioButton" name="rightTwist">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -1201,7 +1256,7 @@ QWidget::disabled {
              <item>
               <widget class="QToolButton" name="weightSwitch">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1343,7 +1398,7 @@ QWidget::disabled {
              <item>
               <widget class="QToolButton" name="lengthSwitch">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1485,7 +1540,7 @@ QWidget::disabled {
              <item>
               <widget class="QToolButton" name="diameterSwitch">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1564,7 +1619,7 @@ QWidget::disabled {
               <widget class="QComboBox" name="dragType">
                <property name="maximumSize">
                 <size>
-                 <width>177</width>
+                 <width>175</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -1598,6 +1653,12 @@ QWidget::disabled {
              </item>
              <item>
               <widget class="QToolButton" name="dragEditor">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>8</pointsize>
@@ -1654,6 +1715,9 @@ QWidget::disabled {
              </property>
              <item>
               <widget class="QCheckBox" name="multiBC">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>

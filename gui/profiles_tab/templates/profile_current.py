@@ -24,13 +24,45 @@ class Ui_profileCurrent(object):
 "    background-color: rgb(51, 51, 51);\n"
 "}\n"
 "\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button { width: 20px; }\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button { width: 20px; }\n"
+"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
+"    width: 20px;\n"
+"    image: url(:/custom/res/custom/caret-up-fill_8.png);\n"
+"}\n"
+"QSpinBox::down-button, QDoubleSpinBox::down-button { \n"
+"    width: 20px;\n"
+"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
+"}\n"
+"QSpinBox::down-button:hover, QSpinBox::up-button:hover,\n"
+"QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {\n"
+"        background-color: rgb(75, 75, 75);\n"
+"}\n"
+"QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,\n"
+"QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {\n"
+"        image: null;\n"
+"}\n"
+"\n"
 "QSpinBox, QDoubleSpinBox {\n"
 "    background-color: rgb(40, 40, 40);\n"
-"    alternate-background-color: rgb(40, 40, 40);\n"
 "    color: rgb(255, 255, 255);\n"
 "}\n"
+"\n"
+"QComboBox {\n"
+"    background-color: rgb(40, 40, 40);\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    background: transparent;\n"
+"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
+"}\n"
+"\n"
+"QComboBox::drop-down:hover {\n"
+"    background-color: rgb(75, 75, 75);\n"
+"}\n"
+"\n"
+"QComboBox::drop-down:disabled {\n"
+"    image: null;\n"
+"}\n"
+"\n"
 "QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "}\n"
@@ -75,15 +107,35 @@ class Ui_profileCurrent(object):
 "     width: 15px;\n"
 "     height: 15px;\n"
 "}\n"
-"QCheckBox::indicator:checked, QRadioButton::indicator::checked {\n"
+"QCheckBox::indicator:checked {\n"
 "    background-color: rgb(255, 170, 0);\n"
-"    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);\n"
-"image-size: 20px, 20px;\n"
+"    image: url(:/custom/res/custom/check.png);\n"
 "}\n"
+"\n"
+"QRadioButton::indicator::checked {\n"
+"        background-color: rgb(255, 170, 0);\n"
+"}\n"
+"\n"
 "\n"
 "QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    image: null;\n"
+"}\n"
+"\n"
+"QCheckBox::disabled {\n"
+"    color: rgb(78, 78, 78);\n"
+"}\n"
+"\n"
+"QRadioButton::indicator::disabled, QRadioButton::indicator::unchecked:disabled {\n"
+"    background-color:rgb(98, 98, 98);\n"
+"}\n"
+"\n"
+"QPushButton, QToolButton {\n"
+"    border: 0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover, QToolButton::hover {\n"
+"    border: 1px solid rgb(76, 76, 76);\n"
 "}\n"
 "")
         self.gridLayout = QtWidgets.QGridLayout(profileCurrent)
@@ -159,6 +211,7 @@ class Ui_profileCurrent(object):
         self.twist.setObjectName("twist")
         self.horizontalLayout_49.addWidget(self.twist)
         self.rightTwist = QtWidgets.QRadioButton(self.widget_8)
+        self.rightTwist.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -555,7 +608,7 @@ class Ui_profileCurrent(object):
         self.weightQuantity.addItem("")
         self.horizontalLayout_51.addWidget(self.weightQuantity)
         self.weightSwitch = QtWidgets.QToolButton(self.horizontalWidget_17)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.weightSwitch.sizePolicy().hasHeightForWidth())
@@ -613,7 +666,7 @@ class Ui_profileCurrent(object):
         self.lengthQuantity.addItem("")
         self.horizontalLayout_52.addWidget(self.lengthQuantity)
         self.lengthSwitch = QtWidgets.QToolButton(self.horizontalWidget_18)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lengthSwitch.sizePolicy().hasHeightForWidth())
@@ -672,7 +725,7 @@ class Ui_profileCurrent(object):
         self.diameterQuantity.addItem("")
         self.horizontalLayout_53.addWidget(self.diameterQuantity)
         self.diameterSwitch = QtWidgets.QToolButton(self.horizontalWidget_19)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.diameterSwitch.sizePolicy().hasHeightForWidth())
@@ -705,7 +758,7 @@ class Ui_profileCurrent(object):
         self.horizontalLayout_54.setSpacing(0)
         self.horizontalLayout_54.setObjectName("horizontalLayout_54")
         self.dragType = QtWidgets.QComboBox(self.horizontalWidget_20)
-        self.dragType.setMaximumSize(QtCore.QSize(177, 16777215))
+        self.dragType.setMaximumSize(QtCore.QSize(175, 16777215))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.dragType.setFont(font)
@@ -716,6 +769,11 @@ class Ui_profileCurrent(object):
         self.dragType.addItem("")
         self.horizontalLayout_54.addWidget(self.dragType)
         self.dragEditor = QtWidgets.QToolButton(self.horizontalWidget_20)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.dragEditor.sizePolicy().hasHeightForWidth())
+        self.dragEditor.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(8)
         self.dragEditor.setFont(font)
@@ -741,6 +799,7 @@ class Ui_profileCurrent(object):
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.multiBC = QtWidgets.QCheckBox(self.bcWidget)
+        self.multiBC.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

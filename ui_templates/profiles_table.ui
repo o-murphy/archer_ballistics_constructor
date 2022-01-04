@@ -76,19 +76,20 @@
 }
 
 QTableWidget {
-	
 	border-color: rgb(76, 76, 76);
 	background-color: rgb(51, 51, 51);
 }
 
 QHeaderView::section {
 	background-color: rgb(51, 51, 51);
-	    width: 22px;
-
+	width: 22px;
 }
 
-
 QTableWidget::item:selected {
+	background-color: rgb(255, 170, 0);
+}
+
+QTableWidget::item:hover {
 	background-color: rgb(255, 170, 0);
 }
 
@@ -99,6 +100,7 @@ QTableView::item:hover {
 QTableView::item {
 	background-color: rgb(55, 52, 63);
 }
+
 
 QScrollBar:vertical {
         background-color: rgb(51, 51, 51); /*#2A2929;*/

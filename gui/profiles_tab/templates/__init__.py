@@ -4,3 +4,4 @@ from .profile_current import Ui_profileCurrent
 from .profiles_tools import Ui_profilesTools
 from .profiles_progress import Ui_profilesProgress
 from .profile_item import Ui_profileItem
+from .add_btn import Ui_tWidget

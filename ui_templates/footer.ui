@@ -40,13 +40,20 @@ QCheckBox::indicator, QRadioButton::indicator {
 }
 QCheckBox::indicator:checked, QRadioButton::indicator::checked {
 	background-color: rgb(255, 170, 0);
-    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);
-image-size: 20px, 20px;
+    image:url(:/custom/res/custom/check.png);
 }
 
 QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
 	background-color: rgb(255, 255, 255);
 	image: null;
+}
+
+QPushButton {
+	border: 0px;
+}
+
+QPushButton::hover {
+	border: 1px solid rgb(76, 76, 76);
 }
 </string>
   </property>
@@ -111,7 +118,7 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
      </property>
      <property name="icon">
       <iconset resource="../.rsrc/res.qrc">
-       <normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</iconset>
+       <normaloff>:/custom/res/custom/tools.png</normaloff>:/custom/res/custom/tools.png</iconset>
      </property>
     </widget>
    </item>

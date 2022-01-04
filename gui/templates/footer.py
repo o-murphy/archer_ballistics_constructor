@@ -31,13 +31,20 @@ class Ui_FooterWidget(object):
 "}\n"
 "QCheckBox::indicator:checked, QRadioButton::indicator::checked {\n"
 "    background-color: rgb(255, 170, 0);\n"
-"    image: url(:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png);\n"
-"image-size: 20px, 20px;\n"
+"    image:url(:/custom/res/custom/check.png);\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    image: null;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border: 0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"    border: 1px solid rgb(76, 76, 76);\n"
 "}\n"
 "")
         self.gridLayout = QtWidgets.QGridLayout(FooterWidget)
@@ -58,7 +65,7 @@ class Ui_FooterWidget(object):
         self.Preferences.setMaximumSize(QtCore.QSize(26, 26))
         self.Preferences.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/custom/res/custom/tools.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.Preferences.setIcon(icon)
         self.Preferences.setObjectName("Preferences")
         self.gridLayout.addWidget(self.Preferences, 0, 3, 1, 1)

@@ -8,13 +8,14 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
         super().__init__()
         self.setupUi(self)
 
-        # self.tableWidget.clicked.connect(self.select)
-
     def select(self):
         if self.tableWidget.currentItem():
             row = self.tableWidget.currentRow()
             column = self.tableWidget.currentColumn()
             return self.tableWidget.cellWidget(row, column)
+
+    def bottom_row(self):
+        return self.tableWidget.cellWidget(self.tableWidget.rowCount()-1, 0)
 
     def add_row(self):
         row_count = self.tableWidget.rowCount()
@@ -23,20 +24,19 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
             self.tableWidget.insertRow(row_count)
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
             self.tableWidget.setCellWidget(row_count, 0, ProfileItem())
-
             self.tableWidget.setCurrentItem(self.tableWidget.item(row_count, 0))
-
 
             return row_count
 
     def remove_row(self):
-        row = self.tableWidget.selectedItems()[0].row()
-        for item in self.tableWidget.selectedItems():
-            self.tableWidget.removeRow(item.row())
-        if self.tableWidget.item(row, 0):
-            self.tableWidget.item(row, 0).setSelected(True)
-        elif self.tableWidget.item(row - 1, 0):
-            self.tableWidget.item(row - 1, 0).setSelected(True)
+        if self.tableWidget.rowCount() > 0:
+            row = self.tableWidget.selectedItems()[0].row()
+            for item in self.tableWidget.selectedItems():
+                self.tableWidget.removeRow(item.row())
+            if self.tableWidget.item(row, 0):
+                self.tableWidget.item(row, 0).setSelected(True)
+            elif self.tableWidget.item(row - 1, 0):
+                self.tableWidget.item(row - 1, 0).setSelected(True)
 
     def remove_all(self):
         for i in range(self.tableWidget.rowCount(), -1, -1):
@@ -65,6 +65,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
                 self.tableWidget.setCellWidget(row + 2, i, w)
                 self.tableWidget.setCurrentCell(row + 2, column)
             self.tableWidget.removeRow(row)
+
 
     def get_current_item(self):
         if self.tableWidget.currentItem():

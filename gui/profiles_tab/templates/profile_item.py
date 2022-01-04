@@ -18,9 +18,7 @@ class Ui_profileItem(object):
         profileItem.setMinimumSize(QtCore.QSize(380, 60))
         profileItem.setMaximumSize(QtCore.QSize(380, 60))
         profileItem.setStyleSheet("QWidget {\n"
-"    background-color: rgb(55, 52, 63);\n"
 "    border: 1px solid rgb(78, 78, 78);\n"
-"    color: rgb(255, 255, 255);\n"
 "    font-size: 15px;\n"
 "}\n"
 "\n"
@@ -29,8 +27,18 @@ class Ui_profileItem(object):
 "    background-color: transparent;\n"
 "}\n"
 "\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button { width: 20px; }\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button { width: 20px; }\n"
+"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
+"    width: 20px;\n"
+"    image: url(:/custom/res/custom/caret-up-fill_8.png);\n"
+"}\n"
+"QSpinBox::down-button, QDoubleSpinBox::down-button { \n"
+"    width: 20px;\n"
+"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
+"}\n"
+"QSpinBox::down-button:hover, QSpinBox::up-button:hover,\n"
+"QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {\n"
+"        background-color: rgb(75, 75, 75);\n"
+"}\n"
 "QSpinBox, QDoubleSpinBox {\n"
 "    background-color: rgb(40, 40, 40);\n"
 "    alternate-background-color: rgb(40, 40, 40);\n"
@@ -38,11 +46,26 @@ class Ui_profileItem(object):
 "    border: 0;\n"
 "}\n"
 "QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {\n"
-"    color: rgb(255, 255, 255);\n"
 "}\n"
 "QLineEdit {\n"
 "    border: 0px solid grey;\n"
 "    background-color: rgb(40, 40, 40);\n"
+"}\n"
+"\n"
+"\n"
+"QWidget#zWidget, QWidget#tWidget {\n"
+"    background: transparent;\n"
+"    border: 0px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    background: transparent;\n"
+"    border: 0px;\n"
+"    border-radius: 8px; \n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"    background-color: white;\n"
 "}\n"
 "\n"
 "\n"
@@ -52,6 +75,30 @@ class Ui_profileItem(object):
         self.gridLayout.setHorizontalSpacing(4)
         self.gridLayout.setVerticalSpacing(2)
         self.gridLayout.setObjectName("gridLayout")
+        self.cartridgeName = QtWidgets.QLabel(profileItem)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.cartridgeName.sizePolicy().hasHeightForWidth())
+        self.cartridgeName.setSizePolicy(sizePolicy)
+        self.cartridgeName.setMinimumSize(QtCore.QSize(160, 0))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.cartridgeName.setFont(font)
+        self.cartridgeName.setObjectName("cartridgeName")
+        self.gridLayout.addWidget(self.cartridgeName, 1, 1, 1, 1)
+        self.rifleName = QtWidgets.QLabel(profileItem)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.rifleName.sizePolicy().hasHeightForWidth())
+        self.rifleName.setSizePolicy(sizePolicy)
+        self.rifleName.setMinimumSize(QtCore.QSize(160, 0))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.rifleName.setFont(font)
+        self.rifleName.setObjectName("rifleName")
+        self.gridLayout.addWidget(self.rifleName, 0, 1, 1, 1)
         self.widget_2 = QtWidgets.QWidget(profileItem)
         self.widget_2.setMinimumSize(QtCore.QSize(50, 50))
         self.widget_2.setMaximumSize(QtCore.QSize(50, 50))
@@ -102,30 +149,11 @@ class Ui_profileItem(object):
         self.weightTile.setObjectName("weightTile")
         self.verticalLayout_2.addWidget(self.weightTile)
         self.gridLayout.addWidget(self.widget_2, 0, 0, 2, 1)
-        self.rifleName = QtWidgets.QLabel(profileItem)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.rifleName.sizePolicy().hasHeightForWidth())
-        self.rifleName.setSizePolicy(sizePolicy)
-        self.rifleName.setMinimumSize(QtCore.QSize(160, 0))
-        font = QtGui.QFont()
-        font.setPointSize(-1)
-        self.rifleName.setFont(font)
-        self.rifleName.setObjectName("rifleName")
-        self.gridLayout.addWidget(self.rifleName, 0, 1, 1, 1)
-        self.cartridgeName = QtWidgets.QLabel(profileItem)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.cartridgeName.sizePolicy().hasHeightForWidth())
-        self.cartridgeName.setSizePolicy(sizePolicy)
-        self.cartridgeName.setMinimumSize(QtCore.QSize(160, 0))
-        font = QtGui.QFont()
-        font.setPointSize(-1)
-        self.cartridgeName.setFont(font)
-        self.cartridgeName.setObjectName("cartridgeName")
-        self.gridLayout.addWidget(self.cartridgeName, 1, 1, 1, 1)
+        self.zWidget = QtWidgets.QWidget(profileItem)
+        self.zWidget.setMinimumSize(QtCore.QSize(20, 0))
+        self.zWidget.setStyleSheet("")
+        self.zWidget.setObjectName("zWidget")
+        self.gridLayout.addWidget(self.zWidget, 0, 2, 3, 1)
 
         self.retranslateUi(profileItem)
         QtCore.QMetaObject.connectSlotsByName(profileItem)
@@ -133,7 +161,8 @@ class Ui_profileItem(object):
     def retranslateUi(self, profileItem):
         _translate = QtCore.QCoreApplication.translate
         profileItem.setWindowTitle(_translate("profileItem", "Form"))
+        self.cartridgeName.setText(_translate("profileItem", "ABR 69GR SMK"))
+        self.rifleName.setText(_translate("profileItem", "223Rem 8TWIST"))
         self.caliberShort.setText(_translate("profileItem", ".223Rem"))
         self.weightTile.setText(_translate("profileItem", "69"))
-        self.rifleName.setText(_translate("profileItem", "223Rem 8TWIST"))
-        self.cartridgeName.setText(_translate("profileItem", "ABR 69GR SMK"))
+import res_rc
