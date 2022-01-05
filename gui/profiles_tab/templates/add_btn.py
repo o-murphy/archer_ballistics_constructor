@@ -14,20 +14,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_tWidget(object):
     def setupUi(self, tWidget):
         tWidget.setObjectName("tWidget")
-        tWidget.resize(382, 20)
+        tWidget.resize(380, 20)
+        tWidget.setMaximumSize(QtCore.QSize(386, 16777215))
         tWidget.setStyleSheet("QWidget#zWidget, QWidget#tWidget {\n"
 "    background: transparent;\n"
 "    border: 0px;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
-"    background: transparent;\n"
+"    background: rgb(51, 51, 51);\n"
+"    color: rgb(95, 95, 95);\n"
+"    font-size: 15px;\n"
 "    border: 0px;\n"
-"    border-radius: 8px; \n"
 "}\n"
 "\n"
 "QPushButton::hover {\n"
-"    background-color: white;\n"
+"    background-color: rgb(76, 76, 76);\n"
 "}\n"
 "\n"
 "\n"
@@ -37,19 +39,19 @@ class Ui_tWidget(object):
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
         self.add = QtWidgets.QPushButton(tWidget)
-        self.add.setMinimumSize(QtCore.QSize(70, 0))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.add.sizePolicy().hasHeightForWidth())
+        self.add.setSizePolicy(sizePolicy)
+        self.add.setMinimumSize(QtCore.QSize(0, 0))
         self.add.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.add.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/addbtn_menu21b.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.add.setIcon(icon)
         self.add.setIconSize(QtCore.QSize(20, 20))
         self.add.setObjectName("add")
-        self.gridLayout.addWidget(self.add, 0, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 0, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.add, 0, 0, 1, 1)
 
         self.retranslateUi(tWidget)
         QtCore.QMetaObject.connectSlotsByName(tWidget)
@@ -57,4 +59,5 @@ class Ui_tWidget(object):
     def retranslateUi(self, tWidget):
         _translate = QtCore.QCoreApplication.translate
         tWidget.setWindowTitle(_translate("tWidget", "Form"))
+        self.add.setText(_translate("tWidget", "Add Profile"))
 import res_rc

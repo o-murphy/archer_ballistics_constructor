@@ -38,7 +38,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profile_current = ProfileCurrent()
 
         self.add_btn = AddBtn()
-        self.add_btn.maximize()
 
         self.setupWidgets()
         self.setupConnects()
@@ -55,7 +54,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.gridLayout.addWidget(self.profiles_table, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.profiles_tools, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
-        self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
+        self.insert_add_btn(0)
 
     def setupConnects(self):
         self.profiles_tools.newProfileButton.clicked.connect(self.add_profile)
@@ -71,6 +70,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.closeFile.clicked.connect(self.close_file)
 
         self.profiles_table.tableWidget.currentCellChanged.connect(self.on_current_profile_change)
+        # self.profiles_table.tableWidget.currentCellChanged.connect(self.on_cur_item)
+
         self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
         self.profile_current.multiBC.stateChanged.connect(self.enable_multi_bc)
 
@@ -97,10 +98,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             except TypeError:
                 pass
 
-    def on_table_click(self):
-        if not self.profiles_table.tableWidget.currentItem():
-            self.add_profile()
-
     def set_current(self, e):
         r = None
         if isinstance(e, QtCore.QModelIndex):
@@ -116,15 +113,19 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profile_current.enable_multi_bc(event)
 
     def on_current_profile_change(self, e):
-        if isinstance(e, int):
+        if not self.profiles_table.tableWidget.currentItem():
+            self.profile_current.enable_tabs(False)
+
+        elif isinstance(e, int):
             if e >= 0:
                 self.profile_current.enable_tabs(True)
                 cell = self.profiles_table.tableWidget.cellWidget(e, 0)
                 if cell:
-                    if cell.profile:
-                        self.disconnectEvts()
-                        self.set_current(e)
-                        self.connectEvts()
+                    if not isinstance(cell, AddBtn):
+                        if cell.profile:
+                            self.disconnectEvts()
+                            self.set_current(e)
+                            self.connectEvts()
             else:
                 self.profile_current.enable_tabs(False)
 
@@ -141,7 +142,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def get_recent_profile_table(self):
         profiles = []
-        for i in range(self.profiles_table.tableWidget.rowCount()):
+        for i in range(self.profiles_table.tableWidget.rowCount()-1):
             p = self.profiles_table.tableWidget.cellWidget(i, 0).profile
             profiles.append(p)
         return profiles
@@ -156,38 +157,34 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             else:
                 self.window().setWindowTitle(self.title)
 
+    def insert_add_btn(self, last_row):
+        self.profiles_table.tableWidget.insertRow(last_row)
+        self.profiles_table.tableWidget.setCellWidget(last_row, 0, self.add_btn)
+
     def add_profile(self, e=None):
-        if self.profiles_table.tableWidget.rowCount() < 20:
+
+        if self.profiles_table.tableWidget.rowCount() < 21:
             self.profiles_table.add_row()
             self.set_profile(e)
             self.set_is_saved(False)
 
-            self.profiles_table.select().layout().addWidget(self.add_btn, 2, 1, 1, 1)
-            self.add_btn.minimize()
+            last_row = self.profiles_table.tableWidget.rowCount()
+            self.insert_add_btn(last_row)
+            self.profiles_table.tableWidget.removeRow(last_row - 2)
 
     def remove_profile(self):
-        add_btn = self.profiles_table.select().findChild(QtWidgets.QWidget, self.add_btn.objectName())
-
         if self.profiles_table.tableWidget.rowCount() > 0:
-            if add_btn:
-                self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
-                self.add_btn.maximize()
-
             self.profiles_table.remove_row()
             self.set_is_saved(False)
-        if self.profiles_table.tableWidget.rowCount() > 0:
-            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
-            self.add_btn.minimize()
 
     def move_profile_up(self):
         if self.profiles_table.tableWidget.rowCount() > 0:
             self.profiles_table.move_up()
-            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
 
     def move_profile_down(self):
-        if self.profiles_table.tableWidget.rowCount() > 0:
-            self.profiles_table.move_down()
-            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
+        if self.profiles_table.tableWidget.currentRow() < self.profiles_table.tableWidget.rowCount()-2:
+            if self.profiles_table.tableWidget.rowCount() > 0:
+                self.profiles_table.move_down()
 
     def set_profile(self, e=None):
         item = self.profiles_table.select()
@@ -275,7 +272,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             data = json.load(fp)
         for d in data:
             self.disconnectEvts()
-            self.profiles_table.add_row()
+            # self.profiles_table.add_row()
+            self.add_profile()
 
             self.profile_current.set_data(d)
             self.set_profile()
@@ -283,9 +281,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.current_file = fileName
         self.set_is_saved(True)
-
-        self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
-        self.add_btn.minimize()
+        # self.insert_add_btn(len(data))
 
     def close_file(self):
         choice = QtWidgets.QMessageBox.Cancel
@@ -302,8 +298,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if choice == QtWidgets.QMessageBox.Close:
                 self.set_is_saved(True)
         if self.is_saved:
-            self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
-            self.add_btn.maximize()
             self.profiles_table.remove_all()
             self.current_file = ''
         return choice
