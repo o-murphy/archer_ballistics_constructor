@@ -22,6 +22,7 @@ class Ui_profilesTable(object):
         profilesTable.setSizePolicy(sizePolicy)
         profilesTable.setMinimumSize(QtCore.QSize(426, 1))
         profilesTable.setMaximumSize(QtCore.QSize(426, 16777215))
+        profilesTable.setMouseTracking(True)
         profilesTable.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profilesTable)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)

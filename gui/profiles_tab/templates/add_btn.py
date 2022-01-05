@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_tWidget(object):
     def setupUi(self, tWidget):
         tWidget.setObjectName("tWidget")
-        tWidget.resize(400, 20)
+        tWidget.resize(382, 20)
         tWidget.setStyleSheet("QWidget#zWidget, QWidget#tWidget {\n"
 "    background: transparent;\n"
 "    border: 0px;\n"

@@ -36,7 +36,9 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         self.profiles_tools = ProfilesTools()
         self.profile_current = ProfileCurrent()
-        # self.add_btn = None
+
+        self.add_btn = AddBtn()
+        self.add_btn.maximize()
 
         self.setupWidgets()
         self.setupConnects()
@@ -53,13 +55,15 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.gridLayout.addWidget(self.profiles_table, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.profiles_tools, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
+        self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
 
     def setupConnects(self):
         self.profiles_tools.newProfileButton.clicked.connect(self.add_profile)
+        self.add_btn.add.clicked.connect(self.add_profile)
+
         self.profiles_tools.removeProfileButton.clicked.connect(self.remove_profile)
-        # self.profiles_tools.clearAllProfiles.clicked.connect(self.profiles_table.remove_all())
-        self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_down)
-        self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_up)
+        self.profiles_tools.downProfile.clicked.connect(self.move_profile_down)
+        self.profiles_tools.upProfile.clicked.connect(self.move_profile_up)
 
         self.profiles_tools.saveAsButton.clicked.connect(self.save_as_file_dialog)
         self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
@@ -92,6 +96,10 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
                 i.disconnect(self.update_profile)
             except TypeError:
                 pass
+
+    def on_table_click(self):
+        if not self.profiles_table.tableWidget.currentItem():
+            self.add_profile()
 
     def set_current(self, e):
         r = None
@@ -154,10 +162,32 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self.set_profile(e)
             self.set_is_saved(False)
 
+            self.profiles_table.select().layout().addWidget(self.add_btn, 2, 1, 1, 1)
+            self.add_btn.minimize()
+
     def remove_profile(self):
+        add_btn = self.profiles_table.select().findChild(QtWidgets.QWidget, self.add_btn.objectName())
+
         if self.profiles_table.tableWidget.rowCount() > 0:
+            if add_btn:
+                self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
+                self.add_btn.maximize()
+
             self.profiles_table.remove_row()
             self.set_is_saved(False)
+        if self.profiles_table.tableWidget.rowCount() > 0:
+            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
+            self.add_btn.minimize()
+
+    def move_profile_up(self):
+        if self.profiles_table.tableWidget.rowCount() > 0:
+            self.profiles_table.move_up()
+            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
+
+    def move_profile_down(self):
+        if self.profiles_table.tableWidget.rowCount() > 0:
+            self.profiles_table.move_down()
+            self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
 
     def set_profile(self, e=None):
         item = self.profiles_table.select()
@@ -254,7 +284,11 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.current_file = fileName
         self.set_is_saved(True)
 
+        self.profiles_table.bottom_row().layout().addWidget(self.add_btn, 2, 1, 1, 1)
+        self.add_btn.minimize()
+
     def close_file(self):
+        choice = QtWidgets.QMessageBox.Cancel
         if not self.is_saved:
             msgbox = QtWidgets.QMessageBox()
             msgbox.setWindowTitle("File not saved!")
@@ -268,6 +302,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if choice == QtWidgets.QMessageBox.Close:
                 self.set_is_saved(True)
         if self.is_saved:
+            self.profiles_table.gridLayout.addWidget(self.add_btn, 0, 0, 1, 1)
+            self.add_btn.maximize()
             self.profiles_table.remove_all()
             self.current_file = ''
         return choice

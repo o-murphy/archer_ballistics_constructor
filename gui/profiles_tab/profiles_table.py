@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from .templates import Ui_profilesTable
 from .profile_item import ProfileItem
 
