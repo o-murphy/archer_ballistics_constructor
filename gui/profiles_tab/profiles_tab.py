@@ -9,6 +9,7 @@ from ..profile_item import WProfileItem
 from datetime import datetime
 
 from modules.env_update import USER_RECENT
+import os
 
 
 class CurrentState(object):
@@ -23,13 +24,15 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def __init__(self, *args):
         super().__init__()
         self.setupUi(self)
+
+        self.title = 'ArcherBC'
+
         self.current_file = ''
         self.is_saved = True
 
+
         self.widget_connect_list = []
         self.profiles_table = ProfilesTable()
-
-        self.recent_table = self.get_recent_profile_table()
 
         self.profiles_tools = ProfilesTools()
         self.profile_current = ProfileCurrent()
@@ -52,82 +55,70 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
 
     def setupConnects(self):
-        self.profiles_tools.newProfileButton.clicked.connect(self.profiles_table.add_row())
-        self.profiles_tools.removeProfileButton.clicked.connect(self.profiles_table.remove_row())
+        self.profiles_tools.newProfileButton.clicked.connect(self.add_profile)
+        self.profiles_tools.removeProfileButton.clicked.connect(self.remove_profile)
         # self.profiles_tools.clearAllProfiles.clicked.connect(self.profiles_table.remove_all())
         self.profiles_tools.downProfile.clicked.connect(self.profiles_table.move_down)
         self.profiles_tools.upProfile.clicked.connect(self.profiles_table.move_up)
-        #
-        # self.profiles_tools.saveAsButton.clicked.connect(self.save_as_file_dialog)
-        # self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
-        # self.profiles_tools.openFile.clicked.connect(self.open_file_dialog)
-        # self.profiles_tools.closeFile.clicked.connect(self.close_file)
-        #
-        # self.profiles_table.tableWidget.clicked.connect(self.set_current)
-        # # self.profiles_table.tableWidget.currentCellChanged.connect(self.add_add_btn)
+
+        self.profiles_tools.saveAsButton.clicked.connect(self.save_as_file_dialog)
+        self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
+        self.profiles_tools.openFile.clicked.connect(self.open_file_dialog)
+        self.profiles_tools.closeFile.clicked.connect(self.close_file)
+
         self.profiles_table.tableWidget.currentCellChanged.connect(self.on_current_profile_change)
-        # self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
-        #
-        # self.profile_current.multiBC.clicked.connect(self.enable_multi_bc)
-        #
-        # for le in self.profile_current.findChildren(QtWidgets.QLineEdit):
-        #     self.widget_connect_list.append(le.textEdited)
-        #     self.widget_connect_list.append(le.editingFinished)
-        #
-        # [self.widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
-        # [self.widget_connect_list.append(sb.valueChanged) for sb in
-        #  self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
-        # [self.widget_connect_list.append(cb.currentIndexChanged) for cb in
-        #  self.profile_current.findChildren(QtWidgets.QComboBox)]
-        # [self.widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
-        # [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
-        # [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
-        #
-        # self.connectEvts()
+        self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
+        self.profile_current.multiBC.stateChanged.connect(self.enable_multi_bc)
+
+        [self.widget_connect_list.append(le.textEdited) for le in self.profile_current.findChildren(QtWidgets.QLineEdit)]
+
+        [self.widget_connect_list.append(sb.valueChanged) for sb in self.profile_current.findChildren(QtWidgets.QSpinBox)]
+        [self.widget_connect_list.append(sb.valueChanged) for sb in
+         self.profile_current.findChildren(QtWidgets.QDoubleSpinBox)]
+        [self.widget_connect_list.append(cb.currentIndexChanged) for cb in
+         self.profile_current.findChildren(QtWidgets.QComboBox)]
+        [self.widget_connect_list.append(rb.clicked) for rb in self.profile_current.findChildren(QtWidgets.QRadioButton)]
+        [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
+        [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
+
+        self.connectEvts()
 
     def connectEvts(self):
-        [i.connect(self.set_profile) for i in self.widget_connect_list]
+        [i.connect(self.update_profile) for i in self.widget_connect_list]
 
     def disconnectEvts(self):
         for i in self.widget_connect_list:
             try:
-                i.disconnect(self.set_profile)
+                i.disconnect(self.update_profile)
             except TypeError:
                 pass
 
-    # def set_current(self, event):
-    #     if isinstance(event, QtCore.QModelIndex):
-    #         r, c = event.row(), event.column()
-    #         self.disconnectEvts()
-    #         self.profile_current.set_data(self.profiles_table.tableWidget.cellWidget(r, c).profile)
-    #         self.enable_multi_bc(self.profile_current.multiBC.isChecked())
-    #         self.connectEvts()
+    def set_current(self, e):
+        r = None
+        if isinstance(e, QtCore.QModelIndex):
+            r = e.row()
+        elif isinstance(e, int) and e >= 0:
+            r = e
+        if r >= 0:
+            cell = self.profiles_table.tableWidget.cellWidget(r, 0)
+            if cell.profile:
+                self.profile_current.set_data(cell.profile)
 
-    # def enable_multi_bc(self, event):
-    #     self.profile_current.enable_multi_bc(event)
+    def enable_multi_bc(self, event):
+        self.profile_current.enable_multi_bc(event)
 
     def on_current_profile_change(self, e):
         if isinstance(e, int):
             if e >= 0:
                 self.profile_current.enable_tabs(True)
-            if e < 0:
+                cell = self.profiles_table.tableWidget.cellWidget(e, 0)
+                if cell:
+                    if cell.profile:
+                        self.disconnectEvts()
+                        self.set_current(e)
+                        self.connectEvts()
+            else:
                 self.profile_current.enable_tabs(False)
-
-            # self.profile_current.set_data(self.profiles_table.tableWidget.cellWidget(e, 0).profile)
-            # self.enable_multi_bc(self.profile_current.multiBC.isChecked())
-
-    # def set_profile(self):
-    #     if self.profiles_table.select():
-    #         item = self.profiles_table.select()
-    #         item.set_profile(self.profile_current.get_rifle())
-    #         item.set_profile(self.profile_current.get_bullet())
-    #         item.set_profile(self.profile_current.get_cartridge())
-    #         item.set_profile(self.profile_current.get_conditions())
-    #         item.set_z_data()
-    #
-    #     if self.recent_table != self.get_recent_profile_table():
-    #         self.window().setWindowTitle('ArcherBC - *' + self.current_file)
-    #         self.is_saved = False
 
     def drag_func_edit(self):
         drag_func_dlg = DragFuncEditDialog(
@@ -140,96 +131,145 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         else:
             self.profile_current.bcWidget.layout().addWidget(self.profile_current.bc, 0)
 
-    # def get_recent_profile_table(self):
-    #     profiles = []
-    #     for i in range(self.profiles_table.tableWidget.rowCount()):
-    #         p = self.profiles_table.tableWidget.cellWidget(i, 0).profile
-    #         profiles.append(p)
-    #     return profiles
+    def get_recent_profile_table(self):
+        profiles = []
+        for i in range(self.profiles_table.tableWidget.rowCount()):
+            p = self.profiles_table.tableWidget.cellWidget(i, 0).profile
+            profiles.append(p)
+        return profiles
 
-    # def add_profile(self):
-    #     self.set_profile()
+    def set_is_saved(self, e: bool):
+        self.is_saved = e
+        if not e:
+            self.window().setWindowTitle(self.title + ' - *' + self.current_file)
+        else:
+            if not self.current_file == '':
+                self.window().setWindowTitle(self.title + ' - ' + self.current_file)
+            else:
+                self.window().setWindowTitle(self.title)
 
-    # @staticmethod
-    # def get_datetime():
-    #     return datetime.now().strftime("%y-%m-%d_%H-%M-%S")
-    #
-    # def save_as_file_dialog(self, fileName=None):
-    #     options = QtWidgets.QFileDialog.Options()
-    #     fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
-    #         self,
-    #         "QFileDialog.getSaveFileName()",
-    #         rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_{self.get_datetime()}',
-    #         "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Text Files (*.txt)",
-    #         options=options
-    #     )
-    #     if fileName:
-    #         self.save_profiles(fileName)
-    #
-    # def save_profiles(self, fileName):
-    #
-    #     import json
-    #     with open(fileName, 'w') as fp:
-    #         json.dump(self.get_recent_profile_table(), fp)
-    #     self.current_file = fileName
-    #     self.window().setWindowTitle('ArcherBC - ' + self.current_file)
-    #     self.is_saved = True
-    #     self.recent_table = self.get_recent_profile_table()
-    #
-    # def save_file_dialog(self):
-    #     if self.current_file != '':
-    #         if not self.current_file.startswith(fr'*{USER_RECENT}'):
-    #             self.save_as_file_dialog(self.current_file)
-    #         else:
-    #             self.save_profiles(self.current_file)
-    #     else:
-    #         self.save_as_file_dialog()
-    #
-    # def open_file_dialog(self):
-    #     self.close_file()
-    #     if self.is_saved:
-    #         options = QtWidgets.QFileDialog.Options()
-    #         fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
-    #             self,
-    #             "QFileDialog.getOpenFileName()",
-    #             USER_RECENT,
-    #             "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Python Files (*.py)",
-    #             options=options
-    #         )
-    #         if fileName:
-    #             self.open_file(fileName)
-    #
-    # def open_file(self, fileName):
-    #     with open(fileName, 'r') as fp:
-    #         import json
-    #         data = json.load(fp)
-    #     for d in data:
-    #         self.disconnectEvts()
-    #         self.profiles_table.add_row()
-    #
-    #         self.profile_current.set_data(d)
-    #         self.set_profile()
-    #         self.connectEvts()
-    #
-    #     self.current_file = fileName
-    #     self.window().setWindowTitle('ArcherBC - ' + self.current_file)
-    #     self.is_saved = True
-    #
-    # def close_file(self):
-    #     if not self.is_saved:
-    #         msgbox = QtWidgets.QMessageBox()
-    #         msgbox.setWindowTitle("File not saved!")
-    #         msgbox.setText('File not saved. Do you want to save changes?')
-    #         msgbox.addButton(QtWidgets.QMessageBox.Save)
-    #         msgbox.addButton(QtWidgets.QMessageBox.Cancel)
-    #         msgbox.addButton(QtWidgets.QMessageBox.Close)
-    #         choice = msgbox.exec_()
-    #         if choice == QtWidgets.QMessageBox.Save:
-    #             self.save_file_dialog()
-    #         if choice == QtWidgets.QMessageBox.Close:
-    #             self.is_saved = True
-    #     if self.is_saved:
-    #         self.profiles_table.remove_all()
-    #         self.current_file = ''
-    #         self.window().setWindowTitle('ArcherBC')
+    def add_profile(self, e=None):
+        if self.profiles_table.tableWidget.rowCount() < 20:
+            self.profiles_table.add_row()
+            self.set_profile(e)
+            self.set_is_saved(False)
+
+    def remove_profile(self):
+        if self.profiles_table.tableWidget.rowCount() > 0:
+            self.profiles_table.remove_row()
+            self.set_is_saved(False)
+
+    def set_profile(self, e=None):
+        item = self.profiles_table.select()
+        if item:
+            item.set_profile(self.profile_current.get_rifle())
+            item.set_profile(self.profile_current.get_bullet())
+            item.set_profile(self.profile_current.get_cartridge())
+            item.set_profile(self.profile_current.get_conditions())
+            item.set_z_data()
+
+    def update_profile(self):
+
+        item = self.profiles_table.select()
+        if item:
+            s = self.sender()
+            k = s.objectName()
+
+            if isinstance(s, QtWidgets.QSpinBox) or isinstance(s, QtWidgets.QDoubleSpinBox):
+                v = s.value()
+            elif isinstance(s, QtWidgets.QLineEdit):
+                v = s.text()
+            elif isinstance(s, QtWidgets.QComboBox):
+                v = s.currentIndex()
+            elif isinstance(s, QtWidgets.QRadioButton):
+                v = s.isChecked()
+            elif isinstance(s, QtWidgets.QCheckBox):
+                v = s.checkState()
+            else:
+                v = None
+            item.profile[k] = v
+            item.set_tile()
+
+            self.set_is_saved(False)
+
+    @staticmethod
+    def get_datetime():
+        return datetime.now().strftime("%y-%m-%d_%H-%M-%S")
+
+    def save_as_file_dialog(self, fileName=None):
+        options = QtWidgets.QFileDialog.Options()
+        fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
+            self,
+            "QFileDialog.getSaveFileName()",
+            rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_{self.get_datetime()}',
+            "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Text Files (*.txt)",
+            options=options
+        )
+        if fileName:
+            self.save_profiles(fileName)
+
+    def save_profiles(self, fileName):
+
+        import json
+        with open(fileName, 'w') as fp:
+            json.dump(self.get_recent_profile_table(), fp)
+        self.current_file = fileName
+        self.set_is_saved(True)
+
+    def save_file_dialog(self):
+        if self.current_file != '':
+            if os.path.isfile(self.current_file):
+                self.save_profiles(self.current_file)
+            else:
+                self.save_as_file_dialog(self.current_file)
+        else:
+            self.save_as_file_dialog()
+
+    def open_file_dialog(self):
+        self.close_file()
+        if self.is_saved:
+            options = QtWidgets.QFileDialog.Options()
+            fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
+                self,
+                "QFileDialog.getOpenFileName()",
+                USER_RECENT,
+                "ArcherBC Profiles (*.arbcp);;JSON (*.json);;All Files (*);;Python Files (*.py)",
+                options=options
+            )
+            if fileName:
+                self.open_file(fileName)
+
+    def open_file(self, fileName):
+        with open(fileName, 'r') as fp:
+            import json
+            data = json.load(fp)
+        for d in data:
+            self.disconnectEvts()
+            self.profiles_table.add_row()
+
+            self.profile_current.set_data(d)
+            self.set_profile()
+            self.connectEvts()
+
+        self.current_file = fileName
+        self.set_is_saved(True)
+
+    def close_file(self):
+        if not self.is_saved:
+            msgbox = QtWidgets.QMessageBox()
+            msgbox.setWindowTitle("File not saved!")
+            msgbox.setText('File not saved. Do you want to save changes?')
+            msgbox.addButton(QtWidgets.QMessageBox.Save)
+            msgbox.addButton(QtWidgets.QMessageBox.Cancel)
+            msgbox.addButton(QtWidgets.QMessageBox.Close)
+            choice = msgbox.exec_()
+            if choice == QtWidgets.QMessageBox.Save:
+                self.save_file_dialog()
+            if choice == QtWidgets.QMessageBox.Close:
+                # self.is_saved = True
+                self.set_is_saved(True)
+        if self.is_saved:
+            self.profiles_table.remove_all()
+            self.current_file = ''
+            # self.window().setWindowTitle('ArcherBC')
 

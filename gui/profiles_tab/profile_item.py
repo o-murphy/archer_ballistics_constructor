@@ -36,8 +36,16 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def set_profile(self, data: dict):
         for k, v in data.items():
             self.profile[k] = v
+        self.set_tile()
+
+    def set_tile(self):
+        for k, v in self.profile.items():
             if hasattr(self, k):
-                self.__getattribute__(k).setText(v)
+                w = self.__getattribute__(k)
+                if isinstance(w, QtWidgets.QLabel):
+                    w.setText(v)
+                if isinstance(w, QtWidgets.QSpinBox) or isinstance(w, QtWidgets.QDoubleSpinBox):
+                    w.setValue(v)
 
     def set_z_data(self):
         self.profile[self.z_x.objectName()] = self.z_x.value()
