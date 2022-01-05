@@ -29,9 +29,20 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.gridLayout.addWidget(self.footer_widget, 1, 0, 1, 1)
 
     def closeEvent(self, event) -> None:
+        self.custom_close(event)
+
+    def custom_close(self, event):
+        if not self.profiles_tab.is_saved:
+            choice = self.profiles_tab.close_file()
+            if choice == QtWidgets.QMessageBox.Cancel or not self.profiles_tab.is_saved:
+                event.ignore()
+            else:
+                QtGui.QCloseEvent()
+        else:
+            QtGui.QCloseEvent()
         # if hasattr(self, 'profiles_tab'):
         #     self.profiles_tab.save_backup()
-        sys.exit()
+        # sys.exit()
 
     
 def main():

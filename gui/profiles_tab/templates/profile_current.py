@@ -107,6 +107,12 @@ class Ui_profileCurrent(object):
 "     width: 15px;\n"
 "     height: 15px;\n"
 "}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"        border: 0px;\n"
+"        border-radius: 7px;\n"
+"}\n"
+"\n"
 "QCheckBox::indicator:checked {\n"
 "    background-color: rgb(255, 170, 0);\n"
 "    image: url(:/custom/res/custom/check.png);\n"
@@ -114,12 +120,19 @@ class Ui_profileCurrent(object):
 "\n"
 "QRadioButton::indicator::checked {\n"
 "        background-color: rgb(255, 170, 0);\n"
+"        border: 0px;\n"
+"        border-radius: 7px;\n"
 "}\n"
 "\n"
 "\n"
 "QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    image: null;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked:hover {\n"
+"    background-color:  rgb(255, 170, 0);\n"
+"    image: url(:/custom/res/custom/check.png);\n"
 "}\n"
 "\n"
 "QCheckBox::disabled {\n"
@@ -774,6 +787,7 @@ class Ui_profileCurrent(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.dragEditor.sizePolicy().hasHeightForWidth())
         self.dragEditor.setSizePolicy(sizePolicy)
+        self.dragEditor.setMinimumSize(QtCore.QSize(24, 0))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.dragEditor.setFont(font)
@@ -1205,6 +1219,7 @@ class Ui_profileCurrent(object):
         self.mvQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.mvQuantity.setItemText(0, _translate("profileCurrent", "m/s"))
         self.mvQuantity.setItemText(1, _translate("profileCurrent", "fps"))
+        self.mvSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
         self.label_72.setText(_translate("profileCurrent", "Temperature sensitivity:"))
         self.label_69.setText(_translate("profileCurrent", "Name:"))
         self.temp.setSuffix(_translate("profileCurrent", " °C"))
@@ -1217,18 +1232,23 @@ class Ui_profileCurrent(object):
         self.weightQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.weightQuantity.setItemText(0, _translate("profileCurrent", "Grains"))
         self.weightQuantity.setItemText(1, _translate("profileCurrent", "Grams"))
+        self.weightSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
         self.label_75.setText(_translate("profileCurrent", "Length:"))
         self.lengthQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.lengthQuantity.setItemText(0, _translate("profileCurrent", "Inches"))
         self.lengthQuantity.setItemText(1, _translate("profileCurrent", "mm"))
+        self.lengthSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
         self.label_76.setText(_translate("profileCurrent", "Diameter:"))
         self.diameterQuantity.setItemText(0, _translate("profileCurrent", "Inches"))
         self.diameterQuantity.setItemText(1, _translate("profileCurrent", "mm"))
+        self.diameterSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
         self.label_77.setText(_translate("profileCurrent", "Drag Function:"))
         self.dragType.setItemText(0, _translate("profileCurrent", "G1"))
         self.dragType.setItemText(1, _translate("profileCurrent", "G7"))
         self.dragType.setItemText(2, _translate("profileCurrent", "Custom"))
+        self.dragEditor.setToolTip(_translate("profileCurrent", "<font color=black>Edit drag function</font>"))
         self.label_78.setText(_translate("profileCurrent", "BC:"))
+        self.multiBC.setToolTip(_translate("profileCurrent", "<font color=black>Enable multi BC</font>"))
         self.multiBC.setText(_translate("profileCurrent", "Multi BC"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), _translate("profileCurrent", "Current profile"))
         self.groupBox_7.setTitle(_translate("profileCurrent", "Zeroing conditions "))

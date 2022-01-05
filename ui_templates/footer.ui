@@ -48,6 +48,10 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
 	image: null;
 }
 
+QCheckBox::indicator:unchecked:hover {
+	image: url(:/custom/res/custom/check.png);
+}
+
 QPushButton {
 	border: 0px;
 }

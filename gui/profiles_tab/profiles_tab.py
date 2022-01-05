@@ -266,10 +266,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if choice == QtWidgets.QMessageBox.Save:
                 self.save_file_dialog()
             if choice == QtWidgets.QMessageBox.Close:
-                # self.is_saved = True
                 self.set_is_saved(True)
         if self.is_saved:
             self.profiles_table.remove_all()
             self.current_file = ''
-            # self.window().setWindowTitle('ArcherBC')
-
+        return choice

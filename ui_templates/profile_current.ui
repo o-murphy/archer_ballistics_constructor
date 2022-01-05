@@ -107,6 +107,12 @@ QCheckBox::indicator, QRadioButton::indicator {
      width: 15px;
      height: 15px;
 }
+
+QRadioButton::indicator {
+		border: 0px;
+		border-radius: 7px;
+}
+
 QCheckBox::indicator:checked {
 	background-color: rgb(255, 170, 0);
     image: url(:/custom/res/custom/check.png);
@@ -114,12 +120,19 @@ QCheckBox::indicator:checked {
 
 QRadioButton::indicator::checked {
 		background-color: rgb(255, 170, 0);
+		border: 0px;
+		border-radius: 7px;
 }
 
 
 QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
 	background-color: rgb(255, 255, 255);
 	image: null;
+}
+
+QCheckBox::indicator:unchecked:hover {
+	background-color:  rgb(255, 170, 0);
+	image: url(:/custom/res/custom/check.png);
 }
 
 QCheckBox::disabled {
@@ -817,6 +830,9 @@ QWidget::disabled {
                  <underline>false</underline>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1270,6 +1286,9 @@ QWidget::disabled {
                  <underline>false</underline>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1411,6 +1430,9 @@ QWidget::disabled {
                  <bold>true</bold>
                  <underline>false</underline>
                 </font>
+               </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
                </property>
                <property name="text">
                 <string/>
@@ -1554,6 +1576,9 @@ QWidget::disabled {
                  <underline>false</underline>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1659,10 +1684,19 @@ QWidget::disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>24</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>8</pointsize>
                 </font>
+               </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Edit drag function&lt;/font&gt;</string>
                </property>
                <property name="text">
                 <string/>
@@ -1735,6 +1769,9 @@ QWidget::disabled {
                  <width>16777215</width>
                  <height>16777215</height>
                 </size>
+               </property>
+               <property name="toolTip">
+                <string>&lt;font color=black&gt;Enable multi BC&lt;/font&gt;</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">            QCheckBox::indicator::checked {background: orange}
