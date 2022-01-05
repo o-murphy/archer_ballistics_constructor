@@ -124,11 +124,11 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
 
     def set_data(self, data: dict):
         tab_data = {self.__getattribute__(k): v for k, v in data.items() if hasattr(self, k)}.items()
-
+        print(data)
         for k, v in tab_data:
             if isinstance(v, str):
                 k.setText(v)
-            if isinstance(k, QtWidgets.QSpinBox):
+            if isinstance(k, QtWidgets.QSpinBox) or isinstance(k, QtWidgets.QDoubleSpinBox):
                 if hasattr(self, f'{k.objectName()}Quantity'):
                     self.set_dirt(data, k, self.__getattribute__(f'{k.objectName()}Quantity'))
                 k.setValue(v)

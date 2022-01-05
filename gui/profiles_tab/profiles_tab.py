@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from .templates import Ui_profilesTab
 from .profiles_table import ProfilesTable
 from .profile_current import ProfileCurrent
@@ -107,6 +107,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         if r >= 0:
             cell = self.profiles_table.tableWidget.cellWidget(r, 0)
             if cell.profile:
+                print(cell.profile)
                 self.profile_current.set_data(cell.profile)
 
     def enable_multi_bc(self, event):
@@ -204,7 +205,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
             if isinstance(s, QtWidgets.QSpinBox) or isinstance(s, QtWidgets.QDoubleSpinBox):
                 v = s.value()
-            elif isinstance(s, QtWidgets.QLineEdit):
+            elif isinstance(s, QtWidgets.QLineEdit) and not k.startswith('qt_spinbox_lineedit'):
                 v = s.text()
             elif isinstance(s, QtWidgets.QComboBox):
                 v = s.currentIndex()
@@ -300,4 +301,5 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         if self.is_saved:
             self.profiles_table.remove_all()
             self.current_file = ''
+            self.set_is_saved(True)
         return choice

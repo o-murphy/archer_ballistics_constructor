@@ -20,7 +20,10 @@ class Ui_profileItem(object):
         profileItem.setStyleSheet("QWidget {\n"
 "    border: 1px solid rgb(78, 78, 78);\n"
 "    font-size: 15px;\n"
+"    color: white;\n"
 "}\n"
+"\n"
+"QWidget:hover {color: black;}\n"
 "\n"
 "QLabel {\n"
 "    border: 0;\n"
@@ -111,8 +114,8 @@ class Ui_profileItem(object):
         font.setPointSize(-1)
         self.widget_2.setFont(font)
         self.widget_2.setStyleSheet("QWidget {background-color: black;\n"
-"color: black;\n"
 "font-size: 16px;\n"
+"color: black;\n"
 "font-family: \"Bahnschrift Light Condensed\";}\n"
 "QLabel {\n"
 "    background-color: white;\n"
