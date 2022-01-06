@@ -18,155 +18,7 @@
     <normaloff>:/title/Icon.png</normaloff>:/title/Icon.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog {
-	background-color: rgb(51, 51, 51);
-}
-
-QWidget {
-	background-color: rgb(51, 51, 51);
-	color: white;
-}
-
-QTableView{border : 1px solid rgb(78, 78, 78);}
-
-QTableWidget {
-	
-	background-color: rgb(40, 40, 40);
-}
-
-QHeaderView::section {
-	background-color: rgb(51, 51, 51);
-}
-
-QTableWidget::item:selected {
-	background-color: rgb(51, 51, 51);
-}
-
-QPushButton {
-	background-color: rgb(51, 51, 51);
-}
-
-QSpinBox::up-button, QDoubleSpinBox::up-button { width: 20px; }
-QSpinBox::down-button, QDoubleSpinBox::down-button { width: 20px; }
-QSpinBox, QDoubleSpinBox {
-	background-color: rgb(40, 40, 40);
-	alternate-background-color: rgb(40, 40, 40);
-	color: rgb(255, 255, 255);
-}
-QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {
-	color: rgb(255, 255, 255);
-}
-QLineEdit {
-	border: 0px solid grey;
-	background-color: rgb(40, 40, 40);
-}
-QGroupBox {
-	color: rgb(255, 255, 255);
-	border: 1px solid rgb(78, 78, 78);
-	padding-top: 25px;
-}
-
-QGroupBox::title {
-	padding: 5px 20px 5px 20px;
-	color: rgb(255, 170, 0);
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	background-color: rgb(40, 40, 40);
-}
-
-
-QScrollBar:vertical {
-        background-color: rgb(51, 51, 51); /*#2A2929;*/
-        width: 14px;
-        margin: 15px 6px 15px 6px;
-        border: 1px transparent #2A2929;
-        border-radius: 6px;
-    }
-
-QScrollBar:vertical:hover {
-        background-color: rgb(51, 51, 51); /*#2A2929;*/
-        width: 14px;
-        margin: 15px 3px 15px 3px;
-        border: 1px transparent #2A2929;
-        border-radius: 6px;
-    }
-    QScrollBar::handle:vertical
-    {
-        background-color: rgb(78, 78, 78);         /* #605F5F; */
-        min-height: 5px;
-        border-radius: 4px;
-    }
-
-    QScrollBar::sub-line:vertical
-    {
-        margin: 4px 0px 0px 0px;
-		border: 1px solid rgb(51, 51, 51);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		background-color: rgb(51, 51, 51);
-		color: white;
-        height: 5px;
-        width: 8px;
-        subcontrol-position: top;
-        subcontrol-origin: margin;
-    }
-
-    QScrollBar::add-line:vertical
-    {
-        margin: 0px 0px 4px 0px;
-		border: 1px solid rgb(51, 51, 51);
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
-		background-color: rgb(51, 51, 51);
-		color: white;
-        height: 5px;
-        width: 8px;
-        subcontrol-position: bottom;
-        subcontrol-origin: margin;
-    }
-
-
-    QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
-    {
-		margin: 4px 0px 0px 0px;
-       	border: 1px solid rgb(51, 51, 51);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		background-color: rgb(78, 78, 78);
-        height: 5px;
-        width: 8px;
-        subcontrol-position: top;
-        subcontrol-origin: margin;
-    }
-
-
-
-    QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
-    {
-		margin: 0px 0px 4px 0px;
-		border: 1px solid rgb(51, 51, 51);
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
-		background-color: rgb(78, 78, 78);
-        height: 5px;
-        width: 8px;
-		subcontrol-position: bottom;
-        subcontrol-origin: margin;
-    }
-
-    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
-    {
-			        background: none;
-    }
-
-    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
-    {
-        background: none;
-
-    }
-
-
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -363,8 +215,7 @@ QScrollBar:vertical:hover {
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string> °C</string>
@@ -473,8 +324,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string> %</string>
@@ -583,8 +433,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string> mmHg</string>
@@ -696,8 +545,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string>°</string>
@@ -809,8 +657,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string>°</string>
@@ -922,8 +769,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+            <string notr="true"/>
            </property>
            <property name="suffix">
             <string>°</string>

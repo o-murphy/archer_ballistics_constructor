@@ -18,155 +18,7 @@ class Ui_CurrentAtmoDialog(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/title/Icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         CurrentAtmoDialog.setWindowIcon(icon)
-        CurrentAtmoDialog.setStyleSheet("QDialog {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QWidget {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QTableView{border : 1px solid rgb(78, 78, 78);}\n"
-"\n"
-"QTableWidget {\n"
-"    \n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button { width: 20px; }\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button { width: 20px; }\n"
-"QSpinBox, QDoubleSpinBox {\n"
-"    background-color: rgb(40, 40, 40);\n"
-"    alternate-background-color: rgb(40, 40, 40);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit {\n"
-"    border: 0px solid grey;\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"QGroupBox {\n"
-"    color: rgb(255, 255, 255);\n"
-"    border: 1px solid rgb(78, 78, 78);\n"
-"    padding-top: 25px;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"    padding: 5px 20px 5px 20px;\n"
-"    color: rgb(255, 170, 0);\n"
-"    border-top-left-radius: 10px;\n"
-"    border-bottom-right-radius: 10px;\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"\n"
-"QScrollBar:vertical {\n"
-"        background-color: rgb(51, 51, 51); /*#2A2929;*/\n"
-"        width: 14px;\n"
-"        margin: 15px 6px 15px 6px;\n"
-"        border: 1px transparent #2A2929;\n"
-"        border-radius: 6px;\n"
-"    }\n"
-"\n"
-"QScrollBar:vertical:hover {\n"
-"        background-color: rgb(51, 51, 51); /*#2A2929;*/\n"
-"        width: 14px;\n"
-"        margin: 15px 3px 15px 3px;\n"
-"        border: 1px transparent #2A2929;\n"
-"        border-radius: 6px;\n"
-"    }\n"
-"    QScrollBar::handle:vertical\n"
-"    {\n"
-"        background-color: rgb(78, 78, 78);         /* #605F5F; */\n"
-"        min-height: 5px;\n"
-"        border-radius: 4px;\n"
-"    }\n"
-"\n"
-"    QScrollBar::sub-line:vertical\n"
-"    {\n"
-"        margin: 4px 0px 0px 0px;\n"
-"        border: 1px solid rgb(51, 51, 51);\n"
-"        border-top-left-radius: 5px;\n"
-"        border-top-right-radius: 5px;\n"
-"        background-color: rgb(51, 51, 51);\n"
-"        color: white;\n"
-"        height: 5px;\n"
-"        width: 8px;\n"
-"        subcontrol-position: top;\n"
-"        subcontrol-origin: margin;\n"
-"    }\n"
-"\n"
-"    QScrollBar::add-line:vertical\n"
-"    {\n"
-"        margin: 0px 0px 4px 0px;\n"
-"        border: 1px solid rgb(51, 51, 51);\n"
-"        border-bottom-left-radius: 5px;\n"
-"        border-bottom-right-radius: 5px;\n"
-"        background-color: rgb(51, 51, 51);\n"
-"        color: white;\n"
-"        height: 5px;\n"
-"        width: 8px;\n"
-"        subcontrol-position: bottom;\n"
-"        subcontrol-origin: margin;\n"
-"    }\n"
-"\n"
-"\n"
-"    QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
-"    {\n"
-"        margin: 4px 0px 0px 0px;\n"
-"           border: 1px solid rgb(51, 51, 51);\n"
-"        border-top-left-radius: 5px;\n"
-"        border-top-right-radius: 5px;\n"
-"        background-color: rgb(78, 78, 78);\n"
-"        height: 5px;\n"
-"        width: 8px;\n"
-"        subcontrol-position: top;\n"
-"        subcontrol-origin: margin;\n"
-"    }\n"
-"\n"
-"\n"
-"\n"
-"    QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
-"    {\n"
-"        margin: 0px 0px 4px 0px;\n"
-"        border: 1px solid rgb(51, 51, 51);\n"
-"        border-bottom-left-radius: 5px;\n"
-"        border-bottom-right-radius: 5px;\n"
-"        background-color: rgb(78, 78, 78);\n"
-"        height: 5px;\n"
-"        width: 8px;\n"
-"        subcontrol-position: bottom;\n"
-"        subcontrol-origin: margin;\n"
-"    }\n"
-"\n"
-"    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
-"    {\n"
-"                    background: none;\n"
-"    }\n"
-"\n"
-"    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
-"    {\n"
-"        background: none;\n"
-"\n"
-"    }\n"
-"\n"
-"\n"
-"")
+        CurrentAtmoDialog.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(CurrentAtmoDialog)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox_7 = QtWidgets.QGroupBox(CurrentAtmoDialog)
@@ -252,8 +104,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_powder_temp.setFont(font)
-        self.z_powder_temp.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_powder_temp.setStyleSheet("")
         self.z_powder_temp.setProperty("value", 15)
         self.z_powder_temp.setObjectName("z_powder_temp")
         self.horizontalLayout_56.addWidget(self.z_powder_temp)
@@ -298,8 +149,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_humidity.setFont(font)
-        self.z_humidity.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_humidity.setStyleSheet("")
         self.z_humidity.setProperty("value", 50)
         self.z_humidity.setObjectName("z_humidity")
         self.horizontalLayout_57.addWidget(self.z_humidity)
@@ -344,8 +194,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_pressure.setFont(font)
-        self.z_pressure.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_pressure.setStyleSheet("")
         self.z_pressure.setMaximum(1100)
         self.z_pressure.setProperty("value", 760)
         self.z_pressure.setObjectName("z_pressure")
@@ -391,8 +240,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_latitude.setFont(font)
-        self.z_latitude.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_latitude.setStyleSheet("")
         self.z_latitude.setMaximum(1000)
         self.z_latitude.setProperty("value", 0)
         self.z_latitude.setObjectName("z_latitude")
@@ -438,8 +286,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_angle.setFont(font)
-        self.z_angle.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_angle.setStyleSheet("")
         self.z_angle.setMaximum(359)
         self.z_angle.setProperty("value", 0)
         self.z_angle.setObjectName("z_angle")
@@ -485,8 +332,7 @@ class Ui_CurrentAtmoDialog(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_azimuth.setFont(font)
-        self.z_azimuth.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_azimuth.setStyleSheet("")
         self.z_azimuth.setMaximum(359)
         self.z_azimuth.setProperty("value", 270)
         self.z_azimuth.setObjectName("z_azimuth")
