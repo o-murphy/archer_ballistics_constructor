@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'archerbc_tab.ui'
+# Form implementation generated from reading ui file 'ui_templates\main_gui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -15,29 +15,28 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(1024, 696)
+        MainWindow.resize(1024, 700)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1024, 696))
+        MainWindow.setMinimumSize(QtCore.QSize(1024, 700))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("ui_templates\\.rsrc/Icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet("background-color: rgb(51, 51, 51);\n"
-                                 "color: white;")
+        MainWindow.setStyleSheet("")
         MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
-        MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks | QtWidgets.QMainWindow.AnimatedDocks)
+        MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.centralwidget.setMinimumSize(QtCore.QSize(0, 678))
+        self.centralwidget.setMinimumSize(QtCore.QSize(0, 680))
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setContentsMargins(-1, -1, -1, 9)
@@ -48,7 +47,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-        self.tabWidget.setMinimumSize(QtCore.QSize(1000, 606))
+        self.tabWidget.setMinimumSize(QtCore.QSize(1000, 630))
         self.tabWidget.setSizeIncrement(QtCore.QSize(0, 0))
         self.tabWidget.setBaseSize(QtCore.QSize(15, 15))
         palette = QtGui.QPalette()
@@ -116,38 +115,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setFont(font)
         self.tabWidget.setFocusPolicy(QtCore.Qt.TabFocus)
         self.tabWidget.setAutoFillBackground(False)
-        self.tabWidget.setStyleSheet("QTabBar::tab {\n"
-                                     "    height: 40px; width: 100px;\n"
-                                     "    background-color: rgb(76, 76, 76);\n"
-                                     "    color: rgb(255, 170, 0);\n"
-                                     "    border-top-left-radius: 10px;\n"
-                                     "    border-top-right-radius: 10px;\n"
-                                     "    border: 0px solid rgb(76, 76, 76);\n"
-                                     "}\n"
-                                     "QTabBar::tab:!selected {\n"
-                                     "    border: 1px solid rgb(76, 76, 76);\n"
-                                     "    background-color:rgb(28, 28, 28); \n"
-                                     "    color: rgb(255, 255, 255);\n"
-                                     "}\n"
-                                     "\n"
-                                     "QTabBar::tab:hover {\n"
-                                     "    border: 0px solid rgb(51, 51, 51);\n"
-                                     "}\n"
-                                     "\n"
-                                     "QTabBar::tab:!hover {\n"
-                                     "    border: 1px solid rgb(51, 51, 51);\n"
-                                     "}\n"
-                                     "\n"
-                                     "QTabWidget::pane { \n"
-                                     "    border: 2px solid rgb(76, 76, 76); \n"
-                                     "}\n"
-                                     "QScrollArea {\n"
-                                     "    border: 0; \n"
-                                     "}\n"
-                                     "\n"
-                                     "\n"
-                                     "\n"
-                                     "")
+        self.tabWidget.setStyleSheet("")
         self.tabWidget.setTabPosition(QtWidgets.QTabWidget.North)
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setUsesScrollButtons(False)

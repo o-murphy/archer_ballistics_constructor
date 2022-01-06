@@ -1,12 +1,15 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_profileItem
 from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
+from ..stylesheet import load_qss
 
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setStyleSheet(load_qss('qss/profile_item.qss'))
+
         self.profile: dict = {}
         self.z_x = NoWheelDoubleSpinBox()
         self.z_x.setPrefix('X: ')
@@ -22,11 +25,9 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_x.setObjectName('z_x')
         self.z_y.setObjectName('z_y')
         self.z_d.setObjectName('z_d')
-        self.zWidget.setLayout(QtWidgets.QGridLayout())
-        self.zWidget.layout().setContentsMargins(0, 0, 0, 0)
-        self.zWidget.layout().addWidget(self.z_x, 0, 2, 1, 1)
-        self.zWidget.layout().addWidget(self.z_y, 1, 2, 1, 1)
-        self.zWidget.layout().addWidget(self.z_d, 0, 5, 2, 1)
+        self.gridLayout.addWidget(self.z_x, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.z_y, 1, 2, 1, 1)
+        self.gridLayout.addWidget(self.z_d, 0, 3, 2, 1)
 
     def setupConnects(self):
         self.z_x.valueChanged.connect(self.set_z_data)

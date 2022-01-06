@@ -7,5 +7,6 @@ pyuic5 ui_templates\profiles_tools.ui -o gui\profiles_tab\templates\profiles_too
 pyuic5 ui_templates\drag_func_edit.ui -o gui\drag_func_editor\templates\drag_func_edit.py
 pyuic5 ui_templates\current_atmo_dialog.ui -o gui\drag_func_editor\templates\current_atmo_dialog.py
 pyuic5 ui_templates\footer.ui -o gui\templates\footer.py
+pyuic5 ui_templates\main_gui.ui -o gui\templates\main_gui.py
 pyrcc5 .rsrc\res.qrc -o res_rc.py
 

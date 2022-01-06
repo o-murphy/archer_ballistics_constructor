@@ -1,12 +1,14 @@
 from PyQt5 import QtWidgets, QtGui
 from .templates import Ui_profilesTable
 from .profile_item import ProfileItem
+from ..stylesheet import load_qss
 
 
 class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setStyleSheet(load_qss('qss/profiles_table.qss'))
 
     def select(self):
         if self.tableWidget.currentItem():

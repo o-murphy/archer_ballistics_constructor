@@ -17,40 +17,7 @@ class Ui_FooterWidget(object):
         FooterWidget.resize(1006, 26)
         FooterWidget.setMinimumSize(QtCore.QSize(1006, 26))
         FooterWidget.setMaximumSize(QtCore.QSize(16777215, 26))
-        FooterWidget.setStyleSheet("QWidget {font-size: 15px;}\n"
-"\n"
-"QCheckBox, QRadioButton {\n"
-"    padding-left: 5px;\n"
-"    padding-right: 5px;\n"
-"    font-size: 15px;\n"
-"    color: white;\n"
-"}\n"
-"QCheckBox::indicator, QRadioButton::indicator {\n"
-"     width: 15px;\n"
-"     height: 15px;\n"
-"}\n"
-"QCheckBox::indicator:checked, QRadioButton::indicator::checked {\n"
-"    background-color: rgb(255, 170, 0);\n"
-"    image:url(:/custom/res/custom/check.png);\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    image: null;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:unchecked:hover {\n"
-"    image: url(:/custom/res/custom/check.png);\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton::hover {\n"
-"    border: 1px solid rgb(76, 76, 76);\n"
-"}\n"
-"")
+        FooterWidget.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(FooterWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")

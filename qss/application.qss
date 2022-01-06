@@ -1,0 +1,203 @@
+QWidget {
+	background-color: rgb(51, 51, 51);
+	color: rgb(255, 255, 255);
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+	width: 20px;
+	image: url(":/custom/res/custom/caret-up-fill_8.png");
+}
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+	width: 20px;
+	image: url(":/custom/res/custom/caret-down-fill_8.png");
+}
+QSpinBox::down-button:hover, QSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
+		background-color: rgb(75, 75, 75);
+		border: 0px;
+		border-radius: 2px;
+}
+QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,
+QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {
+}
+
+QSpinBox, QDoubleSpinBox {
+	background-color: rgb(40, 40, 40);
+	color: rgb(255, 255, 255);
+}
+
+QComboBox {
+	background-color: rgb(40, 40, 40);
+}
+
+QComboBox::drop-down {
+	background: transparent;
+	image: url(":/custom/res/custom/caret-down-fill_8.png");
+}
+
+QComboBox::drop-down:hover {
+	background-color: rgb(75, 75, 75);
+	border: 0px;
+	border-radius: 2px;
+}
+
+QComboBox::drop-down:disabled {
+}
+
+QLineEdit {
+	border: 0px solid rgb(128,128,128);
+	background-color: rgb(40, 40, 40);
+}
+
+QGroupBox {
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(78, 78, 78);
+	padding-top: 25px;
+}
+
+QGroupBox::title {
+	padding: 5px 20px 5px 20px;
+	color: rgb(255, 170, 0);
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: rgb(40, 40, 40);
+}
+
+QTableWidget {
+
+	background-color: rgb(40, 40, 40);
+}
+
+QHeaderView::section {
+	background-color: rgb(51, 51, 51);
+}
+
+QTableWidget::item:selected {
+	background-color: rgb(51, 51, 51);
+}
+
+QCheckBox, QRadioButton {
+	padding-left: 0px;
+	padding-right: 0px;
+	font-size: 15px;
+	color: white;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+     width: 15px;
+     height: 15px;
+     border: 0px;
+     border-radius: 4px;
+}
+
+QRadioButton::indicator {
+		border: 0px;
+		border-radius: 7px;
+}
+
+QCheckBox::indicator:checked {
+	background-color: rgb(255, 170, 0);
+    image: url(":/custom/res/custom/check.png");
+}
+
+QRadioButton::indicator:checked {
+		background-color: rgb(255, 170, 0);
+		border: 0px;
+		border-radius: 7px;
+}
+
+
+QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+	background-color: rgb(255, 255, 255);
+}
+
+QCheckBox::indicator:unchecked:hover {
+	background-color:  rgb(255, 255, 255);
+	image: url(":/custom/res/custom/check.png");
+}
+
+QCheckBox:disabled {
+	color: rgb(78, 78, 78);
+}
+
+QRadioButton::indicator:disabled, QRadioButton::indicator:unchecked:disabled {
+	background-color:rgb(98, 98, 98);
+}
+
+QPushButton, QToolButton {
+	border: 0px;
+}
+
+QPushButton:hover, QToolButton:hover {
+	border: 1px solid rgb(76, 76, 76);
+	border-radius: 4px;
+}
+
+QTabBar::tab {
+	height: 25px; width: 150px;
+	font-size: 15px;
+}
+
+QWidget:disabled {
+	color: rgb(160, 160, 160);
+}
+
+QCheckBox::indicator:checked {
+    background: rgb(255, 170, 0);
+}
+QCheckBox::indicator:unchecked {
+    background: white;
+}
+QCheckBox {
+    font-size: 15px;
+    color: white;
+}
+QComboBox {
+    background-color: rgb(40, 40, 40);
+}
+
+QSpinBox {
+    background-color: rgb(40, 40, 40);
+    alternate-background-color: rgb(40, 40, 40);
+}
+
+QTabBar::tab {
+	height: 40px; width: 100px;
+	background-color: rgb(76, 76, 76);
+	color: rgb(255, 170, 0);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border: 0px solid rgb(76, 76, 76);
+}
+QTabBar::tab:!selected {
+	border: 1px solid rgb(76, 76, 76);
+	background-color:rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
+}
+
+QTabBar::tab:hover {
+	border: 0px solid rgb(51, 51, 51);
+}
+
+QTabBar::tab:!hover {
+	border: 1px solid rgb(51, 51, 51);
+}
+
+QTabWidget::pane {
+	border: 2px solid rgb(76, 76, 76);
+}
+
+QWidget QPushButton#add {
+	background: rgb(51, 51, 51);
+	color: rgb(95, 95, 95);
+	font-size: 15px;
+	border: 0px;
+}
+
+QWidget QPushButton#add:hover {
+	background-color: rgb(76, 76, 76);
+	border-radius: 0px;
+}
+
+QTabWidget QWidget#profileCurrent QTabBar::tab {
+	height: 25px; width: 150px;
+}

@@ -26,62 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-	border: 1px solid rgb(78, 78, 78);
-	font-size: 15px;
-	color: white;
-}
-
-QWidget:hover {color: black;}
-
-QLabel {
-	border: 0;
-	background-color: transparent;
-}
-
-QSpinBox::up-button, QDoubleSpinBox::up-button {
-	width: 20px;
-	image: url(:/custom/res/custom/caret-up-fill_8.png);
-}
-QSpinBox::down-button, QDoubleSpinBox::down-button { 
-	width: 20px;
-	image: url(:/custom/res/custom/caret-down-fill_8.png);
-}
-QSpinBox::down-button:hover, QSpinBox::up-button:hover,
-QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
-		background-color: rgb(75, 75, 75);
-}
-QSpinBox, QDoubleSpinBox {
-	background-color: rgb(40, 40, 40);
-	alternate-background-color: rgb(40, 40, 40);
-	color: rgb(255, 255, 255);
-	border: 0;
-}
-QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {
-}
-QLineEdit {
-	border: 0px solid grey;
-	background-color: rgb(40, 40, 40);
-}
-
-
-QWidget#zWidget, QWidget#tWidget {
-	background: transparent;
-	border: 0px;
-}
-
-QPushButton {
-	background: transparent;
-	border: 0px;
-	border-radius: 8px; 
-}
-
-QPushButton::hover {
-	background-color: white;
-}
-
-
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -117,11 +62,7 @@ QPushButton::hover {
       </size>
      </property>
      <property name="font">
-      <font>
-       <pointsize>-1</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+      <font/>
      </property>
      <property name="text">
       <string>ABR 69GR SMK</string>
@@ -143,11 +84,7 @@ QPushButton::hover {
       </size>
      </property>
      <property name="font">
-      <font>
-       <pointsize>-1</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+      <font/>
      </property>
      <property name="text">
       <string>223Rem 8TWIST</string>
@@ -155,7 +92,7 @@ QPushButton::hover {
     </widget>
    </item>
    <item row="0" column="0" rowspan="2">
-    <widget class="QWidget" name="widget_2" native="true">
+    <widget class="QWidget" name="tile" native="true">
      <property name="minimumSize">
       <size>
        <width>50</width>
@@ -171,17 +108,10 @@ QPushButton::hover {
      <property name="font">
       <font>
        <family>Bahnschrift Light Condensed</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">QWidget {background-color: black;
-font-size: 16px;
-color: black;
-font-family: &quot;Bahnschrift Light Condensed&quot;;}
-QLabel {
-	background-color: white;
-}</string>
+      <string notr="true"/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -216,7 +146,6 @@ QLabel {
         <property name="font">
          <font>
           <family>Bahnschrift Light Condensed</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -247,7 +176,6 @@ QLabel {
         <property name="font">
          <font>
           <family>Bahnschrift Light Condensed</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -262,19 +190,6 @@ QLabel {
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="0" column="2" rowspan="3">
-    <widget class="QWidget" name="zWidget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>20</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
     </widget>
    </item>
   </layout>

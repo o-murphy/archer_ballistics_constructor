@@ -6,6 +6,7 @@ from gui import Ui_MainWindow
 from gui import LPC_dialog
 from gui import FooterWidget
 from gui import EmptyProfilesTab
+from gui.stylesheet import load_qss
 
 
 class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -14,6 +15,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupDriverCheck()
         self.setupUi(self)
         self.setupWidgets()
+        self.setQss()
 
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
 
@@ -27,6 +29,9 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         footer_widget = FooterWidget(self)
         self.__setattr__('footer_widget', footer_widget)
         self.gridLayout.addWidget(self.footer_widget, 1, 0, 1, 1)
+
+    def setQss(self):
+        self.setStyleSheet(load_qss('qss/application.qss'))
 
     def closeEvent(self, event) -> None:
         self.custom_close(event)

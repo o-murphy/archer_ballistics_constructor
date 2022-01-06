@@ -14,26 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_tWidget(object):
     def setupUi(self, tWidget):
         tWidget.setObjectName("tWidget")
-        tWidget.resize(380, 20)
+        tWidget.resize(380, 28)
         tWidget.setMaximumSize(QtCore.QSize(386, 16777215))
-        tWidget.setStyleSheet("QWidget#zWidget, QWidget#tWidget {\n"
-"    background: transparent;\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background: rgb(51, 51, 51);\n"
-"    color: rgb(95, 95, 95);\n"
-"    font-size: 15px;\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton::hover {\n"
-"    background-color: rgb(76, 76, 76);\n"
-"}\n"
-"\n"
-"\n"
-"")
+        tWidget.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(tWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)

@@ -26,40 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {font-size: 15px;}
-
-QCheckBox, QRadioButton {
-	padding-left: 5px;
-	padding-right: 5px;
-	font-size: 15px;
-	color: white;
-}
-QCheckBox::indicator, QRadioButton::indicator {
-     width: 15px;
-     height: 15px;
-}
-QCheckBox::indicator:checked, QRadioButton::indicator::checked {
-	background-color: rgb(255, 170, 0);
-    image:url(:/custom/res/custom/check.png);
-}
-
-QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
-	background-color: rgb(255, 255, 255);
-	image: null;
-}
-
-QCheckBox::indicator:unchecked:hover {
-	image: url(:/custom/res/custom/check.png);
-}
-
-QPushButton {
-	border: 0px;
-}
-
-QPushButton::hover {
-	border: 1px solid rgb(76, 76, 76);
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">

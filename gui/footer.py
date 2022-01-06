@@ -9,6 +9,7 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
     def __init__(self, parent):
         super().__init__(parent)
         self.setupUi(self)
+
         self.conn_status = None
         if check_lpc_driver():
             self.setupLpcTread()

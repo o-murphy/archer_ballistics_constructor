@@ -20,137 +20,7 @@ class Ui_profileCurrent(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(profileCurrent.sizePolicy().hasHeightForWidth())
         profileCurrent.setSizePolicy(sizePolicy)
-        profileCurrent.setStyleSheet("QWidget {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
-"    width: 20px;\n"
-"    image: url(:/custom/res/custom/caret-up-fill_8.png);\n"
-"}\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button { \n"
-"    width: 20px;\n"
-"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
-"}\n"
-"QSpinBox::down-button:hover, QSpinBox::up-button:hover,\n"
-"QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {\n"
-"        background-color: rgb(75, 75, 75);\n"
-"}\n"
-"QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,\n"
-"QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {\n"
-"        image: null;\n"
-"}\n"
-"\n"
-"QSpinBox, QDoubleSpinBox {\n"
-"    background-color: rgb(40, 40, 40);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"QComboBox {\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"    background: transparent;\n"
-"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
-"}\n"
-"\n"
-"QComboBox::drop-down:hover {\n"
-"    background-color: rgb(75, 75, 75);\n"
-"}\n"
-"\n"
-"QComboBox::drop-down:disabled {\n"
-"    image: null;\n"
-"}\n"
-"\n"
-"QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit {\n"
-"    border: 0px solid grey;\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"QGroupBox {\n"
-"    color: rgb(255, 255, 255);\n"
-"    border: 1px solid rgb(78, 78, 78);\n"
-"    padding-top: 25px;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"    padding: 5px 20px 5px 20px;\n"
-"    color: rgb(255, 170, 0);\n"
-"    border-top-left-radius: 10px;\n"
-"    border-bottom-right-radius: 10px;\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"QTableWidget {\n"
-"    \n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QCheckBox, QRadioButton {\n"
-"    padding-left: 0px;\n"
-"    padding-right: 0px;\n"
-"    font-size: 15px;\n"
-"    color: white;\n"
-"}\n"
-"QCheckBox::indicator, QRadioButton::indicator {\n"
-"     width: 15px;\n"
-"     height: 15px;\n"
-"}\n"
-"\n"
-"QRadioButton::indicator {\n"
-"        border: 0px;\n"
-"        border-radius: 7px;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:checked {\n"
-"    background-color: rgb(255, 170, 0);\n"
-"    image: url(:/custom/res/custom/check.png);\n"
-"}\n"
-"\n"
-"QRadioButton::indicator::checked {\n"
-"        background-color: rgb(255, 170, 0);\n"
-"        border: 0px;\n"
-"        border-radius: 7px;\n"
-"}\n"
-"\n"
-"\n"
-"QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    image: null;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:unchecked:hover {\n"
-"    background-color:  rgb(255, 170, 0);\n"
-"    image: url(:/custom/res/custom/check.png);\n"
-"}\n"
-"\n"
-"QCheckBox::disabled {\n"
-"    color: rgb(78, 78, 78);\n"
-"}\n"
-"\n"
-"QRadioButton::indicator::disabled, QRadioButton::indicator::unchecked:disabled {\n"
-"    background-color:rgb(98, 98, 98);\n"
-"}\n"
-"\n"
-"QPushButton, QToolButton {\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton::hover, QToolButton::hover {\n"
-"    border: 1px solid rgb(76, 76, 76);\n"
-"}\n"
-"")
+        profileCurrent.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profileCurrent)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)
@@ -162,14 +32,7 @@ class Ui_profileCurrent(object):
         sizePolicy.setHeightForWidth(self.tabWidget_2.sizePolicy().hasHeightForWidth())
         self.tabWidget_2.setSizePolicy(sizePolicy)
         self.tabWidget_2.setMinimumSize(QtCore.QSize(0, 0))
-        self.tabWidget_2.setStyleSheet("QTabBar::tab {\n"
-"    height: 25px; width: 150px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QWidget::disabled {\n"
-"    color: rgb(160, 160, 160)\n"
-"}")
+        self.tabWidget_2.setStyleSheet("")
         self.tabWidget_2.setObjectName("tabWidget_2")
         self.tab_6 = QtWidgets.QWidget()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -423,17 +286,18 @@ class Ui_profileCurrent(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.mvQuantity.sizePolicy().hasHeightForWidth())
         self.mvQuantity.setSizePolicy(sizePolicy)
-        self.mvQuantity.setMinimumSize(QtCore.QSize(74, 0))
+        self.mvQuantity.setMinimumSize(QtCore.QSize(72, 0))
         self.mvQuantity.setMaximumSize(QtCore.QSize(80, 16777215))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.mvQuantity.setFont(font)
+        self.mvQuantity.setStyleSheet("")
         self.mvQuantity.setObjectName("mvQuantity")
         self.mvQuantity.addItem("")
         self.mvQuantity.addItem("")
         self.horizontalLayout_50.addWidget(self.mvQuantity)
         self.mvSwitch = QtWidgets.QToolButton(self.horizontalWidget_16)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.mvSwitch.sizePolicy().hasHeightForWidth())
@@ -587,7 +451,7 @@ class Ui_profileCurrent(object):
         self.label_74.setObjectName("label_74")
         self.gridLayout_4.addWidget(self.label_74, 1, 0, 1, 1)
         self.horizontalWidget_17 = QtWidgets.QWidget(self.bulletGroupBox)
-        self.horizontalWidget_17.setMinimumSize(QtCore.QSize(170, 0))
+        self.horizontalWidget_17.setMinimumSize(QtCore.QSize(0, 0))
         self.horizontalWidget_17.setMaximumSize(QtCore.QSize(200, 16777215))
         self.horizontalWidget_17.setObjectName("horizontalWidget_17")
         self.horizontalLayout_51 = QtWidgets.QHBoxLayout(self.horizontalWidget_17)
@@ -616,6 +480,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.weightQuantity.setFont(font)
+        self.weightQuantity.setStyleSheet("")
         self.weightQuantity.setObjectName("weightQuantity")
         self.weightQuantity.addItem("")
         self.weightQuantity.addItem("")
@@ -647,7 +512,7 @@ class Ui_profileCurrent(object):
         self.label_75.setObjectName("label_75")
         self.gridLayout_4.addWidget(self.label_75, 2, 0, 1, 1)
         self.horizontalWidget_18 = QtWidgets.QWidget(self.bulletGroupBox)
-        self.horizontalWidget_18.setMinimumSize(QtCore.QSize(170, 0))
+        self.horizontalWidget_18.setMinimumSize(QtCore.QSize(0, 0))
         self.horizontalWidget_18.setMaximumSize(QtCore.QSize(200, 16777215))
         self.horizontalWidget_18.setObjectName("horizontalWidget_18")
         self.horizontalLayout_52 = QtWidgets.QHBoxLayout(self.horizontalWidget_18)
@@ -674,6 +539,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lengthQuantity.setFont(font)
+        self.lengthQuantity.setStyleSheet("")
         self.lengthQuantity.setObjectName("lengthQuantity")
         self.lengthQuantity.addItem("")
         self.lengthQuantity.addItem("")
@@ -705,7 +571,7 @@ class Ui_profileCurrent(object):
         self.label_76.setObjectName("label_76")
         self.gridLayout_4.addWidget(self.label_76, 3, 0, 1, 1)
         self.horizontalWidget_19 = QtWidgets.QWidget(self.bulletGroupBox)
-        self.horizontalWidget_19.setMinimumSize(QtCore.QSize(170, 0))
+        self.horizontalWidget_19.setMinimumSize(QtCore.QSize(0, 0))
         self.horizontalWidget_19.setMaximumSize(QtCore.QSize(200, 16777215))
         self.horizontalWidget_19.setObjectName("horizontalWidget_19")
         self.horizontalLayout_53 = QtWidgets.QHBoxLayout(self.horizontalWidget_19)
@@ -732,7 +598,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.diameterQuantity.setFont(font)
-        self.diameterQuantity.setStyleSheet("background-color: rgb(40, 40, 40);")
+        self.diameterQuantity.setStyleSheet("")
         self.diameterQuantity.setObjectName("diameterQuantity")
         self.diameterQuantity.addItem("")
         self.diameterQuantity.addItem("")
@@ -764,6 +630,7 @@ class Ui_profileCurrent(object):
         self.label_77.setObjectName("label_77")
         self.gridLayout_4.addWidget(self.label_77, 4, 0, 1, 1)
         self.horizontalWidget_20 = QtWidgets.QWidget(self.bulletGroupBox)
+        self.horizontalWidget_20.setMinimumSize(QtCore.QSize(200, 0))
         self.horizontalWidget_20.setMaximumSize(QtCore.QSize(200, 16777215))
         self.horizontalWidget_20.setObjectName("horizontalWidget_20")
         self.horizontalLayout_54 = QtWidgets.QHBoxLayout(self.horizontalWidget_20)
@@ -771,23 +638,29 @@ class Ui_profileCurrent(object):
         self.horizontalLayout_54.setSpacing(0)
         self.horizontalLayout_54.setObjectName("horizontalLayout_54")
         self.dragType = QtWidgets.QComboBox(self.horizontalWidget_20)
-        self.dragType.setMaximumSize(QtCore.QSize(175, 16777215))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.dragType.sizePolicy().hasHeightForWidth())
+        self.dragType.setSizePolicy(sizePolicy)
+        self.dragType.setMinimumSize(QtCore.QSize(172, 0))
+        self.dragType.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.dragType.setFont(font)
-        self.dragType.setStyleSheet("background-color: rgb(40, 40, 40);")
+        self.dragType.setStyleSheet("")
         self.dragType.setObjectName("dragType")
         self.dragType.addItem("")
         self.dragType.addItem("")
         self.dragType.addItem("")
         self.horizontalLayout_54.addWidget(self.dragType)
         self.dragEditor = QtWidgets.QToolButton(self.horizontalWidget_20)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.dragEditor.sizePolicy().hasHeightForWidth())
         self.dragEditor.setSizePolicy(sizePolicy)
-        self.dragEditor.setMinimumSize(QtCore.QSize(24, 0))
+        self.dragEditor.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.dragEditor.setFont(font)
@@ -807,6 +680,7 @@ class Ui_profileCurrent(object):
         self.label_78.setObjectName("label_78")
         self.gridLayout_4.addWidget(self.label_78, 5, 0, 1, 1)
         self.bcWidget = QtWidgets.QWidget(self.bulletGroupBox)
+        self.bcWidget.setMaximumSize(QtCore.QSize(200, 16777215))
         self.bcWidget.setObjectName("bcWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.bcWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -821,9 +695,7 @@ class Ui_profileCurrent(object):
         self.multiBC.setSizePolicy(sizePolicy)
         self.multiBC.setMinimumSize(QtCore.QSize(0, 0))
         self.multiBC.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.multiBC.setStyleSheet("            QCheckBox::indicator::checked {background: orange}\n"
-"            QCheckBox::indicator::unchecked {background: white}\n"
-"            QCheckBox {font-size: 15px; color: white;}")
+        self.multiBC.setStyleSheet("")
         self.multiBC.setChecked(False)
         self.multiBC.setObjectName("multiBC")
         self.horizontalLayout.addWidget(self.multiBC)
@@ -927,8 +799,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_powder_temp.setFont(font)
-        self.z_powder_temp.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_powder_temp.setStyleSheet("")
         self.z_powder_temp.setProperty("value", 15)
         self.z_powder_temp.setObjectName("z_powder_temp")
         self.horizontalLayout_56.addWidget(self.z_powder_temp)
@@ -973,8 +844,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_humidity.setFont(font)
-        self.z_humidity.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_humidity.setStyleSheet("")
         self.z_humidity.setProperty("value", 50)
         self.z_humidity.setObjectName("z_humidity")
         self.horizontalLayout_57.addWidget(self.z_humidity)
@@ -1019,8 +889,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_pressure.setFont(font)
-        self.z_pressure.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_pressure.setStyleSheet("")
         self.z_pressure.setMaximum(1100)
         self.z_pressure.setProperty("value", 760)
         self.z_pressure.setObjectName("z_pressure")
@@ -1066,8 +935,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_latitude.setFont(font)
-        self.z_latitude.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_latitude.setStyleSheet("")
         self.z_latitude.setMaximum(1000)
         self.z_latitude.setProperty("value", 0)
         self.z_latitude.setObjectName("z_latitude")
@@ -1113,8 +981,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_angle.setFont(font)
-        self.z_angle.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_angle.setStyleSheet("")
         self.z_angle.setMaximum(359)
         self.z_angle.setProperty("value", 0)
         self.z_angle.setObjectName("z_angle")
@@ -1160,8 +1027,7 @@ class Ui_profileCurrent(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.z_azimuth.setFont(font)
-        self.z_azimuth.setStyleSheet("background-color: rgb(40, 40, 40);\n"
-"alternate-background-color: rgb(40, 40, 40);")
+        self.z_azimuth.setStyleSheet("")
         self.z_azimuth.setMaximum(359)
         self.z_azimuth.setProperty("value", 270)
         self.z_azimuth.setObjectName("z_azimuth")
@@ -1216,7 +1082,6 @@ class Ui_profileCurrent(object):
         self.label_23.setText(_translate("profileCurrent", "Caliber:"))
         self.label_68.setText(_translate("profileCurrent", "Twist:"))
         self.cartridgeGroupBox.setTitle(_translate("profileCurrent", "Cartridge"))
-        self.mvQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.mvQuantity.setItemText(0, _translate("profileCurrent", "m/s"))
         self.mvQuantity.setItemText(1, _translate("profileCurrent", "fps"))
         self.mvSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
@@ -1229,12 +1094,10 @@ class Ui_profileCurrent(object):
         self.bulletGroupBox.setTitle(_translate("profileCurrent", "Bullet"))
         self.label_73.setText(_translate("profileCurrent", "Name:"))
         self.label_74.setText(_translate("profileCurrent", "Weight:"))
-        self.weightQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.weightQuantity.setItemText(0, _translate("profileCurrent", "Grains"))
         self.weightQuantity.setItemText(1, _translate("profileCurrent", "Grams"))
         self.weightSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))
         self.label_75.setText(_translate("profileCurrent", "Length:"))
-        self.lengthQuantity.setStyleSheet(_translate("profileCurrent", "background-color: rgb(40, 40, 40);"))
         self.lengthQuantity.setItemText(0, _translate("profileCurrent", "Inches"))
         self.lengthQuantity.setItemText(1, _translate("profileCurrent", "mm"))
         self.lengthSwitch.setToolTip(_translate("profileCurrent", "<font color=black>Convert</font>"))

@@ -17,18 +17,7 @@ class Ui_profilesTools(object):
         profilesTools.resize(424, 30)
         profilesTools.setMinimumSize(QtCore.QSize(0, 30))
         profilesTools.setMaximumSize(QtCore.QSize(424, 16777215))
-        profilesTools.setStyleSheet("QWidget {\n"
-"    \n"
-"    background-color: rgb(51, 51, 51);\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton::hover {\n"
-"    border: 1px solid rgb(76, 76, 76);\n"
-"}")
+        profilesTools.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profilesTools)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)

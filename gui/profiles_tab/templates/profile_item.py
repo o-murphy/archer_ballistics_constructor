@@ -17,62 +17,7 @@ class Ui_profileItem(object):
         profileItem.resize(380, 60)
         profileItem.setMinimumSize(QtCore.QSize(380, 60))
         profileItem.setMaximumSize(QtCore.QSize(380, 60))
-        profileItem.setStyleSheet("QWidget {\n"
-"    border: 1px solid rgb(78, 78, 78);\n"
-"    font-size: 15px;\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QWidget:hover {color: black;}\n"
-"\n"
-"QLabel {\n"
-"    border: 0;\n"
-"    background-color: transparent;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
-"    width: 20px;\n"
-"    image: url(:/custom/res/custom/caret-up-fill_8.png);\n"
-"}\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button { \n"
-"    width: 20px;\n"
-"    image: url(:/custom/res/custom/caret-down-fill_8.png);\n"
-"}\n"
-"QSpinBox::down-button:hover, QSpinBox::up-button:hover,\n"
-"QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {\n"
-"        background-color: rgb(75, 75, 75);\n"
-"}\n"
-"QSpinBox, QDoubleSpinBox {\n"
-"    background-color: rgb(40, 40, 40);\n"
-"    alternate-background-color: rgb(40, 40, 40);\n"
-"    color: rgb(255, 255, 255);\n"
-"    border: 0;\n"
-"}\n"
-"QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {\n"
-"}\n"
-"QLineEdit {\n"
-"    border: 0px solid grey;\n"
-"    background-color: rgb(40, 40, 40);\n"
-"}\n"
-"\n"
-"\n"
-"QWidget#zWidget, QWidget#tWidget {\n"
-"    background: transparent;\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background: transparent;\n"
-"    border: 0px;\n"
-"    border-radius: 8px; \n"
-"}\n"
-"\n"
-"QPushButton::hover {\n"
-"    background-color: white;\n"
-"}\n"
-"\n"
-"\n"
-"")
+        profileItem.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(profileItem)
         self.gridLayout.setContentsMargins(4, 4, 4, 4)
         self.gridLayout.setHorizontalSpacing(4)
@@ -86,9 +31,6 @@ class Ui_profileItem(object):
         self.cartridgeName.setSizePolicy(sizePolicy)
         self.cartridgeName.setMinimumSize(QtCore.QSize(160, 0))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
         self.cartridgeName.setFont(font)
         self.cartridgeName.setObjectName("cartridgeName")
         self.gridLayout.addWidget(self.cartridgeName, 1, 1, 1, 1)
@@ -100,32 +42,22 @@ class Ui_profileItem(object):
         self.rifleName.setSizePolicy(sizePolicy)
         self.rifleName.setMinimumSize(QtCore.QSize(160, 0))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
         self.rifleName.setFont(font)
         self.rifleName.setObjectName("rifleName")
         self.gridLayout.addWidget(self.rifleName, 0, 1, 1, 1)
-        self.widget_2 = QtWidgets.QWidget(profileItem)
-        self.widget_2.setMinimumSize(QtCore.QSize(50, 50))
-        self.widget_2.setMaximumSize(QtCore.QSize(50, 50))
+        self.tile = QtWidgets.QWidget(profileItem)
+        self.tile.setMinimumSize(QtCore.QSize(50, 50))
+        self.tile.setMaximumSize(QtCore.QSize(50, 50))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift Light Condensed")
-        font.setPointSize(-1)
-        self.widget_2.setFont(font)
-        self.widget_2.setStyleSheet("QWidget {background-color: black;\n"
-"font-size: 16px;\n"
-"color: black;\n"
-"font-family: \"Bahnschrift Light Condensed\";}\n"
-"QLabel {\n"
-"    background-color: white;\n"
-"}")
-        self.widget_2.setObjectName("widget_2")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
+        self.tile.setFont(font)
+        self.tile.setStyleSheet("")
+        self.tile.setObjectName("tile")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.tile)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setSpacing(2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.caliberShort = QtWidgets.QLabel(self.widget_2)
+        self.caliberShort = QtWidgets.QLabel(self.tile)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -134,13 +66,12 @@ class Ui_profileItem(object):
         self.caliberShort.setMinimumSize(QtCore.QSize(50, 0))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift Light Condensed")
-        font.setPointSize(-1)
         self.caliberShort.setFont(font)
         self.caliberShort.setStyleSheet("")
         self.caliberShort.setAlignment(QtCore.Qt.AlignCenter)
         self.caliberShort.setObjectName("caliberShort")
         self.verticalLayout_2.addWidget(self.caliberShort)
-        self.weightTile = QtWidgets.QLabel(self.widget_2)
+        self.weightTile = QtWidgets.QLabel(self.tile)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -149,18 +80,12 @@ class Ui_profileItem(object):
         self.weightTile.setMinimumSize(QtCore.QSize(50, 0))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift Light Condensed")
-        font.setPointSize(-1)
         self.weightTile.setFont(font)
         self.weightTile.setStyleSheet("")
         self.weightTile.setAlignment(QtCore.Qt.AlignCenter)
         self.weightTile.setObjectName("weightTile")
         self.verticalLayout_2.addWidget(self.weightTile)
-        self.gridLayout.addWidget(self.widget_2, 0, 0, 2, 1)
-        self.zWidget = QtWidgets.QWidget(profileItem)
-        self.zWidget.setMinimumSize(QtCore.QSize(20, 0))
-        self.zWidget.setStyleSheet("")
-        self.zWidget.setObjectName("zWidget")
-        self.gridLayout.addWidget(self.zWidget, 0, 2, 3, 1)
+        self.gridLayout.addWidget(self.tile, 0, 0, 2, 1)
 
         self.retranslateUi(profileItem)
         QtCore.QMetaObject.connectSlotsByName(profileItem)

@@ -1,0 +1,43 @@
+QWidget {
+	border: 1px solid rgb(78, 78, 78);
+	font-size: 15px;
+}
+
+QLabel {
+	border: 0;
+	background-color: transparent;
+}
+
+QSpinBox, QDoubleSpinBox {
+	background-color: rgb(40, 40, 40);
+	alternate-background-color: rgb(40, 40, 40);
+	color: rgb(255, 255, 255);
+	border: 0;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+	width: 20px;
+	image: url(":/custom/res/custom/caret-up-fill_8.png");
+}
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+	width: 20px;
+	image: url(":/custom/res/custom/caret-down-fill_8.png");
+}
+
+QSpinBox::down-button:hover, QSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
+		background-color: rgb(75, 75, 75);
+}
+
+QWidget#tile {
+    background-color: black;
+    font-size: 16px;
+    color: black;
+    font-family: "Bahnschrift Light Condensed";
+}
+
+QLabel#caliberShort, QLabel#weightTile {
+	background-color: white;
+	color: black;
+}
+

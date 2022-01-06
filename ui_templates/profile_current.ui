@@ -20,137 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-	background-color: rgb(51, 51, 51);
-}
-
-QSpinBox::up-button, QDoubleSpinBox::up-button {
-	width: 20px;
-	image: url(:/custom/res/custom/caret-up-fill_8.png);
-}
-QSpinBox::down-button, QDoubleSpinBox::down-button { 
-	width: 20px;
-	image: url(:/custom/res/custom/caret-down-fill_8.png);
-}
-QSpinBox::down-button:hover, QSpinBox::up-button:hover,
-QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
-		background-color: rgb(75, 75, 75);
-}
-QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,
-QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {
-		image: null;
-}
-
-QSpinBox, QDoubleSpinBox {
-	background-color: rgb(40, 40, 40);
-	color: rgb(255, 255, 255);
-}
-
-QComboBox {
-	background-color: rgb(40, 40, 40);
-}
-
-QComboBox::drop-down {
-	background: transparent;
-	image: url(:/custom/res/custom/caret-down-fill_8.png);
-}
-
-QComboBox::drop-down:hover {
-	background-color: rgb(75, 75, 75);
-}
-
-QComboBox::drop-down:disabled {
-	image: null;
-}
-
-QLineEdit, QLabel, QComboBox, QPushButton, QToolButton {
-	color: rgb(255, 255, 255);
-}
-QLineEdit {
-	border: 0px solid grey;
-	background-color: rgb(40, 40, 40);
-}
-QGroupBox {
-	color: rgb(255, 255, 255);
-	border: 1px solid rgb(78, 78, 78);
-	padding-top: 25px;
-}
-
-QGroupBox::title {
-	padding: 5px 20px 5px 20px;
-	color: rgb(255, 170, 0);
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	background-color: rgb(40, 40, 40);
-}
-
-QTableWidget {
-	
-	background-color: rgb(40, 40, 40);
-}
-
-QHeaderView::section {
-	background-color: rgb(51, 51, 51);
-}
-
-QTableWidget::item:selected {
-	background-color: rgb(51, 51, 51);
-}
-
-QCheckBox, QRadioButton {
-	padding-left: 0px;
-	padding-right: 0px;
-	font-size: 15px;
-	color: white;
-}
-QCheckBox::indicator, QRadioButton::indicator {
-     width: 15px;
-     height: 15px;
-}
-
-QRadioButton::indicator {
-		border: 0px;
-		border-radius: 7px;
-}
-
-QCheckBox::indicator:checked {
-	background-color: rgb(255, 170, 0);
-    image: url(:/custom/res/custom/check.png);
-}
-
-QRadioButton::indicator::checked {
-		background-color: rgb(255, 170, 0);
-		border: 0px;
-		border-radius: 7px;
-}
-
-
-QCheckBox::indicator:unchecked, QRadioButton::indicator::unchecked {
-	background-color: rgb(255, 255, 255);
-	image: null;
-}
-
-QCheckBox::indicator:unchecked:hover {
-	background-color:  rgb(255, 170, 0);
-	image: url(:/custom/res/custom/check.png);
-}
-
-QCheckBox::disabled {
-	color: rgb(78, 78, 78);
-}
-
-QRadioButton::indicator::disabled, QRadioButton::indicator::unchecked:disabled {
-	background-color:rgb(98, 98, 98);
-}
-
-QPushButton, QToolButton {
-	border: 0px;
-}
-
-QPushButton::hover, QToolButton::hover {
-	border: 1px solid rgb(76, 76, 76);
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -183,14 +53,7 @@ QPushButton::hover, QToolButton::hover {
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTabBar::tab {
-	height: 25px; width: 150px;
-	font-size: 15px;
-}
-
-QWidget::disabled {
-	color: rgb(160, 160, 160)
-}</string>
+      <string notr="true"/>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -783,7 +646,7 @@ QWidget::disabled {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>74</width>
+                 <width>72</width>
                  <height>0</height>
                 </size>
                </property>
@@ -799,7 +662,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string>background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <item>
                 <property name="text">
@@ -816,7 +679,7 @@ QWidget::disabled {
              <item>
               <widget class="QToolButton" name="mvSwitch">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1176,7 +1039,7 @@ QWidget::disabled {
            <widget class="QWidget" name="horizontalWidget_17" native="true">
             <property name="minimumSize">
              <size>
-              <width>170</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
@@ -1255,7 +1118,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string>background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <item>
                 <property name="text">
@@ -1330,7 +1193,7 @@ QWidget::disabled {
            <widget class="QWidget" name="horizontalWidget_18" native="true">
             <property name="minimumSize">
              <size>
-              <width>170</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
@@ -1400,7 +1263,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string>background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <item>
                 <property name="text">
@@ -1475,7 +1338,7 @@ QWidget::disabled {
            <widget class="QWidget" name="horizontalWidget_19" native="true">
             <property name="minimumSize">
              <size>
-              <width>170</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
@@ -1545,7 +1408,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <item>
                 <property name="text">
@@ -1618,6 +1481,12 @@ QWidget::disabled {
           </item>
           <item row="4" column="1">
            <widget class="QWidget" name="horizontalWidget_20" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>200</width>
@@ -1642,9 +1511,21 @@ QWidget::disabled {
              </property>
              <item>
               <widget class="QComboBox" name="dragType">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>172</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
-                 <width>175</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -1654,7 +1535,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="currentIndex">
                 <number>1</number>
@@ -1679,14 +1560,14 @@ QWidget::disabled {
              <item>
               <widget class="QToolButton" name="dragEditor">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>24</width>
+                 <width>0</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1731,6 +1612,12 @@ QWidget::disabled {
           </item>
           <item row="5" column="1">
            <widget class="QWidget" name="bcWidget" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <property name="spacing">
               <number>6</number>
@@ -1774,9 +1661,7 @@ QWidget::disabled {
                 <string>&lt;font color=black&gt;Enable multi BC&lt;/font&gt;</string>
                </property>
                <property name="styleSheet">
-                <string notr="true">            QCheckBox::indicator::checked {background: orange}
-            QCheckBox::indicator::unchecked {background: white}
-            QCheckBox {font-size: 15px; color: white;}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string>Multi BC</string>
@@ -2041,8 +1926,7 @@ QWidget::disabled {
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string> °C</string>
@@ -2151,8 +2035,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string> %</string>
@@ -2261,8 +2144,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string> mmHg</string>
@@ -2374,8 +2256,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string>°</string>
@@ -2487,8 +2368,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string>°</string>
@@ -2600,8 +2480,7 @@ alternate-background-color: rgb(40, 40, 40);</string>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(40, 40, 40);
-alternate-background-color: rgb(40, 40, 40);</string>
+                <string notr="true"/>
                </property>
                <property name="suffix">
                 <string>°</string>

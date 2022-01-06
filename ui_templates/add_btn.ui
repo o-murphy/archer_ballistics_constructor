@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>20</height>
+    <height>28</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -20,24 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#zWidget, QWidget#tWidget {
-	background: transparent;
-	border: 0px;
-}
-
-QPushButton {
-	background: rgb(51, 51, 51);
-	color: rgb(95, 95, 95);
-	font-size: 15px;
-	border: 0px;
-}
-
-QPushButton::hover {
-	background-color: rgb(76, 76, 76);
-}
-
-
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
