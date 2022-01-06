@@ -10,4 +10,4 @@ class CloseDialog(QtWidgets.QMessageBox):
         self.addButton(QtWidgets.QMessageBox.Save)
         self.addButton(QtWidgets.QMessageBox.Cancel)
         self.addButton(QtWidgets.QMessageBox.Close)
-        self.setStyleSheet(load_qss('qss/drag_func_editor.qss'))
+        self.setStyleSheet(load_qss('qss/dialog.qss'))

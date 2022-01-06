@@ -18,7 +18,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def __init__(self, cur_prof=None, bc_table=None):
         super().__init__()
         self.setupUi(self)
-        self.setStyleSheet(load_qss('qss/drag_func_editor.qss'))
+        self.setStyleSheet(load_qss('qss/dialog.qss'))
 
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')

@@ -7,7 +7,7 @@ class CurrentAtmoDialog(QtWidgets.QDialog, Ui_CurrentAtmoDialog):
     def __init__(self):
         super(CurrentAtmoDialog, self).__init__()
         self.setupUi(self)
-        self.setStyleSheet(load_qss('qss/drag_func_editor.qss'))
+        self.setStyleSheet(load_qss('qss/dialog.qss'))
 
     def get_atmo(self):
         return {sb.objectName(): sb.value() for sb in self.findChildren(QtWidgets.QSpinBox)}
