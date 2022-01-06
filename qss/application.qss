@@ -19,6 +19,7 @@ QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
 }
 QSpinBox::down-button:disabled, QSpinBox::up-button:disabled,
 QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {
+    image: url("");
 }
 
 QSpinBox, QDoubleSpinBox {
@@ -42,6 +43,7 @@ QComboBox::drop-down:hover {
 }
 
 QComboBox::drop-down:disabled {
+    image: url("");
 }
 
 QLineEdit {
