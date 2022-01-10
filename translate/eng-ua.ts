@@ -25,7 +25,7 @@
         <location filename="../gui/close_dialog/close_dlg.py" line="27"/>
         <source>File not saved.
 Do you want to save changes?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Зміни не збережено. Зберегти?</translation>
     </message>
 </context>
 <context>
@@ -48,7 +48,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="384"/>
         <source> °C</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="383"/>
@@ -63,7 +63,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="386"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="387"/>
@@ -83,7 +83,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="394"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="391"/>
