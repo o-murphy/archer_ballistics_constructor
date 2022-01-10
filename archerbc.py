@@ -30,7 +30,14 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def setLang(self):
         self.config = configparser.ConfigParser()
         self.config.read('settings.ini')
-        self.config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
+        if not os.path.isfile('settings.ini'):
+            self.config.add_section('Locale')
+
+            self.config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
+            self.config.set('Locale', 'current', QtCore.QLocale.system().name().split('_')[1].lower())
+            with open('settings.ini', 'w') as fp:
+                self.config.write(fp)
+
         self.locale = self.config['Locale']['current']
 
         app = QtCore.QCoreApplication.instance()
