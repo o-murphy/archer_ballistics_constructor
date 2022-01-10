@@ -1694,7 +1694,7 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Сбросить</translation>
+        <translation>Повернути стандартні</translation>
     </message>
     <message>
         <source>Retry</source>

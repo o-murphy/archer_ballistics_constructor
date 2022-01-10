@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from .templates import Ui_DragFuncEditDialog
 from .drag_func_plot import DragPlot
 from .drop_func_plot import DropPlot
@@ -121,6 +121,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         ))
         self.Calculate.clicked.connect(self.custom_drop_at_distance)
         self.SetConditions.clicked.connect(self.current_atmo_dialog)
+        self.buttonBox.keyPressEvent = self.keyPressEvent
+
+    def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
+        if e.key() == QtCore.Qt.Key_Enter:
+            e.ignore()
 
     def custom_drop_at_distance(self):
         d = [self.drop_table.cellWidget(r, 0).value() for r in range(self.drop_table.rowCount())]
