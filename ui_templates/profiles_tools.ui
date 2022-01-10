@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>424</width>
-    <height>16777215</height>
+    <height>30</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -44,7 +44,7 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="11">
+   <item row="0" column="10">
     <widget class="QPushButton" name="saveProfileButton">
      <property name="enabled">
       <bool>false</bool>
@@ -62,7 +62,7 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Save to database&lt;/font&gt;</string>
+      <string>Save to database</string>
      </property>
      <property name="text">
       <string/>
@@ -98,7 +98,7 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Add Profile (CTRL+N)&lt;/font&gt;</string>
+      <string>Add Profile (CTRL+N)</string>
      </property>
      <property name="whatsThis">
       <string/>
@@ -143,7 +143,7 @@ QPushButton::QToolTip {color: black}</string>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Remove Profile (CTRL+Del)&lt;/font&gt;</string>
+      <string>Remove Profile (CTRL+Del)</string>
      </property>
      <property name="text">
       <string/>
@@ -163,45 +163,6 @@ QPushButton::QToolTip {color: black}</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="10">
-    <widget class="QPushButton" name="clearAllProfiles">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>&lt;font color=black&gt;Remove All Profiles (CTRL+Shift+Del)&lt;/font&gt;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../.rsrc/res/drawable/deletebtn21a.png</normaloff>
-       <disabledoff>:/icons/res/drawable-hdpi-v4/deletebtn21b.png</disabledoff>../.rsrc/res/drawable/deletebtn21a.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="shortcut">
-      <string>Ctrl+Shift+Del</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0">
     <widget class="QPushButton" name="upProfile">
      <property name="minimumSize">
@@ -217,7 +178,7 @@ QPushButton::QToolTip {color: black}</string>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Move up (CTRL+Up)&lt;/font&gt;</string>
+      <string>Move up (CTRL+Up)</string>
      </property>
      <property name="text">
       <string/>
@@ -238,7 +199,7 @@ QPushButton::QToolTip {color: black}</string>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>48</width>
+       <width>20</width>
        <height>20</height>
       </size>
      </property>
@@ -259,7 +220,7 @@ QPushButton::QToolTip {color: black}</string>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Move down (CTRL+Up)&lt;/font&gt;</string>
+      <string>Move down (CTRL+Up)</string>
      </property>
      <property name="text">
       <string/>
@@ -270,41 +231,6 @@ QPushButton::QToolTip {color: black}</string>
      </property>
      <property name="shortcut">
       <string>Ctrl+Up</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="saveButton">
-     <property name="minimumSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>&lt;font color=black&gt;Save File (CTRL+S)&lt;/font&gt;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="shortcut">
-      <string>Ctrl+S</string>
      </property>
     </widget>
    </item>
@@ -323,7 +249,7 @@ QPushButton::QToolTip {color: black}</string>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Close File (CTRL+Shift+C)&lt;/font&gt;</string>
+      <string>Close File (CTRL+Shift+C)</string>
      </property>
      <property name="text">
       <string/>
@@ -364,7 +290,7 @@ QPushButton::QToolTip {color: black}</string>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Open File (CTRL+O)&lt;/font&gt;</string>
+      <string>Open File (CTRL+O)</string>
      </property>
      <property name="text">
       <string/>
@@ -396,32 +322,67 @@ QPushButton::QToolTip {color: black}</string>
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Preferred</enum>
+      <enum>QSizePolicy::Expanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>60</width>
-       <height>9</height>
+       <width>20</width>
+       <height>20</height>
       </size>
      </property>
     </spacer>
    </item>
-   <item row="0" column="4">
-    <widget class="QPushButton" name="saveAsButton">
+   <item row="0" column="3">
+    <widget class="QPushButton" name="saveButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
        <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
+       <height>0</height>
       </size>
      </property>
      <property name="toolTip">
-      <string>&lt;font color=black&gt;Save file as... (CTRL+Shift+S)&lt;/font&gt;</string>
+      <string>Save File (CTRL+S)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</normaloff>../.rsrc/res/drawable/savebtn_menu21a.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl+S</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="saveAsButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Save File (CTRL+S)</string>
      </property>
      <property name="text">
       <string/>

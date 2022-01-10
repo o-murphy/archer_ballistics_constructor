@@ -107,7 +107,6 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         self.tabWidget.setPalette(palette)
         font = QtGui.QFont()
-        font.setPointSize(12)
         font.setBold(False)
         font.setWeight(50)
         font.setStrikeOut(False)

@@ -65,7 +65,7 @@
       <font/>
      </property>
      <property name="text">
-      <string>ABR 69GR SMK</string>
+      <string notr="true"/>
      </property>
     </widget>
    </item>
@@ -87,7 +87,7 @@
       <font/>
      </property>
      <property name="text">
-      <string>223Rem 8TWIST</string>
+      <string notr="true"/>
      </property>
     </widget>
    </item>
@@ -152,7 +152,7 @@
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>.223Rem</string>
+         <string notr="true"/>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -182,7 +182,7 @@
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>69</string>
+         <string notr="true"/>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

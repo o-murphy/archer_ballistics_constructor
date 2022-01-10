@@ -377,7 +377,7 @@ class Ui_CurrentAtmoDialog(object):
     def retranslateUi(self, CurrentAtmoDialog):
         _translate = QtCore.QCoreApplication.translate
         CurrentAtmoDialog.setWindowTitle(_translate("CurrentAtmoDialog", "Current conditions"))
-        self.groupBox_7.setTitle(_translate("CurrentAtmoDialog", "Current conditions "))
+        self.groupBox_7.setTitle(_translate("CurrentAtmoDialog", "Current conditions"))
         self.label_79.setText(_translate("CurrentAtmoDialog", "Temperature:"))
         self.z_temp.setSuffix(_translate("CurrentAtmoDialog", " °C"))
         self.label_80.setText(_translate("CurrentAtmoDialog", "Powder Temperature:"))
@@ -386,7 +386,7 @@ class Ui_CurrentAtmoDialog(object):
         self.z_humidity.setSuffix(_translate("CurrentAtmoDialog", " %"))
         self.label_82.setText(_translate("CurrentAtmoDialog", "Pressure:"))
         self.z_pressure.setSuffix(_translate("CurrentAtmoDialog", " mmHg"))
-        self.label_83.setText(_translate("CurrentAtmoDialog", "Latitude"))
+        self.label_83.setText(_translate("CurrentAtmoDialog", "Latitude:"))
         self.z_latitude.setSuffix(_translate("CurrentAtmoDialog", "°"))
         self.label_84.setText(_translate("CurrentAtmoDialog", "Angle:"))
         self.z_angle.setSuffix(_translate("CurrentAtmoDialog", "°"))

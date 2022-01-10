@@ -169,7 +169,7 @@ class Ui_DragFuncEditDialog(object):
 
     def retranslateUi(self, DragFuncEditDialog):
         _translate = QtCore.QCoreApplication.translate
-        DragFuncEditDialog.setWindowTitle(_translate("DragFuncEditDialog", "Form"))
+        DragFuncEditDialog.setWindowTitle(_translate("DragFuncEditDialog", "Drag function editor"))
         self.Down.setText(_translate("DragFuncEditDialog", "Down"))
         self.PeakDown.setText(_translate("DragFuncEditDialog", "Peak Down"))
         self.EndDown.setText(_translate("DragFuncEditDialog", "End Down"))

@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Drag function editor</string>
   </property>
   <property name="windowIcon">
    <iconset>

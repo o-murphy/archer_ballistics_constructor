@@ -32,6 +32,7 @@ class Ui_profileItem(object):
         self.cartridgeName.setMinimumSize(QtCore.QSize(160, 0))
         font = QtGui.QFont()
         self.cartridgeName.setFont(font)
+        self.cartridgeName.setText("")
         self.cartridgeName.setObjectName("cartridgeName")
         self.gridLayout.addWidget(self.cartridgeName, 1, 1, 1, 1)
         self.rifleName = QtWidgets.QLabel(profileItem)
@@ -43,6 +44,7 @@ class Ui_profileItem(object):
         self.rifleName.setMinimumSize(QtCore.QSize(160, 0))
         font = QtGui.QFont()
         self.rifleName.setFont(font)
+        self.rifleName.setText("")
         self.rifleName.setObjectName("rifleName")
         self.gridLayout.addWidget(self.rifleName, 0, 1, 1, 1)
         self.tile = QtWidgets.QWidget(profileItem)
@@ -68,6 +70,7 @@ class Ui_profileItem(object):
         font.setFamily("Bahnschrift Light Condensed")
         self.caliberShort.setFont(font)
         self.caliberShort.setStyleSheet("")
+        self.caliberShort.setText("")
         self.caliberShort.setAlignment(QtCore.Qt.AlignCenter)
         self.caliberShort.setObjectName("caliberShort")
         self.verticalLayout_2.addWidget(self.caliberShort)
@@ -82,6 +85,7 @@ class Ui_profileItem(object):
         font.setFamily("Bahnschrift Light Condensed")
         self.weightTile.setFont(font)
         self.weightTile.setStyleSheet("")
+        self.weightTile.setText("")
         self.weightTile.setAlignment(QtCore.Qt.AlignCenter)
         self.weightTile.setObjectName("weightTile")
         self.verticalLayout_2.addWidget(self.weightTile)
@@ -93,8 +97,4 @@ class Ui_profileItem(object):
     def retranslateUi(self, profileItem):
         _translate = QtCore.QCoreApplication.translate
         profileItem.setWindowTitle(_translate("profileItem", "Form"))
-        self.cartridgeName.setText(_translate("profileItem", "ABR 69GR SMK"))
-        self.rifleName.setText(_translate("profileItem", "223Rem 8TWIST"))
-        self.caliberShort.setText(_translate("profileItem", ".223Rem"))
-        self.weightTile.setText(_translate("profileItem", "69"))
 import res_rc

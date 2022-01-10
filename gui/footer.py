@@ -55,6 +55,7 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
         else:
             config.set('Locale', 'current', locale)
         with open('settings.ini', 'w') as fp:
+            print(locale)
             config.write(fp)
 
         self.window().setLang()

@@ -17,7 +17,7 @@ class ProfilesTools(QtWidgets.QWidget, Ui_profilesTools):
         self.saveAsAction = QtWidgets.QAction('Save as... (CTRL+Shift+S)', self)
         self.saveAsAction.setIcon(icon9)
         self.saveButtonMenu.addAction(self.saveAsAction)
-        self.clearAllProfiles.setVisible(False)
+        # self.clearAllProfiles.setVisible(False)
 
     def on_context_menu(self, point):
         action = self.saveButtonMenu.exec_(self.saveButton.mapToGlobal(point))

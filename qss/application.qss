@@ -81,7 +81,7 @@ QTableWidget::item:selected {
 QCheckBox, QRadioButton {
 	padding-left: 0px;
 	padding-right: 0px;
-	font-size: 15px;
+	font-size: 14px;
 	color: white;
 }
 QCheckBox::indicator, QRadioButton::indicator {
@@ -127,11 +127,13 @@ QRadioButton::indicator:disabled, QRadioButton::indicator:unchecked:disabled {
 
 QPushButton, QToolButton {
 	border: 0px;
+	font-size: 14px;
 }
 
 QPushButton:hover, QToolButton:hover {
 	border: 1px solid rgb(76, 76, 76);
 	border-radius: 4px;
+	background-color: rgb(76, 76, 76);
 }
 
 QTabBar::tab {
@@ -150,7 +152,7 @@ QCheckBox::indicator:unchecked {
     background: white;
 }
 QCheckBox {
-    font-size: 15px;
+    font-size: 14px;
     color: white;
 }
 QComboBox {
@@ -191,7 +193,7 @@ QTabWidget::pane {
 QWidget QPushButton#add {
 	background: rgb(51, 51, 51);
 	color: rgb(95, 95, 95);
-	font-size: 15px;
+	font-size: 14px;
 	border: 0px;
 }
 
