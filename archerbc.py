@@ -15,9 +15,12 @@ import os
 class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.sys_locale = QtCore.QLocale.system().name().split('_')[1].lower()
+        self.config = configparser.ConfigParser()
+        self.config.read('settings.ini')
+
         self.translator_custom = QtCore.QTranslator()
         self.translator_qt = QtCore.QTranslator()
-
 
         self.setLang()
         self.setupDriverCheck()
@@ -28,13 +31,11 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
 
     def setLang(self):
-        self.config = configparser.ConfigParser()
-        self.config.read('settings.ini')
         if not os.path.isfile('settings.ini'):
             self.config.add_section('Locale')
 
-            self.config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
-            self.config.set('Locale', 'current', QtCore.QLocale.system().name().split('_')[1].lower())
+            self.config.set('Locale', 'system', self.sys_locale)
+            self.config.set('Locale', 'current', self.sys_locale)
             with open('settings.ini', 'w') as fp:
                 self.config.write(fp)
 
