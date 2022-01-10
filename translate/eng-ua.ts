@@ -17,12 +17,12 @@
 <context>
     <name>CloseDialog</name>
     <message>
-        <location filename="../gui/close_dialog/close_dlg.py" line="26"/>
+        <location filename="../gui/close_dialog/close_dlg.py" line="15"/>
         <source>File not saved!</source>
         <translation>У вас є не збережені зміни!</translation>
     </message>
     <message>
-        <location filename="../gui/close_dialog/close_dlg.py" line="27"/>
+        <location filename="../gui/close_dialog/close_dlg.py" line="16"/>
         <source>File not saved.
 Do you want to save changes?</source>
         <translation type="unfinished">Зміни не збережено. Зберегти?</translation>
@@ -210,23 +210,48 @@ Do you want to save changes?</source>
 <context>
     <name>FooterWidget</name>
     <message>
-        <location filename="../gui/templates/footer.py" line="54"/>
+        <location filename="../gui/templates/footer.py" line="69"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="55"/>
+        <location filename="../gui/templates/footer.py" line="71"/>
         <source>No DFU device found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="56"/>
+        <location filename="../gui/templates/footer.py" line="72"/>
         <source>&lt;font color=black&gt;Preferences&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="57"/>
+        <location filename="../gui/templates/footer.py" line="70"/>
         <source>Auto search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/footer.py" line="63"/>
+        <source>Restart application to apply changes</source>
+        <translation type="obsolete">Зміна мови потребує перезапуску програми</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="74"/>
+        <source>English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="75"/>
+        <source>Українська</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="76"/>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="73"/>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -345,7 +370,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/templates/profiles.py" line="1404"/>
         <source>Rifle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Гвинтівка</translation>
     </message>
     <message>
         <location filename="../gui/templates/profiles.py" line="1424"/>
@@ -665,7 +690,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1073"/>
         <source>Rifle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Гвинтівка</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1074"/>
@@ -954,7 +979,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/templates/prot_profiles_tab.py" line="1241"/>
         <source>Rifle</source>
-        <translation type="unfinished"></translation>
+        <translation>Гвинтівка</translation>
     </message>
     <message>
         <location filename="../gui/templates/prot_profiles_tab.py" line="1263"/>

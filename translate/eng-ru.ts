@@ -17,12 +17,12 @@
 <context>
     <name>CloseDialog</name>
     <message>
-        <location filename="../gui/close_dialog/close_dlg.py" line="26"/>
+        <location filename="../gui/close_dialog/close_dlg.py" line="15"/>
         <source>File not saved!</source>
         <translation type="unfinished">Профили не сохранены!</translation>
     </message>
     <message>
-        <location filename="../gui/close_dialog/close_dlg.py" line="27"/>
+        <location filename="../gui/close_dialog/close_dlg.py" line="16"/>
         <source>File not saved.
 Do you want to save changes?</source>
         <translation type="unfinished">Профили не сохранены.
@@ -211,23 +211,43 @@ Do you want to save changes?</source>
 <context>
     <name>FooterWidget</name>
     <message>
-        <location filename="../gui/templates/footer.py" line="54"/>
+        <location filename="../gui/templates/footer.py" line="69"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="55"/>
+        <location filename="../gui/templates/footer.py" line="71"/>
         <source>No DFU device found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="56"/>
+        <location filename="../gui/templates/footer.py" line="72"/>
         <source>&lt;font color=black&gt;Preferences&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="57"/>
+        <location filename="../gui/templates/footer.py" line="70"/>
         <source>Auto search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="74"/>
+        <source>English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="75"/>
+        <source>Українська</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="76"/>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/footer.py" line="73"/>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

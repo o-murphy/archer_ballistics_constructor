@@ -15,7 +15,7 @@ try:
     templates = []
     for file in matches:
         with open(file, 'r') as f:
-            if search('def retranslateUi', f.read()):
+            if search('_translate', f.read()):
                 templates.append(file)
 
     os.system('pylupdate5 ' + ' '.join(templates) + ' -ts ' + filepath + '.ts')

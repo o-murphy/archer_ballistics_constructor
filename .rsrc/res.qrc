@@ -65,6 +65,12 @@
     <file>res/drawable-hdpi-v4/zipbtn21b.png</file>
     <file>res/drawable-hdpi-v4/addbtn_menu21b.png</file>
   </qresource>
+  <qresource prefix="flags">
+    <file>res/flags/russia.png</file>
+    <file>res/flags/ukraine.png</file>
+    <file>res/flags/united-kingdom.png</file>
+    <file>res/flags/united-states-of-america.png</file>
+  </qresource>
   <qresource prefix="custom">
     <file>res/custom/tools.png</file>
     <file>res/custom/caret-down-fill_8.png</file>

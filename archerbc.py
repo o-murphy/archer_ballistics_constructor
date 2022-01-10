@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
 from modules import env_update
 from gui import Ui_MainWindow
@@ -8,16 +8,56 @@ from gui import FooterWidget
 from gui import EmptyProfilesTab
 from gui.stylesheet import load_qss
 
+import configparser
+import os
+
 
 class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.translator_custom = QtCore.QTranslator()
+        self.translator_qt = QtCore.QTranslator()
+
+
+        self.setLang()
         self.setupDriverCheck()
         self.setupUi(self)
         self.setupWidgets()
         self.setQss()
 
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
+
+    def setLang(self):
+        self.config = configparser.ConfigParser()
+        self.config.read('settings.ini')
+        self.config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
+        self.locale = self.config['Locale']['current']
+
+        app = QtCore.QCoreApplication.instance()
+        app.removeTranslator(self.translator_qt)
+        app.removeTranslator(self.translator_custom)
+
+        if self.locale != 'en':
+            if not os.path.isfile(f'translate/eng-{self.locale}.qm'):
+                self.locale = self.config['Locale']['system']
+                self.config.set('Locale', 'current', self.locale)
+
+            with open('settings.ini', 'w') as fp:
+                self.config.write(fp)
+            if self.locale != 'en':
+
+                self.translator_custom = QtCore.QTranslator()
+                self.translator_custom.load(f'translate/eng-{self.locale}.qm')
+
+                self.translator_qt = QtCore.QTranslator()
+                self.translator_qt.load(f'translate/qtbase_{self.locale}.qm')
+
+                app.installTranslator(self.translator_qt)
+                app.installTranslator(self.translator_custom)
+        self.retranslateUi(self)
+        for c in self.findChildren(QtWidgets.QWidget):
+            if hasattr(c, 'retranslateUi'):
+                c.retranslateUi(c)
 
     def setupDriverCheck(self):
         self.lpc_dialog = LPC_dialog()
@@ -51,11 +91,11 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 def main():
-    import os
     os.chdir(os.path.dirname(__file__))
 
     env_update.main()
     app = QtWidgets.QApplication(sys.argv)
+
     window = ExampleApp()
     window.show()
     app.setWindowIcon(QtGui.QIcon('Icon.png'))

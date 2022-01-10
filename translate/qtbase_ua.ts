@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="uk_UA">
 <context>
     <name>QWidget</name>
     <message>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <source>Back</source>
@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <source>Send</source>
@@ -228,7 +228,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <source>Eject</source>
@@ -1662,11 +1662,11 @@
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
+        <translation>&amp;Ні</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
+        <translation>&amp;Так</translation>
     </message>
     <message>
         <source>Help</source>
@@ -1674,11 +1674,11 @@
     </message>
     <message>
         <source>Open</source>
-        <translation>Открыть</translation>
+        <translation>Відкрити</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <source>Abort</source>
@@ -1690,7 +1690,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -1706,7 +1706,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>Відміна</translation>
     </message>
     <message>
         <source>Ignore</source>
@@ -1718,7 +1718,7 @@
     </message>
     <message>
         <source>Save All</source>
-        <translation>Сохранить все</translation>
+        <translation>Зберегти все</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -1726,7 +1726,7 @@
     </message>
     <message>
         <source>Yes to &amp;All</source>
-        <translation>Да для &amp;всех</translation>
+        <translation>Так для &amp;всіх</translation>
     </message>
 </context>
 <context>
