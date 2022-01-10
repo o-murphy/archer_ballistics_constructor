@@ -38,9 +38,9 @@ class Ui_BCTable(QtWidgets.QTableWidget):
         self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName()
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Ui_BCTable):
         _translate = QtCore.QCoreApplication.translate
         item = self.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Speed"))
+        item.setText(_translate("Ui_BCTable", "Speed"))
         item = self.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "BC"))
+        item.setText(_translate("Ui_BCTable", "BC"))

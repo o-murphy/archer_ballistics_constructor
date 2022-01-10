@@ -22,10 +22,10 @@ class Ui_DragTable(QtWidgets.QTableWidget):
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Ui_DragTable):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Ui_DragTable.setWindowTitle(_translate("Ui_DragTable", "Form"))
         item = self.verticalHeaderItem(0)
-        item.setText(_translate("Form", "x"))
+        item.setText(_translate("Ui_DragTable", "x"))
         item = self.verticalHeaderItem(1)
-        item.setText(_translate("Form", "y"))
+        item.setText(_translate("Ui_DragTable", "y"))

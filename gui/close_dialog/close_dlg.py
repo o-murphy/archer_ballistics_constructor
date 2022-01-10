@@ -10,7 +10,7 @@ class CloseDialog(QtWidgets.QMessageBox):
         self.setStyleSheet(load_qss('qss/dialog.qss'))
 
         self.translator_custom = QtCore.QTranslator(self)
-        self.translator_custom.load('translate/eng-ru.qm')
+        self.translator_custom.load('translate/eng-ua.qm')
 
         self.translator_qt = QtCore.QTranslator()
         self.translator_qt.load('translate/qtbase_ru.qm')

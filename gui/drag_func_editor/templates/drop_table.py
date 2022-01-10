@@ -24,12 +24,12 @@ class Ui_DropTable(QtWidgets.QTableWidget):
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Ui_DropTable):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Ui_DropTable.setWindowTitle(_translate("Ui_DropTable", "Form"))
         item = self.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "dist"))
+        item.setText(_translate("Ui_DropTable", "dist"))
         item = self.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "hold off"))
+        item.setText(_translate("Ui_DropTable", "hold off"))
         item = self.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "correction"))
+        item.setText(_translate("Ui_DropTable", "correction"))
