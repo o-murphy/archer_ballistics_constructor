@@ -20,6 +20,8 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
         self.set_language()
         self.Language.currentIndexChanged.connect(self.update_language)
 
+        self.autoConnect.setDisabled(True)
+
         self.conn_status = None
         if check_lpc_driver():
             self.setupLpcTread()

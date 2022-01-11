@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="ru_UA">
 <context>
     <name>ArcheBCUpdate</name>
     <message>
         <location filename="../gui/templates/archerbc_updater_ui.py" line="110"/>
         <source>ArcherBC Update</source>
-        <translation type="unfinished"></translation>
+        <translation>ArcherBC Update</translation>
     </message>
     <message>
         <location filename="../gui/templates/archerbc_updater_ui.py" line="111"/>
         <source>Looking for updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка обновлений...</translation>
     </message>
 </context>
 <context>
@@ -34,62 +34,62 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="380"/>
         <source>Current conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущие условия</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="381"/>
         <source>Temperature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура:</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="384"/>
         <source> °C</source>
-        <translation type="unfinished"></translation>
+        <translation> °C</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="383"/>
         <source>Powder Temperature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура пороха:</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="385"/>
         <source>Humidity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Влажность:</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="386"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="387"/>
         <source>Pressure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Давление:</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="388"/>
         <source> mmHg</source>
-        <translation type="unfinished"></translation>
+        <translation> мм.рт.ст</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="389"/>
         <source>Latitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Широта:</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="394"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="391"/>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="393"/>
         <source>Azimuth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Азимут:</translation>
     </message>
 </context>
 <context>
@@ -97,12 +97,12 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/recent_dialog/templates/recent_dlg.py" line="49"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../gui/recent_dialog/templates/recent_dlg.py" line="50"/>
         <source>Change recent</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние файлы</translation>
     </message>
 </context>
 <context>
@@ -110,7 +110,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="172"/>
         <source>Drag function editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор драг-функции</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="173"/>
@@ -145,62 +145,62 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="179"/>
         <source>Drag</source>
-        <translation type="unfinished"></translation>
+        <translation>Драг-функция</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="180"/>
         <source>Drop</source>
-        <translation type="unfinished"></translation>
+        <translation>Падение пули</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="181"/>
         <source>Mach</source>
-        <translation type="unfinished"></translation>
+        <translation>Mach</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="182"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>м/с</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="183"/>
         <source>ft/s</source>
-        <translation type="unfinished"></translation>
+        <translation>фт/с</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="184"/>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>см</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="185"/>
         <source>MIL</source>
-        <translation type="unfinished"></translation>
+        <translation>MIL</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="186"/>
         <source>MOA</source>
-        <translation type="unfinished"></translation>
+        <translation>MOA</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="187"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="188"/>
         <source>Step</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="189"/>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Рассчитать</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="190"/>
         <source>Set current conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить текущее состояние</translation>
     </message>
 </context>
 <context>
@@ -208,42 +208,42 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/templates/footer.py" line="70"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="71"/>
         <source>Auto search</source>
-        <translation type="unfinished"></translation>
+        <translation>Авто подключение</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="72"/>
         <source>No DFU device found</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство не обнаружено</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="74"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="75"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>English</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="76"/>
         <source>Українська</source>
-        <translation type="unfinished"></translation>
+        <translation>Українська</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="77"/>
         <source>Русский</source>
-        <translation type="unfinished"></translation>
+        <translation>Русский</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="73"/>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
 </context>
 <context>
@@ -251,12 +251,12 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/bc_table.py" line="44"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/bc_table.py" line="46"/>
         <source>BC</source>
-        <translation type="unfinished"></translation>
+        <translation>БК</translation>
     </message>
 </context>
 <context>
@@ -264,17 +264,17 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="27"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="29"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="31"/>
         <source>y</source>
-        <translation type="unfinished"></translation>
+        <translation>y</translation>
     </message>
 </context>
 <context>
@@ -282,22 +282,22 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="29"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="31"/>
         <source>dist</source>
-        <translation type="unfinished"></translation>
+        <translation>Дист.</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="33"/>
         <source>hold off</source>
-        <translation type="unfinished"></translation>
+        <translation>Падение</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="35"/>
         <source>correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Коррек.</translation>
     </message>
 </context>
 <context>
@@ -305,17 +305,17 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table_edit.py" line="38"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table_edit.py" line="39"/>
         <source>Add Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table_edit.py" line="40"/>
         <source>Remove Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -323,237 +323,237 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1074"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1075"/>
         <source>Rifle</source>
-        <translation type="unfinished"></translation>
+        <translation>Винтовка</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1076"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Правый</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1077"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Левый</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1078"/>
         <source> mm</source>
-        <translation type="unfinished"></translation>
+        <translation> мм</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1079"/>
         <source>Tile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сокр.:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1080"/>
         <source>Sight height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота прицела:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1095"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1082"/>
         <source>Caliber:</source>
-        <translation type="unfinished"></translation>
+        <translation>Калибр:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1083"/>
         <source>Twist:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг нарезов:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1084"/>
         <source>Cartridge</source>
-        <translation type="unfinished"></translation>
+        <translation>Патрон</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1085"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>м/с</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1086"/>
         <source>fps</source>
-        <translation type="unfinished"></translation>
+        <translation>фт/с</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1107"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертировать</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1088"/>
         <source>Temperature sensitivity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Температурная чувствительность:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1121"/>
         <source> °C</source>
-        <translation type="unfinished"></translation>
+        <translation> °C</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1123"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1118"/>
         <source>Temperature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1093"/>
         <source>Muzzle Velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальная скорость:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1094"/>
         <source>Bullet</source>
-        <translation type="unfinished"></translation>
+        <translation>Пуля</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1096"/>
         <source>Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вес:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1097"/>
         <source>Grains</source>
-        <translation type="unfinished"></translation>
+        <translation>Граны</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1098"/>
         <source>Grams</source>
-        <translation type="unfinished"></translation>
+        <translation>Граммы</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1100"/>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1105"/>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Дюймы</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1106"/>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>мм</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1104"/>
         <source>Diameter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Диаметр:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1108"/>
         <source>Drag Function:</source>
-        <translation type="unfinished"></translation>
+        <translation>Драг-функция:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1109"/>
         <source>G1</source>
-        <translation type="unfinished"></translation>
+        <translation>G1</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1110"/>
         <source>G7</source>
-        <translation type="unfinished"></translation>
+        <translation>G7</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1111"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Кастомная</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1112"/>
         <source>&lt;font color=black&gt;Edit drag function&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать драг-функцию</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1113"/>
         <source>BC:</source>
-        <translation type="unfinished"></translation>
+        <translation>БК:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1114"/>
         <source>&lt;font color=black&gt;Enable multi BC&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить мульти БК</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1115"/>
         <source>Multi BC</source>
-        <translation type="unfinished"></translation>
+        <translation>Мульти БК</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1116"/>
         <source>Current profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущий профиль</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1117"/>
         <source>Zeroing conditions </source>
-        <translation type="unfinished"></translation>
+        <translation>Условия пристрелки </translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1120"/>
         <source>Powder Temperature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура пороха:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1122"/>
         <source>Humidity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Влажность:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1124"/>
         <source>Pressure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Давление:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1125"/>
         <source> mmHg</source>
-        <translation type="unfinished"></translation>
+        <translation> мм.рт.ст</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1126"/>
         <source>Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Широта:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1131"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1128"/>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1130"/>
         <source>Azimuth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Азимут:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1132"/>
         <source>Zeroing conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Условия пристрелки</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_current.py" line="1133"/>
         <source>Distances</source>
-        <translation type="unfinished"></translation>
+        <translation>Дистанции</translation>
     </message>
 </context>
 <context>
@@ -561,7 +561,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profile_item.py" line="99"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
 </context>
 <context>
@@ -569,23 +569,20 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_progress.py" line="48"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_progress.py" line="49"/>
         <source>%p%</source>
-        <translation type="unfinished"></translation>
+        <translation>%p%</translation>
     </message>
-</context>
-<context>
-    <name>profilesTab</name>
 </context>
 <context>
     <name>profilesTable</name>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_table.py" line="61"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
 </context>
 <context>
@@ -593,82 +590,82 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="144"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="145"/>
         <source>Save to database</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить шаблон</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="146"/>
         <source>Add Profile (CTRL+N)</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить профиль (CTRL+N)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="147"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="148"/>
         <source>Remove Profile (CTRL+Del)</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить профиль (CTRL+Del)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="149"/>
         <source>Ctrl+Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Del</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="150"/>
         <source>Move up (CTRL+Up)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вверх (CTRL+Up)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="153"/>
         <source>Ctrl+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Up</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="152"/>
         <source>Move down (CTRL+Up)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вниз (CTRL+Up)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="154"/>
         <source>Close File (CTRL+Shift+C)</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть файл (CTRL+Shift+C)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="155"/>
         <source>Ctrl+Shift+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+C</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="156"/>
         <source>Open File (CTRL+O)</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть файл (CTRL+O)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="157"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="160"/>
         <source>Save File (CTRL+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить файл (CTRL+S)</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="159"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="161"/>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+S</translation>
     </message>
 </context>
 <context>
@@ -676,12 +673,12 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/add_btn.py" line="44"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/add_btn.py" line="45"/>
         <source>Add Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить профиль</translation>
     </message>
 </context>
 </TS>

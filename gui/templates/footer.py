@@ -25,7 +25,7 @@ class Ui_FooterWidget(object):
         self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
         self.autoConnect = QtWidgets.QCheckBox(FooterWidget)
         self.autoConnect.setStyleSheet("")
-        self.autoConnect.setChecked(True)
+        self.autoConnect.setChecked(False)
         self.autoConnect.setObjectName("autoConnect")
         self.gridLayout.addWidget(self.autoConnect, 0, 0, 1, 1)
         self.connectionStatus = QtWidgets.QLabel(FooterWidget)

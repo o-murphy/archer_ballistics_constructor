@@ -29,8 +29,8 @@
    <string>ArcherBC</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>.rsrc/Icon.ico</normaloff>.rsrc/Icon.ico</iconset>
+   <iconset resource="../.rsrc/res.qrc">
+    <normaloff>:/title/Icon.png</normaloff>:/title/Icon.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -305,6 +305,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../.rsrc/res.qrc"/>
+ </resources>
  <connections/>
 </ui>
