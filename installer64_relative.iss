@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Archer BC"
-#define MyAppVersion "v0.0.5-alpha"
+#define MyAppVersion "v0.0.6-alpha"
 #define MyAppPublisher "Thermal Vision Technologies"
 #define MyAppExeName "archerbc.exe"
 #define MyAppAssocName MyAppName + " File"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=.\
-OutputBaseFilename=AcherBC_setup_x64{#MyAppVersion}
+OutputBaseFilename=AcherBC_setup_x64_{#MyAppVersion}
 SetupIconFile=.\.rsrc\Icon.ico
 Compression=none
 ;lzma2/ultra64

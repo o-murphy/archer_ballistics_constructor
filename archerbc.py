@@ -7,6 +7,7 @@ from gui import LPC_dialog
 from gui import FooterWidget
 from gui import EmptyProfilesTab
 from gui.stylesheet import load_qss
+from modules.env_update import CONFIG_PATH
 
 import configparser
 import os
@@ -29,13 +30,13 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def setLang(self):
         self.config = configparser.ConfigParser()
-        self.config.read('settings.ini')
-        if not os.path.isfile('settings.ini'):
+        self.config.read(CONFIG_PATH)
+        if not os.path.isfile(CONFIG_PATH):
             self.config.add_section('Locale')
 
             self.config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
             self.config.set('Locale', 'current', QtCore.QLocale.system().name().split('_')[1].lower())
-            with open('settings.ini', 'w') as fp:
+            with open(CONFIG_PATH, 'w') as fp:
                 self.config.write(fp)
 
         self.locale = self.config['Locale']['current']
@@ -49,7 +50,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.locale = self.config['Locale']['system']
                 self.config.set('Locale', 'current', self.locale)
 
-            with open('settings.ini', 'w') as fp:
+            with open(CONFIG_PATH, 'w') as fp:
                 self.config.write(fp)
             if self.locale != 'en':
 

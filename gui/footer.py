@@ -4,7 +4,8 @@ from PyQt5 import QtWidgets, QtCore
 from gui.templates import Ui_FooterWidget
 from modules.lpc_check import lpcRunThread, UsbStatusCode, check_lpc_driver
 import configparser
-import os, sys
+import os
+from modules.env_update import CONFIG_PATH
 
 
 class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
@@ -43,7 +44,7 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
     def update_language(self, e):
         locale = self.Language.currentData()
         config = configparser.ConfigParser()
-        config.read('settings.ini')
+        config.read(CONFIG_PATH)
         config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
 
         if locale != 'en':
@@ -54,7 +55,7 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
                 config.set('Locale', 'current', locale)
         else:
             config.set('Locale', 'current', locale)
-        with open('settings.ini', 'w') as fp:
+        with open(CONFIG_PATH, 'w') as fp:
             print(locale)
             config.write(fp)
 
@@ -62,6 +63,6 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
 
     def set_language(self):
         config = configparser.ConfigParser()
-        config.read('settings.ini')
+        config.read(CONFIG_PATH)
         locale = config['Locale']['current']
         self.Language.setCurrentIndex(self.languages.index(locale))

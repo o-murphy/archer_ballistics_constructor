@@ -15,6 +15,8 @@ MK_DIRS = [USER_ARCHERBC, USER_RECENT, USER_BACKUP]
 USER_TEMP = rf'{USER_ARCHERBC}\temp'
 RM_DIRS = [USER_TEMP]
 
+CONFIG_PATH = rf'{USER_ARCHERBC}\settings.ini'
+
 
 def main():
     for dir in MK_DIRS:

@@ -79,8 +79,8 @@ QTableWidget::item:selected {
 }
 
 QCheckBox, QRadioButton {
-	padding-left: 0px;
-	padding-right: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
 	font-size: 14px;
 	color: white;
 }
