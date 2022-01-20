@@ -31,6 +31,7 @@ class Conditions(Params):
     """
     def __init__(self, params):
         super().__init__(params)
+
         self.Temperature = self.params['z_temp']
         self.P_Temperature = self.params['z_powder_temp']
         self.Humidity = self.params['z_humidity']
@@ -181,7 +182,12 @@ class ArcherBallistics(object):
         return self.ballistics.get_profile()
 
     def get_drag_function(self):
-        return self.ballistics.get_drag_function()
+        ret = self.ballistics.get_drag_function()
+        table = ''
+        for (v, c) in ret:
+            table += str(v) + '\t' + str(c) + '\n'
+        print(table)
+        return ret
 
 
 if __name__ == '__main__':

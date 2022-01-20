@@ -107,6 +107,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             cell = self.profiles_table.tableWidget.cellWidget(r, 0)
             if cell.profile:
                 self.profile_current.set_data(cell.profile)
+                cell.set_tile()
 
     def enable_multi_bc(self, event):
         self.profile_current.enable_multi_bc(event)
@@ -164,7 +165,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
         if self.profiles_table.tableWidget.rowCount() < 21:
             self.profiles_table.add_row()
-            self.set_profile(e)
+            self.set_profile()
             self.set_is_saved(False)
 
             last_row = self.profiles_table.tableWidget.rowCount()
@@ -185,14 +186,15 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if self.profiles_table.tableWidget.rowCount() > 0:
                 self.profiles_table.move_down()
 
-    def set_profile(self, e=None):
+    def set_profile(self, z_data=None):
         item = self.profiles_table.select()
         if item:
-            item.set_profile(self.profile_current.get_rifle())
-            item.set_profile(self.profile_current.get_bullet())
-            item.set_profile(self.profile_current.get_cartridge())
-            item.set_profile(self.profile_current.get_conditions())
-            item.set_z_data()
+            new_profile = {}
+            profile = self.profile_current
+            for func in [profile.get_rifle, profile.get_bullet, profile.get_cartridge, profile.get_conditions]:
+                new_profile.update(func())
+            item.set_profile(new_profile)
+            item.set_z_data(z_data=z_data)
 
     def update_profile(self):
 
@@ -272,9 +274,9 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         for d in data:
             self.disconnectEvts()
             self.add_profile()
-
             self.profile_current.set_data(d)
-            self.set_profile()
+            print(d)
+            self.set_profile(d)
             self.connectEvts()
 
         self.current_file = fileName

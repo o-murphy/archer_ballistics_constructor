@@ -11,6 +11,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
 
         self.profile: dict = {}
+
         self.z_x = NoWheelDoubleSpinBox()
         self.z_x.setPrefix('X: ')
         self.z_y = NoWheelDoubleSpinBox()
@@ -48,10 +49,11 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
                 if isinstance(w, QtWidgets.QSpinBox) or isinstance(w, QtWidgets.QDoubleSpinBox):
                     w.setValue(v)
 
-    def set_z_data(self):
-        self.profile[self.z_x.objectName()] = self.z_x.value()
-        self.profile[self.z_y.objectName()] = self.z_y.value()
-        self.profile[self.z_d.objectName()] = self.z_d.value()
+    def set_z_data(self, e=None, z_data=None):
+        if z_data:
+            self.z_x.setValue(z_data['z_x'])
+            self.z_y.setValue(z_data['z_y'])
+            self.z_d.setValue(z_data['z_d'])
 
-    def init_data(self, data):
-        pass
+        if e and (isinstance(self.sender(), NoWheelDoubleSpinBox) or isinstance(self.sender(), NoWheelSpinBox)):
+            self.profile[self.sender().objectName()] = e
