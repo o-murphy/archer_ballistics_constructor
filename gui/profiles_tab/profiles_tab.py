@@ -186,13 +186,14 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if self.profiles_table.tableWidget.rowCount() > 0:
                 self.profiles_table.move_down()
 
-    def set_profile(self, z_data=None):
+    def set_profile(self, z_data={'z_x': 0, 'z_y': 0, 'z_d': 100}):
         item = self.profiles_table.select()
         if item:
             new_profile = {}
             profile = self.profile_current
             for func in [profile.get_rifle, profile.get_bullet, profile.get_cartridge, profile.get_conditions]:
                 new_profile.update(func())
+            new_profile.update(z_data)
             item.set_profile(new_profile)
             item.set_z_data(z_data=z_data)
 
@@ -275,8 +276,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self.disconnectEvts()
             self.add_profile()
             self.profile_current.set_data(d)
-            print(d)
-            self.set_profile(d)
+            self.set_profile({'z_x': d['z_x'], 'z_y': d['z_y'], 'z_d': d['z_d']})
             self.connectEvts()
 
         self.current_file = fileName

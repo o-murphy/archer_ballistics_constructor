@@ -54,6 +54,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setConnects()
 
     def setProfile(self):
+        print(self.cur_prof)
         self.profile = Profile(self.cur_prof) if self.cur_prof else None
         self.ballistics.set_profile(self.profile)
         if self.profile.DragFunc == 10 and self.profile.df_data:
