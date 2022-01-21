@@ -44,7 +44,7 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
                 self.connectionStatus.setText(status)
 
     def update_language(self, e):
-        locale = self.Language.currentData()
+        locale = self.Language.itemData(e)
         config = configparser.ConfigParser()
         config.read(CONFIG_PATH)
         config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
@@ -58,7 +58,6 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
         else:
             config.set('Locale', 'current', locale)
         with open(CONFIG_PATH, 'w') as fp:
-            print(locale)
             config.write(fp)
 
         self.window().setLang()
