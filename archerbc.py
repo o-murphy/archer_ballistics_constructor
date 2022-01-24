@@ -20,6 +20,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.translator_custom = QtCore.QTranslator()
         self.translator_qt = QtCore.QTranslator()
 
+        self.config = configparser.ConfigParser()
         self.setLang()
         self.setupDriverCheck()
         self.setupUi(self)
@@ -29,7 +30,6 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
 
     def setLang(self):
-        self.config = configparser.ConfigParser()
         self.config.read(CONFIG_PATH)
         if not os.path.isfile(CONFIG_PATH):
             self.config.add_section('Locale')

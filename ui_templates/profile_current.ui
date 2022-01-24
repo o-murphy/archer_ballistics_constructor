@@ -56,7 +56,7 @@
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_6">
       <property name="sizePolicy">
@@ -1821,7 +1821,7 @@
        <property name="bottomMargin">
         <number>6</number>
        </property>
-       <item>
+       <item alignment="Qt::AlignLeft|Qt::AlignTop">
         <widget class="QGroupBox" name="groupBox_7">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1831,8 +1831,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>270</width>
-           <height>382</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -1853,6 +1853,24 @@
           <string>Zeroing conditions </string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_84">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Angle:</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="1">
            <widget class="QWidget" name="widget_42" native="true">
             <property name="sizePolicy">
@@ -2077,115 +2095,6 @@
             </layout>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QWidget" name="widget_41" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>180</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_57">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QSpinBox" name="z_humidity">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="suffix">
-                <string> %</string>
-               </property>
-               <property name="value">
-                <number>50</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="lPushButton_31">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="rPushButton_31">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QWidget" name="widget_39" native="true">
             <property name="sizePolicy">
@@ -2274,6 +2183,115 @@
              </item>
              <item>
               <widget class="QPushButton" name="rPushButton_29">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QWidget" name="widget_41" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_57">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QSpinBox" name="z_humidity">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="suffix">
+                <string> %</string>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="lPushButton_31">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="rPushButton_31">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2410,115 +2428,6 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QWidget" name="widget_40" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>180</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_56">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QSpinBox" name="z_powder_temp">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="suffix">
-                <string> °C</string>
-               </property>
-               <property name="value">
-                <number>15</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="lPushButton_30">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="rPushButton_30">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>23</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
           <item row="4" column="1">
            <widget class="QWidget" name="widget_43" native="true">
             <property name="sizePolicy">
@@ -2631,8 +2540,123 @@
             </layout>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QWidget" name="widget_40" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_56">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QSpinBox" name="z_powder_temp">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="suffix">
+                <string> °C</string>
+               </property>
+               <property name="value">
+                <number>15</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="lPushButton_30">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</normaloff>../.rsrc/res/drawable/arrowrlbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="rPushButton_30">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>23</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</normaloff>../.rsrc/res/drawable/arrowlrbtn21a.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_83">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2645,6 +2669,12 @@
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="label_85">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2655,20 +2685,14 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_81">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Humidity:</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_82">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2679,8 +2703,32 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_81">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Humidity:</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_80">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2691,20 +2739,14 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_84">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Angle:</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_79">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2714,32 +2756,6 @@
              <string>Temperature:</string>
             </property>
            </widget>
-          </item>
-          <item row="0" column="2" rowspan="7">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="7" column="0" colspan="3">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>

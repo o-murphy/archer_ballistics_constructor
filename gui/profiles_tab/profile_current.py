@@ -22,9 +22,9 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.lengthSwitch.clicked.connect(self.convert_bullet_length)
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
 
-        self.caliberShort.textEdited.connect(
-            lambda: self.caliberShort.setText(self.caliberShort.text().replace(' ', ''))
-        )
+        # self.caliberShort.editingFinished.connect(
+        #     lambda: self.caliberShort.setText(self.caliberShort.text().replace(' ', ''))
+        # )
 
     def setConverter(self):
         self.mvQuantity.setItemData(0, self.convert.mps2fps)
