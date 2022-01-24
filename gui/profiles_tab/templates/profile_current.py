@@ -1172,7 +1172,7 @@ class Ui_profileCurrent(object):
         self.gridLayout.addWidget(self.tabWidget_2, 0, 0, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
 
         self.retranslateUi(profileCurrent)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         self.dragType.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(profileCurrent)
 
