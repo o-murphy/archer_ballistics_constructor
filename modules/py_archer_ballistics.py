@@ -186,12 +186,11 @@ class ArcherBallistics(object):
         table = ''
         for (v, c) in ret:
             table += str(v) + '\t' + str(c) + '\n'
-        print(table)
         return ret
 
 
 if __name__ == '__main__':
-    print()
+    pass
     # test_data = {'z_d': 100, 'z_y': 0, 'z_x': 0, 'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True, 'bulletName': '', 'weight': 69.0, 'length': 0.9, 'diameter': 0.224, 'weightTile': '69gr', 'dragType': 1, 'bc': 0.169, 'cartridgeName': '', 'mv': 868, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_angle': 0, 'z_pressure': 760, 'z_latitude': 0, 'z_humidity': 50, 'z_azimuth': 270, 'z_powder_temp': 15}
     #
     # calc = ArcherBallistics()

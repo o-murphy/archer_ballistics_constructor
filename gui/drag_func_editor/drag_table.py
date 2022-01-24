@@ -2,6 +2,7 @@ from .templates import Ui_DragTable
 from ..single_custom_widgets.no_wheel_sb import DisabledDoubleSpinBox
 from modules.converter import BConverter
 
+
 rnd = BConverter.auto_rnd
 
 
@@ -34,4 +35,3 @@ class DragTable(Ui_DragTable):
             for i, v in enumerate(data):
                 self.cellWidget(0, i).setValue(v[0])
                 self.cellWidget(1, i).setValue(v[1])
-

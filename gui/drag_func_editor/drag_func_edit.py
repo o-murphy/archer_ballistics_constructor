@@ -86,7 +86,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
         self.gridLayout.addWidget(self.dragTable, 5, 0, 1, 4)
-        self.gridLayout.addWidget(self.buttonBox, 6, 0, 1, 4)
+        self.gridLayout.addWidget(self.dragTableToolBox, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.buttonBox, 7, 0, 1, 4)
 
         self.distanceQuantity.setItemData(0, 1)
         self.distanceQuantity.setItemData(1, self.ballistics.sound_speed)
@@ -122,6 +123,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.Calculate.clicked.connect(self.custom_drop_at_distance)
         self.SetConditions.clicked.connect(self.current_atmo_dialog)
         self.buttonBox.keyPressEvent = self.keyPressEvent
+
+        self.copyTable.clicked.connect(self.copy_table)
+        self.pasteTable.clicked.connect(self.paste_table)
 
     def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
         if e.key() == QtCore.Qt.Key_Enter:
@@ -196,6 +200,28 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         ok = self.current_atmo_dlg.exec_()
         if ok:
             atmo = self.current_atmo_dlg.get_atmo()
+
+    def copy_table(self):
+        datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
+            self.current_data if self.current_data else self.default_data
+        )])
+        cb = QtWidgets.QApplication.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(datasheet, mode=cb.Clipboard)
+
+    # TODO:
+    def paste_table(self):
+        try:
+            cb = QtWidgets.QApplication.clipboard()
+            new_data = [
+                [float(j.replace(',', '.')) for j in i.split('\t')
+                 if not j == ''] for i in cb.text().split('\n') if i.split('\t') != []
+            ][::-1]
+            print(new_data)
+            self.current_data = new_data
+            self.append_updates()
+        except Exception as error:
+            print(error)
 
     @staticmethod
     def parse_data(data: list) -> dict or None:
