@@ -1,3 +1,29 @@
+from PyQt5 import QtCore
+
+
+class BProfile(QtCore.QObject):
+
+    setter = QtCore.pyqtSignal(object, object)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+
+        self.installEventFilter(self)
+        # self.setter.connect(self.customEv)
+
+        for k, v in kwargs.items():
+            self.__setattr__(k, v)
+
+    def __setattr__(self, key, value):
+        self.setter.emit(key, value)
+        super().__setattr__(key, value)
+
+
+    def customEv(self, key, value):
+        print(key, value)
+        pass
+
+
 class Conditions(object):
     def __init__(self, z_temp=None, z_powder_temp=None, z_humidity=None, z_pressure=None, z_angle=None,
                  z_azimuth=None, z_latitude=None):

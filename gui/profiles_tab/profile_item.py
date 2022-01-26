@@ -1,16 +1,20 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileItem
 from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 
+from modules.profile import BProfile
+
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        super(ProfileItem, self).__init__()
+        self.parent = parent
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
 
         self.profile: dict = {}
+        self.b_profile = None
 
         self.z_x = NoWheelDoubleSpinBox()
         self.z_x.setPrefix('X: ')
@@ -39,6 +43,20 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         for k, v in data.items():
             self.profile[k] = v
         self.set_tile()
+
+        self.b_profile = BProfile(**data)
+        # print(self.b_profile.z_d)
+
+        self.b_profile.setter.connect(lambda x, y: print(x, y))
+
+        self.setBProfile(z_d=5)
+    #
+    def setBProfile(self, **kwargs):
+        for k, v in kwargs.items():
+            if hasattr(self.b_profile, k):
+                self.b_profile.__setattr__(k, v)
+
+        #     # print(self.z_d)
 
     def set_tile(self):
         for k, v in self.profile.items():

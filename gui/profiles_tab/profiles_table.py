@@ -24,7 +24,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
         if row_count < 21:
             self.tableWidget.insertRow(row_count)
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
-            self.tableWidget.setCellWidget(row_count, 0, ProfileItem())
+            self.tableWidget.setCellWidget(row_count, 0, ProfileItem(self))
             self.tableWidget.setCurrentCell(row_count, 0)
 
             return row_count
