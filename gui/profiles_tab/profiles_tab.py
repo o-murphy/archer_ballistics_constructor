@@ -83,7 +83,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         [self.widget_connect_list.append(rb.clicked) for rb in
          self.profile_current.findChildren(QtWidgets.QRadioButton)]
         [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
-        [self.widget_connect_list.append(cb.clicked) for cb in self.profile_current.findChildren(QtWidgets.QCheckBox)]
 
         self.connectEvts()
 
@@ -107,7 +106,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             cell = self.profiles_table.tableWidget.cellWidget(r, 0)
             if cell.profile:
                 self.profile_current.set_data(cell.profile)
-                cell.set_tile()
 
     def enable_multi_bc(self, event):
         self.profile_current.enable_multi_bc(event)
@@ -186,39 +184,27 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if self.profiles_table.tableWidget.rowCount() > 0:
                 self.profiles_table.move_down()
 
-    def set_profile(self, z_data={'z_x': 0, 'z_y': 0, 'z_d': 100}):
+    def set_profile(self, z_data=None):
+        if not z_data:
+            z_data = {'z_x': 0, 'z_y': 0, 'z_d': 100}
         item = self.profiles_table.select()
         if item:
+            cur_prof = self.profile_current
             new_profile = {}
-            profile = self.profile_current
-            for func in [profile.get_rifle, profile.get_bullet, profile.get_cartridge, profile.get_conditions]:
-                new_profile.update(func())
-            new_profile.update(z_data)
+            new_profile.update(**cur_prof.get_bullet(),
+                               **cur_prof.get_rifle(),
+                               **cur_prof.get_cartridge(),
+                               **cur_prof.get_conditions(),
+                               **z_data)
             item.set_profile(new_profile)
-            item.set_z_data(z_data=z_data)
+            item.setState(new_profile)
 
-    def update_profile(self):
+    def update_profile(self, value):
 
         item = self.profiles_table.select()
         if item:
-            s = self.sender()
-            k = s.objectName()
-
-            if isinstance(s, QtWidgets.QSpinBox) or isinstance(s, QtWidgets.QDoubleSpinBox):
-                v = s.value()
-            elif isinstance(s, QtWidgets.QLineEdit) and not k.startswith('qt_spinbox_lineedit'):
-                v = s.text()
-            elif isinstance(s, QtWidgets.QComboBox):
-                v = s.currentIndex()
-            elif isinstance(s, QtWidgets.QRadioButton):
-                v = s.isChecked()
-            elif isinstance(s, QtWidgets.QCheckBox):
-                v = s.checkState()
-            else:
-                v = None
-            item.profile[k] = v
-            item.set_tile()
-
+            item.profile[self.sender().objectName()] = value
+            item.setState({self.sender().objectName(): value})
             self.set_is_saved(False)
 
     @staticmethod
