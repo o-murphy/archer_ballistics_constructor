@@ -123,6 +123,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                       else combo.currentData()(data[spin.objectName()]))
 
     def set_data(self, data: dict):
+        print(data)
         tab_data = {self.__getattribute__(k): v for k, v in data.items() if hasattr(self, k)}.items()
         for k, v in tab_data:
             if isinstance(v, str):

@@ -11,6 +11,7 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
         self.setStyleSheet(load_qss('qss/profiles_table.qss'))
 
     def select(self):
+        """Returns current cellWidget"""
         if self.tableWidget.currentItem():
             row = self.tableWidget.currentRow()
             column = self.tableWidget.currentColumn()
@@ -19,12 +20,12 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
     def bottom_row(self):
         return self.tableWidget.cellWidget(self.tableWidget.rowCount()-1, 0)
 
-    def add_row(self):
+    def add_row(self, widget: ProfileItem):
         row_count = self.tableWidget.rowCount()
         if row_count < 21:
             self.tableWidget.insertRow(row_count)
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
-            self.tableWidget.setCellWidget(row_count, 0, ProfileItem(self))
+            self.tableWidget.setCellWidget(row_count, 0, widget)
             self.tableWidget.setCurrentCell(row_count, 0)
 
             return row_count
@@ -69,4 +70,6 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
 
     def get_current_item(self):
         if self.tableWidget.currentItem():
-            return self.tableWidget.cellWidget(self.tableWidget.currentRow(), self.tableWidget.currentColumn()).profile
+            return self.tableWidget.cellWidget(
+                self.tableWidget.currentRow(),
+                self.tableWidget.currentColumn())

@@ -6,13 +6,10 @@ from gui.custom_widget import State, StateUpdated
 
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
-    def __init__(self, parent):
+    def __init__(self):
         super(ProfileItem, self).__init__()
-        self.parent = parent
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
-
-        self.profile: dict = {}
 
         self.state = None
         self.init_state()
@@ -29,7 +26,6 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
     def init_state(self):
         self.state = State(self)
-        # self.onStateUpdate.connect(lambda e: print(e.key, e.value))
         self.onStateUpdate.connect(lambda e: self.state_did_update(e))
 
     def setupWidgets(self):
@@ -41,59 +37,22 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.gridLayout.addWidget(self.z_d, 0, 3, 2, 1)
 
     def setupConnects(self):
-        # self.z_x.valueChanged.connect(self.set_z_data)
-        # self.z_y.valueChanged.connect(self.set_z_data)
-        # self.z_d.valueChanged.connect(self.set_z_data)
-        self.z_x.valueChanged.connect(lambda value: self.setState(z_x=value))
-        self.z_y.valueChanged.connect(lambda value: self.setState(z_y=value))
-        self.z_d.valueChanged.connect(lambda value: self.setState(z_d=value))
+        self.z_x.valueChanged.connect(self.state_will_update)
+        self.z_y.valueChanged.connect(self.state_will_update)
+        self.z_d.valueChanged.connect(self.state_will_update)
 
-    def set_profile(self, data: dict):
-        for k, v in data.items():
-            self.profile[k] = v
-        # self.set_tile()
+    def state_will_update(self, value):
+        self.setState({self.sender().objectName(): value})
 
-        """ new way """
-        # self.setState(data)
-
-    def set_tile(self):
-        """"""
-
-        """ temp """
-        for k, v in self.profile.items():
-            if hasattr(self, k):
-                w = self.__getattribute__(k)
-                if isinstance(w, QtWidgets.QLabel):
-                    w.setText(v)
-                if isinstance(w, QtWidgets.QSpinBox) or isinstance(w, QtWidgets.QDoubleSpinBox):
-                    w.setValue(v)
-
-        """ new way """
-        for k, v in self.state.__dict__.items():
-            if hasattr(self, k):
-                w = self.__getattribute__(k)
-                if isinstance(w, QtWidgets.QLabel):
-                    w.setText(v)
-                if isinstance(w, QtWidgets.QSpinBox) or isinstance(w, QtWidgets.QDoubleSpinBox):
-                    w.setValue(v)
-
-    def set_z_data(self, e=None, z_data=None):
-        if z_data:
-            self.z_x.setValue(z_data['z_x'])
-            self.z_y.setValue(z_data['z_y'])
-            self.z_d.setValue(z_data['z_d'])
-
-        # if e and (isinstance(self.sender(), NoWheelDoubleSpinBox) or isinstance(self.sender(), NoWheelSpinBox)):
-        #     self.profile[self.sender().objectName()] = e
-        #
-        #     """ new way """
-        #     self.setState({self.sender().objectName(): e})
-
-    def state_did_update(self, e=None, z_data=None):
+    def state_did_update(self, e=None, z_data=None, *args, **kwargs):
         if isinstance(e, StateUpdated):
             print(e.key, e.value)
-
-            """temp"""
-            self.profile[e.key] = e.value
-
-            self.set_tile()
+            if e.key in ['rifleName', 'cartridgeName', 'caliberShort']:
+                self.findChild(QtWidgets.QWidget, e.key).setText(e.value)
+            # if e.key == 'weight':
+            #     # temporary
+            #     self.weightTile.setText(
+            #         str(int(round(e.value(), 0))) + 'gr'
+            #         if self.state.weightQuantity == 0
+            #         else str(round(e.value(), 1)) + 'g'
+            #     )
