@@ -186,7 +186,7 @@ class ArcherBallistics(object):
         table = ''
         for (v, c) in ret:
             table += str(v) + '\t' + str(c) + '\n'
-        return ret
+        return ret[::-1]
 
 
 if __name__ == '__main__':

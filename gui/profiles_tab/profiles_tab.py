@@ -116,14 +116,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         """wrong way
         TODO: DragFuncEditDialog(self.profiles_table.get_current_item().state)
         """
-        drag_func_dlg = DragFuncEditDialog(
-            cur_prof=self.profiles_table.get_current_item().state.__dict__,  # Error here
-            bc_table=self.profile_current.bc_table
-            if self.profile_current.multiBC.isChecked()
-            else self.profile_current.bc,
-            state=self.profiles_table.get_current_item().state.__dict__
-        )
-        new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
+        drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
+        new_drag_func = drag_func_dlg.state.current_data if drag_func_dlg.exec_() else drag_func_dlg.state.default_data
         if self.profile_current.multiBC.isChecked():
             self.profile_current.bulletGroupBox.layout().addWidget(self.profile_current.bc_table, 0, 2, 6, 1)
         else:

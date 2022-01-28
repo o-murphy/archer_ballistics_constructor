@@ -16,7 +16,7 @@ rnd = BConverter.auto_rnd
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
-    def __init__(self, cur_prof: dict = None, bc_table=None, state: dict = None):
+    def __init__(self, state: dict = None):
         super().__init__()
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
@@ -27,13 +27,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         """ init state"""
         self.state = State(self, **state)
         """ define callbacks for a state events"""
-        # self.onStateUpdate.connect(self.state_did_update)
+        self.onStateUpdate.connect(self.state_did_update)
         # self.onStateSet.connect(self.state_did_set)
         """ set state attrs """
         self.setState(
             default_data=None,
             current_data=None,
-            distances=[],
+            distances=None,
             current_distance=None,
             default_drop=None,
             current_drop=None,
@@ -50,49 +50,51 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit = DropTableEdit()
         self.dragTable = DragTable()
         self.drop_table = self.drop_table_edit.drop_table
-
         self.current_atmo_dlg = CurrentAtmoDialog()
 
-        # self.cur_prof = cur_prof
-        self.profile = None
-
-        self.default_data = None
-        self.current_data = None
-        self.dox = None
-        self.doy = None
-
-        self.distances = []
-        self.current_distance = None
-        self.default_drop = None
-        self.current_drop = None
-
+        self.profile = Profile(self.state.__dict__)
         self.setProfile()
         self.setWidgets()
 
-        self.setDrag()
-        self.setDrops()
+        self.dox = None
+        self.doy = None
+
+        self.updateState(
+            default_data=self.ballistics.get_drag_function() if self.profile else None,
+            distances=[i for i in range(25, 2500, 25)]
+        )
+
+        self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
+            self.state.default_data, self.state.distances)])
+
         self.setConnects()
 
     def setProfile(self):
-        self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
+        # self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
         self.ballistics.set_profile(self.profile)
         if self.profile.DragFunc == 10 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
         self.ballistics.set_atmo(self.profile)
         self.ballistics.get_sound_speed()
 
+    def state_did_update(self, e):
+        if isinstance(e, StateDidUpdate):
+            if e.key == 'default_data':
+                print(self.state.default_data)
+                self.setDrag()
+
+            if e.key == 'default_drop':
+                self.setDrops()
+
+
     def setDrag(self):
-        self.default_data = self.ballistics.get_drag_function()[::-1] if self.profile else None
-        self.current_data = None
-        self.dox, self.doy = self.parse_data(self.default_data)
+        self.dox, self.doy = self.parse_data(self.state.default_data)
         self.drag_plot.draw_default_plot(self.dox, self.doy)
         self.set_distance_quantity()
         self.update_drag_table()
 
     def setDrops(self):
-        self.set_distances()
-        self.default_drop = [rnd(i) for i in self.ballistics.calculate_drop(self.default_data, self.distances)]
-        self.drop_plot.draw_default_plot(self.distances, self.default_drop)
+        self.drop_plot.draw_default_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
 
         self.drop_table_edit.drop_table.set()
@@ -166,20 +168,16 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.x_quantity = self.distanceQuantity.currentData()
         self.drag_plot.set_distance_quantity()
 
-    def set_distances(self):
-        for i in range(25, 2500, 25):
-            self.distances.append(i)
-
     """ TEMPORARY """
 
     def cd_at_distance(self):
-        self.current_distance = self.drop_table.cellWidget(self.drop_table.currentRow(), 0).value()
+        self.updateState(current_distance=self.drop_table.cellWidget(self.drop_table.currentRow(), 0).value())
         drop = self.drop_table.cellWidget(self.drop_table.currentRow(), 1).sb.value()
-        self.ballistics.calculate_cd(distance=self.current_distance)
-        ox, oy = self.parse_data(self.current_data if self.current_data else self.default_data)
+        self.ballistics.calculate_cd(distance=self.state.current_distance)
+        ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
         x, y = rnd(self.ballistics.cd_at_distance), rnd(min(oy))
         self.drag_plot.set_cd_at_distance(x, y)
-        self.drop_plot.set_cd_at_distance(self.current_distance, drop)
+        self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
 
     def switch_plot_drop(self):
         self.drag_plot.setVisible(False), self.drop_plot.setVisible(True)
@@ -188,33 +186,34 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.setVisible(True), self.drop_plot.setVisible(False)
 
     def calculate_bullet_drop(self):
-        if self.current_data:
-            self.current_drop = self.ballistics.calculate_drop(self.current_data, self.distances)
-        if self.current_distance:
+        if self.state.current_data:
+            self.state.current_drop = self.ballistics.calculate_drop(self.state.current_data, self.state.distances)
+        if self.state.current_distance:
             self.cd_at_distance()
 
     def update_drag_table(self):
-        self.dragTable.set(self.current_data, self.default_data)
+        self.dragTable.set(self.state.current_data, self.state.default_data)
         self.drag_plot.current_point.setData()
         self.drag_plot.current_point_text.setText("")
 
     def reset(self):
-        self.current_data = None  # self.default_data
+        self.updateState(current_data=None)
+
         self.update_drag_table()
         self.drag_plot.reset_current_plot()
 
-        self.current_drop = None  # self.default_drop
+        self.updateSet(current_drop=None)
         self.calculate_bullet_drop()
         self.drop_plot.reset_current_plot()
 
     def append_updates(self):
-        self.ballistics.drag_function = self.current_data
+        self.ballistics.drag_function = self.state.current_data
         self.ballistics.set_drag_function(self.ballistics.drag_function)
         self.update_drag_table()
-        self.drag_plot.draw_current_plot(self.parse_data(self.current_data)[1])
+        self.drag_plot.draw_current_plot(self.parse_data(self.state.current_data)[1])
 
         self.calculate_bullet_drop()
-        self.drop_plot.draw_custom_plot(self.current_drop)
+        self.drop_plot.draw_custom_plot(self.state.current_drop)
 
     def current_atmo_dialog(self):
         ok = self.current_atmo_dlg.exec_()
@@ -223,7 +222,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def copy_table(self):
         datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
-            self.current_data if self.current_data else self.default_data
+            self.state.current_data if self.state.current_data else self.state.default_data
         )])
         cb = QtWidgets.QApplication.clipboard()
         cb.clear(mode=cb.Clipboard)
@@ -238,7 +237,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                  if not j == ''] for i in cb.text().split('\n') if i.split('\t') != []
             ][::-1]
             print(new_data)
-            self.current_data = new_data
+            self.updateState(current_data=new_data)
             self.append_updates()
         except Exception as error:
             print(error)
@@ -249,7 +248,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         return ox, oy if ox and oy else None
 
     def set_coefficient(self, side, is_up):
-        ox, oy = self.parse_data(self.current_data if self.current_data else self.default_data)
+        ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
         if self.Step.value() > 0:
             max_y = max(oy)
             max_y_idx = oy.index(max_y)
@@ -277,5 +276,5 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 elif side == 'all':
                     oy[i] *= 1 + step
                 new_data.append([ox[i], oy[i]])
-            self.current_data = new_data
+            self.updateState(current_data=new_data)
             self.append_updates()
