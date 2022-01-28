@@ -32,15 +32,28 @@ class State(QtCore.QObject):
     onStateSet = QtCore.pyqtSignal(StateDidSet)
 
     def __init__(self, widget: QtWidgets.QWidget, state: dict = None, **kwargs):
+        """
+        widget: QtWidgets.QWidget | widget that's need to be state-full
+        """
         super(State, self).__init__()
         if state:
             kwargs.update(state)
+
+        if kwargs:
             self.setState(**kwargs)
 
         widget.setState = self.setState
         widget.updateState = self.updateState
         widget.onStateUpdate = self.onStateUpdate
         widget.onStateSet = self.onStateSet
+
+    def __getstate__(self):
+        return self.__dict__
+
+    def __setstate__(self, state):
+        for key, value in state.items():
+            self.onStateSet.emit(StateDidSet(key, value))
+            self.__setattr__(key, value)
 
     def emit(self, key, value):
         self.arg_update.emit(StateDidUpdate(key, value))
@@ -49,13 +62,19 @@ class State(QtCore.QObject):
     def setState(self, state: dict = None, **kwargs):
         if state:
             kwargs.update(state)
-        for key, value in kwargs.items():
-            self.onStateSet.emit(StateDidSet(key, value))
-            self.__setattr__(key, value)
+        if kwargs:
+            for key, value in kwargs.items():
+                self.onStateSet.emit(StateDidSet(key, value))
+                self.__setattr__(key, value)
+        else:
+            self.onStateSet.emit(StateDidSet())
 
     def updateState(self, state: dict = None, **kwargs):
         if state:
-            kwargs.update(state)
-        for key, value in kwargs.items():
-            self.onStateUpdate.emit(StateDidUpdate(key, value))
-            self.__setattr__(key, value)
+            kwargs.update(**state)
+        if kwargs:
+            for key, value in kwargs.items():
+                self.onStateUpdate.emit(StateDidUpdate(key, value))
+                self.__setattr__(key, value)
+        else:
+            self.onStateUpdate.emit(StateDidUpdate())

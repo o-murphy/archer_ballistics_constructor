@@ -117,8 +117,11 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         TODO: DragFuncEditDialog(self.profiles_table.get_current_item().state)
         """
         drag_func_dlg = DragFuncEditDialog(
-            self.profiles_table.get_current_item().state.__dict__,  # Error here
-            self.profile_current.bc_table if self.profile_current.multiBC.isChecked() else self.profile_current.bc
+            cur_prof=self.profiles_table.get_current_item().state.__dict__,  # Error here
+            bc_table=self.profile_current.bc_table
+            if self.profile_current.multiBC.isChecked()
+            else self.profile_current.bc,
+            state=self.profiles_table.get_current_item().state.__dict__
         )
         new_drag_func = drag_func_dlg.current_data if drag_func_dlg.exec_() else drag_func_dlg.default_data
         if self.profile_current.multiBC.isChecked():
@@ -142,12 +145,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def add_profile(self, data=None):  # refactored yet
         if self.profiles_table.tableWidget.rowCount() < 21:
-            new_item = ProfileItem()
-
-            if data:
-                new_item.updateState(**data)
-            elif self.get_current_data():
-                new_item.updateState(**self.get_current_data())
+            new_item = ProfileItem(self)
+            new_item.updateState(**data) if data else new_item.updateState(**self.get_current_data())
 
             self.profiles_table.add_row(new_item)
             self.set_is_saved(False)

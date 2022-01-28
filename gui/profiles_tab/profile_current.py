@@ -12,7 +12,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.convert = BConverter()
         self.setConverter()
         self.bc_table = BCTable()
-        self.bc_table.set()
         self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
         self.enable_multi_bc(self.multiBC.isChecked())
 
@@ -73,14 +72,14 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
         return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
 
-    def get_multiBC(self):
-        return [[self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value()]
-                for r in range(self.bc_table.rowCount())]
+    # def get_multiBC(self):
+    #     return [[self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value()]
+    #             for r in range(self.bc_table.rowCount())]
 
-    def set_multiBC(self, multi_bc):
-        for i, (v, bc) in enumerate(multi_bc):
-            self.bc_table.cellWidget(i, 0).setValue(v)
-            self.bc_table.cellWidget(i, 1).setValue(bc)
+    # def set_multiBC(self, multi_bc):
+    #     for i, (v, bc) in enumerate(multi_bc):
+    #         self.bc_table.cellWidget(i, 0).setValue(v)
+    #         self.bc_table.cellWidget(i, 1).setValue(bc)
 
     def get_bullet(self):
         ret = {
@@ -94,7 +93,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
             self.multiBC.objectName(): self.multiBC.checkState(),
 
             self.bc.objectName(): self.bc.value(),
-            self.bc_table.objectName(): self.get_multiBC()
+            self.bc_table.objectName(): self.bc_table.get_data()
         }
         return ret
 
@@ -137,7 +136,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
                 k.setCheckState(v)
 
         self.rightTwist.click() if data['rightTwist'] else self.leftTwist.click()
-        self.set_multiBC(data['bcTable'])
+        self.bc_table.set_data(data['bcTable'])
 
     def enable_tabs(self, e: bool):
         for tab in [self.tab_6, self.tab_7, self.tab_8]:

@@ -8,6 +8,7 @@ from .drop_table_edit import DropTableEdit
 from .current_atmo_dialog import CurrentAtmoDialog
 from modules.py_archer_ballistics import ArcherBallistics, Profile
 from modules import BConverter
+from modules import State, StateDidSet, StateDidUpdate
 
 from ..stylesheet import load_qss
 
@@ -15,16 +16,35 @@ rnd = BConverter.auto_rnd
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
-    def __init__(self, cur_prof=None, bc_table=None):
+    def __init__(self, cur_prof: dict = None, bc_table=None, state: dict = None):
         super().__init__()
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
 
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
+
+        """ init state"""
+        self.state = State(self, **state)
+        """ define callbacks for a state events"""
+        # self.onStateUpdate.connect(self.state_did_update)
+        # self.onStateSet.connect(self.state_did_set)
+        """ set state attrs """
+        self.setState(
+            default_data=None,
+            current_data=None,
+            distances=[],
+            current_distance=None,
+            default_drop=None,
+            current_drop=None,
+        )
+
         self.ballistics = ArcherBallistics()
 
-        self.bc_table = bc_table if bc_table else BCTable()
+        self.bc_table = BCTable()
+        self.bc_table.set_data(self.state.bcTable)
+
+        # self.bc_table = bc_table if bc_table else BCTable()
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
         self.drop_table_edit = DropTableEdit()
@@ -33,7 +53,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.current_atmo_dlg = CurrentAtmoDialog()
 
-        self.cur_prof = cur_prof
+        # self.cur_prof = cur_prof
         self.profile = None
 
         self.default_data = None
@@ -54,7 +74,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setConnects()
 
     def setProfile(self):
-        self.profile = Profile(self.cur_prof) if self.cur_prof else None
+        self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
         self.ballistics.set_profile(self.profile)
         if self.profile.DragFunc == 10 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
