@@ -1,8 +1,8 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from .templates import Ui_profileItem
 from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
-from gui.custom_widget import State, StateUpdated
+from modules import State, StateDidUpdate, StateDidSet
 
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
@@ -11,7 +11,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
 
-        self.state = None
+        self.state = State(self)
         self.init_state()
 
         self.z_x = NoWheelDoubleSpinBox()
@@ -25,8 +25,8 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.setupConnects()
 
     def init_state(self):
-        self.state = State(self)
         self.onStateUpdate.connect(lambda e: self.state_did_update(e))
+        self.onStateSet.connect(lambda e: self.state_did_set(e))
 
     def setupWidgets(self):
         self.z_x.setObjectName('z_x')
@@ -42,17 +42,15 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_d.valueChanged.connect(self.state_will_update)
 
     def state_will_update(self, value):
-        self.setState({self.sender().objectName(): value})
+        self.setState(**{self.sender().objectName(): value})
 
-    def state_did_update(self, e=None, z_data=None, *args, **kwargs):
-        if isinstance(e, StateUpdated):
-            print(e.key, e.value)
+    def state_did_set(self, e=None):
+        if isinstance(e, StateDidSet):
             if e.key in ['rifleName', 'cartridgeName', 'caliberShort']:
                 self.findChild(QtWidgets.QWidget, e.key).setText(e.value)
-            # if e.key == 'weight':
-            #     # temporary
-            #     self.weightTile.setText(
-            #         str(int(round(e.value(), 0))) + 'gr'
-            #         if self.state.weightQuantity == 0
-            #         else str(round(e.value(), 1)) + 'g'
-            #     )
+
+    def state_did_update(self, e=None):
+        if isinstance(e, StateDidUpdate):
+            if e.key in ['rifleName', 'cartridgeName', 'caliberShort']:
+                self.findChild(QtWidgets.QWidget, e.key).setText(e.value)
+

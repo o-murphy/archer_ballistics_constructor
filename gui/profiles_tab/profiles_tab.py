@@ -58,7 +58,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def setupConnects(self):
         self.profiles_tools.newProfileButton.clicked.connect(self.add_profile)
         self.add_btn.add.clicked.connect(self.add_profile)
-
         self.profiles_tools.removeProfileButton.clicked.connect(self.remove_profile)
         self.profiles_tools.downProfile.clicked.connect(self.move_profile_down)
         self.profiles_tools.upProfile.clicked.connect(self.move_profile_up)
@@ -81,17 +80,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         [self.widget_connect_list.append(i.currentIndexChanged) for i in children if hasattr(i, 'currentIndexChanged')]
         [self.widget_connect_list.append(i.clicked) for i in children if hasattr(i, 'clicked')]
 
-        self.connectEvts()
-
-    def connectEvts(self):
         [i.connect(self.update_profile) for i in self.widget_connect_list]
-
-    def disconnectEvts(self):
-        for i in self.widget_connect_list:
-            try:
-                i.disconnect(self.update_profile)
-            except TypeError:
-                pass
 
     def set_current(self, e):
         r = None
@@ -118,9 +107,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
                 if cell:
                     if not isinstance(cell, AddBtn):
                         if cell.state:
-                            self.disconnectEvts()
                             self.set_current(e)
-                            self.connectEvts()
             else:
                 self.profile_current.enable_tabs(False)
 
@@ -155,9 +142,12 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def add_profile(self, data=None):  # refactored yet
         if self.profiles_table.tableWidget.rowCount() < 21:
-
             new_item = ProfileItem()
-            new_item.state.setState(data if data else self.get_current_data())
+
+            if data:
+                new_item.updateState(**data)
+            elif self.get_current_data():
+                new_item.updateState(**self.get_current_data())
 
             self.profiles_table.add_row(new_item)
             self.set_is_saved(False)
@@ -167,16 +157,14 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def get_current_data(self):
         new_profile = {}
-        item = self.profiles_table.select()
-        if item:
-            z_data = {'z_x': 0, 'z_y': 0, 'z_d': 100}
-            cur_prof = self.profile_current
-            new_profile.update(**cur_prof.get_bullet(),
-                               **cur_prof.get_rifle(),
-                               **cur_prof.get_cartridge(),
-                               **cur_prof.get_conditions(),
-                               **z_data)
-        return new_profile if new_profile else None
+        z_data = {'z_x': 0, 'z_y': 0, 'z_d': 100}
+        cur_prof = self.profile_current
+        new_profile.update(**cur_prof.get_bullet(),
+                           **cur_prof.get_rifle(),
+                           **cur_prof.get_cartridge(),
+                           **cur_prof.get_conditions(),
+                           **z_data)
+        return new_profile
 
     def remove_profile(self):
         if self.profiles_table.tableWidget.rowCount() > 0:
@@ -193,9 +181,13 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
                 self.profiles_table.move_down()
 
     def update_profile(self, value):
+        sender = self.sender().objectName()
         item = self.profiles_table.select()
         if item:
-            item.setState({self.sender().objectName(): value})
+            if sender:
+                item.setState(**{sender: value})
+            else:
+                item.setState(**self.get_current_data())
             self.set_is_saved(False)
 
     @staticmethod
@@ -257,9 +249,9 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             import json
             data = json.load(fp)
         for d in data:
-            self.disconnectEvts()
+            # self.disconnectEvts()
             self.add_profile(data=d)
-            self.connectEvts()
+            # self.connectEvts()
 
         self.current_file = fileName
         self.set_is_saved(True)
