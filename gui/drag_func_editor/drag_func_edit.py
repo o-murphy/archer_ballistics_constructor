@@ -44,7 +44,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.bc_table = BCTable()
         self.bc_table.set_data(self.state.bcTable)
 
-        # self.bc_table = bc_table if bc_table else BCTable()
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
         self.drop_table_edit = DropTableEdit()
@@ -80,12 +79,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def state_did_update(self, e):
         if isinstance(e, StateDidUpdate):
             if e.key == 'default_data':
-                print(self.state.default_data)
                 self.setDrag()
 
             if e.key == 'default_drop':
                 self.setDrops()
-
 
     def setDrag(self):
         self.dox, self.doy = self.parse_data(self.state.default_data)
@@ -96,7 +93,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setDrops(self):
         self.drop_plot.draw_default_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
-
         self.drop_table_edit.drop_table.set()
         self.custom_drop_at_distance()
 
