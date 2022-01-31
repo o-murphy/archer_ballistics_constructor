@@ -3,12 +3,12 @@ from .templates import Ui_DragFuncEditDialog
 from .drag_func_plot import DragPlot
 from .drop_func_plot import DropPlot
 from .drag_table import DragTable
-from .bc_table import BCTable
+from ..bc_table import BCTable
 from .drop_table_edit import DropTableEdit
 from .current_atmo_dialog import CurrentAtmoDialog
-from modules.py_archer_ballistics import ArcherBallistics, Profile
+from modules import ArcherBallistics, Profile
 from modules import BConverter
-from modules import State, StateDidSet, StateDidUpdate
+from modules import State, StateDidUpdate
 
 from ..stylesheet import load_qss
 
@@ -41,8 +41,18 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.ballistics = ArcherBallistics()
 
-        self.bc_table = BCTable()
-        self.bc_table.set_data(self.state.bcTable)
+        if self.state.multiBC:
+            self.bc_table = BCTable()
+            self.bc_table.set_data(self.state.bcTable)
+        else:
+            from ..single_custom_widgets.no_wheel_sb import BCSpinBox
+            self.bc_table = BCSpinBox()
+            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.bc_table.setSizePolicy(sizePolicy)
+            self.bc_table.setMaximumHeight(30)
+            self.bc_table.setStyleSheet("")
+            self.bc_table.setPrefix('BC: ')
+            self.bc_table.setValue(self.state.bc)
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
@@ -71,7 +81,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setProfile(self):
         # self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
         self.ballistics.set_profile(self.profile)
-        if self.profile.DragFunc == 10 and self.profile.df_data:
+        if self.profile.DragFunc == 2 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
         self.ballistics.set_atmo(self.profile)
         self.ballistics.get_sound_speed()
@@ -138,7 +148,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit.addRow.clicked.connect(lambda: (
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
         ))
-        self.Calculate.clicked.connect(self.custom_drop_at_distance)
+        self.Calculate.clicked.connect(
+            lambda: self.setState(bcTable=self.bc_table.get_data()) if isinstance(self.bc_table, BCTable)
+            else self.setState(bc=self.bc_table.value())
+        )
         self.SetConditions.clicked.connect(self.current_atmo_dialog)
         self.buttonBox.keyPressEvent = self.keyPressEvent
 
@@ -274,3 +287,21 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 new_data.append([ox[i], oy[i]])
             self.updateState(current_data=new_data)
             self.append_updates()
+
+    def __getstate__(self):
+        new_state = self.state.__dict__
+        is_new_data = True if self.state.current_data else False
+
+        if is_new_data:
+            new_state['df_data'] = self.state.current_data
+            new_state['dragType'] = 2
+        else:
+            new_state['df_data'] = self.state.default_data
+
+        [new_state.pop(key) for key in ['default_data',
+                                    'current_data',
+                                    'distances',
+                                    'current_distance',
+                                    'default_drop',
+                                    'current_drop']]
+        return new_state

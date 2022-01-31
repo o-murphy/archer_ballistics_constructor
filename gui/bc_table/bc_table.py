@@ -1,6 +1,6 @@
-from .templates import Ui_BCTable
+from gui.drag_func_editor.templates import Ui_BCTable
 from modules.converter import BConverter
-from ..single_custom_widgets.no_wheel_sb import BVSpinBox, BCSpinBox
+from gui.single_custom_widgets.no_wheel_sb import BVSpinBox, BCSpinBox
 
 rnd = BConverter.auto_rnd
 

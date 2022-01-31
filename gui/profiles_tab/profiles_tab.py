@@ -70,15 +70,14 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_table.tableWidget.currentCellChanged.connect(self.on_current_profile_change)
 
         self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
-        self.profile_current.multiBC.stateChanged.connect(self.enable_multi_bc)
 
         children = self.profile_current.findChildren(QtWidgets.QWidget)
 
         [self.widget_connect_list.append(i.valueChanged) for i in children if hasattr(i, 'valueChanged')]
         [self.widget_connect_list.append(i.textEdited) for i in children if hasattr(i, 'textEdited')]
         [self.widget_connect_list.append(i.currentIndexChanged) for i in children if hasattr(i, 'currentIndexChanged')]
-        [self.widget_connect_list.append(i.currentIndexChanged) for i in children if hasattr(i, 'currentIndexChanged')]
         [self.widget_connect_list.append(i.clicked) for i in children if hasattr(i, 'clicked')]
+        self.widget_connect_list.append(self.profile_current.multiBC.stateChanged)
 
         [i.connect(self.update_profile) for i in self.widget_connect_list]
 
@@ -113,15 +112,13 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def drag_func_edit(self):
 
-        """wrong way
-        TODO: DragFuncEditDialog(self.profiles_table.get_current_item().state)
-        """
         drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
-        new_drag_func = drag_func_dlg.state.current_data if drag_func_dlg.exec_() else drag_func_dlg.state.default_data
-        if self.profile_current.multiBC.isChecked():
-            self.profile_current.bulletGroupBox.layout().addWidget(self.profile_current.bc_table, 0, 2, 6, 1)
-        else:
-            self.profile_current.bcWidget.layout().addWidget(self.profile_current.bc, 0)
+        new_state = drag_func_dlg.__getstate__() if drag_func_dlg.exec_() else None
+
+        if new_state:
+            cell = self.profiles_table.get_current_item()
+            cell.updateState(**new_state)
+            self.profile_current.set_data(cell.state.__dict__)
 
     def set_is_saved(self, e: bool):
         self.is_saved = e
@@ -179,6 +176,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         if item:
             if sender:
                 item.setState(**{sender: value})
+                if sender == 'multiBC':
+                    self.profile_current.enable_multi_bc(value)
             else:
                 item.setState(**self.get_current_data())
             self.set_is_saved(False)

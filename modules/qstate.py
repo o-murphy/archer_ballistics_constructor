@@ -55,10 +55,6 @@ class State(QtCore.QObject):
             self.__setattr__(key, value)
             self.onStateSet.emit(StateDidSet(key, value))
 
-    def emit(self, key, value):
-        self.__setattr__(key, value)
-        self.arg_update.emit(StateDidUpdate(key, value))
-
     def setState(self, state: dict = None, **kwargs):
         if state:
             kwargs.update(state)

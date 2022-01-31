@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_profileCurrent
-from modules.converter import BConverter
-from ..drag_func_editor.bc_table import BCTable
+from modules import BConverter
+from ..bc_table import BCTable
 
 
 class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
