@@ -19,6 +19,7 @@ class CustomPlot(QtWidgets.QWidget):
         self.x = None
         self.def_y = None
         self.cur_y = None
+        self.cur_x = None
 
         self.x_quantity = None
         self.x_q_label = None

@@ -19,11 +19,23 @@ class DragTable(Ui_DragTable):
 
     def set(self, current_data, default_data):
         row_count = self.columnCount()
-        if len(default_data) != row_count:
-            for i in range(self.columnCount()):
-                self.removeColumn(0)
-            if default_data:
+        if not current_data:
+            if len(default_data) != row_count:
+                for i in range(self.columnCount()):
+                    self.removeColumn(0)
+
                 for i, v in enumerate(default_data):
+                    self.insertColumn(i)
+                    self.setCellWidget(0, i, DisabledDoubleSpinBox())
+                    self.setCellWidget(1, i, DisabledDoubleSpinBox())
+                    self.cellWidget(0, i).setDecimals(2)
+                    self.cellWidget(1, i).setDecimals(4)
+        else:
+            if len(current_data) != row_count:
+                for i in range(self.columnCount()):
+                    self.removeColumn(0)
+
+                for i, v in enumerate(current_data):
                     self.insertColumn(i)
                     self.setCellWidget(0, i, DisabledDoubleSpinBox())
                     self.setCellWidget(1, i, DisabledDoubleSpinBox())

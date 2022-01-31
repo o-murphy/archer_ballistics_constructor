@@ -211,7 +211,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.update_drag_table()
         self.drag_plot.reset_current_plot()
 
-        self.updateSet(current_drop=None)
+        self.updateState(current_drop=None)
         self.calculate_bullet_drop()
         self.drop_plot.reset_current_plot()
 
@@ -219,7 +219,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.ballistics.drag_function = self.state.current_data
         self.ballistics.set_drag_function(self.ballistics.drag_function)
         self.update_drag_table()
-        self.drag_plot.draw_current_plot(self.parse_data(self.state.current_data)[1])
+        self.drag_plot.draw_current_plot(
+            self.parse_data(self.state.current_data)[0],
+            self.parse_data(self.state.current_data)[1]
+        )
 
         self.calculate_bullet_drop()
         self.drop_plot.draw_custom_plot(self.state.current_drop)
@@ -239,17 +242,19 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     # TODO:
     def paste_table(self):
-        try:
+        # try:
             cb = QtWidgets.QApplication.clipboard()
-            new_data = [
-                [float(j.replace(',', '.')) for j in i.split('\t')
-                 if not j == ''] for i in cb.text().split('\n') if i.split('\t') != []
-            ][::-1]
-            print(new_data)
-            self.updateState(current_data=new_data)
+            lines = cb.text().split('\n')
+            pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
+            float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
+            float_pairs.sort(reverse=False)
+
+            print(float_pairs)
+            self.updateState(current_data=float_pairs)
+            self.dragTable.set(self.state.current_data, self.state.default_data)
             self.append_updates()
-        except Exception as error:
-            print(error)
+        # except Exception as error:
+        #     print(error)
 
     @staticmethod
     def parse_data(data: list) -> dict or None:

@@ -54,10 +54,14 @@ class DragPlot(CustomPlot):
         self.set_limits(self.def_y)
         self.default_plot.setData(self.x, self.def_y)
 
-    def draw_current_plot(self, oy):
+    def draw_current_plot(self, ox, oy):
         self.cur_y = oy
         self.set_limits(self.cur_y + self.def_y)
-        self.current_plot.setData(self.x, self.cur_y)
+        if len(self.x) != len(self.cur_y):
+            self.cur_x = ox
+            self.current_plot.setData(self.cur_x, self.cur_y)
+        else:
+            self.current_plot.setData(self.x, self.cur_y)
         self.current_point_text.setColor(color=(255, 170, 0))
 
     def reset_current_plot(self):
