@@ -1129,24 +1129,6 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_78">
-            <property name="maximumSize">
-             <size>
-              <width>105</width>
-              <height>23</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>BC:</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QWidget" name="horizontalWidget_17" native="true">
             <property name="minimumSize">
@@ -1363,6 +1345,16 @@
                <item>
                 <property name="text">
                  <string>Custom</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>G1 Multi BC</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>G7 Multi BC</string>
                 </property>
                </item>
               </widget>
@@ -1783,7 +1775,7 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="3" rowspan="6">
+          <item row="1" column="2">
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1795,6 +1787,24 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_78">
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>BC:</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

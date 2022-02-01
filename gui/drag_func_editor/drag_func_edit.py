@@ -240,21 +240,15 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         cb.clear(mode=cb.Clipboard)
         cb.setText(datasheet, mode=cb.Clipboard)
 
-    # TODO:
     def paste_table(self):
-        # try:
-            cb = QtWidgets.QApplication.clipboard()
-            lines = cb.text().split('\n')
-            pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
-            float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
-            float_pairs.sort(reverse=False)
-
-            print(float_pairs)
-            self.updateState(current_data=float_pairs)
-            self.dragTable.set(self.state.current_data, self.state.default_data)
-            self.append_updates()
-        # except Exception as error:
-        #     print(error)
+        cb = QtWidgets.QApplication.clipboard()
+        lines = cb.text().split('\n')
+        pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
+        float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
+        float_pairs.sort(reverse=False)
+        self.updateState(current_data=float_pairs)
+        self.dragTable.set(self.state.current_data, self.state.default_data)
+        self.append_updates()
 
     @staticmethod
     def parse_data(data: list) -> dict or None:
