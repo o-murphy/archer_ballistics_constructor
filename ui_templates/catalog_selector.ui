@@ -47,7 +47,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="usesScrollButtons">
       <bool>false</bool>
@@ -60,14 +60,14 @@
        <string>Rifles</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="bullets">
-      <attribute name="title">
-       <string>Bullets</string>
-      </attribute>
-     </widget>
      <widget class="QWidget" name="cartridges">
       <attribute name="title">
        <string>Cartridges</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="bullets">
+      <attribute name="title">
+       <string>Bullets</string>
       </attribute>
      </widget>
      <widget class="QWidget" name="profiles">

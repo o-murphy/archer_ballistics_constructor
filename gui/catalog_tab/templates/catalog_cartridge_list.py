@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_templates\catalog_rifle_list.ui'
+# Form implementation generated from reading ui file 'ui_templates\catalog_cartridge_list.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -11,15 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_catalogRifleList(object):
-    def setupUi(self, catalogRifleList):
-        catalogRifleList.setObjectName("catalogRifleList")
-        catalogRifleList.resize(535, 229)
-        self.gridLayout = QtWidgets.QGridLayout(catalogRifleList)
+class Ui_catalogCartridgeList(object):
+    def setupUi(self, catalogCartridgeList):
+        catalogCartridgeList.setObjectName("catalogCartridgeList")
+        catalogCartridgeList.resize(535, 229)
+        self.gridLayout = QtWidgets.QGridLayout(catalogCartridgeList)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
-        self.tableWidget = QtWidgets.QTableWidget(catalogRifleList)
+        self.tableWidget = QtWidgets.QTableWidget(catalogCartridgeList)
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -50,26 +50,26 @@ class Ui_catalogRifleList(object):
         self.tableWidget.verticalHeader().setDefaultSectionSize(50)
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 
-        self.retranslateUi(catalogRifleList)
-        QtCore.QMetaObject.connectSlotsByName(catalogRifleList)
+        self.retranslateUi(catalogCartridgeList)
+        QtCore.QMetaObject.connectSlotsByName(catalogCartridgeList)
 
-    def retranslateUi(self, catalogRifleList):
+    def retranslateUi(self, catalogCartridgeList):
         _translate = QtCore.QCoreApplication.translate
-        catalogRifleList.setWindowTitle(_translate("catalogRifleList", "Form"))
+        catalogCartridgeList.setWindowTitle(_translate("catalogCartridgeList", "Form"))
         self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("catalogRifleList", "id"))
+        item.setText(_translate("catalogCartridgeList", "id"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("catalogRifleList", "Name"))
+        item.setText(_translate("catalogCartridgeList", "Name"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("catalogRifleList", "Caliber"))
+        item.setText(_translate("catalogCartridgeList", "Velocity"))
         item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("catalogRifleList", "Height"))
+        item.setText(_translate("catalogCartridgeList", "Temp."))
         item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("catalogRifleList", "Twist"))
+        item.setText(_translate("catalogCartridgeList", "Temp. sens."))
         item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("catalogRifleList", "Copy"))
+        item.setText(_translate("catalogCartridgeList", "Copy"))
         item = self.tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("catalogRifleList", "Edit"))
+        item.setText(_translate("catalogCartridgeList", "Edit"))
         item = self.tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("catalogRifleList", "Delete"))
+        item.setText(_translate("catalogCartridgeList", "Delete"))

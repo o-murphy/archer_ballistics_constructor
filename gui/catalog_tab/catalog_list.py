@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets
 from .catalog_item_edit import CatalogItemEdit
-from .catalog_rifle import CatalogRifle
 
 
 class DeleteButton(QtWidgets.QPushButton):
@@ -34,7 +33,7 @@ class CatalogList(QtWidgets.QWidget):
         header.setSectionHidden(0, True)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         for i in range(2, header.count()):
-            header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+            header.setSectionResizeMode(i, QtWidgets.QHeaderView.Fixed)
 
         self.update_table()
         self.tableWidget.currentCellChanged.connect(self.row_changed)
@@ -56,7 +55,6 @@ class CatalogList(QtWidgets.QWidget):
 
             for j, x in enumerate(y):
                 self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(x)))
-                print(x)
             edit_btn = EditButton(self)
             del_btn = DeleteButton(self)
             copy_btn = CopyButton(self)
@@ -64,9 +62,9 @@ class CatalogList(QtWidgets.QWidget):
             del_btn.clicked.connect(self.delete_item)
             copy_btn.clicked.connect(self.copy_item)
 
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount()-3, copy_btn)
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount()-2, edit_btn)
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount()-1, del_btn)
+            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 3, copy_btn)
+            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 2, edit_btn)
+            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, del_btn)
 
     def copy_item(self):
         current_row = self.tableWidget.currentRow()
@@ -85,9 +83,54 @@ class CatalogList(QtWidgets.QWidget):
             "twist": 10,
             "caliberShort": ".224",
             "rightTwist": True,
+            "bulletName": "",
+            "weight": 175.0,
+            "length": 0.9,
+            "diameter": 0.224,
+            "dragType": 1,
+            "weightTile": "175gr",
+            "multiBC": 2,
+            "bc": 0.169,
+            "bcTable": [
+                [
+                    914,
+                    0
+                ],
+                [
+                    762,
+                    0
+                ],
+                [
+                    609,
+                    0
+                ],
+                [
+                    457,
+                    0
+                ],
+                [
+                    0,
+                    0
+                ]
+            ],
+            "cartridgeName": "",
+            "mv": 800,
+            "temp": 15,
+            "ts": 1.55,
+            "z_pressure": 750,
+            "z_angle": 0,
+            "z_humidity": 50,
+            "z_temp": 15,
+            "z_azimuth": 270,
+            "z_powder_temp": 15,
+            "z_latitude": 0,
+            "z_x": 0,
+            "z_y": 0,
+            "z_d": 100,
+            "": 0.246
         }
 
-        edit = CatalogItemEdit('Rifle', CatalogRifle(temp_data))
+        edit = CatalogItemEdit('Rifle', self.editor(temp_data))
         if edit.exec_():
             temp_data = edit.get_data()
             print('here will be query to db to edit', id)

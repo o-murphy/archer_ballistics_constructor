@@ -78,7 +78,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Sight height</string>
+       <string>Height</string>
       </property>
      </column>
      <column>

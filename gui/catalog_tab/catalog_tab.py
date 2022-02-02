@@ -2,10 +2,6 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
 from .catalog_info import CatalogInfo
-from .catalog_rifle import CatalogRifle
-from .catalog_bullet import CatalogBullet
-from .catalog_cartridge import CatalogCartridge
-from .catalog_item_edit import CatalogItemEdit
 from gui.stylesheet import load_qss
 
 
@@ -38,76 +34,39 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.gridLayout.addWidget(self.selector, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
 
+        self.selector.rifle_list.tableWidget.currentCellChanged.connect(self.show_rifle_info)
+        self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
+        self.selector.bullet_list.tableWidget.currentCellChanged.connect(self.show_bullet_info)
 
-        self.data = {
-            "rifleName": "G7 template",
-            "caliberName": ".224 Remington",
-            "sh": 90,
-            "twist": 10,
-            "caliberShort": ".224",
-            "rightTwist": True,
-            "bulletName": "",
-            "weight": 175.0,
-            "length": 0.9,
-            "diameter": 0.224,
-            "dragType": 1,
-            "weightTile": "175gr",
-            "multiBC": 2,
-            "bc": 0.169,
-            "bcTable": [
-                [
-                    914,
-                    0
-                ],
-                [
-                    762,
-                    0
-                ],
-                [
-                    609,
-                    0
-                ],
-                [
-                    457,
-                    0
-                ],
-                [
-                    0,
-                    0
-                ]
-            ],
-            "cartridgeName": "",
-            "mv": 800,
-            "temp": 15,
-            "ts": 1.55,
-            "z_pressure": 750,
-            "z_angle": 0,
-            "z_humidity": 50,
-            "z_temp": 15,
-            "z_azimuth": 270,
-            "z_powder_temp": 15,
-            "z_latitude": 0,
-            "z_x": 0,
-            "z_y": 0,
-            "z_d": 100,
-            "": 0.246
-        }
+    def show_rifle_info(self, row, col, prow, pcol):
+        r = self.selector.rifle_list.tableWidget.item(row, 0).text()
 
-        # self.selector.tabWidget.currentChanged.connect(self.edit_item)
+        label = QtWidgets.QLabel('added rifle' + r)
+        label.setObjectName('rifle')
 
-    def edit_item(self, index):
-        item = self.selector.tabWidget.widget(index).objectName()
-        print(item)
-        if item == 'rifles':
-            item_edit = CatalogItemEdit(item.upper()[:-1], CatalogRifle(self.data))
-        elif item == 'cartridges':
-            item_edit = CatalogItemEdit(item.upper()[:-1], CatalogCartridge(self.data))
-        elif item == 'bullets':
-            item_edit = CatalogItemEdit(item.upper()[:-1], CatalogBullet(self.data))
-        else:
-            item_edit = None
+        prev_label = self.info.findChild(QtWidgets.QLabel, name='rifle')
+        if prev_label:
+            self.info.gridLayout.removeWidget(prev_label)
+        self.info.gridLayout.addWidget(label, 0, 0, 1, 1)
 
-        if item_edit:
-            if item_edit.exec_():
-                print(item_edit.get_data())
+    def show_cartridge_info(self, row, col, prow, pcol):
+        r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
 
+        label = QtWidgets.QLabel('added cartridge' + r)
+        label.setObjectName('cartridge')
+
+        prev_label = self.info.findChild(QtWidgets.QLabel, name='cartridge')
+        if prev_label:
+            self.info.gridLayout.removeWidget(prev_label)
+        self.info.gridLayout.addWidget(label, 1, 0, 1, 1)
+
+    def show_bullet_info(self, row, col, prow, pcol):
+        r = self.selector.bullet_list.tableWidget.item(row, 0).text()
+
+        label = QtWidgets.QLabel('added bullet' + r)
+        label.setObjectName('bullet')
+
+        prev_label = self.info.findChild(QtWidgets.QLabel, name='bullet')
+        if prev_label:
+            self.info.gridLayout.removeWidget(prev_label)
+        self.info.gridLayout.addWidget(label, 2, 0, 1, 1)
