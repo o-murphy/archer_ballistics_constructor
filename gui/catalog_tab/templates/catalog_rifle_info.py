@@ -17,6 +17,8 @@ class Ui_catalogRifleInfo(object):
         catalogRifleInfo.resize(306, 190)
         catalogRifleInfo.setMaximumSize(QtCore.QSize(16777215, 190))
         self.gridLayout = QtWidgets.QGridLayout(catalogRifleInfo)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
         self.rifleGroupBox = QtWidgets.QGroupBox(catalogRifleInfo)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)

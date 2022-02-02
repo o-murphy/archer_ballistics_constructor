@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
 from .catalog_info import CatalogInfo
-from .catalog_rifle_info import CatalogRifleInfo
 
 from gui.stylesheet import load_qss
 
@@ -42,29 +41,12 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
     def show_rifle_info(self, row, col, prow, pcol):
         r = self.selector.rifle_list.tableWidget.item(row, 0).text()
-
-        if self.info.findChild(CatalogRifleInfo):
-            self.info.gridLayout.removeWidget(self.info.findChild(CatalogRifleInfo))
-        self.info.gridLayout.addWidget(CatalogRifleInfo(r), 0, 0, 1, 1)
+        self.info.show_rifle(r)
 
     def show_cartridge_info(self, row, col, prow, pcol):
         r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
-
-        label = QtWidgets.QLabel('added cartridge' + r)
-        label.setObjectName('cartridge')
-
-        prev_label = self.info.findChild(QtWidgets.QLabel, name='cartridge')
-        if prev_label:
-            self.info.gridLayout.removeWidget(prev_label)
-        self.info.gridLayout.addWidget(label, 1, 0, 1, 1)
+        self.info.show_cartridge(r)
 
     def show_bullet_info(self, row, col, prow, pcol):
         r = self.selector.bullet_list.tableWidget.item(row, 0).text()
-
-        label = QtWidgets.QLabel('added bullet' + r)
-        label.setObjectName('bullet')
-
-        prev_label = self.info.findChild(QtWidgets.QLabel, name='bullet')
-        if prev_label:
-            self.info.gridLayout.removeWidget(prev_label)
-        self.info.gridLayout.addWidget(label, 2, 0, 1, 1)
+        self.info.show_bullet(r)
