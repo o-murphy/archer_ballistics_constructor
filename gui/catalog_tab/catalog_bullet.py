@@ -15,16 +15,6 @@ class BC(BCSpinBox):
         self.setPrefix('BC: ')
 
 
-class Advanced(QtWidgets.QToolButton):
-    def __init__(self):
-        super(Advanced, self).__init__()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.setSizePolicy(sizePolicy)
-        self.setMaximumHeight(30)
-        self.setStyleSheet("")
-        self.setText("Advanced")
-
-
 class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
     """
     TODO:
@@ -51,11 +41,9 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
 
         self.bc_table = BCTable()
         self.bc = BC()
-        self.advanced = Advanced()
 
         self.bulletGroupBox.layout().addWidget(self.bc, 5, 1, 1, 1)
         self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
-        self.bulletGroupBox.layout().addWidget(self.advanced, 5, 1, 1, 1)
 
         if data:
             self.bulletName.setText(data['bulletName'])
@@ -65,6 +53,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.dragType.setCurrentIndex(data['dragType'])
             self.bc.setValue(data['bc'])
             self.bc_table.set_data(data['bcTable'])
+            self.df_data = data['df_data'] if 'df_data' in data else None
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
@@ -81,16 +70,13 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
     def set_drag_type(self, value):
         if value in [0, 1]:
             self.bc_table.setVisible(False)
-            self.advanced.setVisible(False)
             self.bc.setVisible(True)
 
         elif value in [3, 4]:
             self.bc_table.setVisible(True)
-            self.advanced.setVisible(False)
             self.bc.setVisible(False)
         else:
             self.bc_table.setVisible(False)
-            self.advanced.setVisible(True)
             self.bc.setVisible(False)
 
     def get_data(self):
@@ -101,4 +87,6 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             'diameter': self.get_cln(self.diameter, self.diameterQuantity),
             'dragType': self.dragType.currentIndex(),
             'bc': self.bc.value(),
+            'bcTable': self.bc_table.get_data(),
+            'df_data': self.df_data
         }

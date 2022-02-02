@@ -14,9 +14,8 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         super(CatalogTab, self).__init__()
         self.setupUi(self)
 
-
-
-        self.setStyleSheet(load_qss('qss/application.qss') + """
+        self.setStyleSheet(load_qss('qss/application.qss') +
+                           """
             QTabBar::tab {
                 height: 140px;
                 width: 50px;
@@ -35,12 +34,10 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
         self.selector = CatalogSelector()
         self.info = CatalogInfo()
+        self.gridLayout.setAlignment(QtCore.Qt.AlignLeft)
         self.gridLayout.addWidget(self.selector, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
 
-        # self.info.gridLayout.addWidget(CatalogRifle())
-        # self.info.gridLayout.addWidget(CatalogCartridge())
-        # self.info.gridLayout.addWidget(CatalogBullet())
 
         self.data = {
             "rifleName": "G7 template",
@@ -96,7 +93,7 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
             "": 0.246
         }
 
-        self.selector.tabWidget.currentChanged.connect(self.edit_item)
+        # self.selector.tabWidget.currentChanged.connect(self.edit_item)
 
     def edit_item(self, index):
         item = self.selector.tabWidget.widget(index).objectName()

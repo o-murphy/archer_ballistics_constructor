@@ -16,5 +16,6 @@ venv\Scripts\pyuic5 ui_templates\catalog_rifle.ui -o gui\catalog_tab\templates\c
 venv\Scripts\pyuic5 ui_templates\catalog_bullet.ui -o gui\catalog_tab\templates\catalog_bullet.py
 venv\Scripts\pyuic5 ui_templates\catalog_cartridge.ui -o gui\catalog_tab\templates\catalog_cartridge.py
 venv\Scripts\pyuic5 ui_templates\catalog_item_edit.ui -o gui\catalog_tab\templates\catalog_item_edit.py
+venv\Scripts\pyuic5 ui_templates\catalog_rifle_list.ui -o gui\catalog_tab\templates\catalog_rifle_list.py
 
 venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
