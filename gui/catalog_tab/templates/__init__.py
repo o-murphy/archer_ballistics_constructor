@@ -8,3 +8,4 @@ from .catalog_item_edit import Ui_catalogItemEdit
 from .catalog_rifle_list import Ui_catalogRifleList
 from .catalog_cartridge_list import Ui_catalogCartridgeList
 from .catalog_bullet_list import Ui_catalogBulletList
+from .catalog_rifle_info import Ui_catalogRifleInfo

@@ -2,6 +2,8 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
 from .catalog_info import CatalogInfo
+from .catalog_rifle_info import CatalogRifleInfo
+
 from gui.stylesheet import load_qss
 
 
@@ -41,13 +43,9 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
     def show_rifle_info(self, row, col, prow, pcol):
         r = self.selector.rifle_list.tableWidget.item(row, 0).text()
 
-        label = QtWidgets.QLabel('added rifle' + r)
-        label.setObjectName('rifle')
-
-        prev_label = self.info.findChild(QtWidgets.QLabel, name='rifle')
-        if prev_label:
-            self.info.gridLayout.removeWidget(prev_label)
-        self.info.gridLayout.addWidget(label, 0, 0, 1, 1)
+        if self.info.findChild(CatalogRifleInfo):
+            self.info.gridLayout.removeWidget(self.info.findChild(CatalogRifleInfo))
+        self.info.gridLayout.addWidget(CatalogRifleInfo(r), 0, 0, 1, 1)
 
     def show_cartridge_info(self, row, col, prow, pcol):
         r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
