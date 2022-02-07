@@ -39,6 +39,8 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
         self.selector.bullet_list.tableWidget.currentCellChanged.connect(self.show_bullet_info)
 
+        self.selector.tabWidget.currentChanged.connect(self.show_templates)
+
         self.selector.rifle_list.tableWidget.setCurrentCell(0, 0)
         self.selector.cartridge_list.tableWidget.setCurrentCell(0, 0)
         self.selector.bullet_list.tableWidget.setCurrentCell(0, 0)
@@ -57,3 +59,6 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         if row >= 0:
             r = self.selector.bullet_list.tableWidget.item(row, 0).text()
             self.info.show_bullet(r)
+
+    def show_templates(self, index):
+        print('tab:', index)

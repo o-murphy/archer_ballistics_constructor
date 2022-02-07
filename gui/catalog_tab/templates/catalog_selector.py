@@ -41,7 +41,7 @@ class Ui_catalogSelector(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         self.retranslateUi(catalogSelector)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(catalogSelector)
 
     def retranslateUi(self, catalogSelector):

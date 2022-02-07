@@ -14,13 +14,6 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
             self.sh.setValue(data.sh)
             self.twist.setValue(data.twist)
             self.rightTwist.setChecked(data.is_right)
-            # self.data = data
-            # self.rifleName.setText(data['rifleName'])
-            # self.caliberName.setText(data['caliberName'])
-            # self.sh.setValue(data['sh'])
-            # self.twist.setValue(data['twist'])
-            # self.rightTwist.setChecked(data['rightTwist'])
-            # self.caliberShort.setText(data['caliberShort'])
 
     def setConverter(self):
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)

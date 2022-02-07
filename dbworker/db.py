@@ -63,24 +63,61 @@ temp_data = {
     "": 0.246
 }
 
-# caliber = session.query(Caliber).filter_by(name=temp_data['caliberName']).first()
-# print('cal', caliber)
-
 
 def get_rifles():
     session = SessMake(bind=engine)
     rifles = session.query(Rifle).all()
     return rifles
 
+
 def get_rifle(id):
     session = SessMake(bind=engine)
     rifle = session.query(Rifle).get(id)
     return rifle
 
+
+def delete_rifle(id):
+    session: Session = SessMake(bind=engine)
+    rifle = session.query(Rifle).get(id)
+    session.delete(rifle)
+    session.commit()
+
+
+def update_rifle(id, data):
+    session: Session = SessMake(bind=engine)
+    rifle = session.query(Rifle).get(id)
+    for k, v in data.items():
+        if hasattr(rifle, k):
+            setattr(rifle, k, v)
+    session.commit()
+
+
 def get_cartridges():
     session = SessMake(bind=engine)
     rifles = session.query(Cartridge).all()
     return rifles
+
+
+def get_cartridge(id):
+    session = SessMake(bind=engine)
+    cartridge = session.query(Cartridge).get(id)
+    return cartridge
+
+
+def delete_cartridge(id):
+    session: Session = SessMake(bind=engine)
+    cartridge = session.query(Cartridge).get(id)
+    session.delete(cartridge)
+    session.commit()
+
+
+def update_cartridge(id, data):
+    session: Session = SessMake(bind=engine)
+    cartridge = session.query(Cartridge).get(id)
+    for k, v in data.items():
+        if hasattr(cartridge, k):
+            setattr(cartridge, k, v)
+    session.commit()
 
 
 def add_rifle(rifleName, sh, twist, rightTwist, caliberName, diameter, **kwargs):
@@ -103,22 +140,6 @@ def add_rifle(rifleName, sh, twist, rightTwist, caliberName, diameter, **kwargs)
 
     session.commit()
     session.close()
-
-
-def delete_rifle(id):
-    session: Session = SessMake(bind=engine)
-    rifle = session.query(Rifle).get(id)
-    session.delete(rifle)
-    session.commit()
-
-
-def update_rifle(id, data):
-    session: Session = SessMake(bind=engine)
-    rifle = session.query(Rifle).get(id)
-    for k, v in data.items():
-        if hasattr(rifle, k):
-            setattr(rifle, k, v)
-    session.commit()
 
 
 def add_cartridge(diameter, caliberName, cartridgeName, mv, temp, ts, **kwargs):

@@ -4,7 +4,7 @@ from modules import BConverter
 
 
 class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
-    def __init__(self, data: dict = None):
+    def __init__(self, data):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
         self.convert = BConverter()
@@ -12,10 +12,10 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         self.mvQuantity.setItemData(1, self.convert.fps2mps)
 
         if data:
-            self.cartridgeName.setText(data['cartridgeName'])
-            self.mv.setValue(data['mv'])
-            self.temp.setValue(data['temp'])
-            self.ts.setValue(data['ts'])
+            self.cartridgeName.setText(data.name)
+            self.mv.setValue(data.mv)
+            self.temp.setValue(data.temp)
+            self.ts.setValue(data.ts)
 
         self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
 
@@ -32,6 +32,6 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         return {
             'cartridgeName': self.cartridgeName.text(),
             'mv': self.get_cln(self.mv, self.mvQuantity),
-            'temp': self.mv.value(),
-            'ts': self.mv.value(),
+            'temp': self.temp.value(),
+            'ts': self.ts.value(),
         }

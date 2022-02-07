@@ -4,6 +4,9 @@ from .catalog_rifle_info import CatalogRifleInfo
 from .catalog_cartridge_info import CatalogCartridgeInfo
 from .catalog_bullet_info import CatalogBulletInfo
 
+from dbworker.base import Base, engine
+Base.metadata.create_all(engine)
+
 
 class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
     def __init__(self):

@@ -16,7 +16,7 @@ class Ui_catalogInfo(object):
         catalogInfo.setObjectName("catalogInfo")
         catalogInfo.resize(412, 300)
         catalogInfo.setMinimumSize(QtCore.QSize(412, 300))
-        catalogInfo.setMaximumSize(QtCore.QSize(360, 16777215))
+        catalogInfo.setMaximumSize(QtCore.QSize(600, 16777215))
 
         self.retranslateUi(catalogInfo)
         QtCore.QMetaObject.connectSlotsByName(catalogInfo)

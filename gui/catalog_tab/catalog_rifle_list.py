@@ -41,8 +41,6 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
         rifle = db.get_rifle(id)
         edit = CatalogItemEdit('Rifle', self.editor(rifle))
         if edit.exec_():
-            # new_rifle.update(edit.get_data())
-            # db.add_rifle(**new_rifle)
             db.update_rifle(id, edit.get_data())
         self.set_data()
         self.update_table()
