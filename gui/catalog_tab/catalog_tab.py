@@ -39,14 +39,21 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
         self.selector.bullet_list.tableWidget.currentCellChanged.connect(self.show_bullet_info)
 
+        self.selector.rifle_list.tableWidget.setCurrentCell(0, 0)
+        self.selector.cartridge_list.tableWidget.setCurrentCell(0, 0)
+        self.selector.bullet_list.tableWidget.setCurrentCell(0, 0)
+
     def show_rifle_info(self, row, col, prow, pcol):
-        r = self.selector.rifle_list.tableWidget.item(row, 0).text()
-        self.info.show_rifle(r)
+        if row >= 0:
+            r = self.selector.rifle_list.tableWidget.item(row, 0).text()
+            self.info.show_rifle(r)
 
     def show_cartridge_info(self, row, col, prow, pcol):
-        r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
-        self.info.show_cartridge(r)
+        if row >= 0:
+            r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
+            self.info.show_cartridge(r)
 
     def show_bullet_info(self, row, col, prow, pcol):
-        r = self.selector.bullet_list.tableWidget.item(row, 0).text()
-        self.info.show_bullet(r)
+        if row >= 0:
+            r = self.selector.bullet_list.tableWidget.item(row, 0).text()
+            self.info.show_bullet(r)

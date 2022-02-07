@@ -47,13 +47,13 @@
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>50</number>
+      <number>20</number>
      </attribute>
      <attribute name="horizontalHeaderHighlightSections">
       <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>50</number>
+      <number>20</number>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -93,17 +93,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Copy</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
        <string>Edit</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Delete</string>
       </property>
      </column>
     </widget>

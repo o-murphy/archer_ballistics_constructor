@@ -35,9 +35,9 @@ class Ui_catalogSelector(object):
         self.bullets = QtWidgets.QWidget()
         self.bullets.setObjectName("bullets")
         self.tabWidget.addTab(self.bullets, "")
-        self.profiles = QtWidgets.QWidget()
-        self.profiles.setObjectName("profiles")
-        self.tabWidget.addTab(self.profiles, "")
+        self.templates = QtWidgets.QWidget()
+        self.templates.setObjectName("templates")
+        self.tabWidget.addTab(self.templates, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         self.retranslateUi(catalogSelector)
@@ -50,4 +50,4 @@ class Ui_catalogSelector(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.rifles), _translate("catalogSelector", "Rifles"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.cartridges), _translate("catalogSelector", "Cartridges"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.bullets), _translate("catalogSelector", "Bullets"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.profiles), _translate("catalogSelector", "Profiles"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.templates), _translate("catalogSelector", "Templates"))

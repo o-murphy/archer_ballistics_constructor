@@ -1,11 +1,12 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from .catalog_item_edit import CatalogItemEdit
+from .selectorBtns import SelectBtn
 
 
-class DeleteButton(QtWidgets.QPushButton):
-    def __init__(self, parent=None):
-        super(DeleteButton, self).__init__(parent)
-        self.setText('Del')
+# class DeleteButton(QtWidgets.QPushButton):
+#     def __init__(self, parent=None):
+#         super(DeleteButton, self).__init__(parent)
+#         self.setText('Del')
 
 
 class EditButton(QtWidgets.QPushButton):
@@ -23,6 +24,7 @@ class CopyButton(QtWidgets.QPushButton):
 class CatalogList(QtWidgets.QWidget):
     def __init__(self):
         super(CatalogList, self).__init__()
+        self.tableWidget: QtWidgets.QTableWidget = None
 
     def setupTable(self):
         self.data = [
@@ -33,7 +35,7 @@ class CatalogList(QtWidgets.QWidget):
         header.setSectionHidden(0, True)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         for i in range(2, header.count()):
-            header.setSectionResizeMode(i, QtWidgets.QHeaderView.Fixed)
+            header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
         self.update_table()
         self.tableWidget.currentCellChanged.connect(self.row_changed)
@@ -55,25 +57,26 @@ class CatalogList(QtWidgets.QWidget):
 
             for j, x in enumerate(y):
                 self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(x)))
-            edit_btn = EditButton(self)
-            del_btn = DeleteButton(self)
-            copy_btn = CopyButton(self)
+            sel_btn = SelectBtn()
+            edit_btn = sel_btn.editBtn
+            del_btn = sel_btn.delBtn
+            copy_btn = sel_btn.copyBtn
             edit_btn.clicked.connect(self.edit_item)
             del_btn.clicked.connect(self.delete_item)
             copy_btn.clicked.connect(self.copy_item)
 
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 3, copy_btn)
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 2, edit_btn)
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, del_btn)
+            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, sel_btn)
+
+    def viewport_row(self):
+        cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())
+        return self.tableWidget.indexAt(cursor).row()
 
     def copy_item(self):
-        current_row = self.tableWidget.currentRow()
-        id = int(self.tableWidget.item(current_row, 0).text())
+        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
         print('here will be create copy of item in db', id)
 
     def edit_item(self):
-        current_row = self.tableWidget.currentRow()
-        id = int(self.tableWidget.item(current_row, 0).text())
+        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
         print('here will be query to db to get', id)
 
         temp_data = {
@@ -136,7 +139,6 @@ class CatalogList(QtWidgets.QWidget):
             print('here will be query to db to edit', id)
 
     def delete_item(self):
-        current_row = self.tableWidget.currentRow()
-        id = int(self.tableWidget.item(current_row, 0).text())
-        self.tableWidget.removeRow(current_row)
+        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
+        self.tableWidget.removeRow(self.viewport_row())
         print('here will be deleted', id)

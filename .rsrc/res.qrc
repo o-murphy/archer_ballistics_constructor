@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>res/drawable-v19/copynotification.png</file>
     <file>res/drawable-hdpi-v4/removebtn_menu21b.png</file>
     <file>res/drawable-hdpi-v4/removebtn_menu21a.png</file>
     <file>res/drawable-hdpi-v4/addbtn_menu21a.png</file>
