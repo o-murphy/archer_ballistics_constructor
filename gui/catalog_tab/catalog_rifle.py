@@ -3,18 +3,24 @@ from .templates import Ui_catalogRifle
 
 
 class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
-    def __init__(self, data: dict = None):
+    def __init__(self, data):
         super(CatalogRifle, self).__init__()
         self.setupUi(self)
 
         if data:
             self.data = data
-            self.rifleName.setText(data['rifleName'])
-            self.caliberName.setText(data['caliberName'])
-            self.sh.setValue(data['sh'])
-            self.twist.setValue(data['twist'])
-            self.rightTwist.setChecked(data['rightTwist'])
-            self.caliberShort.setText(data['caliberShort'])
+            self.rifleName.setText(data.name)
+            self.caliberName.setText(data.caliber.name)
+            self.sh.setValue(data.sh)
+            self.twist.setValue(data.twist)
+            self.rightTwist.setChecked(data.is_right)
+            # self.data = data
+            # self.rifleName.setText(data['rifleName'])
+            # self.caliberName.setText(data['caliberName'])
+            # self.sh.setValue(data['sh'])
+            # self.twist.setValue(data['twist'])
+            # self.rightTwist.setChecked(data['rightTwist'])
+            # self.caliberShort.setText(data['caliberShort'])
 
     def setConverter(self):
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)

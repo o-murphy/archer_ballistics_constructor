@@ -27,17 +27,12 @@ class CatalogList(QtWidgets.QWidget):
         self.tableWidget: QtWidgets.QTableWidget = None
 
     def setupTable(self):
-        self.data = [
-            [101, 'WWWWWWWWWWWWWWWWWWWW', 'b', 'c', 'd'], [102, 2, 'b', 'c', 'd'], [103, 4, 'b', 'c', 'd']
-        ]
-
         header = self.tableWidget.horizontalHeader()
         header.setSectionHidden(0, True)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         for i in range(2, header.count()):
             header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
-        self.update_table()
         self.tableWidget.currentCellChanged.connect(self.row_changed)
         self.tableWidget.doubleClicked.connect(self.double_clicked)
 
@@ -78,60 +73,6 @@ class CatalogList(QtWidgets.QWidget):
     def edit_item(self):
         id = int(self.tableWidget.item(self.viewport_row(), 0).text())
         print('here will be query to db to get', id)
-
-        temp_data = {
-            "rifleName": "G7 template",
-            "caliberName": ".224 Remington",
-            "sh": 90,
-            "twist": 10,
-            "caliberShort": ".224",
-            "rightTwist": True,
-            "bulletName": "",
-            "weight": 175.0,
-            "length": 0.9,
-            "diameter": 0.224,
-            "dragType": 1,
-            "weightTile": "175gr",
-            "multiBC": 2,
-            "bc": 0.169,
-            "bcTable": [
-                [
-                    914,
-                    0
-                ],
-                [
-                    762,
-                    0
-                ],
-                [
-                    609,
-                    0
-                ],
-                [
-                    457,
-                    0
-                ],
-                [
-                    0,
-                    0
-                ]
-            ],
-            "cartridgeName": "",
-            "mv": 800,
-            "temp": 15,
-            "ts": 1.55,
-            "z_pressure": 750,
-            "z_angle": 0,
-            "z_humidity": 50,
-            "z_temp": 15,
-            "z_azimuth": 270,
-            "z_powder_temp": 15,
-            "z_latitude": 0,
-            "z_x": 0,
-            "z_y": 0,
-            "z_d": 100,
-            "": 0.246
-        }
 
         edit = CatalogItemEdit('Rifle', self.editor(temp_data))
         if edit.exec_():
