@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -15,7 +15,8 @@ Base = declarative_base()
 class Diameter(Base):
     __tablename__ = 'diameter'
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    diameter = Column(Integer)
+    diameter = Column(Integer, unique=True)
+
     caliber = relationship('Caliber', back_populates='diameter')
     bullet = relationship('Bullet', back_populates='diameter')
 
@@ -26,9 +27,11 @@ class Diameter(Base):
 class Caliber(Base):
     __tablename__ = 'caliber'
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    name = Column(String)
+    name = Column(String, unique=True)
+
     diameter_id = Column(Integer, ForeignKey('diameter.id'))
     diameter = relationship('Diameter', back_populates='caliber')
+
     rifle = relationship("Rifle", back_populates="caliber")
     cartridge = relationship("Cartridge", back_populates="caliber")
 
@@ -41,11 +44,12 @@ class Rifle(Base):
     __tablename__ = 'rifle'
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     name = Column(String)
-    caliber_id = Column(Integer, ForeignKey('caliber.id'))
-    caliber = relationship("Caliber", back_populates="rifle")
     sh = Column(Integer)
     twist = Column(Integer)
     is_right = Column(Boolean)
+
+    caliber_id = Column(Integer, ForeignKey('caliber.id'))
+    caliber = relationship("Caliber", back_populates="rifle")
 
     def __init__(self, name, caliber_id, sh, twist, is_right):
         self.name = name
@@ -62,8 +66,12 @@ class Cartridge(Base):
     mv = Column(Integer)
     temp = Column(Integer)
     ts = Column(Integer)
+
     caliber_id = Column(Integer, ForeignKey('caliber.id'))
     caliber = relationship("Caliber", back_populates="cartridge")
+
+    bullet_id = Column(Integer, ForeignKey('bullet.id'))
+    bullet = relationship("Bullet", back_populates="cartridge")
 
     def __init__(self, name, mv, temp, ts, caliber_id):
         self.name = name
@@ -78,11 +86,31 @@ class Bullet(Base):
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     name = Column(String)
     weight = Column(Integer)
-    lenght = Column(Integer)
+    length = Column(Integer)
+    g1 = Column(Integer)
+    g7 = Column(Integer)
+
     diameter_id = Column(Integer, ForeignKey('diameter.id'))
     diameter = relationship('Diameter', back_populates='bullet')
-    drag_type = Column(Integer)
-    drag_func = Column(Integer)
+
+    multi_bc = relationship("MultiBC", back_populates="bullet")
+    drag_func = relationship("DragFunc", back_populates="bullet")
+    cartridge = relationship("Cartridge", back_populates="bullet")
+
+    def __init__(self, name, weight, length, diameter_id, g1=None, g7=None):
+        self.name = name
+        self.weight = weight
+        self.length = length
+        self.diameter_id = diameter_id
+        self.g1 = g1
+        self.g7 = g7
+
+
+class MultiBC(Base):
+    __tablename__ = "multi_bc"
+    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
+    bullet_id = Column(Integer, ForeignKey('bullet.id'))
+    bullet = relationship('Bullet', back_populates='multi_bc')
 
     bc0 = Column(Integer)
     bc1 = Column(Integer)
@@ -96,14 +124,8 @@ class Bullet(Base):
     v3 = Column(Integer)
     v4 = Column(Integer)
 
-    def __init__(self, name, weight, lenght, diameter_id, drag_type, drag_func,
-                 bc0, bc1, bc2, bc3, bc4, v0, v1, v2, v3, v4):
-        self.name = name
-        self.weight = weight
-        self.lenght = lenght
-        self.diameter_id = diameter_id
-        self.drag_func = drag_func
-        self.drag_type = drag_type
+    def __init__(self, bullet_id, bc0, bc1, bc2, bc3, bc4, v0, v1, v2, v3, v4):
+        self.bullet_id = bullet_id
         self.bc0 = bc0
         self.bc1 = bc1
         self.bc2 = bc2
@@ -114,3 +136,15 @@ class Bullet(Base):
         self.v2 = v2
         self.v3 = v3
         self.v4 = v4
+
+
+class DragFunc(Base):
+    __tablename__ = 'drag_func'
+    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
+    bullet_id = Column(Integer, ForeignKey('bullet.id'))
+    bullet = relationship('Bullet', back_populates='drag_func')
+    data = Column(JSON)
+
+    def __init__(self, bullet_id, data):
+        self.bullet_id = bullet_id
+        self.data = data

@@ -1,8 +1,12 @@
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.orm import aliased
 
-from .models import *
-from .base import engine
+try:
+    from .models import *
+    from .base import engine
+except ImportError:
+    from dbworker.models import *
+    from dbworker.base import engine
 
 SessMake = sessionmaker(bind=engine)
 
@@ -94,8 +98,8 @@ def update_rifle(id, data):
 
 def get_cartridges():
     session = SessMake(bind=engine)
-    rifles = session.query(Cartridge).all()
-    return rifles
+    cartridges = session.query(Cartridge).all()
+    return cartridges
 
 
 def get_cartridge(id):
@@ -120,13 +124,36 @@ def update_cartridge(id, data):
     session.commit()
 
 
+def get_bullets():
+    session = SessMake(bind=engine)
+    bullets = session.query(Bullet).all()
+    return bullets
+
+
+def get_bullet(id):
+    session = SessMake(bind=engine)
+    bullet = session.query(Bullet).get(id)
+    return bullet
+
+
+def delete_bullet(id):
+    session: Session = SessMake(bind=engine)
+    bullet = session.query(Bullet).get(id)
+    session.delete(bullet)
+    session.commit()
+
+
+def update_bullet(id, data):
+    session: Session = SessMake(bind=engine)
+    bullet = session.query(Bullet).get(id)
+    for k, v in data.items():
+        if hasattr(bullet, k):
+            setattr(bullet, k, v)
+    session.commit()
+
+
 def add_rifle(rifleName, sh, twist, rightTwist, caliberName, diameter, **kwargs):
     session: Session = SessMake(bind=engine)
-    d = session.query(Diameter).filter_by(diameter=diameter).first()
-
-    if not d:
-        d = Diameter(diameter=diameter)
-        session.add(d)
 
     caliber = session.query(Caliber).filter_by(name=caliberName).first()
 
@@ -142,66 +169,106 @@ def add_rifle(rifleName, sh, twist, rightTwist, caliberName, diameter, **kwargs)
     session.close()
 
 
-def add_cartridge(diameter, caliberName, cartridgeName, mv, temp, ts, **kwargs):
+def merge_caliber(name):
+    session: Session = SessMake(bind=engine)
+    caliber = session.query(Caliber).filter_by(name=name).first()
+    # if not caliber:
+    #     caliber = Caliber(name, diameter_id)
+    #     session.add(caliber)
+    #     session.commit()
+    return caliber
+
+
+def merge_cartridge(name, caliber, mv, temp, ts, id=None):
     session: Session = SessMake(bind=engine)
 
-    d = session.query(Diameter).filter_by(diameter=diameter).first()
+    c = merge_caliber(caliber)
 
-    if not d:
-        d = Diameter(diameter=diameter)
-        session.add(d)
-
-    caliber = session.query(Caliber).filter_by(name=caliberName).first()
-
-    if not caliber and d:
-        caliber = Caliber(caliberName, d.id)
-        session.add(caliber)
-
-    if caliber:
-        cartridge = Cartridge(cartridgeName, mv, temp, ts, caliber.id)
-        session.add(cartridge)
-
-    session.commit()
-    session.close()
+    if c:
+        cartridge = session.query(Cartridge).get(id)
+        if cartridge:
+            cartridge.name = name
+            cartridge.caliber_id = c.id
+            cartridge.mv = mv
+            cartridge.temp = temp
+            cartridge.ts = ts
+        else:
+            cartridge = Cartridge(name, mv, temp, ts, caliber.id)
+            session.add(cartridge)
+        session.commit()
+        return cartridge
 
 
-def add_bullet(bulletName, weight, length, diameter, dragType, dfdata, multiBC, bcTable, bc, mv, **kwargs):
+def merge_bullet(name, weight, length, diameter, bc, id=None):
     session: Session = SessMake(bind=engine)
 
-    d = session.query(Diameter).filter_by(diameter=diameter).first()
-
-    if not d:
-        d = Diameter(diameter=diameter)
-        session.add(d)
-
-    if multiBC == 0:
-        mbc = {
-            'bc0': bc,
-            'bc1': -1,
-            'bc2': -1,
-            'bc3': -1,
-            'bc4': -1,
-            'v0': mv,
-            'v1': 0,
-            'v2': 0,
-            'v3': 0,
-            'v4': 0
-        }
-    else:
-        mbc = {}
-        for i, (v, bc) in enumerate(bcTable):
-            mbc[f'bc{i}'] = bc
-            mbc[f'v{i}'] = v
-
+    d = merge_diameter(diameter)
     if d:
-        bullet = Bullet(bulletName, weight, length, d.id, dragType, dfdata, **mbc)
-        session.add(bullet)
+        g1 = bc['G1'] if 'G1' in bc else None
+        g7 = bc['G7'] if 'G7' in bc else None
+        bullet = session.query(Bullet).get(id)
+        if bullet:
+            bullet.name = name
+            bullet.weight = weight
+            bullet.length = length
+            bullet.diameter_id = d.id
+            bullet.g1 = g1
+            bullet.g7 = g7
+        else:
+            bullet = Bullet(name, weight, length, d.id, g1, g7)
+            session.add(bullet)
 
+        session.commit()
+
+        if 'Custom' in bc:
+            merge_drag_func(bullet.id, bc['Custom'])
+
+        if 'MultiBC' in bc:
+            merge_multi_bc(bullet.id, *bc['MultiBC'])
+        return bullet
+
+
+def merge_diameter(diameter):
+    session: Session = SessMake(bind=engine)
+
+    d = session.query(Diameter).filter_by(diameter=diameter).first()
+
+    if not d:
+        d = Diameter(diameter=diameter)
+        session.add(d)
+        session.commit()
+    return d
+
+
+def merge_multi_bc(id, *args):
+    session: Session = SessMake(bind=engine)
+    mbc = session.query(MultiBC).filter_by(bullet_id=id).first()
+    if mbc:
+        cols = [k for k in MultiBC.__dict__.keys() if k.startswith('v') or k.startswith('bc')]
+        for i, k in enumerate(cols):
+            setattr(mbc, k, args[i])
+    else:
+        session.add(MultiBC(id, *args))
     session.commit()
-    session.close()
+    return mbc
+
+
+def merge_drag_func(id, data):
+    session: Session = SessMake(bind=engine)
+    drag_func = session.query(DragFunc).filter_by(bullet_id=id).first()
+    if not drag_func:
+        session.add(DragFunc(id, data))
+    else:
+        drag_func.data = data
+    session.commit()
+    return drag_func
 
 
 if __name__ == '__main__':
-    add_rifle(**temp_data)
-    add_cartridge(**temp_data)
-    add_bullet(**temp_data)
+    Base.metadata.create_all(engine)
+
+    merge_bullet('bull1', 175, 0.9, .30,
+                   {'G1': .169,
+                    "Custom": [[1, 1], [0, 0]],
+                    "MultiBC": [.1, .1, .1, 0, 0, 700, 800, 900, 0, 0]
+                    }, id=1)

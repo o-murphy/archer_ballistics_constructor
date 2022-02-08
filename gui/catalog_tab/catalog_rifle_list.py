@@ -14,7 +14,7 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
 
         self.data = []
         self.setupTable()
-        self.set_data()
+        # self.set_data()
         self.update_table()
 
     def set_data(self):

@@ -3,6 +3,7 @@ from .templates import Ui_catalogBullet
 from modules import BConverter
 from gui.bc_table import BCTable
 from ..single_custom_widgets.no_wheel_sb import BCSpinBox
+from dbworker.models import Bullet
 
 
 class BC(BCSpinBox):
@@ -21,7 +22,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         add multi_bc
         add drag_func_editor
     """
-    def __init__(self, data: dict = None):
+    def __init__(self, data: Bullet):
         super(CatalogBullet, self).__init__()
         self.setupUi(self)
         self.convert = BConverter()
@@ -46,14 +47,21 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
 
         if data:
-            self.bulletName.setText(data['bulletName'])
-            self.weight.setValue(data['weight'])
-            self.length.setValue(data['length'])
-            self.diameter.setValue(data['diameter'])
-            self.dragType.setCurrentIndex(data['dragType'])
-            self.bc.setValue(data['bc'])
-            self.bc_table.set_data(data['bcTable'])
-            self.df_data = data['df_data'] if 'df_data' in data else None
+            self.bulletName.setText(data.name)
+            self.weight.setValue(data.weight)
+            self.length.setValue(data.length)
+            self.diameter.setValue(data.diameter.diameter)
+            self.dragType.setCurrentIndex(data.drag_type)
+            self.bc.setValue(data.bc0)
+            bc_table = [
+                [data.v0, data.bc0],
+                [data.v1, data.bc1],
+                [data.v2, data.bc2],
+                [data.v3, data.bc3],
+                [data.v4, data.bc4],
+            ]
+            self.bc_table.set_data(bc_table)
+            self.df_data = data.dfdata if hasattr(data, 'dfdata') else None
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):

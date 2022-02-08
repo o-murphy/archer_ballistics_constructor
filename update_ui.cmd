@@ -23,5 +23,7 @@ venv\Scripts\pyuic5 ui_templates\catalog_rifle_info.ui -o gui\catalog_tab\templa
 venv\Scripts\pyuic5 ui_templates\catalog_cartridge_info.ui -o gui\catalog_tab\templates\catalog_cartridge_info.py
 venv\Scripts\pyuic5 ui_templates\catalog_bullet_info.ui -o gui\catalog_tab\templates\catalog_bullet_info.py
 venv\Scripts\pyuic5 ui_templates\selectorBtns.ui -o gui\catalog_tab\templates\selectorBtns.py
+venv\Scripts\pyuic5 ui_templates\catalog_caliber_list.ui -o gui\catalog_tab\templates\catalog_caliber_list.py
+venv\Scripts\pyuic5 ui_templates\caliber_edit.ui -o gui\catalog_tab\templates\caliber_edit.py
 
 venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py

@@ -12,3 +12,5 @@ from .catalog_rifle_info import Ui_catalogRifleInfo
 from .catalog_cartridge_info import Ui_catalogCartridgeInfo
 from .catalog_bullet_info import Ui_catalogBulletInfo
 from .selectorBtns import Ui_selectorBtns
+from .catalog_caliber_list import Ui_catalogCaliberList
+from .caliber_edit import Ui_caliberEdit

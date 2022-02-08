@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from .catalog_item_edit import CatalogItemEdit
 from .selectorBtns import SelectBtn
 
@@ -8,17 +8,17 @@ from .selectorBtns import SelectBtn
 #         super(DeleteButton, self).__init__(parent)
 #         self.setText('Del')
 
-
-class EditButton(QtWidgets.QPushButton):
-    def __init__(self, parent):
-        super(EditButton, self).__init__(parent)
-        self.setText('Edit')
-
-
-class CopyButton(QtWidgets.QPushButton):
-    def __init__(self, parent):
-        super(CopyButton, self).__init__(parent)
-        self.setText('Copy')
+#
+# class EditButton(QtWidgets.QPushButton):
+#     def __init__(self, parent):
+#         super(EditButton, self).__init__(parent)
+#         self.setText('Edit')
+#
+#
+# class CopyButton(QtWidgets.QPushButton):
+#     def __init__(self, parent):
+#         super(CopyButton, self).__init__(parent)
+#         self.setText('Copy')
 
 
 class CatalogList(QtWidgets.QWidget):
@@ -35,6 +35,15 @@ class CatalogList(QtWidgets.QWidget):
 
         self.tableWidget.currentCellChanged.connect(self.row_changed)
         self.tableWidget.doubleClicked.connect(self.double_clicked)
+
+        self.tableWidget.doubleClicked.connect(self.edit_item)
+        self.tableWidget.viewport().installEventFilter(self)
+
+    def eventFilter(self, watched, event):
+        if watched == self.tableWidget.viewport() and event.type() == QtCore.QEvent.MouseButtonDblClick:
+            if not self.tableWidget.item(self.viewport_row(), 0):
+                self.new_item()
+        return QtWidgets.QWidget.eventFilter(self, watched, event)
 
     def double_clicked(self, index):
         id = self.tableWidget.item(index.row(), 0).text()
@@ -67,19 +76,16 @@ class CatalogList(QtWidgets.QWidget):
         return self.tableWidget.indexAt(cursor).row()
 
     def copy_item(self):
-        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-        print('here will be create copy of item in db', id)
+        pass
 
     def edit_item(self):
-        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-        print('here will be query to db to get', id)
-
-        edit = CatalogItemEdit('Rifle', self.editor(temp_data))
-        if edit.exec_():
-            temp_data = edit.get_data()
-            print('here will be query to db to edit', id)
+        pass
 
     def delete_item(self):
-        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-        self.tableWidget.removeRow(self.viewport_row())
-        print('here will be deleted', id)
+        pass
+
+    def new_item(self):
+        pass
+
+    def edit_dialog(self):
+        pass
