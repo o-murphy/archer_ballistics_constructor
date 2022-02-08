@@ -22,7 +22,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         add multi_bc
         add drag_func_editor
     """
-    def __init__(self, data: Bullet):
+    def __init__(self, data: Bullet = None):
         super(CatalogBullet, self).__init__()
         self.setupUi(self)
         self.convert = BConverter()
@@ -34,7 +34,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
 
-        self.dragType.currentIndexChanged.connect(self.set_drag_type)
+        # self.dragType.currentIndexChanged.connect(self.set_drag_type)
 
         self.weightSwitch.clicked.connect(lambda: self.convert_values(self.weight, self.weightQuantity))
         self.lengthSwitch.clicked.connect(lambda: self.convert_values(self.length, self.lengthQuantity))
@@ -43,8 +43,8 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.bc_table = BCTable()
         self.bc = BC()
 
-        self.bulletGroupBox.layout().addWidget(self.bc, 5, 1, 1, 1)
-        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
+        # self.bulletGroupBox.layout().addWidget(self.bc, 5, 1, 1, 1)
+        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 3, 6, 1)
 
         if data:
             self.bulletName.setText(data.name)
@@ -52,16 +52,16 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.length.setValue(data.length)
             self.diameter.setValue(data.diameter.diameter)
             self.dragType.setCurrentIndex(data.drag_type)
-            self.bc.setValue(data.bc0)
-            bc_table = [
-                [data.v0, data.bc0],
-                [data.v1, data.bc1],
-                [data.v2, data.bc2],
-                [data.v3, data.bc3],
-                [data.v4, data.bc4],
-            ]
-            self.bc_table.set_data(bc_table)
-            self.df_data = data.dfdata if hasattr(data, 'dfdata') else None
+            self.bc.setValue(data.bc)
+            # bc_table = [
+            #     [data.v0, data.bc0],
+            #     [data.v1, data.bc1],
+            #     [data.v2, data.bc2],
+            #     [data.v3, data.bc3],
+            #     [data.v4, data.bc4],
+            # ]
+            # self.bc_table.set_data(bc_table)
+            # self.df_data = data.dfdata if hasattr(data, 'dfdata') else None
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
