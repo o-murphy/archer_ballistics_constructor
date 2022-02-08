@@ -7,6 +7,7 @@ class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
     def __init__(self, title, widget: QtWidgets.QWidget):
         super(CatalogItemEdit, self).__init__()
         self.setupUi(self)
+
         self.setWindowTitle(title)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
         self.widget = widget

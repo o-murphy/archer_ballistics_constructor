@@ -27,6 +27,9 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
                                     border: 1px solid rgb(78, 78, 78);
                                     padding-top: 0px;
                                 }
+                                QTableCornerButton::section {
+                                    background: rgb(51, 51, 51);
+                                }
                                 """
                            )
 
