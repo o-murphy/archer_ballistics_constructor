@@ -47,16 +47,18 @@ class Rifle(Base):
     sh = Column(Integer)
     twist = Column(Integer)
     is_right = Column(Boolean)
+    tile = Column(String)
 
     caliber_id = Column(Integer, ForeignKey('caliber.id'))
     caliber = relationship("Caliber", back_populates="rifle")
 
-    def __init__(self, name, caliber_id, sh, twist, is_right):
+    def __init__(self, name, caliber_id, sh, twist, is_right, tile):
         self.name = name
         self.caliber_id = caliber_id
         self.sh = sh
         self.twist = twist
         self.is_right = is_right
+        self.tile = tile
 
 
 class Cartridge(Base):

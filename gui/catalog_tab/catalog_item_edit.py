@@ -15,5 +15,5 @@ class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
         self.gridLayout.addWidget(self.widget)
         self.gridLayout.addWidget(self.buttonBox)
 
-    def get_data(self):
-        return self.widget.get_data()
+    def get(self):
+        return self.widget.get()

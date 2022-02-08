@@ -14,8 +14,8 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.setStyleSheet(load_qss('qss/application.qss') +
                            """
             QTabBar::tab {
-                height: 140px;
-                width: 50px;
+                height: 100px;
+                width: 30px;
                 font-size: 15px;
                 border-bottom-left-radius: 8px;
                 border-top-left-radius: 8px;
