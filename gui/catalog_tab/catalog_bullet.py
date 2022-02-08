@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_catalogBullet
 from modules import BConverter
-from gui.bc_table import BCTable
+# from gui.bc_table import BCTable
 from ..single_custom_widgets.no_wheel_sb import BCSpinBox
 from dbworker.models import Bullet
 
@@ -27,6 +27,17 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.setupUi(self)
         self.convert = BConverter()
 
+        self.n = None
+        self.w = None
+        self.ln = None
+        self.d = None
+        self.w = None
+        self.g1 = None
+        self.g7 = None
+        self.mbc1 = None
+        self.mbc7 = None
+        self.cdf = None
+
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)
         self.weightQuantity.setItemData(1, self.convert.g_to_gr)
         self.lengthQuantity.setItemData(0, self.convert.inch_to_mm)
@@ -34,34 +45,17 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
 
-        # self.dragType.currentIndexChanged.connect(self.set_drag_type)
-
         self.weightSwitch.clicked.connect(lambda: self.convert_values(self.weight, self.weightQuantity))
         self.lengthSwitch.clicked.connect(lambda: self.convert_values(self.length, self.lengthQuantity))
         self.diameterSwitch.clicked.connect(lambda: self.convert_values(self.diameter, self.diameterQuantity))
-
-        self.bc_table = BCTable()
-        self.bc = BC()
-
-        # self.bulletGroupBox.layout().addWidget(self.bc, 5, 1, 1, 1)
-        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 3, 6, 1)
 
         if data:
             self.bulletName.setText(data.name)
             self.weight.setValue(data.weight)
             self.length.setValue(data.length)
             self.diameter.setValue(data.diameter.diameter)
-            self.dragType.setCurrentIndex(data.drag_type)
-            self.bc.setValue(data.bc)
-            # bc_table = [
-            #     [data.v0, data.bc0],
-            #     [data.v1, data.bc1],
-            #     [data.v2, data.bc2],
-            #     [data.v3, data.bc3],
-            #     [data.v4, data.bc4],
-            # ]
-            # self.bc_table.set_data(bc_table)
-            # self.df_data = data.dfdata if hasattr(data, 'dfdata') else None
+            self.bcG1.setValue(data.g1)
+            self.bcG7.setValue(data.g7)
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
@@ -75,26 +69,15 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         if spin.objectName() == 'weight':
             spin.setSingleStep(0.01 if cur_idx == 0 else 0.1)
 
-    def set_drag_type(self, value):
-        if value in [0, 1]:
-            self.bc_table.setVisible(False)
-            self.bc.setVisible(True)
-
-        elif value in [3, 4]:
-            self.bc_table.setVisible(True)
-            self.bc.setVisible(False)
-        else:
-            self.bc_table.setVisible(False)
-            self.bc.setVisible(False)
-
-    def get_data(self):
-        return {
-            'bulletName': self.bulletName.text(),
-            'weight': self.get_cln(self.weight, self.weightQuantity),
-            'length': self.get_cln(self.length, self.lengthQuantity),
-            'diameter': self.get_cln(self.diameter, self.diameterQuantity),
-            'dragType': self.dragType.currentIndex(),
-            'bc': self.bc.value(),
-            'bcTable': self.bc_table.get_data(),
-            'df_data': self.df_data
-        }
+    def get(self):
+        self.n = self.bulletName.text()
+        self.w = self.get_cln(self.weight, self.weightQuantity)
+        self.ln = self.get_cln(self.length, self.lengthQuantity)
+        self.d = self.get_cln(self.diameter, self.diameterQuantity)
+        self.w = self.get_cln(self.weight, self.weightQuantity)
+        self.g1 = self.bcG1.value()
+        self.g7 = self.bcG7.value()
+        self.mbc1 = None  # self.mbcG1edit
+        self.mbc7 = None  # self.mbcG7edit
+        self.cdf = None  # self.cdf
+        return self

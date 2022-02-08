@@ -22,33 +22,60 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
         sess = db.SessMake()
         bullets = sess.query(Bullet).all()
         for i in bullets:
-            self.data.append([i.id, i.name, i.weight, i.length, i.diameter.diameter, i.bc])
+            self.data.append([i.id, i.name, i.weight, i.length, i.diameter.diameter])
         self.update_table()
 
     def edit_dialog(self):
         item = self.tableWidget.item(self.viewport_row(), 0)
         id = int(item.text()) if item else None
         sess = db.SessMake()
-        r = sess.query(Bullet).get(id) if id else None
+        b = sess.query(Bullet).get(id) if id else None
         if id:
-            edit = CatalogItemEdit('Rifle edit', self.editor(r))
+            edit = CatalogItemEdit('Rifle edit', self.editor(b))
         else:
             edit = CatalogItemEdit('Rifle edit', self.editor())
         if edit.exec_():
             ret = edit.get()
-            # ret.id = id
-            # ret.r = r
-            # ret.sess = sess
-            # return ret
+            ret.id = id
+            ret.b = b
+            ret.sess = sess
+            d = ret.sess.query(Diameter).filter_by(diameter=ret.d).first()
+            if not d:
+                d = Diameter(ret.d)
+                ret.sess.add(d)
+            ret.d = d
+            return ret
 
     def new_item(self):
         ret = self.edit_dialog()
-        #
-        # if ret:
-        #     d = ret.sess.query(Diameter).filter_by(diameter=ret.c).first()
-        #     ret.sess.add(Rifle(ret.n, c.id, ret.s, ret.t, ret.ir, ret.tl))
+        if ret:
+            ret.sess.add(Bullet(ret.n, ret.w, ret.ln, ret.d.id, ret.g1, ret.g7))
+            ret.sess.commit()
+            self.set_data()
+
+    def edit_item(self):
+        ret = self.edit_dialog()
+        if ret:
+            b: Bullet = ret.b
+            b.name = ret.n
+            b.weight = ret.w
+            b.length = ret.ln
+            b.diameter_id = ret.d.id
+            b.g1 = ret.g1
+            b.g7 = ret.g7
+            ret.sess.commit()
+            self.set_data()
+
+        #     c = ret.sess.query(Caliber).filter_by(name=ret.c).first()
+        #     r: Rifle = ret.r
+        #     r.name = ret.n
+        #     r.caliber_id = c.id
+        #     r.sh = ret.s
+        #     r.twist = ret.t
+        #     r.is_right = ret.ir
+        #     r.tile = ret.tl
         #     ret.sess.commit()
-        # self.set_data()
+        #     self.set_data()
 
     # def copy_item(self):
     #     id = int(self.tableWidget.item(self.viewport_row(), 0).text())
