@@ -20,6 +20,8 @@ class Ui_catalogRifleList(object):
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(catalogRifleList)
+        self.tableWidget.setToolTip("")
+        self.tableWidget.setWhatsThis("")
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)

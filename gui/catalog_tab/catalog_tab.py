@@ -30,6 +30,11 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
                                 QTableCornerButton::section {
                                     background: rgb(51, 51, 51);
                                 }
+                                QTableWidget {
+                                    background-image: url(:/icons/res/drawable-hdpi-v4/addbtn_menu21b.png);
+                                    background-repeat: no-repeat; 
+                                    background-position: center;
+                                }
                                 """
                            )
 

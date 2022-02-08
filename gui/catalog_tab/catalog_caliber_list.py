@@ -1,3 +1,4 @@
+from PyQt5 import QtWidgets
 from .catalog_list import CatalogList
 from .templates import Ui_catalogCaliberList
 from .caliber_edit import CaliberEdit
