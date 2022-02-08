@@ -13,21 +13,22 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
         self.setStyleSheet(load_qss('qss/application.qss') +
                            """
-            QTabBar::tab {
-                height: 100px;
-                width: 30px;
-                font-size: 15px;
-                border-bottom-left-radius: 8px;
-                border-top-left-radius: 8px;
-                border-bottom-right-radius: 0px;
-                border-top-right-radius: 0px;
-            }
-            QGroupBox {
-                color: rgb(255, 255, 255);
-                border: 1px solid rgb(78, 78, 78);
-                padding-top: 0px;
-            }
-        """)
+                                QTabBar::tab {
+                                    height: 100px;
+                                    width: 30px;
+                                    font-size: 15px;
+                                    border-bottom-left-radius: 8px;
+                                    border-top-left-radius: 8px;
+                                    border-bottom-right-radius: 0px;
+                                    border-top-right-radius: 0px;
+                                }
+                                QGroupBox {
+                                    color: rgb(255, 255, 255);
+                                    border: 1px solid rgb(78, 78, 78);
+                                    padding-top: 0px;
+                                }
+                                """
+                           )
 
         self.selector = CatalogSelector()
         self.info = CatalogInfo()

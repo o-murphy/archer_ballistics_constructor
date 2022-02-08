@@ -1,6 +1,8 @@
 from .catalog_list import CatalogList
 from .templates import Ui_catalogCaliberList
 from .caliber_edit import CaliberEdit
+from .catalog_item_edit import CatalogItemEdit
+
 from dbworker import db
 from dbworker.models import *
 
@@ -30,7 +32,7 @@ class CatalogCaliberList(CatalogList, Ui_catalogCaliberList):
         sess = db.SessMake()
         c = sess.query(Caliber).get(id) if id else None
         if id:
-            edit = CaliberEdit(c.name, c.diameter.diameter)
+            edit = CatalogItemEdit('Caliber edit', CaliberEdit(c.name, c.diameter.diameter))
         else:
             edit = CaliberEdit()
         if edit.exec_():
