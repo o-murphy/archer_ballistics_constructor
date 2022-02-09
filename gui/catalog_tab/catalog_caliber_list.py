@@ -79,7 +79,7 @@ class CatalogCaliberList(CatalogList, Ui_catalogCaliberList):
         sess = db.SessMake()
         c = sess.query(Caliber).get(id)
         r = sess.query(Rifle).filter_by(caliber_id=c.id).first()
-        b = self.query(Bullet).filter_by(diameter_id=c.diameter.diameter).first()
+        b = sess.query(Bullet).filter_by(diameter_id=c.diameter.id).first()
         if not r and not b:
             d = sess.query(Diameter).filter_by(diameter=c.diameter.diameter).all()
             if d:

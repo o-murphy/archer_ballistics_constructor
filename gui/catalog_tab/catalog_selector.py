@@ -17,7 +17,6 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
         self.caliber.setLayout(self.caliberLayout)
         self.caliber.layout().addWidget(self.caliber_list)
 
-
         self.rifle_list = CatalogRifleList()
         self.rifleLayout = QtWidgets.QGridLayout()
         self.rifleLayout.setContentsMargins(0, 0, 0, 0)

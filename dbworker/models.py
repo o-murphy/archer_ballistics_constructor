@@ -75,12 +75,13 @@ class Cartridge(Base):
     bullet_id = Column(Integer, ForeignKey('bullet.id'))
     bullet = relationship("Bullet", back_populates="cartridge")
 
-    def __init__(self, name, mv, temp, ts, caliber_id):
+    def __init__(self, name, mv, temp, ts, caliber_id, bullet_id):
         self.name = name
         self.caliber_id = caliber_id
         self.ts = ts
         self.mv = mv
         self.temp = temp
+        self.bullet_id = bullet_id
 
 
 class Bullet(Base):

@@ -1,24 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from .catalog_item_edit import CatalogItemEdit
 from .selectorBtns import SelectBtn
-
-
-# class DeleteButton(QtWidgets.QPushButton):
-#     def __init__(self, parent=None):
-#         super(DeleteButton, self).__init__(parent)
-#         self.setText('Del')
-
-#
-# class EditButton(QtWidgets.QPushButton):
-#     def __init__(self, parent):
-#         super(EditButton, self).__init__(parent)
-#         self.setText('Edit')
-#
-#
-# class CopyButton(QtWidgets.QPushButton):
-#     def __init__(self, parent):
-#         super(CopyButton, self).__init__(parent)
-#         self.setText('Copy')
 
 
 class CatalogList(QtWidgets.QWidget):
@@ -33,9 +14,6 @@ class CatalogList(QtWidgets.QWidget):
         for i in range(2, header.count()):
             header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
-        self.tableWidget.currentCellChanged.connect(self.row_changed)
-        self.tableWidget.doubleClicked.connect(self.double_clicked)
-
         self.tableWidget.doubleClicked.connect(self.edit_item)
         self.tableWidget.viewport().installEventFilter(self)
 
@@ -44,14 +22,6 @@ class CatalogList(QtWidgets.QWidget):
             if not self.tableWidget.item(self.viewport_row(), 0):
                 self.new_item()
         return QtWidgets.QWidget.eventFilter(self, watched, event)
-
-    def double_clicked(self, index):
-        id = self.tableWidget.item(index.row(), 0).text()
-        print('here will added to constructor', id)
-
-    def row_changed(self, row, col, prow, pcol):
-        id = self.tableWidget.item(row, 0).text()
-        print('here will be query to db to draw info about', id)
 
     def update_table(self):
         print('here will be query to db')

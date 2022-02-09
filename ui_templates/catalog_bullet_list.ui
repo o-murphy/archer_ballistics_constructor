@@ -88,11 +88,6 @@
      </column>
      <column>
       <property name="text">
-       <string>BC</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
        <string>Edit</string>
       </property>
      </column>

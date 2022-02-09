@@ -14,3 +14,4 @@ from .catalog_bullet_info import Ui_catalogBulletInfo
 from .selectorBtns import Ui_selectorBtns
 from .catalog_caliber_list import Ui_catalogCaliberList
 from .caliber_edit import Ui_caliberEdit
+from .catalog_info_tools import Ui_catalogInfoTools

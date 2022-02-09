@@ -78,12 +78,12 @@
      </column>
      <column>
       <property name="text">
-       <string>Velocity</string>
+       <string>Bullet</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Temp.</string>
+       <string>Velocity</string>
       </property>
      </column>
      <column>

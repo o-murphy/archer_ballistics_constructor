@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>133</height>
+    <width>687</width>
+    <height>221</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>157</height>
+    <height>221</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -67,6 +67,80 @@
       <bool>false</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_74">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Caliber:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_73">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Bullet:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="ts">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>ts</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" alignment="Qt::AlignLeft">
+       <widget class="QLabel" name="cartridgeName">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Cartridge name</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
        <widget class="QLabel" name="label_72">
         <property name="sizePolicy">
@@ -91,33 +165,16 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
-       <widget class="QLabel" name="label_70">
+      <item row="1" column="1" alignment="Qt::AlignLeft">
+       <widget class="QLabel" name="mv">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
         <property name="text">
-         <string>Muzzle Velocity:</string>
+         <string>mv</string>
         </property>
        </widget>
       </item>
@@ -151,16 +208,33 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1" alignment="Qt::AlignLeft">
-       <widget class="QLabel" name="mv">
+      <item row="1" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
+       <widget class="QLabel" name="label_70">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>mv</string>
+         <string>Muzzle Velocity:</string>
         </property>
        </widget>
       </item>
@@ -177,29 +251,51 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1" alignment="Qt::AlignLeft">
-       <widget class="QLabel" name="ts">
+      <item row="4" column="1">
+       <widget class="QLabel" name="caliber">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>ts</string>
+         <string>caliber</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" alignment="Qt::AlignLeft">
-       <widget class="QLabel" name="cartridgeName">
+      <item row="5" column="1">
+       <widget class="QLabel" name="bullet">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>Cartridge name</string>
+         <string>bullet</string>
         </property>
        </widget>
       </item>

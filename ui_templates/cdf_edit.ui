@@ -134,7 +134,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../.rsrc/res.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

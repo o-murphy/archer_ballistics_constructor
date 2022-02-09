@@ -87,3 +87,4 @@ class Ui_cdfEdit(object):
         self.copyTable_3.setText(_translate("cdfEdit", "Remove"))
         self.copyTable_4.setText(_translate("cdfEdit", "Clear"))
         self.lineEdit.setPlaceholderText(_translate("cdfEdit", "Comment here"))
+import res_rc

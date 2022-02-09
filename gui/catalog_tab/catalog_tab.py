@@ -46,7 +46,7 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
         self.selector.rifle_list.tableWidget.currentCellChanged.connect(self.show_rifle_info)
         self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
-        self.selector.bullet_list.tableWidget.currentCellChanged.connect(self.show_bullet_info)
+        # self.selector.bullet_list.tableWidget.currentCellChanged.connect(self.show_bullet_info)
 
         self.selector.tabWidget.currentChanged.connect(self.show_templates)
 
@@ -56,18 +56,36 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
     def show_rifle_info(self, row, col, prow, pcol):
         if row >= 0:
-            r = self.selector.rifle_list.tableWidget.item(row, 0).text()
-            self.info.show_rifle(r)
+            item = self.selector.rifle_list.tableWidget.item(
+                self.selector.rifle_list.viewport_row(), 0
+            )
+            id = int(item.text()) if item else None
+            if id:
+                self.info.show_rifle(id)
+        else:
+            self.info.remove_rifle()
 
     def show_cartridge_info(self, row, col, prow, pcol):
         if row >= 0:
-            r = self.selector.cartridge_list.tableWidget.item(row, 0).text()
-            self.info.show_cartridge(r)
+            item = self.selector.cartridge_list.tableWidget.item(
+                self.selector.cartridge_list.viewport_row(), 0
+            )
+            id = int(item.text()) if item else None
+            if id:
+                self.info.show_cartridge(id)
+        else:
+            self.info.remove_cartridge()
 
-    def show_bullet_info(self, row, col, prow, pcol):
-        if row >= 0:
-            r = self.selector.bullet_list.tableWidget.item(row, 0).text()
-            self.info.show_bullet(r)
+    # def show_bullet_info(self, row, col, prow, pcol):
+    #     if row >= 0:
+    #         item = self.selector.bullet_list.tableWidget.item(
+    #             self.selector.bullet_list.viewport_row(), 0
+    #         )
+    #         id = int(item.text()) if item else None
+    #         if id:
+    #             self.info.show_bullet(id)
+    #     else:
+    #         self.info.remove_bullet()
 
     def show_templates(self, index):
         print('tab:', index)

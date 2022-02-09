@@ -26,7 +26,8 @@ venv\Scripts\pyuic5 ui_templates\selectorBtns.ui -o gui\catalog_tab\templates\se
 venv\Scripts\pyuic5 ui_templates\catalog_caliber_list.ui -o gui\catalog_tab\templates\catalog_caliber_list.py
 venv\Scripts\pyuic5 ui_templates\caliber_edit.ui -o gui\catalog_tab\templates\caliber_edit.py
 REM venv\Scripts\pyuic5 ui_templates\bc_edit.ui -o gui\catalog_tab\templates\bc_edit.py
-venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\catalog_tab\drag_func_settings\templates\mbc_edit.py
-venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\catalog_tab\drag_func_settings\templates\cdf_edit.py
+REM venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\catalog_tab\drag_func_settings\templates\mbc_edit.py
+REM venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\catalog_tab\drag_func_settings\templates\cdf_edit.py
+venv\Scripts\pyuic5 ui_templates\catalog_info_tools.ui -o gui\catalog_tab\templates\catalog_info_tools.py
 
 venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
