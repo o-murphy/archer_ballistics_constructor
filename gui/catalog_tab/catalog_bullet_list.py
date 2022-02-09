@@ -30,8 +30,9 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
         id = int(item.text()) if item else None
         sess = db.SessMake()
         b = sess.query(Bullet).get(id) if id else None
+        df = sess.query(DragFunc).filter_by(bullet_id=id).all()
         if id:
-            edit = CatalogItemEdit('Rifle edit', self.editor(b))
+            edit = CatalogItemEdit('Rifle edit', self.editor(b, df))
         else:
             edit = CatalogItemEdit('Rifle edit', self.editor())
         if edit.exec_():
@@ -43,14 +44,26 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
             if not d:
                 d = Diameter(ret.d)
                 ret.sess.add(d)
+                sess.commit()
             ret.d = d
             return ret
+
+    # def update_drag(self):
 
     def new_item(self):
         ret = self.edit_dialog()
         if ret:
-            ret.sess.add(Bullet(ret.n, ret.w, ret.ln, ret.d.id, ret.g1, ret.g7))
+            bullet = Bullet(ret.n, ret.w, ret.ln, ret.d.id)
+            ret.sess.add(bullet)
             ret.sess.commit()
+
+            drags = ret.sess.query(DragFunc).filter_by(bullet_id=bullet.id).all()
+            for df in drags:
+                ret.sess.delete(df)
+            for df in ret.df:
+                ret.sess.add(DragFunc(*df, bullet_id=bullet.id))
+                ret.sess.commit()
+
             self.set_data()
 
     def edit_item(self):
@@ -61,10 +74,30 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
             b.weight = ret.w
             b.length = ret.ln
             b.diameter_id = ret.d.id
-            b.g1 = ret.g1
-            b.g7 = ret.g7
             ret.sess.commit()
             self.set_data()
+
+            drags = ret.sess.query(DragFunc).filter_by(bullet_id=ret.id).all()
+            for df in drags:
+                ret.sess.delete(df)
+            for df in ret.df:
+                ret.sess.add(DragFunc(*df, bullet_id=ret.id))
+                ret.sess.commit()
+
+            self.set_data()
+
+    def delete_item(self):
+        id = int(self.tableWidget.item(self.viewport_row(), 0).text())
+        sess = db.SessMake()
+        b = sess.query(Bullet).get(id)
+
+        drags = sess.query(DragFunc).filter_by(bullet_id=id).all()
+        for df in drags:
+            sess.delete(df)
+
+        sess.delete(b)
+        sess.commit()
+        self.set_data()
 
         #     c = ret.sess.query(Caliber).filter_by(name=ret.c).first()
         #     r: Rifle = ret.r

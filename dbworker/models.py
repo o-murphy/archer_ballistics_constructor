@@ -89,13 +89,10 @@ class Bullet(Base):
     name = Column(String)
     weight = Column(Integer)
     length = Column(Integer)
-    g1 = Column(Integer)
-    g7 = Column(Integer)
 
     diameter_id = Column(Integer, ForeignKey('diameter.id'))
     diameter = relationship('Diameter', back_populates='bullet')
 
-    multi_bc = relationship("MultiBC", back_populates="bullet")
     drag_func = relationship("DragFunc", back_populates="bullet")
     cartridge = relationship("Cartridge", back_populates="bullet")
 
@@ -104,40 +101,6 @@ class Bullet(Base):
         self.weight = weight
         self.length = length
         self.diameter_id = diameter_id
-        self.g1 = g1
-        self.g7 = g7
-
-
-class MultiBC(Base):
-    __tablename__ = "multi_bc"
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    bullet_id = Column(Integer, ForeignKey('bullet.id'))
-    bullet = relationship('Bullet', back_populates='multi_bc')
-
-    bc0 = Column(Integer)
-    bc1 = Column(Integer)
-    bc2 = Column(Integer)
-    bc3 = Column(Integer)
-    bc4 = Column(Integer)
-
-    v0 = Column(Integer)
-    v1 = Column(Integer)
-    v2 = Column(Integer)
-    v3 = Column(Integer)
-    v4 = Column(Integer)
-
-    def __init__(self, bullet_id, bc0, bc1, bc2, bc3, bc4, v0, v1, v2, v3, v4):
-        self.bullet_id = bullet_id
-        self.bc0 = bc0
-        self.bc1 = bc1
-        self.bc2 = bc2
-        self.bc3 = bc3
-        self.bc4 = bc4
-        self.v0 = v0
-        self.v1 = v1
-        self.v2 = v2
-        self.v3 = v3
-        self.v4 = v4
 
 
 class DragFunc(Base):
@@ -145,8 +108,12 @@ class DragFunc(Base):
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     bullet_id = Column(Integer, ForeignKey('bullet.id'))
     bullet = relationship('Bullet', back_populates='drag_func')
+    drag_type = Column(String)
     data = Column(JSON)
+    comment = Column(String)
 
-    def __init__(self, bullet_id, data):
-        self.bullet_id = bullet_id
+    def __init__(self, drag_type, data, comment, bullet_id=None):
+        self.drag_type = drag_type
         self.data = data
+        self.comment = comment
+        self.bullet_id = bullet_id
