@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
-from .catalog_info import CatalogInfo
-from .catalog_info_tools import InfoTools
+from .info import CatalogInfo
+from .toolbar import InfoTools
 
 from gui.stylesheet import load_qss
 
@@ -43,54 +43,31 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.info_tools = InfoTools()
         self.gridLayout.addWidget(self.info_tools, 1, 1, 1, 1)
 
-        self.selector.rifle_list.tableWidget.currentCellChanged.connect(self.show_rifle_info)
-        self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
-
-        self.selector.tabWidget.currentChanged.connect(self.show_templates)
+        # self.selector.rifle_list.tableWidget.currentCellChanged.connect(self.show_rifle_info)
+        # self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
 
         self.selector.rifle_list.tableWidget.setCurrentCell(0, 0)
         self.selector.cartridge_list.tableWidget.setCurrentCell(0, 0)
         self.selector.bullet_list.tableWidget.setCurrentCell(0, 0)
 
-        self.info_tools.addTemplate.clicked.connect(self.create_template)
-
-        self.selector.template_list.tableWidget.clicked.connect(self.show_template_info)
-
-    def show_rifle_info(self, row, col, prow, pcol):
-        if row >= 0:
-            item = self.selector.rifle_list.tableWidget.item(
-                self.selector.rifle_list.viewport_row(), 0
-            )
-            id = int(item.text()) if item else None
-            if id:
-                self.info.show_rifle(id)
-        else:
-            self.info.remove_rifle()
-
-    def show_cartridge_info(self, row, col, prow, pcol):
-        if row >= 0:
-            item = self.selector.cartridge_list.tableWidget.item(
-                self.selector.cartridge_list.viewport_row(), 0
-            )
-            id = int(item.text()) if item else None
-            if id:
-                self.info.show_cartridge(id)
-        else:
-            self.info.remove_cartridge()
-
-    def show_templates(self, index):
-        print('tab:', index)
-
-    def create_template(self):
-        self.info.create_template()
-        self.selector.template_list.set_data()
-
-    def show_template_info(self, row, col=None, prow=None, pcol=None):
-        if not isinstance(row, int):
-            row = row.row()
-        item = self.selector.template_list.tableWidget.item(row, 0)
-        if item and row != -1:
-            id = item.text()
-            self.info.show_template(id)
-        else:
-            self.info.remove_template()
+    # def show_rifle_info(self, row, col, prow, pcol):
+    #     if row >= 0:
+    #         item = self.selector.rifle_list.tableWidget.item(
+    #             self.selector.rifle_list.viewport_row(), 0
+    #         )
+    #         id = int(item.text()) if item else None
+    #         if id:
+    #             self.info.show_rifle(id)
+    #     else:
+    #         self.info.remove_rifle()
+    #
+    # def show_cartridge_info(self, row, col, prow, pcol):
+    #     if row >= 0:
+    #         item = self.selector.cartridge_list.tableWidget.item(
+    #             self.selector.cartridge_list.viewport_row(), 0
+    #         )
+    #         id = int(item.text()) if item else None
+    #         if id:
+    #             self.info.show_cartridge(id)
+    #     else:
+    #         self.info.remove_cartridge()

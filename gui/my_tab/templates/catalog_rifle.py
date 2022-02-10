@@ -65,6 +65,7 @@ class Ui_catalogRifle(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.caliberName.sizePolicy().hasHeightForWidth())
         self.caliberName.setSizePolicy(sizePolicy)
+        self.caliberName.setEditable(True)
         self.caliberName.setObjectName("caliberName")
         self.gridLayout.addWidget(self.caliberName, 1, 1, 1, 1)
         self.label_67 = QtWidgets.QLabel(catalogRifle)

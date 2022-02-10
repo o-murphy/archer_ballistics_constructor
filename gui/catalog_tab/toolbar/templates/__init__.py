@@ -1,0 +1,1 @@
+from .catalog_info_tools import Ui_catalogInfoTools

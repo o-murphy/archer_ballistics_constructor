@@ -1,22 +1,12 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_catalogSelector
-from .catalog_rifle_list import CatalogRifleList
-from .catalog_cartridge_list import CatalogCartridgeList
-from .catalog_bullet_list import CatalogBulletList
-from .catalog_caliber_list import CatalogCaliberList
-from .catalog_template_list import CatalogTemplateList
+from .tables import CatalogRifleList, CatalogCartridgeList, CatalogBulletList
 
 
 class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
     def __init__(self):
         super(CatalogSelector, self).__init__()
         self.setupUi(self)
-
-        self.caliber_list = CatalogCaliberList()
-        self.caliberLayout = QtWidgets.QGridLayout()
-        self.caliberLayout.setContentsMargins(0, 0, 0, 0)
-        self.caliber.setLayout(self.caliberLayout)
-        self.caliber.layout().addWidget(self.caliber_list)
 
         self.rifle_list = CatalogRifleList()
         self.rifleLayout = QtWidgets.QGridLayout()
@@ -35,9 +25,3 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
         self.bulletLayout.setContentsMargins(0, 0, 0, 0)
         self.bullets.setLayout(self.bulletLayout)
         self.bullets.layout().addWidget(self.bullet_list)
-
-        self.template_list = CatalogTemplateList()
-        self.templateLayout = QtWidgets.QGridLayout()
-        self.templateLayout.setContentsMargins(0, 0, 0, 0)
-        self.templates.setLayout(self.templateLayout)
-        self.templates.layout().addWidget(self.template_list)

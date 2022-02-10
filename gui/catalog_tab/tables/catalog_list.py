@@ -1,5 +1,4 @@
-from PyQt5 import QtWidgets, QtGui, QtCore
-from .selectorBtns import SelectBtn
+from PyQt5 import QtWidgets, QtGui
 
 
 class CatalogList(QtWidgets.QWidget):
@@ -14,33 +13,11 @@ class CatalogList(QtWidgets.QWidget):
         for i in range(2, header.count()):
             header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
-        self.tableWidget.doubleClicked.connect(self.edit_item)
-        self.tableWidget.viewport().installEventFilter(self)
-        self.tableWidget.clicked.connect(self.sel_cur)
-
-    def eventFilter(self, watched, event):
-        if watched == self.tableWidget.viewport() and event.type() == QtCore.QEvent.MouseButtonDblClick:
-            if not self.tableWidget.item(self.viewport_row(), 0):
-                self.new_item()
-        return QtWidgets.QWidget.eventFilter(self, watched, event)
-
     def update_table(self):
-        print('here will be query to db')
-
         self.tableWidget.setRowCount(len(self.data))
         for i, y in enumerate(self.data):
-
             for j, x in enumerate(y):
                 self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(x)))
-            sel_btn = SelectBtn()
-            edit_btn = sel_btn.editBtn
-            del_btn = sel_btn.delBtn
-            copy_btn = sel_btn.copyBtn
-            edit_btn.clicked.connect(self.edit_item)
-            del_btn.clicked.connect(self.delete_item)
-            copy_btn.clicked.connect(self.copy_item)
-
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, sel_btn)
 
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())

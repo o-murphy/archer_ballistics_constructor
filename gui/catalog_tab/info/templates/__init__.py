@@ -1,0 +1,4 @@
+from .catalog_rifle_info import Ui_catalogRifleInfo
+from .catalog_cartridge_info import Ui_catalogCartridgeInfo
+from .catalog_bullet_info import Ui_catalogBulletInfo
+from .catalog_info import Ui_catalogInfo

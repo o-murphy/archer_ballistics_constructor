@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogInfo
 from .catalog_rifle_info import CatalogRifleInfo
 from .catalog_cartridge_info import CatalogCartridgeInfo
-from .template_info import TemplateInfo
 from dbworker import db
 from dbworker.models import *
 
@@ -21,7 +20,6 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
         self.setLayout(self.gridLayout)
 
     def show_rifle(self, r):
-        self.remove_template()
         self.remove_rifle()
         self.gridLayout.addWidget(CatalogRifleInfo(r), 0, 0, 1, 1)
 
@@ -30,7 +28,6 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
             self.gridLayout.removeWidget(self.findChild(CatalogRifleInfo))
 
     def show_cartridge(self, r):
-        self.remove_template()
         self.remove_cartridge()
         self.gridLayout.addWidget(CatalogCartridgeInfo(r), 1, 0, 1, 1)
 
@@ -55,13 +52,4 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
 
             return rifle, cartridge
 
-    def remove_template(self):
-        if self.findChild(TemplateInfo):
-            self.gridLayout.removeWidget(self.findChild(TemplateInfo))
-
-    def show_template(self, t):
-        self.remove_rifle()
-        self.remove_cartridge()
-        self.remove_template()
-        self.gridLayout.addWidget(TemplateInfo(t), 0, 0, 1, 1)
 

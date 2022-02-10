@@ -86,11 +86,6 @@
        <string>Velocity</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>Edit</string>
-      </property>
-     </column>
     </widget>
    </item>
   </layout>
