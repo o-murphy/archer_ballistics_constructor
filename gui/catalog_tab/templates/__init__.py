@@ -15,3 +15,6 @@ from .selectorBtns import Ui_selectorBtns
 from .catalog_caliber_list import Ui_catalogCaliberList
 from .caliber_edit import Ui_caliberEdit
 from .catalog_info_tools import Ui_catalogInfoTools
+from .catalog_template_list import Ui_catalogTemplateList
+from .template_info import Ui_templateInfo
+from .templateBtns import Ui_templateBtns

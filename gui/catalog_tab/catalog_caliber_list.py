@@ -1,11 +1,28 @@
-from PyQt5 import QtWidgets
 from .catalog_list import CatalogList
 from .templates import Ui_catalogCaliberList
 from .caliber_edit import CaliberEdit
-from .catalog_item_edit import CatalogItemEdit
 
 from dbworker import db
 from dbworker.models import *
+
+
+# from PyQt5.QtSql import QSqlDatabase, QSqlQuery
+#
+# qdb = QSqlDatabase.addDatabase("QSQLITE", "qdb")
+# qdb.setDatabaseName('db.db')
+# qdb.open()
+#
+# calibers_query = QSqlQuery(db=qdb)
+# e = calibers_query.exec_(
+#     """
+#         SELECT * FROM "main"."caliber" LIMIT 0, 49999
+#     """
+# )
+# if not e:
+#     print(QtCore.qDebug(calibers_query.lastError().text()))
+# else:
+#     calibers_query.first()
+#     print(calibers_query.value(1))
 
 
 class CatalogCaliberList(CatalogList, Ui_catalogCaliberList):
@@ -33,7 +50,8 @@ class CatalogCaliberList(CatalogList, Ui_catalogCaliberList):
         sess = db.SessMake()
         c = sess.query(Caliber).get(id) if id else None
         if id:
-            edit = CatalogItemEdit('Caliber edit', CaliberEdit(c.name, c.diameter.diameter))
+            # edit = CatalogItemEdit('Caliber edit', CaliberEdit(c.name, c.diameter.diameter))
+            edit = CaliberEdit(c.name, c.diameter.diameter)
         else:
             edit = CaliberEdit()
         if edit.exec_():

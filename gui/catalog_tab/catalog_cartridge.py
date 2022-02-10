@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogCartridge
 from modules import BConverter
 from dbworker import db
@@ -9,9 +9,13 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
     def __init__(self, data: Cartridge = None):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
+        self.setWindowTitle('Cartridge edit')
+
         self.convert = BConverter()
         self.mvQuantity.setItemData(0, self.convert.mps2fps)
         self.mvQuantity.setItemData(1, self.convert.fps2mps)
+
+        self._translate = QtCore.QCoreApplication.translate
 
         self.n = None
         self.v = None
@@ -42,18 +46,16 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         d = sess.query(Diameter).get(caliber.diameter_id)
 
         bullets = sess.query(Bullet).filter_by(diameter_id=d.id).all()
-        # bullets = sess.query(Bullet).all()
-        print(bullets)
         for i in range(self.bullet.count()):
             self.bullet.removeItem(i)
         for b in bullets:
-            self.bullet.addItem(b.name, b.id)
+            self.bullet.addItem(b.name + ', ' + str(b.weight) + 'gr', b.id)
 
     def set_calibers(self):
         sess = db.SessMake()
         calibers = sess.query(Caliber).all()
         for c in calibers:
-            self.caliber.addItem(c.name, c.id)
+            self.caliber.addItem(c.name + ', ' + f'{c.diameter.diameter:.3f}{self._translate("catalogCartridge", "inch")}', c.id)
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):

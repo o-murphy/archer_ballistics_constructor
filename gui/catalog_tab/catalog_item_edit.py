@@ -13,6 +13,8 @@ class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
         self.widget = widget
         self.widget.setStyleSheet(load_qss('qss/application.qss'))
 
+        self.setMaximumSize(self.widget.maximumSize())
+
         self.gridLayout.addWidget(self.widget)
         self.gridLayout.addWidget(self.buttonBox)
 

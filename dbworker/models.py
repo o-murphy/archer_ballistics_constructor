@@ -52,6 +52,8 @@ class Rifle(Base):
     caliber_id = Column(Integer, ForeignKey('caliber.id'))
     caliber = relationship("Caliber", back_populates="rifle")
 
+    template = relationship("Template", back_populates="rifle")
+
     def __init__(self, name, caliber_id, sh, twist, is_right, tile):
         self.name = name
         self.caliber_id = caliber_id
@@ -74,6 +76,8 @@ class Cartridge(Base):
 
     bullet_id = Column(Integer, ForeignKey('bullet.id'))
     bullet = relationship("Bullet", back_populates="cartridge")
+
+    template = relationship("Template", back_populates="cartridge")
 
     def __init__(self, name, mv, temp, ts, caliber_id, bullet_id):
         self.name = name
@@ -113,8 +117,31 @@ class DragFunc(Base):
     data = Column(JSON)
     comment = Column(String)
 
+    template = relationship("Template", back_populates="drag_func")
+
     def __init__(self, drag_type, data, comment, bullet_id=None):
         self.drag_type = drag_type
         self.data = data
         self.comment = comment
         self.bullet_id = bullet_id
+
+
+class Template(Base):
+    __tablename__ = 'template'
+    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
+    name = Column(String)
+
+    rifle_id = Column(Integer, ForeignKey('rifle.id'))
+    rifle = relationship('Rifle', back_populates='template')
+
+    cartridge_id = Column(Integer, ForeignKey('cartridge.id'))
+    cartridge = relationship('Cartridge', back_populates='template')
+
+    drag_func_id = Column(Integer, ForeignKey('drag_func.id'))
+    drag_func = relationship('DragFunc', back_populates='template')
+
+    def __init__(self, name, rifle_id, cartridge_id, drag_func_id):
+        self.name = name
+        self.rifle_id = rifle_id
+        self.cartridge_id = cartridge_id
+        self.drag_func_id = drag_func_id

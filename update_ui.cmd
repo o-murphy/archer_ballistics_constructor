@@ -28,6 +28,9 @@ venv\Scripts\pyuic5 ui_templates\caliber_edit.ui -o gui\catalog_tab\templates\ca
 REM venv\Scripts\pyuic5 ui_templates\bc_edit.ui -o gui\catalog_tab\templates\bc_edit.py
 REM venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\catalog_tab\drag_func_settings\templates\mbc_edit.py
 REM venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\catalog_tab\drag_func_settings\templates\cdf_edit.py
-venv\Scripts\pyuic5 ui_templates\catalog_info_tools.ui -o gui\catalog_tab\templates\catalog_info_tools.py
+REM venv\Scripts\pyuic5 ui_templates\catalog_info_tools.ui -o gui\catalog_tab\templates\catalog_info_tools.py
+venv\Scripts\pyuic5 ui_templates\catalog_template_list.ui -o gui\catalog_tab\templates\catalog_template_list.py
+venv\Scripts\pyuic5 ui_templates\template_info.ui -o gui\catalog_tab\templates\template_info.py
+venv\Scripts\pyuic5 ui_templates\templateBtns.ui -o gui\catalog_tab\templates\templateBtns.py
 
 venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py

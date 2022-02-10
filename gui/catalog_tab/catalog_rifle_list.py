@@ -73,6 +73,9 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
             ret.sess.commit()
             self.set_data()
 
+            catalog_tab = self.findParent(self.parent(), 'catalogTab')
+            catalog_tab.info.show_rifle(r.id)
+
     def delete_item(self):
         id = int(self.tableWidget.item(self.viewport_row(), 0).text())
         sess = db.SessMake()
@@ -80,3 +83,8 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
         sess.delete(r)
         sess.commit()
         self.set_data()
+
+    def findParent(self, parent, objectName):
+        if parent.objectName() != objectName:
+            return self.findParent(parent.parent(), objectName)
+        return parent

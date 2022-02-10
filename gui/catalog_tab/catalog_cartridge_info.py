@@ -20,3 +20,10 @@ class CatalogCartridgeInfo(QtWidgets.QWidget, Ui_catalogCartridgeInfo):
         self.bullet.setText(self.cartridge.bullet.name + ', ' + str(self.cartridge.bullet.weight) + ' gr')
         self.caliber.setText(
             self.cartridge.caliber.name + ', d:  ' + str(self.cartridge.caliber.diameter.diameter) + ' inch')
+
+        drags = sess.query(DragFunc).filter_by(bullet_id=self.cartridge.bullet.id)
+
+        for df in drags:
+            self.drag_func.addItem(df.drag_type + ' ' + df.comment, df.id)
+
+

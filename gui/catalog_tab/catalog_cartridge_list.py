@@ -73,6 +73,9 @@ class CatalogCartridgeList(CatalogList, Ui_catalogCartridgeList):
             ret.sess.commit()
             self.set_data()
 
+            catalog_tab = self.findParent(self.parent(), 'catalogTab')
+            catalog_tab.info.show_cartridge(c.id)
+
     def delete_item(self):
         item = self.tableWidget.item(self.viewport_row(), 0)
         id = int(item.text()) if item else None
@@ -83,41 +86,7 @@ class CatalogCartridgeList(CatalogList, Ui_catalogCartridgeList):
             sess.commit()
             self.set_data()
 
-
-
-    # def copy_item(self):
-    #     id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-    #     cartridge = db.get_cartridge(id)
-    #
-    #     edit = CatalogItemEdit('Rifle', self.editor(cartridge))
-    #     if edit.exec_():
-    #         new_cartridge = cartridge.__dict__
-    #         new_data = edit.get_data()
-    #         new_cartridge.update(new_data)
-    #         new_cartridge['diameter'] = cartridge.caliber.diameter.diameter
-    #         new_cartridge['name'] = new_data['cartridgeName']
-    #         new_cartridge['caliberName'] = cartridge.caliber.name
-    #
-    #         db.add_cartridge(**new_cartridge)
-    #     self.set_data()
-    #     self.update_table()
-    #
-    # def edit_item(self):
-    #     id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-    #     cartridge = db.get_cartridge(id)
-    #     edit = CatalogItemEdit('Cartridge', self.editor(cartridge))
-    #     if edit.exec_():
-    #         new_cartridge = edit.get_data()
-    #         new_cartridge['diameter'] = cartridge.caliber.diameter.diameter
-    #         new_cartridge['name'] = new_cartridge['cartridgeName']
-    #         new_cartridge['caliberName'] = cartridge.caliber.name
-    #
-    #         db.update_cartridge(id, new_cartridge)
-    #     self.set_data()
-    #     self.update_table()
-    #
-    # def delete_item(self):
-    #     id = int(self.tableWidget.item(self.viewport_row(), 0).text())
-    #     db.delete_cartridge(id)
-    #     self.set_data()
-    #     self.update_table()
+    def findParent(self, parent, objectName):
+        if parent.objectName() != objectName:
+            return self.findParent(parent.parent(), objectName)
+        return parent

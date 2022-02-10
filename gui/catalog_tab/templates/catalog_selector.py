@@ -15,7 +15,6 @@ class Ui_catalogSelector(object):
     def setupUi(self, catalogSelector):
         catalogSelector.setObjectName("catalogSelector")
         catalogSelector.resize(550, 475)
-        catalogSelector.setMaximumSize(QtCore.QSize(800, 16777215))
         self.gridLayout = QtWidgets.QGridLayout(catalogSelector)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)

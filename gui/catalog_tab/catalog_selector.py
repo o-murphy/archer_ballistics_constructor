@@ -4,6 +4,7 @@ from .catalog_rifle_list import CatalogRifleList
 from .catalog_cartridge_list import CatalogCartridgeList
 from .catalog_bullet_list import CatalogBulletList
 from .catalog_caliber_list import CatalogCaliberList
+from .catalog_template_list import CatalogTemplateList
 
 
 class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
@@ -34,3 +35,9 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
         self.bulletLayout.setContentsMargins(0, 0, 0, 0)
         self.bullets.setLayout(self.bulletLayout)
         self.bullets.layout().addWidget(self.bullet_list)
+
+        self.template_list = CatalogTemplateList()
+        self.templateLayout = QtWidgets.QGridLayout()
+        self.templateLayout.setContentsMargins(0, 0, 0, 0)
+        self.templates.setLayout(self.templateLayout)
+        self.templates.layout().addWidget(self.template_list)

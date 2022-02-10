@@ -2,11 +2,13 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogInfo
 from .catalog_rifle_info import CatalogRifleInfo
 from .catalog_cartridge_info import CatalogCartridgeInfo
-from .catalog_bullet_info import CatalogBulletInfo
-from .catalog_info_tools import InfoTools
+from .template_info import TemplateInfo
 
 from dbworker.base import Base, engine
 Base.metadata.create_all(engine)
+
+from dbworker import db
+from dbworker.models import *
 
 
 class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
@@ -19,11 +21,8 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
         self.gridLayout.setAlignment(QtCore.Qt.AlignTop)
         self.setLayout(self.gridLayout)
 
-        self.info_tools = InfoTools()
-
-        self.gridLayout.addWidget(self.info_tools, 2, 0, 1, 1)
-
     def show_rifle(self, r):
+        self.remove_template()
         self.remove_rifle()
         self.gridLayout.addWidget(CatalogRifleInfo(r), 0, 0, 1, 1)
 
@@ -32,18 +31,39 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
             self.gridLayout.removeWidget(self.findChild(CatalogRifleInfo))
 
     def show_cartridge(self, r):
+        self.remove_template()
         self.remove_cartridge()
         self.gridLayout.addWidget(CatalogCartridgeInfo(r), 1, 0, 1, 1)
 
     def remove_cartridge(self):
-        if self.findChild(CatalogRifleInfo):
+        if self.findChild(CatalogCartridgeInfo):
             self.gridLayout.removeWidget(self.findChild(CatalogCartridgeInfo))
 
-    def show_bullet(self, r):
-        self.remove_bullet()
-        self.gridLayout.addWidget(CatalogBulletInfo(r), 2, 0, 1, 1)
+    def create_template(self):
+        r = self.findChild(CatalogRifleInfo)
+        c = self.findChild(CatalogCartridgeInfo)
+        rifle = r.rifle if r else None
+        cartridge = c.cartridge if c else None
+        if rifle and cartridge:
 
-    def remove_bullet(self):
-        if self.findChild(CatalogRifleInfo):
-            self.gridLayout.removeWidget(self.findChild(CatalogBulletInfo))
+            name = rifle.name + ' / ' + cartridge.name
+            drag_func_id = c.drag_func.currentData()
+
+            sess = db.SessMake()
+            t = Template(name, rifle.id, cartridge.id, drag_func_id)
+            sess.add(t)
+            sess.commit()
+
+            return rifle, cartridge
+
+    def remove_template(self):
+        if self.findChild(TemplateInfo):
+            self.gridLayout.removeWidget(self.findChild(TemplateInfo))
+
+    def show_template(self, t):
+        self.remove_rifle()
+        self.remove_cartridge()
+        self.remove_template()
+        if t:
+            self.gridLayout.addWidget(TemplateInfo(t), 0, 0, 1, 1)
 
