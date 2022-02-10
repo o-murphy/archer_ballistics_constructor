@@ -16,6 +16,7 @@ class CatalogList(QtWidgets.QWidget):
 
         self.tableWidget.doubleClicked.connect(self.edit_item)
         self.tableWidget.viewport().installEventFilter(self)
+        self.tableWidget.clicked.connect(self.sel_cur)
 
     def eventFilter(self, watched, event):
         if watched == self.tableWidget.viewport() and event.type() == QtCore.QEvent.MouseButtonDblClick:
@@ -59,3 +60,11 @@ class CatalogList(QtWidgets.QWidget):
 
     def edit_dialog(self):
         pass
+
+    def sel_cur(self):
+        pass
+
+    def findParent(self, parent, objectName):
+        if parent.objectName() != objectName:
+            return self.findParent(parent.parent(), objectName)
+        return parent

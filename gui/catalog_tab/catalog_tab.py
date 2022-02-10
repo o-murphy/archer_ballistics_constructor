@@ -54,7 +54,7 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
 
         self.info_tools.addTemplate.clicked.connect(self.create_template)
 
-        self.selector.template_list.tableWidget.currentCellChanged.connect(self.show_template_info)
+        self.selector.template_list.tableWidget.clicked.connect(self.show_template_info)
 
     def show_rifle_info(self, row, col, prow, pcol):
         if row >= 0:
@@ -85,9 +85,10 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         self.info.create_template()
         self.selector.template_list.set_data()
 
-    def show_template_info(self, row, col, prow, pcol):
+    def show_template_info(self, row, col=None, prow=None, pcol=None):
+        if not isinstance(row, int):
+            row = row.row()
         item = self.selector.template_list.tableWidget.item(row, 0)
-        print(row, item)
         if item and row != -1:
             id = item.text()
             self.info.show_template(id)

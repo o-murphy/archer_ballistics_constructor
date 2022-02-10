@@ -3,12 +3,11 @@ from .templates import Ui_catalogInfo
 from .catalog_rifle_info import CatalogRifleInfo
 from .catalog_cartridge_info import CatalogCartridgeInfo
 from .template_info import TemplateInfo
+from dbworker import db
+from dbworker.models import *
 
 from dbworker.base import Base, engine
 Base.metadata.create_all(engine)
-
-from dbworker import db
-from dbworker.models import *
 
 
 class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
@@ -64,6 +63,5 @@ class CatalogInfo(QtWidgets.QWidget, Ui_catalogInfo):
         self.remove_rifle()
         self.remove_cartridge()
         self.remove_template()
-        if t:
-            self.gridLayout.addWidget(TemplateInfo(t), 0, 0, 1, 1)
+        self.gridLayout.addWidget(TemplateInfo(t), 0, 0, 1, 1)
 

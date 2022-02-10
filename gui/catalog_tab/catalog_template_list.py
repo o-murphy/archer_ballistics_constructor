@@ -11,7 +11,15 @@ class CatalogTemplateList(CatalogList, Ui_catalogTemplateList):
     def __init__(self):
         super(CatalogTemplateList, self).__init__()
         self.setupUi(self)
-        # self.editor = CatalogRifle
+        self.setStyleSheet(
+            """
+            QTableWidget {
+                background-image: url();
+                background-repeat: no-repeat; 
+                background-position: center;
+            }
+            """
+        )
 
         self.data = []
         self.setupTable()
@@ -62,3 +70,13 @@ class CatalogTemplateList(CatalogList, Ui_catalogTemplateList):
 
     def new_profile(self):
         pass
+
+    def sel_cur(self):
+        # item = self.tableWidget.item(self.viewport_row(), 0)
+        # id = int(item.text()) if item else None
+        #
+        # show_template_info
+
+        if id:
+            catalog_tab = self.findParent(self.parent(), 'catalogTab')
+            catalog_tab.info.show_template_info(self.viewport_row(), 0, 0, 0)

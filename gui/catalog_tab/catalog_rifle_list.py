@@ -84,7 +84,9 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
         sess.commit()
         self.set_data()
 
-    def findParent(self, parent, objectName):
-        if parent.objectName() != objectName:
-            return self.findParent(parent.parent(), objectName)
-        return parent
+    def sel_cur(self):
+        item = self.tableWidget.item(self.viewport_row(), 0)
+        id = int(item.text()) if item else None
+        if id:
+            catalog_tab = self.findParent(self.parent(), 'catalogTab')
+            catalog_tab.info.show_rifle(id)

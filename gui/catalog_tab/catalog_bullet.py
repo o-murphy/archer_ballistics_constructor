@@ -66,6 +66,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
 
+        print(drags)
         if drags:
             if len(drags) > 0:
                 for df in drags:
@@ -121,6 +122,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.tableWidget.cellWidget(idx, 3).clicked.connect(self.del_df)
 
         if df:
+            print(df)
             self.tableWidget.cellWidget(idx, 0).setCurrentText(df.drag_type)
             data, comment = df.data, df.comment
             if df.drag_type in ['G1', 'G7']:

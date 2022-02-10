@@ -15,6 +15,8 @@ class TemplateInfo(QtWidgets.QWidget, Ui_templateInfo):
 
         self.rifle = sess.query(Rifle).get(self.template.rifle_id)
 
+        self.templateName.setText('Template: ' + self.template.name)
+
         self.rifleName.setText(self.rifle.name)
         self.sh.setText(str(self.rifle.sh))
         self.twist.setText(

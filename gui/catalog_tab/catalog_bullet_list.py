@@ -30,9 +30,13 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
         id = int(item.text()) if item else None
         sess = db.SessMake()
         b = sess.query(Bullet).get(id) if id else None
-        df = sess.query(DragFunc).filter_by(bullet_id=id).all()
+
         if id:
-            edit = CatalogItemEdit('Rifle edit', self.editor(b, df))
+            print(id)
+            print(sess.query(DragFunc).filter_by(bullet_id=b.id))
+            drags = sess.query(DragFunc).filter_by(bullet_id=b.id).all()
+            print(drags)
+            edit = CatalogItemEdit('Rifle edit', self.editor(b, drags))
         else:
             edit = CatalogItemEdit('Rifle edit', self.editor())
         if edit.exec_():
@@ -77,7 +81,7 @@ class CatalogBulletList(CatalogList, Ui_catalogBulletList):
             ret.sess.commit()
             self.set_data()
 
-            drags = ret.sess.query(DragFunc).filter_by(bullet_id=ret.id).all()
+            drags = ret.sess.query(DragFunc).filter_by(bullet_id=b.id).all()
             for df in drags:
                 ret.sess.delete(df)
             for df in ret.df:

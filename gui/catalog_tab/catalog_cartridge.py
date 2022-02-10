@@ -31,7 +31,7 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
             self.mv.setValue(data.mv)
             self.temp.setValue(data.temp)
             self.ts.setValue(data.ts)
-            self.caliber.setCurrentText(data.caliber.name)
+            self.caliber.setCurrentText(data.caliber.name + ', ' + f'{data.caliber.diameter.diameter:.3f}inch')
             self.set_bullets()
             self.bullet.setCurrentText(data.bullet.name)
         else:
@@ -55,7 +55,7 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         sess = db.SessMake()
         calibers = sess.query(Caliber).all()
         for c in calibers:
-            self.caliber.addItem(c.name + ', ' + f'{c.diameter.diameter:.3f}{self._translate("catalogCartridge", "inch")}', c.id)
+            self.caliber.addItem(c.name + ', ' + f'{c.diameter.diameter:.3f}inch', c.id)
 
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):

@@ -101,7 +101,7 @@ class Bullet(Base):
     drag_func = relationship("DragFunc", back_populates="bullet")
     cartridge = relationship("Cartridge", back_populates="bullet")
 
-    def __init__(self, name, weight, length, diameter_id, g1=None, g7=None):
+    def __init__(self, name, weight, length, diameter_id):
         self.name = name
         self.weight = weight
         self.length = length
