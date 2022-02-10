@@ -15,8 +15,6 @@ class Ui_catalogRifle(object):
     def setupUi(self, catalogRifle):
         catalogRifle.setObjectName("catalogRifle")
         catalogRifle.resize(349, 167)
-        catalogRifle.setMinimumSize(QtCore.QSize(349, 167))
-        catalogRifle.setMaximumSize(QtCore.QSize(349, 167))
         self.gridLayout = QtWidgets.QGridLayout(catalogRifle)
         self.gridLayout.setObjectName("gridLayout")
         self.label_25 = QtWidgets.QLabel(catalogRifle)
