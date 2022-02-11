@@ -13,6 +13,10 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
         self.bullets = BulletsTab(Bullet, 'rw')
         self.cartridges = CartridgesTab(Cartridge, 'rw')
 
+        self.rifles.list.set_editable()
+        self.bullets.list.set_editable()
+        self.cartridges.list.set_editable()
+
         self.tabWidget.addTab(self.rifles, 'Rifles', )
         self.tabWidget.addTab(self.bullets, 'Bullets', )
         self.tabWidget.addTab(self.cartridges, 'Cartridges', )

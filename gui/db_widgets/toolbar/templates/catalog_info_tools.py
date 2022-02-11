@@ -14,12 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_catalogInfoTools(object):
     def setupUi(self, catalogInfoTools):
         catalogInfoTools.setObjectName("catalogInfoTools")
-        catalogInfoTools.resize(504, 122)
+        catalogInfoTools.resize(504, 64)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogInfoTools.sizePolicy().hasHeightForWidth())
         catalogInfoTools.setSizePolicy(sizePolicy)
+        catalogInfoTools.setMaximumSize(QtCore.QSize(16777215, 64))
         self.gridLayout = QtWidgets.QGridLayout(catalogInfoTools)
         self.gridLayout.setObjectName("gridLayout")
         self.addTemplate = QtWidgets.QPushButton(catalogInfoTools)

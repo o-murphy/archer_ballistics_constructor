@@ -14,12 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_catalogBulletInfo(object):
     def setupUi(self, catalogBulletInfo):
         catalogBulletInfo.setObjectName("catalogBulletInfo")
-        catalogBulletInfo.resize(564, 321)
+        catalogBulletInfo.resize(473, 321)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogBulletInfo.sizePolicy().hasHeightForWidth())
         catalogBulletInfo.setSizePolicy(sizePolicy)
+        catalogBulletInfo.setMaximumSize(QtCore.QSize(473, 16777215))
         self.gridLayout = QtWidgets.QGridLayout(catalogBulletInfo)
         self.gridLayout.setObjectName("gridLayout")
         self.bulletGroupBox = QtWidgets.QGroupBox(catalogBulletInfo)

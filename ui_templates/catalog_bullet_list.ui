@@ -31,6 +31,12 @@
    </property>
    <item row="0" column="0">
     <widget class="QTableWidget" name="tableWidget">
+     <property name="maximumSize">
+      <size>
+       <width>473</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
