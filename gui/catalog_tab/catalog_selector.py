@@ -13,6 +13,10 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
         self.bullets = BulletsTab(Bullet, 'r')
         self.cartridges = CartridgesTab(Cartridge, 'r')
 
+        self.rifles.enable_add_template()
+        self.bullets.enable_add_template()
+        self.cartridges.enable_add_template()
+
         self.tabWidget.addTab(self.rifles, 'Rifles', )
         self.tabWidget.addTab(self.bullets, 'Bullets', )
         self.tabWidget.addTab(self.cartridges, 'Cartridges', )

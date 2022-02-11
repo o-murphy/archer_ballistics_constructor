@@ -18,15 +18,18 @@ class Tab(QtWidgets.QWidget):
         self.list = None
         self.info = None
         self.table = None
+        self.tools = None
+
+    def enable_add_template(self):
         self.tools = InfoTools()
         self.tools.addTemplate.clicked.connect(self.add_template)
+        self.gridLayout.addWidget(self.tools, 1, 1, 1, 1)
 
     def set(self):
         if self.list and self.info:
             self.table = self.list.tableWidget
             self.gridLayout.addWidget(self.list, 0, 0, 2, 1)
             self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
-            self.gridLayout.addWidget(self.tools, 1, 1, 1, 1)
 
     def add_template(self):
         if self.info.item:
@@ -38,6 +41,7 @@ class Tab(QtWidgets.QWidget):
             db.make_transient(item)
             delattr(item, 'id')
             item.attrs = 'rw'
+
             sess.add(item)
             sess.commit()
 
