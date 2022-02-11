@@ -1,10 +1,14 @@
 from PyQt5 import QtWidgets, QtGui
+from dbworker import db
 
 
 class CatalogList(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self, model=None, attrs=None):
         super(CatalogList, self).__init__()
         self.tableWidget: QtWidgets.QTableWidget = None
+        self.data = []
+        self.model = model
+        self.attrs = attrs
 
     def setupTable(self):
         header = self.tableWidget.horizontalHeader()
@@ -22,6 +26,22 @@ class CatalogList(QtWidgets.QWidget):
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())
         return self.tableWidget.indexAt(cursor).row()
+
+    def set_data(self):
+        self.data = []
+        sess = db.SessMake()
+        if self.model:
+            if self.attrs:
+                items = sess.query(self.model).filter_by(attrs=self.attrs).all()
+            else:
+                items = sess.query(self.model).all()
+            self.parse_data(items)
+            self.update_table()
+
+    def parse_data(self, items):
+        self.data = []
+        for i in items:
+            self.data.append(i.__dict__)
 
     def copy_item(self):
         pass

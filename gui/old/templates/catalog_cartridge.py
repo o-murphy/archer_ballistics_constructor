@@ -37,7 +37,7 @@ class Ui_catalogCartridge(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bullet.sizePolicy().hasHeightForWidth())
         self.bullet.setSizePolicy(sizePolicy)
-        self.bullet.setObjectName("bullet")
+        self.bullet.setObjectName("item")
         self.gridLayout.addWidget(self.bullet, 6, 1, 1, 1)
         self.cartridgeName = QtWidgets.QLineEdit(catalogCartridge)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)

@@ -1,16 +1,17 @@
 from PyQt5 import QtWidgets
-from .templates import Ui_catalogSelector
-from .tabs import RiflesTab, CartridgesTab, BulletsTab
+from .templates import Ui_myTabSelector
+from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
+from dbworker.models import *
 
 
-class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
+class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
     def __init__(self):
-        super(CatalogSelector, self).__init__()
+        super(MyTabSelector, self).__init__()
         self.setupUi(self)
 
-        self.rifles = RiflesTab()
-        self.bullets = BulletsTab()
-        self.cartridges = CartridgesTab()
+        self.rifles = RiflesTab(Rifle, 'rw')
+        self.bullets = BulletsTab(Bullet, 'rw')
+        self.cartridges = CartridgesTab(Cartridge, 'rw')
 
         self.tabWidget.addTab(self.rifles, 'Rifles', )
         self.tabWidget.addTab(self.bullets, 'Bullets', )

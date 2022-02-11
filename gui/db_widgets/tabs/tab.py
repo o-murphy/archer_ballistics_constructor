@@ -1,5 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
 from ..toolbar import InfoTools
+from dbworker import db
+
+from ...db_widgets.tables.catalog_list import CatalogList
 
 
 class Tab(QtWidgets.QWidget):
@@ -26,5 +29,22 @@ class Tab(QtWidgets.QWidget):
             self.gridLayout.addWidget(self.tools, 1, 1, 1, 1)
 
     def add_template(self):
-        pass
+        if self.info.item:
+            sess = db.SessMake()
 
+            item = sess.query(self.list.model).get(self.info.item.id)
+
+            sess.expunge(item)
+            db.make_transient(item)
+            delattr(item, 'id')
+            item.attrs = 'rw'
+            sess.add(item)
+            sess.commit()
+
+            for table in self.window().my_tab.findChildren(CatalogList):
+                table.set_data()
+
+    def findParent(self, parent, objectName):
+        if parent.objectName() != objectName:
+            return self.findParent(parent.parent(), objectName)
+        return parent

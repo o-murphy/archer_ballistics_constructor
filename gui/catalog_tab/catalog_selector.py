@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 from .templates import Ui_catalogSelector
-from .tabs import RiflesTab, CartridgesTab, BulletsTab
+from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
+from dbworker.models import *
 
 
 class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
@@ -8,9 +9,9 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
         super(CatalogSelector, self).__init__()
         self.setupUi(self)
 
-        self.rifles = RiflesTab()
-        self.bullets = BulletsTab()
-        self.cartridges = CartridgesTab()
+        self.rifles = RiflesTab(Rifle, 'r')
+        self.bullets = BulletsTab(Bullet, 'r')
+        self.cartridges = CartridgesTab(Cartridge, 'r')
 
         self.tabWidget.addTab(self.rifles, 'Rifles', )
         self.tabWidget.addTab(self.bullets, 'Bullets', )

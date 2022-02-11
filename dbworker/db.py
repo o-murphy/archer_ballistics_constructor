@@ -1,5 +1,6 @@
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.orm import aliased
+from sqlalchemy.orm.session import make_transient
 
 try:
     from .models import *
@@ -77,14 +78,14 @@ if __name__ == '__main__':
     # for i in range(len(names)):
     #     if not sess.query(Bullet).filter_by(name=vendor[i] + ' ' + names[i]).first():
     #
-    #         bullet = Bullet(
+    #         item = Bullet(
     #             name=vendor[i] + ' ' + names[i],
     #             weight=w[i],
     #             length=ln[i],
     #             diameter_id=sess.query(Diameter).filter_by(diameter=diameter).first().id
     #         )
-    #         sess.add(bullet)
+    #         sess.add(item)
     #         sess.commit()
     #
-    #         sess.add(DragFunc('G1', bc[i], 'default bc', bullet.id))
+    #         sess.add(DragFunc('G1', bc[i], 'default bc', item.id))
     # sess.commit()

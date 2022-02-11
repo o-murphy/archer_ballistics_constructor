@@ -1,11 +1,11 @@
+from .tab import Tab
 from ..tables import CatalogCartridgeList
 from ..info import CatalogCartridgeInfo
-from .tab import Tab
 
 
 class CartridgesTab(Tab):
-    def __init__(self):
+    def __init__(self, model=None, attrs=None):
         super(CartridgesTab, self).__init__()
-        self.list = CatalogCartridgeList()
+        self.list = CatalogCartridgeList(model, attrs)
         self.info = CatalogCartridgeInfo()
         self.set()

@@ -14,12 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_catalogRifleInfo(object):
     def setupUi(self, catalogRifleInfo):
         catalogRifleInfo.setObjectName("catalogRifleInfo")
-        catalogRifleInfo.resize(533, 276)
+        catalogRifleInfo.resize(473, 276)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogRifleInfo.sizePolicy().hasHeightForWidth())
         catalogRifleInfo.setSizePolicy(sizePolicy)
+        catalogRifleInfo.setMaximumSize(QtCore.QSize(473, 16777215))
         self.gridLayout = QtWidgets.QGridLayout(catalogRifleInfo)
         self.gridLayout.setContentsMargins(9, 9, 9, 9)
         self.gridLayout.setSpacing(6)

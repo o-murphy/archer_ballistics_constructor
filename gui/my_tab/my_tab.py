@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_myTab
-# from .catalog_selector import CatalogSelector
+from .templates_selector import MyTabSelector
 
 from gui.stylesheet import load_qss
 
@@ -26,3 +26,7 @@ class MyTab(QtWidgets.QWidget, Ui_myTab):
                                 }
 
                                 """)
+
+        self.selector = MyTabSelector()
+        self.gridLayout.setAlignment(QtCore.Qt.AlignLeft)
+        self.gridLayout.addWidget(self.selector, 0, 0, 1, 1)

@@ -1,16 +1,11 @@
+from .tab import Tab
 from ..tables import CatalogRifleList
 from ..info import CatalogRifleInfo
-from .tab import Tab
-from dbworker import db
-from dbworker.models import *
 
 
 class RiflesTab(Tab):
-    def __init__(self):
+    def __init__(self, model=None, attrs=None):
         super(RiflesTab, self).__init__()
-        self.list = CatalogRifleList()
+        self.list = CatalogRifleList(model, attrs)
         self.info = CatalogRifleInfo()
         self.set()
-
-    def add_template(self):
-        sess = db.SessMake()
