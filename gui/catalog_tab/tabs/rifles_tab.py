@@ -1,6 +1,8 @@
 from ..tables import CatalogRifleList
 from ..info import CatalogRifleInfo
 from .tab import Tab
+from dbworker import db
+from dbworker.models import *
 
 
 class RiflesTab(Tab):
@@ -9,3 +11,6 @@ class RiflesTab(Tab):
         self.list = CatalogRifleList()
         self.info = CatalogRifleInfo()
         self.set()
+
+    def add_template(self):
+        sess = db.SessMake()

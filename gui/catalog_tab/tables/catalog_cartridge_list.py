@@ -17,7 +17,7 @@ class CatalogCartridgeList(CatalogList, Ui_catalogCartridgeList):
     def set_data(self):
         self.data = []
         sess = db.SessMake()
-        cartridges = sess.query(Cartridge).all()
+        cartridges = sess.query(Cartridge).filter_by(attrs='r').all()
         for i in cartridges:
             self.data.append([i.id, i.name, i.caliber.name, i.bullet.name, i.mv])
         self.update_table()

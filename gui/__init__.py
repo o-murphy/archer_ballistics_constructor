@@ -7,3 +7,4 @@ from .recent_dialog import RecentDialog
 from .profiles_tab import EmptyProfilesTab
 from .single_custom_widgets import no_wheel_sb
 from .catalog_tab import CatalogTab
+from .my_tab import MyTab

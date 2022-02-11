@@ -16,6 +16,7 @@ class Tab(QtWidgets.QWidget):
         self.info = None
         self.table = None
         self.tools = InfoTools()
+        self.tools.addTemplate.clicked.connect(self.add_template)
 
     def set(self):
         if self.list and self.info:
@@ -23,4 +24,7 @@ class Tab(QtWidgets.QWidget):
             self.gridLayout.addWidget(self.list, 0, 0, 2, 1)
             self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
             self.gridLayout.addWidget(self.tools, 1, 1, 1, 1)
+
+    def add_template(self):
+        pass
 

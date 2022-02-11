@@ -11,7 +11,10 @@ REM venv\Scripts\pyuic5 ui_templates\main_gui.ui -o gui\templates\main_gui.py
 
 
 venv\Scripts\pyuic5 ui_templates\catalog_tab.ui -o gui\catalog_tab\templates\catalog_tab.py
+venv\Scripts\pyuic5 ui_templates\catalog_tab.ui -o gui\my_tab\templates\my_tab.py
+
 venv\Scripts\pyuic5 ui_templates\catalog_selector.ui -o gui\catalog_tab\templates\catalog_selector.py
+venv\Scripts\pyuic5 ui_templates\catalog_selector.ui -o gui\my_tab\templates\templates_selector.py
 
 venv\Scripts\pyuic5 ui_templates\catalog_info.ui -o gui\catalog_tab\info\templates\catalog_info.py
 venv\Scripts\pyuic5 ui_templates\catalog_rifle_info.ui -o gui\catalog_tab\info\templates\catalog_rifle_info.py

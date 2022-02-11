@@ -48,19 +48,21 @@ class Rifle(Base):
     twist = Column(Integer)
     is_right = Column(Boolean)
     tile = Column(String)
+    attrs = Column(String)
 
     caliber_id = Column(Integer, ForeignKey('caliber.id'))
     caliber = relationship("Caliber", back_populates="rifle")
 
     template = relationship("Template", back_populates="rifle")
 
-    def __init__(self, name, caliber_id, sh, twist, is_right, tile):
+    def __init__(self, name, caliber_id, sh, twist, is_right, tile, attrs='r'):
         self.name = name
         self.caliber_id = caliber_id
         self.sh = sh
         self.twist = twist
         self.is_right = is_right
         self.tile = tile
+        self.attrs = attrs
 
 
 class Cartridge(Base):
@@ -70,6 +72,7 @@ class Cartridge(Base):
     mv = Column(Integer)
     temp = Column(Integer)
     ts = Column(Integer)
+    attrs = Column(String)
 
     caliber_id = Column(Integer, ForeignKey('caliber.id'))
     caliber = relationship("Caliber", back_populates="cartridge")
@@ -79,12 +82,13 @@ class Cartridge(Base):
 
     template = relationship("Template", back_populates="cartridge")
 
-    def __init__(self, name, mv, temp, ts, caliber_id, bullet_id):
+    def __init__(self, name, mv, temp, ts, caliber_id, bullet_id, attrs='r'):
         self.name = name
         self.caliber_id = caliber_id
         self.ts = ts
         self.mv = mv
         self.temp = temp
+        self.attrs = attrs
         self.bullet_id = bullet_id
 
 
@@ -94,6 +98,7 @@ class Bullet(Base):
     name = Column(String)
     weight = Column(Integer)
     length = Column(Integer)
+    attrs = Column(String)
 
     diameter_id = Column(Integer, ForeignKey('diameter.id'))
     diameter = relationship('Diameter', back_populates='bullet')
@@ -101,10 +106,11 @@ class Bullet(Base):
     drag_func = relationship("DragFunc", back_populates="bullet")
     cartridge = relationship("Cartridge", back_populates="bullet")
 
-    def __init__(self, name, weight, length, diameter_id):
+    def __init__(self, name, weight, length, diameter_id, attrs='r'):
         self.name = name
         self.weight = weight
         self.length = length
+        self.attrs = attrs
         self.diameter_id = diameter_id
 
 
@@ -116,13 +122,15 @@ class DragFunc(Base):
     drag_type = Column(String)
     data = Column(JSON)
     comment = Column(String)
+    attrs = Column(String)
 
     template = relationship("Template", back_populates="drag_func")
 
-    def __init__(self, drag_type, data, comment, bullet_id=None):
+    def __init__(self, drag_type, data, comment, bullet_id=None, attrs='r'):
         self.drag_type = drag_type
         self.data = data
         self.comment = comment
+        self.attrs = attrs
         self.bullet_id = bullet_id
 
 

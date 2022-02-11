@@ -1,8 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
-# from .info import CatalogInfo
-# from .toolbar import InfoTools
 
 from gui.stylesheet import load_qss
 
@@ -36,10 +34,8 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
                            )
 
         self.selector = CatalogSelector()
-        # self.info = CatalogInfo()
         self.gridLayout.setAlignment(QtCore.Qt.AlignLeft)
         self.gridLayout.addWidget(self.selector, 0, 0, 1, 1)
-        # self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
 
         # self.info_tools = InfoTools()
         # self.gridLayout.addWidget(self.info_tools, 1, 1, 1, 1)

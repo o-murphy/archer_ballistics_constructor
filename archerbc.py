@@ -7,6 +7,7 @@ from gui import LPC_dialog
 from gui import FooterWidget
 from gui import EmptyProfilesTab
 from gui import CatalogTab
+from gui import MyTab
 from gui.stylesheet import load_qss
 from modules.env_update import CONFIG_PATH
 
@@ -73,9 +74,12 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def setupWidgets(self):
         self.profiles_tab = EmptyProfilesTab(*sys.argv)
-        self.tabWidget.addTab(self.profiles_tab, QtGui.QIcon(), 'Profiles')
+        self.my_tab = MyTab()
+        self.catalog_tab = CatalogTab()
 
-        self.tabWidget.addTab(CatalogTab(), QtGui.QIcon(), 'Catalog')
+        self.tabWidget.addTab(self.profiles_tab, QtGui.QIcon(), 'Profiles')
+        self.tabWidget.addTab(self.my_tab, QtGui.QIcon(), 'Templates')
+        self.tabWidget.addTab(self.catalog_tab, QtGui.QIcon(), 'Catalog')
 
         footer_widget = FooterWidget(self)
         self.__setattr__('footer_widget', footer_widget)

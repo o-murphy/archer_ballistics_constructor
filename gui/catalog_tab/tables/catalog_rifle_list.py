@@ -17,7 +17,7 @@ class CatalogRifleList(CatalogList, Ui_catalogRifleList):
     def set_data(self):
         self.data = []
         sess = db.SessMake()
-        rifles = sess.query(Rifle).all()
+        rifles = sess.query(Rifle).filter_by(attrs='r').all()
         for i in rifles:
             self.data.append([i.id, i.name, i.caliber.name, i.sh, i.twist])
         self.update_table()
