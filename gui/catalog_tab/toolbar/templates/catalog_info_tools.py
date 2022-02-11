@@ -14,13 +14,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_catalogInfoTools(object):
     def setupUi(self, catalogInfoTools):
         catalogInfoTools.setObjectName("catalogInfoTools")
-        catalogInfoTools.resize(504, 57)
+        catalogInfoTools.resize(504, 122)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogInfoTools.sizePolicy().hasHeightForWidth())
         catalogInfoTools.setSizePolicy(sizePolicy)
-        catalogInfoTools.setMaximumSize(QtCore.QSize(16777215, 60))
         self.gridLayout = QtWidgets.QGridLayout(catalogInfoTools)
         self.gridLayout.setObjectName("gridLayout")
         self.addTemplate = QtWidgets.QPushButton(catalogInfoTools)
@@ -38,4 +37,4 @@ class Ui_catalogInfoTools(object):
     def retranslateUi(self, catalogInfoTools):
         _translate = QtCore.QCoreApplication.translate
         catalogInfoTools.setWindowTitle(_translate("catalogInfoTools", "Form"))
-        self.addTemplate.setText(_translate("catalogInfoTools", "Create template"))
+        self.addTemplate.setText(_translate("catalogInfoTools", "Add to templates"))

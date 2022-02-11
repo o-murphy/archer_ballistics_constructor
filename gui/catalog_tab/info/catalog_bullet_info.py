@@ -9,6 +9,7 @@ class CatalogBulletInfo(QtWidgets.QWidget, Ui_catalogBulletInfo):
         super(CatalogBulletInfo, self).__init__()
         self.setupUi(self)
         self.bullet = None
+        self.clear()
 
     def set(self, id):
         if id:

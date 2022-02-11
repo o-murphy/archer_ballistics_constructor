@@ -9,6 +9,7 @@ class CatalogCartridgeInfo(QtWidgets.QWidget, Ui_catalogCartridgeInfo):
         super(CatalogCartridgeInfo, self).__init__()
         self.setupUi(self)
         self.cartridge = None
+        self.clear()
 
     def set(self, id):
         if id:

@@ -43,7 +43,8 @@ class Ui_catalogRifleList(object):
         self.tableWidget.horizontalHeader().setHighlightSections(True)
         self.tableWidget.horizontalHeader().setMinimumSectionSize(20)
         self.tableWidget.horizontalHeader().setSortIndicatorShown(True)
-        self.tableWidget.verticalHeader().setDefaultSectionSize(50)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
+        self.tableWidget.verticalHeader().setMinimumSectionSize(30)
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 
         self.retranslateUi(catalogRifleList)

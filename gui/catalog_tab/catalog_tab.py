@@ -26,12 +26,13 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
                                 QTableCornerButton::section {
                                     background: rgb(51, 51, 51);
                                 }
-                                QTableWidget {
-                                    background-image: url(:/icons/res/drawable-hdpi-v4/addbtn_menu21b.png);
-                                    background-repeat: no-repeat; 
-                                    background-position: center;
-                                }
+
                                 """
+                           #         QTableWidget {
+                           #             background-image: url(:/icons/res/drawable-hdpi-v4/addbtn_menu21b.png);
+                           #             background-repeat: no-repeat;
+                           #             background-position: center;
+                           #         }
                            )
 
         self.selector = CatalogSelector()
@@ -46,9 +47,9 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
         # self.selector.rifle_list.tableWidget.currentCellChanged.connect(self.show_rifle_info)
         # self.selector.cartridge_list.tableWidget.currentCellChanged.connect(self.show_cartridge_info)
 
-        self.selector.rifle_list.tableWidget.setCurrentCell(0, 0)
-        self.selector.cartridge_list.tableWidget.setCurrentCell(0, 0)
-        self.selector.bullet_list.tableWidget.setCurrentCell(0, 0)
+        # self.selector.rifle_list.tableWidget.setCurrentCell(0, 0)
+        # self.selector.cartridge_list.tableWidget.setCurrentCell(0, 0)
+        # self.selector.bullet_list.tableWidget.setCurrentCell(0, 0)
 
     # def show_rifle_info(self, row, col, prow, pcol):
     #     if row >= 0:

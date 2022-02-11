@@ -9,6 +9,7 @@ class CatalogRifleInfo(QtWidgets.QWidget, Ui_catalogRifleInfo):
         super(CatalogRifleInfo, self).__init__()
         self.setupUi(self)
         self.rifle = None
+        self.clear()
 
     def set(self, id):
         if id:

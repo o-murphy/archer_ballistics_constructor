@@ -25,24 +25,12 @@ class Ui_catalogSelector(object):
         self.tabWidget.setUsesScrollButtons(False)
         self.tabWidget.setMovable(False)
         self.tabWidget.setObjectName("tabWidget")
-        self.bullets = QtWidgets.QWidget()
-        self.bullets.setObjectName("bullets")
-        self.tabWidget.addTab(self.bullets, "")
-        self.rifles = QtWidgets.QWidget()
-        self.rifles.setObjectName("rifles")
-        self.tabWidget.addTab(self.rifles, "")
-        self.cartridges = QtWidgets.QWidget()
-        self.cartridges.setObjectName("cartridges")
-        self.tabWidget.addTab(self.cartridges, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         self.retranslateUi(catalogSelector)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(catalogSelector)
 
     def retranslateUi(self, catalogSelector):
         _translate = QtCore.QCoreApplication.translate
         catalogSelector.setWindowTitle(_translate("catalogSelector", "Form"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.bullets), _translate("catalogSelector", "Bullets"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.rifles), _translate("catalogSelector", "Rifles"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.cartridges), _translate("catalogSelector", "Cartridges"))
