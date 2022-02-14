@@ -5,16 +5,10 @@ from dbworker.models import *
 
 
 class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
-    def __init__(self, data=None):
+    def __init__(self, data=None, call=None):
         super(CatalogRifle, self).__init__()
         self.setupUi(self)
-
-        self.n = None
-        self.c = None
-        self.s = None
-        self.t = None
-        self.ir = None
-        self.tl = None
+        self.call = call
 
         self.query_calibers()
 
@@ -37,13 +31,30 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
 
     def query_calibers(self):
         sess = db.SessMake()
-        self.caliberName.addItems([c.name for c in sess.query(Caliber).all()])
+        for c in sess.query(Caliber).all():
+            self.caliberName.addItem(c.name, c.id)
 
     def get(self):
-        self.n = self.rifleName.text()
-        self.c = self.caliberName.currentText()
-        self.s = self.sh.value()
-        self.t = self.twist.value()
-        self.ir = self.rightTwist.isChecked()
-        self.tl = self.caliberShort.text()
-        return self
+        sess = db.SessMake()
+
+        if self.call == 'edit':
+            rifle = sess.query(Rifle).get(self.data.id)
+            rifle.name = self.rifleName.text()
+            rifle.caliber_id = self.caliberName.currentData()
+            rifle.sh = self.sh.value()
+            rifle.twist = self.twist.value()
+            rifle.is_right = self.rightTwist.isChecked()
+            rifle.tile = self.caliberShort.text()
+        else:
+            sess.add(
+                    Rifle(
+                        self.rifleName.text(),
+                        self.caliberName.currentData(),
+                        self.sh.value(),
+                        self.twist.value(),
+                        self.rightTwist.isChecked(),
+                        self.caliberShort.text(),
+                        'rw'
+                    )
+                )
+        sess.commit()

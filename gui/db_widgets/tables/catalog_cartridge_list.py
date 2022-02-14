@@ -1,10 +1,11 @@
 from .templates import Ui_catalogCartridgeList
 from .catalog_list import CatalogList
+from ..edit import CatalogCartridge
 
 
 class CatalogCartridgeList(CatalogList, Ui_catalogCartridgeList):
     def __init__(self, model=None, attrs=None):
-        super(CatalogCartridgeList, self).__init__(model, attrs)
+        super(CatalogCartridgeList, self).__init__(model, attrs, CatalogCartridge)
         self.setupUi(self)
 
         self.setupTable()

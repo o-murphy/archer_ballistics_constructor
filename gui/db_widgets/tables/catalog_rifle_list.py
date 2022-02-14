@@ -1,10 +1,11 @@
 from .templates import Ui_catalogRifleList
 from .catalog_list import CatalogList
+from ..edit import CatalogRifle
 
 
 class CatalogRifleList(CatalogList, Ui_catalogRifleList):
     def __init__(self, model=None, attrs=None):
-        super(CatalogRifleList, self).__init__(model, attrs)
+        super(CatalogRifleList, self).__init__(model, attrs, CatalogRifle)
         self.setupUi(self)
 
         self.setupTable()

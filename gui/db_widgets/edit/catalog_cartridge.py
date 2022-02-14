@@ -6,7 +6,7 @@ from dbworker.models import *
 
 
 class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
-    def __init__(self, data: Cartridge = None):
+    def __init__(self, data: Cartridge = None, call=None):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('Cartridge edit')
@@ -15,25 +15,19 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         self.mvQuantity.setItemData(0, self.convert.mps2fps)
         self.mvQuantity.setItemData(1, self.convert.fps2mps)
 
-        self._translate = QtCore.QCoreApplication.translate
-
-        self.n = None
-        self.v = None
-        self.t = None
-        self.tss = None
-        self.b = None
-        self.cb = None
+        self.call = call
+        self.data = data
 
         self.set_calibers()
 
-        if data:
-            self.cartridgeName.setText(data.name)
-            self.mv.setValue(data.mv)
-            self.temp.setValue(data.temp)
-            self.ts.setValue(data.ts)
-            self.caliber.setCurrentText(data.caliber.name + ', ' + f'{data.caliber.diameter.diameter:.3f}inch')
+        if self.data:
+            self.cartridgeName.setText(self.data.name)
+            self.mv.setValue(self.data.mv)
+            self.temp.setValue(self.data.temp)
+            self.ts.setValue(self.data.ts)
+            self.caliber.setCurrentText(self.data.caliber.name + ', ' + f'{self.data.caliber.diameter.diameter:.3f}inch')
             self.set_bullets()
-            self.bullet.setCurrentText(data.bullet.name)
+            self.bullet.setCurrentText(self.data.bullet.name)
         else:
             self.set_bullets()
 
@@ -45,7 +39,7 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         caliber = sess.query(Caliber).get(self.caliber.currentData())
         d = sess.query(Diameter).get(caliber.diameter_id)
 
-        bullets = sess.query(Bullet).filter_by(diameter_id=d.id).all()
+        bullets = sess.query(Bullet).filter_by(diameter_id=d.id, attrs='rw').all()
         for i in range(self.bullet.count()):
             self.bullet.removeItem(i)
         for b in bullets:
@@ -67,10 +61,28 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         self.mvQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
 
     def get(self):
-        self.n = self.cartridgeName.text()
-        self.v = self.mv.value()
-        self.t = self.temp.value()
-        self.tss = self.ts.value()
-        self.b = self.bullet.currentData()
-        self.cb = self.caliber.currentData()
-        return self
+
+        sess = db.SessMake()
+
+        if self.call == 'edit':
+            cart: Cartridge = sess.query(Cartridge).get(self.data.id)
+            cart.name = self.cartridgeName.text()
+            cart.mv = self.mv.value()
+            cart.temp = self.temp.value()
+            cart.ts = self.ts.value()
+            cart.bullet_id = self.bullet.currentData()
+            cart.caliber_id = self.caliber.currentData()
+
+        else:
+            sess.add(Cartridge(
+                self.cartridgeName.text(),
+                self.mv.value(),
+                self.temp.value(),
+                self.ts.value(),
+                self.caliber.currentData(),
+                self.bullet.currentData(),
+                'rw'
+            ))
+
+        sess.commit()
+

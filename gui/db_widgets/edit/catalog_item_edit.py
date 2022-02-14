@@ -4,11 +4,11 @@ from gui.stylesheet import load_qss
 
 
 class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
-    def __init__(self, title, widget: QtWidgets.QWidget):
+    def __init__(self, widget: QtWidgets.QWidget):
         super(CatalogItemEdit, self).__init__()
         self.setupUi(self)
 
-        self.setWindowTitle(title)
+        # self.setWindowTitle(title)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
         self.widget = widget
         self.widget.setStyleSheet(load_qss('qss/application.qss'))

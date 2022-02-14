@@ -4,12 +4,13 @@ from ..table_btns import SelectBtn
 
 
 class CatalogList(QtWidgets.QWidget):
-    def __init__(self, model=None, attrs=None):
+    def __init__(self, model=None, attrs=None, editor=None):
         super(CatalogList, self).__init__()
         self.tableWidget = None
         self.data = []
         self.model = model
         self.attrs = attrs
+        self.editor = editor
         self.btns = None
 
     def setupTable(self):
@@ -27,16 +28,22 @@ class CatalogList(QtWidgets.QWidget):
         self.update_table()
         self.tableWidget.horizontalHeader().setSectionResizeMode(idx-1, QtWidgets.QHeaderView.ResizeToContents)
 
+    def add_btns(self, i):
+        if self.btns:
+            sel_btn = SelectBtn(self.model, self.editor)
+            sel_btn.delBtn.clicked.connect(self.delete_item)
+            sel_btn.editBtn.clicked.connect(self.edit_item)
+            sel_btn.copyBtn.clicked.connect(self.copy_item)
+
+            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, sel_btn)
+
     def update_table(self):
         self.tableWidget.setRowCount(len(self.data))
         for i, y in enumerate(self.data):
             for j, x in enumerate(y):
                 self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(x)))
 
-            if self.btns:
-                sel_btn = SelectBtn()
-                sel_btn.delBtn.clicked.connect(self.delete_item)
-                self.tableWidget.setCellWidget(i, self.tableWidget.columnCount()-1, sel_btn)
+            self.add_btns(i)
 
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())
@@ -59,21 +66,32 @@ class CatalogList(QtWidgets.QWidget):
             self.data.append(i.__dict__)
 
     def copy_item(self):
-        pass
+        item = self.tableWidget.item(self.viewport_row(), 0)
+        if item:
+            id = item.text()
+            if id:
+                self.sender().parent().copy(id)
+                self.set_data()
 
     def edit_item(self):
-        pass
+        item = self.tableWidget.item(self.viewport_row(), 0)
+        if item:
+            id = item.text()
+            if id:
+                self.sender().parent().edit(id)
+                self.set_data()
 
     def delete_item(self):
         item = self.tableWidget.item(self.viewport_row(), 0)
         if item:
             id = item.text()
             if id:
-                self.sender().parent().delete(self.model, id)
+                self.sender().parent().delete(id)
                 self.set_data()
 
     def new_item(self):
-        pass
+        self.sender().parent().new()
+        self.set_data()
 
     def edit_dialog(self):
         pass
