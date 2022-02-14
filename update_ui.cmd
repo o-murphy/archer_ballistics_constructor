@@ -21,6 +21,9 @@ venv\Scripts\pyuic5 ui_templates\catalog_rifle_info.ui -o gui\db_widgets\info\te
 venv\Scripts\pyuic5 ui_templates\catalog_bullet_info.ui -o gui\db_widgets\info\templates\catalog_bullet_info.py
 venv\Scripts\pyuic5 ui_templates\catalog_cartridge_info.ui -o gui\db_widgets\info\templates\catalog_cartridge_info.py
 
+venv\Scripts\pyuic5 ui_templates\catalog_rifle.ui -o gui\db_widgets\edit\templates\catalog_rifle.py
+venv\Scripts\pyuic5 ui_templates\catalog_cartridge.ui -o gui\db_widgets\edit\templates\catalog_cartridge.py
+
 REM venv\Scripts\pyuic5 ui_templates\catalog_caliber_list.ui -o gui\db_widgets\tables\templates\catalog_caliber_list.py
 venv\Scripts\pyuic5 ui_templates\catalog_bullet_list.ui -o gui\db_widgets\tables\templates\catalog_bullet_list.py
 venv\Scripts\pyuic5 ui_templates\catalog_rifle_list.ui -o gui\db_widgets\tables\templates\catalog_rifle_list.py

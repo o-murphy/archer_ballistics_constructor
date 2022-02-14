@@ -30,11 +30,11 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         add multi_bc
         add drag_func_editor
     """
-    def __init__(self, data: Bullet = None, call=None
-                 # drags: list = None
-                 ):
+    def __init__(self, data: Bullet = None, call=None):
         super(CatalogBullet, self).__init__()
         self.setupUi(self)
+        self.title = 'Bullet Edit'
+
         self.convert = BConverter()
         self.data = data
         self.call = call
@@ -53,7 +53,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.diameter.setValue(self.data.diameter.diameter)
 
             sess = db.SessMake()
-            self.drags = sess.query(DragFunc).filter_by(bullet_id=self.data.id).all()
+            self.drags = self.data.drag_func
 
         if self.drags:
             if len(self.drags) > 0:
@@ -119,15 +119,21 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.tableWidget.cellWidget(idx, 0).setCurrentText(df.drag_type)
             data, comment = df.data, df.comment
             if df.drag_type in ['G1', 'G7']:
-                bc = str(df.data)
+                bc = str(df.data) if df.data else str(0)
             elif df.drag_type.endswith('Multi-BC'):
                 bc = 'Points: ' + str(len([(bc, v) for (bc, v) in df.data if bc > 0 and v >= 0])) \
                     if isinstance(df.data, list) else 'Points: 0'
             else:
                 bc = 'DFL: ' + str(len(df.data)) if isinstance(df.data, list) else 'DFL: 0'
-            self.tableWidget.item(idx, 1).setText(bc)
-            self.tableWidget.item(idx, 1).state = data
-            self.tableWidget.item(idx, 2).setText(comment)
+            # self.tableWidget.item(idx, 1).setText(bc)
+            # self.tableWidget.item(idx, 1).state = data
+            # self.tableWidget.item(idx, 2).setText(comment)
+        else:
+            bc, data, comment = '0', 0, ''
+        self.tableWidget.item(idx, 1).setText(bc)
+        self.tableWidget.item(idx, 1).state = data
+        self.tableWidget.item(idx, 2).setText(comment)
+
 
         self.tableWidget.cellWidget(idx, 0).currentIndexChanged.connect(lambda *args: print(args))
 
@@ -163,6 +169,15 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
                 self.tableWidget.item(row, 2).setText(comment)
 
     def get(self):
+        sess = db.SessMake()
+
+        dimeter = self.get_cln(self.diameter, self.diameterQuantity)
+        diam = sess.query(Diameter).filter_by(diameter=dimeter).first()
+        if not diam:
+            diam = Diameter(dimeter)
+            sess.add(diam)
+            sess.commit()
+
         for i in range(self.tableWidget.rowCount()):
             row = [
                 self.tableWidget.cellWidget(i, 0).currentText(),
@@ -171,8 +186,18 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             ]
             self.df.append(row)
 
-        self.n = self.bulletName.text()
-        self.w = self.get_cln(self.weight, self.weightQuantity)
-        self.ln = self.get_cln(self.length, self.lengthQuantity)
-        self.d = self.get_cln(self.diameter, self.diameterQuantity)
-        return self
+        if self.call == 'edit':
+            bullet = sess.query(Bullet).get(self.data.id)
+            bullet.name = self.bulletName.text()
+            bullet.weight = self.weight.value()
+            bullet.length = self.length.value()
+            bullet.diameter_id = diam.id
+        else:
+
+            new_bullet = Bullet(self.bulletName.text(), self.weight.value(), self.length.value(), diam.id, 'rw')
+            sess.add(new_bullet)
+            sess.commit()
+
+            for df in self.df:
+                sess.add(DragFunc(*df, bullet_id=new_bullet.id, attrs='rw'))
+        sess.commit()

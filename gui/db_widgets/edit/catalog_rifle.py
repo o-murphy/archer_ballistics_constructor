@@ -2,12 +2,16 @@ from PyQt5 import QtWidgets
 from .templates import Ui_catalogRifle
 from dbworker import db
 from dbworker.models import *
+from .caliber_edit import CaliberEdit
 
 
 class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
     def __init__(self, data=None, call=None):
         super(CatalogRifle, self).__init__()
         self.setupUi(self)
+        self.title = 'Rifle Edit'
+
+        self.data = data
         self.call = call
 
         self.query_calibers()
@@ -21,6 +25,8 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
             self.rightTwist.setChecked(data.is_right)
             self.caliberShort.setText(data.tile)
 
+        self.pushButton.clicked.connect(self.add_caliber)
+
     def setConverter(self):
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)
         self.weightQuantity.setItemData(1, self.convert.g_to_gr)
@@ -30,6 +36,8 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
 
     def query_calibers(self):
+        for i in range(self.caliberName.count()):
+            self.caliberName.removeItem(i)
         sess = db.SessMake()
         for c in sess.query(Caliber).all():
             self.caliberName.addItem(c.name, c.id)
@@ -58,3 +66,9 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
                     )
                 )
         sess.commit()
+
+    def add_caliber(self):
+        ced = CaliberEdit()
+        if ced.exec_():
+            cal_id = ced.get()
+        self.query_calibers()

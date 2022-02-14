@@ -103,8 +103,8 @@ class Bullet(Base):
     diameter_id = Column(Integer, ForeignKey('diameter.id'))
     diameter = relationship('Diameter', back_populates='bullet')
 
-    drag_func = relationship("DragFunc", back_populates="bullet")
-    cartridge = relationship("Cartridge", back_populates="bullet")
+    drag_func = relationship("DragFunc", back_populates="bullet", cascade="all, delete, delete-orphan")
+    cartridge = relationship("Cartridge", back_populates="bullet", cascade="all, delete, delete-orphan")
 
     def __init__(self, name, weight, length, diameter_id, attrs='r'):
         self.name = name

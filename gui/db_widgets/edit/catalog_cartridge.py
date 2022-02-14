@@ -3,13 +3,16 @@ from .templates import Ui_catalogCartridge
 from modules import BConverter
 from dbworker import db
 from dbworker.models import *
+from .caliber_edit import CaliberEdit
+
 
 
 class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
     def __init__(self, data: Cartridge = None, call=None):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
-        self.setWindowTitle('Cartridge edit')
+
+        self.title = 'Cartridge Edit'
 
         self.convert = BConverter()
         self.mvQuantity.setItemData(0, self.convert.mps2fps)
@@ -33,6 +36,7 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
 
         self.caliber.currentIndexChanged.connect(self.set_bullets)
         self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
+        self.pushButton.clicked.connect(self.add_caliber)
 
     def set_bullets(self):
         sess = db.SessMake()
@@ -46,6 +50,8 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
             self.bullet.addItem(b.name + ', ' + str(b.weight) + 'gr', b.id)
 
     def set_calibers(self):
+        for i in range(self.caliber.count()):
+            self.caliber.removeItem(i)
         sess = db.SessMake()
         calibers = sess.query(Caliber).all()
         for c in calibers:
@@ -86,3 +92,8 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
 
         sess.commit()
 
+    def add_caliber(self):
+        ced = CaliberEdit()
+        if ced.exec_():
+            cal_id = ced.get()
+        self.set_calibers()

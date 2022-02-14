@@ -1,6 +1,7 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from dbworker import db
 from ..table_btns import SelectBtn
+from ..edit import CatalogItemEdit
 
 
 class CatalogList(QtWidgets.QWidget):
@@ -12,6 +13,12 @@ class CatalogList(QtWidgets.QWidget):
         self.attrs = attrs
         self.editor = editor
         self.btns = None
+
+    def eventFilter(self, watched, event):
+        if watched == self.tableWidget.viewport() and event.type() == QtCore.QEvent.MouseButtonDblClick:
+            if not self.tableWidget.item(self.viewport_row(), 0):
+                self.new_item()
+        return QtWidgets.QWidget.eventFilter(self, watched, event)
 
     def setupTable(self):
         header = self.tableWidget.horizontalHeader()
@@ -27,6 +34,10 @@ class CatalogList(QtWidgets.QWidget):
         self.tableWidget.setHorizontalHeaderItem(idx-1, QtWidgets.QTableWidgetItem('Edit'))
         self.update_table()
         self.tableWidget.horizontalHeader().setSectionResizeMode(idx-1, QtWidgets.QHeaderView.ResizeToContents)
+
+        if self.tableWidget:
+            self.tableWidget.viewport().installEventFilter(self)
+            self.tableWidget.doubleClicked.connect(self.edit_item)
 
     def add_btns(self, i):
         if self.btns:
@@ -70,7 +81,11 @@ class CatalogList(QtWidgets.QWidget):
         if item:
             id = item.text()
             if id:
-                self.sender().parent().copy(id)
+                sess = db.SessMake()
+                item = sess.query(self.model).get(id)
+                dlg = CatalogItemEdit(self.editor(item, 'copy'))
+                if dlg.exec_():
+                    dlg.get()
                 self.set_data()
 
     def edit_item(self):
@@ -78,7 +93,11 @@ class CatalogList(QtWidgets.QWidget):
         if item:
             id = item.text()
             if id:
-                self.sender().parent().edit(id)
+                sess = db.SessMake()
+                item = sess.query(self.model).get(id)
+                dlg = CatalogItemEdit(self.editor(item, 'edit'))
+                if dlg.exec_():
+                    dlg.get()
                 self.set_data()
 
     def delete_item(self):
@@ -86,11 +105,16 @@ class CatalogList(QtWidgets.QWidget):
         if item:
             id = item.text()
             if id:
-                self.sender().parent().delete(id)
+                sess = db.SessMake()
+                item = sess.query(self.model).get(id)
+                sess.delete(item)
+                sess.commit()
                 self.set_data()
 
     def new_item(self):
-        self.sender().parent().new()
+        dlg = CatalogItemEdit(self.editor())
+        if dlg.exec_():
+            dlg.get()
         self.set_data()
 
     def edit_dialog(self):
