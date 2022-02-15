@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from .templates import Ui_catalogBullet
 from modules import BConverter
 
@@ -151,34 +151,43 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.tableWidget.removeRow(self.viewport_row())
 
     def set_cell_data(self, index):
-        row = index.row() if not isinstance(index, int) else index
-        drag_type = self.tableWidget.item(row, 0).text()
-        state = self.tableWidget.item(row, 1).state
-        data = state if state else None
-        if drag_type in ['G1', 'G7']:
-            bc_edit = BCEdit(data)
-            if bc_edit.exec_():
-                data = bc_edit.get()
-                self.tableWidget.item(row, 1).setText(str(data))
-                self.tableWidget.item(row, 1).state = data if data else 0
 
-        elif drag_type.endswith('Multi-BC'):
-            mbc_edit = MBCEdit(data)
-            if mbc_edit.exec_():
-                data, comment = mbc_edit.get()
-                count = [(bc, v) for (bc, v) in data if bc > 0 and v >= 0]
-
-                self.tableWidget.item(row, 1).setText('Points: ' + str(len(count)))
-                self.tableWidget.item(row, 1).state = data if data else []
-                self.tableWidget.item(row, 2).setText(comment)
+        if isinstance(index, int):
+            row = index
+        elif isinstance(index, QtCore.QModelIndex) and (index.column() == 1):
+            row = index.row()
         else:
-            cdf_edit = CDFEdit(data)
-            if cdf_edit.exec_():
-                data, comment = cdf_edit.get()
-                self.tableWidget.item(row, 1).setText('DFL: ' + str(len(data)))
-                self.tableWidget.item(row, 1).state = data if data else []
-                self.tableWidget.item(row, 2).setText(comment)
-        return data
+            return
+
+        if row is not None and (row >= 0):
+
+            drag_type = self.tableWidget.item(row, 0).text()
+            state = self.tableWidget.item(row, 1).state
+            data = state if state else None
+            if drag_type in ['G1', 'G7']:
+                bc_edit = BCEdit(data)
+                if bc_edit.exec_():
+                    data = bc_edit.get()
+                    self.tableWidget.item(row, 1).setText(str(data))
+                    self.tableWidget.item(row, 1).state = data if data else 0
+
+            elif drag_type.endswith('Multi-BC'):
+                mbc_edit = MBCEdit(data)
+                if mbc_edit.exec_():
+                    data, comment = mbc_edit.get()
+                    count = [(bc, v) for (bc, v) in data if bc > 0 and v >= 0]
+
+                    self.tableWidget.item(row, 1).setText('Points: ' + str(len(count)))
+                    self.tableWidget.item(row, 1).state = data if data else []
+                    self.tableWidget.item(row, 2).setText(comment)
+            else:
+                cdf_edit = CDFEdit(data)
+                if cdf_edit.exec_():
+                    data, comment = cdf_edit.get()
+                    self.tableWidget.item(row, 1).setText('DFL: ' + str(len(data)))
+                    self.tableWidget.item(row, 1).state = data if data else []
+                    self.tableWidget.item(row, 2).setText(comment)
+            return data
 
     def get(self):
         sess = db.SessMake()
