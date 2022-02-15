@@ -4,10 +4,12 @@ from typing import Optional
 
 
 class BCEdit(QtWidgets.QDialog, Ui_bcEdit):
-    def __init__(self):
+    def __init__(self, data=None):
         super(BCEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        if data:
+            self.doubleSpinBox.setValue(data)
 
     def get(self) -> Optional[float]:
         value = self.doubleSpinBox.value()

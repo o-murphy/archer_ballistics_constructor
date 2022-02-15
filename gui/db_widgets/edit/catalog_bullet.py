@@ -120,14 +120,12 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
 
                 drag_type = df_type.combo.currentText()
                 self.tableWidget.item(idx, 0).setText(drag_type)
+                self.tableWidget.item(idx, 1).state = None
                 if drag_type in ['G1', 'G7']:
-                    self.tableWidget.item(idx, 1).state = 0.1
                     self.tableWidget.item(idx, 1).setText(f'{0.1:.3f}')
                 elif drag_type.endswith('Multi-BC'):
-                    self.tableWidget.item(idx, 1).state = []
                     self.tableWidget.item(idx, 1).setText('Points: 0')
                 else:
-                    self.tableWidget.item(idx, 1).state = []
                     self.tableWidget.item(idx, 1).setText('DFL: 0')
 
                 if not self.set_cell_data(idx):
@@ -155,16 +153,17 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
     def set_cell_data(self, index):
         row = index.row() if not isinstance(index, int) else index
         drag_type = self.tableWidget.item(row, 0).text()
-        data = None
+        state = self.tableWidget.item(row, 1).state
+        data = state if state else None
         if drag_type in ['G1', 'G7']:
-            bc_edit = BCEdit()
+            bc_edit = BCEdit(data)
             if bc_edit.exec_():
                 data = bc_edit.get()
                 self.tableWidget.item(row, 1).setText(str(data))
                 self.tableWidget.item(row, 1).state = data if data else 0
 
         elif drag_type.endswith('Multi-BC'):
-            mbc_edit = MBCEdit()
+            mbc_edit = MBCEdit(data)
             if mbc_edit.exec_():
                 data, comment = mbc_edit.get()
                 count = [(bc, v) for (bc, v) in data if bc > 0 and v >= 0]
@@ -173,7 +172,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
                 self.tableWidget.item(row, 1).state = data if data else []
                 self.tableWidget.item(row, 2).setText(comment)
         else:
-            cdf_edit = CDFEdit()
+            cdf_edit = CDFEdit(data)
             if cdf_edit.exec_():
                 data, comment = cdf_edit.get()
                 self.tableWidget.item(row, 1).setText('DFL: ' + str(len(data)))

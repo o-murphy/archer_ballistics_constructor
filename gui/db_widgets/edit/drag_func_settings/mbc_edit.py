@@ -5,7 +5,7 @@ from typing import Optional
 
 
 class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
-    def __init__(self):
+    def __init__(self, data=None):
         super(MBCEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -25,14 +25,17 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
         self.bc_table.setItemDelegateForColumn(0, self.ballistics_coefficient)
         self.bc_table.setItemDelegateForColumn(1, self.muzzle_velocity)
 
-        data = [(0, 0) for i in range(5)]
-        self.set_data(data)
+        if data:
+            self.set_data(data)
+        else:
+            data = [(0, 0) for i in range(5)]
+            self.set_data(data)
 
         self.gridLayout.addWidget(self.bc_table)
         self.gridLayout.addWidget(self.buttonBox)
 
     def set_data(self, data):
-        data.sort(reverse=False)
+        data.sort(reverse=True)
         self.bc_table.setRowCount(len(data))
         for i, (bc, v) in enumerate(data):
             self.bc_table.setItem(i, 0, QtWidgets.QTableWidgetItem())
@@ -52,7 +55,7 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
                 return
             else:
                 data.append((bc, v))
-        data.sort(reverse=False)
+        data.sort(reverse=True)
         return data
 
     def accept(self) -> None:

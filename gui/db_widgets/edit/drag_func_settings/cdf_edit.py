@@ -8,7 +8,7 @@ rnd = BConverter().auto_rnd
 
 
 class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
-    def __init__(self):
+    def __init__(self, data=None):
         super(CDFEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -27,6 +27,9 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         self.Add.clicked.connect(lambda: self.cdf_table.setColumnCount(self.cdf_table.columnCount() + 1))
         self.Remove.clicked.connect(lambda: self.cdf_table.removeColumn(self.cdf_table.currentColumn()))
         self.Clear.clicked.connect(self.clear_table)
+
+        if data:
+            self.set_data(data)
 
     def clear_table(self):
         while self.cdf_table.columnCount():
