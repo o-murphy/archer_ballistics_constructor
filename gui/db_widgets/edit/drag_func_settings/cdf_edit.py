@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_cdfEdit
 from gui.drag_func_editor.drag_table import DragTable
 from modules.converter import BConverter
+from gui.delegates import Velocity, DragCoefficient
 
 rnd = BConverter().auto_rnd
 
@@ -13,6 +14,10 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
         self.cdf_table = DragTable()
+        self.velocity_delegate = Velocity()
+        self.df_delegate = DragCoefficient()
+        self.cdf_table.setItemDelegateForRow(0, self.velocity_delegate)
+        self.cdf_table.setItemDelegateForRow(1, self.df_delegate)
 
         self.gridLayout.addWidget(self.cdf_table, 2, 0, 1, 5)
         self.gridLayout.addWidget(self.buttonBox, 3, 0, 1, 5)
@@ -21,30 +26,39 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         self.pasteTable.clicked.connect(self.paste_table)
 
     def copy_table(self):
-        # datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
-        #     self.state.current_data if self.state.current_data else self.state.default_data
-        # )])
-        # cb = QtWidgets.QApplication.clipboard()
-        # cb.clear(mode=cb.Clipboard)
-        # cb.setText(datasheet, mode=cb.Clipboard)
-        pass
+        data = self.get_data()
+        datasheet = []
+        for (v, c) in data:
+            datasheet.append(f"{str(v).replace(r'.', r',')}\t{str(c).replace(r'.', r',')}")
+        datasheet = '\n'.join(datasheet)
+
+        cb = QtWidgets.QApplication.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(datasheet, mode=cb.Clipboard)
 
     def paste_table(self):
         cb = QtWidgets.QApplication.clipboard()
         lines = cb.text().split('\n')
         pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
         float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
-        float_pairs.sort(reverse=False)
-        self.cdf_table.setColumnCount(len(float_pairs))
-        for i, (k, v) in enumerate(float_pairs):
-            self.cdf_table.setItem(0, i, QtWidgets.QTableWidgetItem(str(k)))
-            self.cdf_table.setItem(1, i, QtWidgets.QTableWidgetItem(str(v)))
+        self.set_data(float_pairs)
+
+    def set_data(self, data):
+        data.sort(reverse=False)
+        self.cdf_table.setColumnCount(len(data))
+        for i, (v, c) in enumerate(data):
+            self.cdf_table.setItem(0, i, QtWidgets.QTableWidgetItem())
+            self.cdf_table.setItem(1, i, QtWidgets.QTableWidgetItem())
+            self.cdf_table.item(0, i).setData(QtCore.Qt.EditRole, v)
+            self.cdf_table.item(1, i).setData(QtCore.Qt.EditRole, c)
 
     def get_data(self):
-        data = [
-            [float(self.cdf_table.item(0, i).text()), float(self.cdf_table.item(1, i).text())]
-            for i in range(self.cdf_table.columnCount())
-        ]
+        data = []
+        for i in range(self.cdf_table.columnCount()):
+            v = self.cdf_table.item(0, i).data(QtCore.Qt.EditRole)
+            c = self.cdf_table.item(1, i).data(QtCore.Qt.EditRole)
+            data.append((v, c))
+        data.sort(reverse=False)
         return data
 
     def get(self) -> tuple[list, str]:

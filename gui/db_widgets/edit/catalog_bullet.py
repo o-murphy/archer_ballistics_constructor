@@ -133,8 +133,6 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.tableWidget.item(idx, 1).setText(bc)
         self.tableWidget.item(idx, 1).state = data
         self.tableWidget.item(idx, 2).setText(comment)
-
-
         self.tableWidget.cellWidget(idx, 0).currentIndexChanged.connect(lambda *args: print(args))
 
     def del_df(self):
