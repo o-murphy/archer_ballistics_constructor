@@ -24,6 +24,13 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
 
         self.copyTable.clicked.connect(self.copy_table)
         self.pasteTable.clicked.connect(self.paste_table)
+        self.Add.clicked.connect(lambda: self.cdf_table.setColumnCount(self.cdf_table.columnCount() + 1))
+        self.Remove.clicked.connect(lambda: self.cdf_table.removeColumn(self.cdf_table.currentColumn()))
+        self.Clear.clicked.connect(self.clear_table)
+
+    def clear_table(self):
+        while self.cdf_table.columnCount():
+            self.cdf_table.removeColumn(0)
 
     def copy_table(self):
         data = self.get_data()
@@ -52,11 +59,12 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
             self.cdf_table.item(0, i).setData(QtCore.Qt.EditRole, v)
             self.cdf_table.item(1, i).setData(QtCore.Qt.EditRole, c)
 
-    def get_data(self):
+    def get_data(self) -> list[tuple]:
         data = []
         for i in range(self.cdf_table.columnCount()):
             v = self.cdf_table.item(0, i).data(QtCore.Qt.EditRole)
             c = self.cdf_table.item(1, i).data(QtCore.Qt.EditRole)
+
             data.append((v, c))
         data.sort(reverse=False)
         return data

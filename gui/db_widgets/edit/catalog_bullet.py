@@ -5,15 +5,10 @@ from modules import BConverter
 from .drag_func_settings import BCEdit
 from .drag_func_settings import MBCEdit
 from .drag_func_settings import CDFEdit
+from .df_type_dlg import DFTypeDlg
 
 from dbworker.models import *
 from dbworker import db
-
-
-class DFCombo(QtWidgets.QComboBox):
-    def __init__(self):
-        super(DFCombo, self).__init__()
-        self.addItems(['G1', 'G7', 'G1 Multi-BC', 'G7 Multi-BC', 'Custom'])
 
 
 class DFDelBtn(QtWidgets.QPushButton):
@@ -99,41 +94,59 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())
         return self.tableWidget.indexAt(cursor).row()
 
-    def add(self, df=None):
+    def add_row(self):
         idx = self.tableWidget.rowCount()
         self.tableWidget.setRowCount(idx+1)
-        self.tableWidget.setCellWidget(idx, 0, DFCombo())
+        self.tableWidget.setItem(idx, 0, QtWidgets.QTableWidgetItem(''))
         self.tableWidget.setItem(idx, 1, QtWidgets.QTableWidgetItem(''))
-
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-
-        self.tableWidget.item(idx, 1).setIcon(icon1)
-
-        self.tableWidget.item(idx, 1).state = None
         self.tableWidget.setItem(idx, 2, QtWidgets.QTableWidgetItem(''))
         self.tableWidget.setCellWidget(idx, 3, DFDelBtn())
         self.tableWidget.cellWidget(idx, 3).clicked.connect(self.del_df)
 
-        if df:
-            self.tableWidget.cellWidget(idx, 0).setCurrentText(df.drag_type)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png"),
+                        QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
+        self.tableWidget.item(idx, 1).setIcon(icon1)
+        return idx
+
+    def add(self, df=None):
+        if not df:
+            df_type = DFTypeDlg()
+
+            if df_type.exec_():
+
+                idx = self.add_row()
+
+                drag_type = df_type.combo.currentText()
+                self.tableWidget.item(idx, 0).setText(drag_type)
+                if drag_type in ['G1', 'G7']:
+                    self.tableWidget.item(idx, 1).state = 0.1
+                    self.tableWidget.item(idx, 1).setText(f'{0.1:.3f}')
+                elif drag_type.endswith('Multi-BC'):
+                    self.tableWidget.item(idx, 1).state = []
+                    self.tableWidget.item(idx, 1).setText('Points: 0')
+                else:
+                    self.tableWidget.item(idx, 1).state = []
+                    self.tableWidget.item(idx, 1).setText('DFL: 0')
+
+                if not self.set_cell_data(idx):
+                    self.tableWidget.removeRow(idx)
+        else:
+            idx = self.add_row()
             data, comment = df.data, df.comment
             if df.drag_type in ['G1', 'G7']:
-                bc = str(df.data) if df.data else str(0)
+                bc = f'{data:.3f}' if data else f'{0.1:.3f}'
             elif df.drag_type.endswith('Multi-BC'):
                 bc = 'Points: ' + str(len([(bc, v) for (bc, v) in df.data if bc > 0 and v >= 0])) \
                     if isinstance(df.data, list) else 'Points: 0'
             else:
                 bc = 'DFL: ' + str(len(df.data)) if isinstance(df.data, list) else 'DFL: 0'
-            # self.tableWidget.item(idx, 1).setText(bc)
-            # self.tableWidget.item(idx, 1).state = data
-            # self.tableWidget.item(idx, 2).setText(comment)
-        else:
-            bc, data, comment = '0', 0, ''
-        self.tableWidget.item(idx, 1).setText(bc)
-        self.tableWidget.item(idx, 1).state = data
-        self.tableWidget.item(idx, 2).setText(comment)
-        self.tableWidget.cellWidget(idx, 0).currentIndexChanged.connect(lambda *args: print(args))
+
+            self.tableWidget.item(idx, 0).setText(df.drag_type)
+            self.tableWidget.item(idx, 1).setText(bc)
+            self.tableWidget.item(idx, 1).state = data
+            self.tableWidget.item(idx, 2).setText(comment)
 
     def del_df(self):
         if self.tableWidget.rowCount() > 1:
@@ -141,7 +154,8 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
 
     def set_cell_data(self, index):
         row = index.row() if not isinstance(index, int) else index
-        drag_type = self.tableWidget.cellWidget(row, 0).currentText()
+        drag_type = self.tableWidget.item(row, 0).text()
+        data = None
         if drag_type in ['G1', 'G7']:
             bc_edit = BCEdit()
             if bc_edit.exec_():
@@ -165,6 +179,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
                 self.tableWidget.item(row, 1).setText('DFL: ' + str(len(data)))
                 self.tableWidget.item(row, 1).state = data if data else []
                 self.tableWidget.item(row, 2).setText(comment)
+        return data
 
     def get(self):
         sess = db.SessMake()
@@ -178,7 +193,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
 
         for i in range(self.tableWidget.rowCount()):
             row = [
-                self.tableWidget.cellWidget(i, 0).currentText(),
+                self.tableWidget.item(i, 0).text(),
                 self.tableWidget.item(i, 1).state,
                 self.tableWidget.item(i, 2).text()
             ]

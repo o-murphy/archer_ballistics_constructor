@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_bcEdit
+from typing import Optional
 
 
 class BCEdit(QtWidgets.QDialog, Ui_bcEdit):
@@ -8,5 +9,18 @@ class BCEdit(QtWidgets.QDialog, Ui_bcEdit):
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
-    def get(self):
-        return self.doubleSpinBox.value()
+    def get(self) -> Optional[float]:
+        value = self.doubleSpinBox.value()
+        if value > 0:
+            return value
+        else:
+            message_box = QtWidgets.QMessageBox()
+            message_box.setText('BC cannot be 0')
+            message_box.exec_()
+            return
+
+    def accept(self) -> None:
+        if self.get():
+            super().accept()
+        else:
+            return

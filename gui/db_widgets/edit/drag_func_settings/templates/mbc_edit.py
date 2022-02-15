@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_mbcEdit(object):
     def setupUi(self, mbcEdit):
         mbcEdit.setObjectName("mbcEdit")
-        mbcEdit.resize(174, 237)
+        mbcEdit.resize(213, 295)
         self.gridLayout = QtWidgets.QGridLayout(mbcEdit)
         self.gridLayout.setObjectName("gridLayout")
         self.buttonBox = QtWidgets.QDialogButtonBox(mbcEdit)
