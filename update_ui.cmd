@@ -38,5 +38,6 @@ venv\Scripts\pyuic5 ui_templates\bc_edit.ui -o gui\db_widgets\edit\drag_func_set
 venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\db_widgets\edit\drag_func_settings\templates\mbc_edit.py
 venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\db_widgets\edit\drag_func_settings\templates\cdf_edit.py
 
+venv\Scripts\pyuic5 ui_templates\db_filter.ui -o gui\db_widgets\filter\templates\db_filter.py
 
 REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py

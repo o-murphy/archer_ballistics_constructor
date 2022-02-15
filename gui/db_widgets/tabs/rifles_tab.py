@@ -9,3 +9,4 @@ class RiflesTab(Tab):
         self.list = CatalogRifleList(model, attrs)
         self.info = CatalogRifleInfo()
         self.set()
+        self.enable_filter()
