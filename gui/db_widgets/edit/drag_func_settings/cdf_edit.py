@@ -3,6 +3,8 @@ from .templates import Ui_cdfEdit
 from gui.drag_func_editor.drag_table import DragTable
 from modules.converter import BConverter
 from gui.delegates import Velocity, DragCoefficient
+from gui.stylesheet import load_qss
+
 
 rnd = BConverter().auto_rnd
 
@@ -12,6 +14,10 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         super(CDFEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
+        self.setStyleSheet(load_qss('qss/dialog.qss') + """
+            QDialog {border: 1px solid rgb(76, 76, 76)}
+        """)
 
         self.cdf_table = DragTable()
         self.velocity_delegate = Velocity()

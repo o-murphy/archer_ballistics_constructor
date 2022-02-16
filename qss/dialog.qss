@@ -11,6 +11,7 @@ QSpinBox::down-button, QDoubleSpinBox::down-button {
 	width: 20px;
 	image: url(":/custom/res/custom/caret-down-fill_8.png");
 }
+
 QSpinBox::down-button:hover, QSpinBox::up-button:hover,
 QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
 		background-color: rgb(75, 75, 75);

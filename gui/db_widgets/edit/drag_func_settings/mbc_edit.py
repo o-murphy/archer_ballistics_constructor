@@ -2,6 +2,8 @@ from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_mbcEdit
 from gui.delegates import BallisticCoefficient, MuzzleVelocity
 from typing import Optional
+from gui.stylesheet import load_qss
+
 
 
 class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
@@ -9,6 +11,10 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
         super(MBCEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
+        self.setStyleSheet(load_qss('qss/dialog.qss') + """
+            QDialog {border: 1px solid rgb(76, 76, 76)}
+        """)
 
         self.bc_table = QtWidgets.QTableWidget()
 

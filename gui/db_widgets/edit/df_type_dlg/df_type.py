@@ -1,4 +1,5 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
+from gui.stylesheet import load_qss
 
 
 class DFCombo(QtWidgets.QComboBox):
@@ -11,7 +12,23 @@ class DFTypeDlg(QtWidgets.QDialog):
     def __init__(self):
         super(DFTypeDlg, self).__init__()
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
+        self.setStyleSheet(load_qss('qss/dialog.qss') + """
+            QDialog {border: 1px solid rgb(76, 76, 76)}
+        """)
+
         self.combo = DFCombo()
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.combo.sizePolicy().hasHeightForWidth())
+        self.combo.setSizePolicy(sizePolicy)
+
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.combo.setFont(font)
+
         self.ok = QtWidgets.QPushButton('OK')
         self.cancel = QtWidgets.QPushButton('Cancel')
         self.grid = QtWidgets.QGridLayout()
