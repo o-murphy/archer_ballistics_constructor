@@ -10,7 +10,7 @@ class Filter(QtWidgets.QWidget, Ui_filter):
         self.setupUi(self)
         self.update_calibers()
 
-        self.applyFilter.clicked.connect(self.apply_filter)
+        # self.applyFilter.clicked.connect(self.apply_filter)
 
     def update_calibers(self):
         sess = db.SessMake()
@@ -19,24 +19,24 @@ class Filter(QtWidgets.QWidget, Ui_filter):
             self.caliber.removeItem(i)
         self.caliber.addItem("None", None)
         for cal in calibers:
-            self.caliber.addItem(f"{cal.name}, {cal.diameter.diameter:.3f}inch", cal.id)
+            self.caliber.addItem(f"{cal.name}, {cal.diameter.diameter:.3f}inch", cal)
 
-    def apply_filter(self):
-        filter_by = {}
-
-        if self.name.text() != "":
-            filter_by['name'] = self.name.text()
-        # if self.caliber.currentData():
-        #     filter.update({'caliber_id', self.caliber.currentData()})
-        # if self.diameter.value() > 0:
-        #     filter.update({'diameter', self.diameter.value()})
-        # if self.weight.value() > 0:
-        #     filter.update({'weight', self.weight.value()})
-
-        sess = db.SessMake()
-        rifles = sess.query(Rifle).filter_by(**filter_by).all()
-        # rifles = Rifle.query.filter(Rifle.name.contains('sub_string')).all()
-
-        for r in rifles:
-            print(r.name)
+    # def apply_filter(self):
+    #     filter_by = {}
+    #
+    #     # if self.name.text() != "":
+    #     #     filter_by['name'] = self.name.text()
+    #     # if self.caliber.currentData():
+    #     #     filter.update({'caliber_id.name', self.caliber.currentData()})
+    #     if self.diameter.value() > 0:
+    #         filter.update({'diameter', self.diameter.value()})
+    #     # if self.weight.value() > 0:
+    #     #     filter.update({'weight', self.weight.value()})
+    #
+    #     sess = db.SessMake()
+    #     rifles = sess.query(Rifle).filter_by(**filter_by).all()
+    #     # rifles = Rifle.query.filter(Rifle.name.contains('sub_string')).all()
+    #
+    #     for r in rifles:
+    #         print(r.name)
 

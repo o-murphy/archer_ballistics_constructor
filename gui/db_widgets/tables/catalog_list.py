@@ -1,64 +1,78 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from dbworker import db
-from ..table_btns import SelectBtn
+from .templates import Ui_roTable
 from ..edit import CatalogItemEdit
 
 
-class CatalogList(QtWidgets.QWidget):
+class CatalogList(QtWidgets.QWidget, Ui_roTable):
     def __init__(self, model=None, attrs=None, editor=None):
         super(CatalogList, self).__init__()
-        self.tableWidget = None
+        self.setupUi(self)
+
+        # self.tableWidget: QtWidgets.QTableWidget = None
         self.data = []
         self.model = model
         self.attrs = attrs
         self.editor = editor
-        self.btns = None
+        self.table_model = QtGui.QStandardItemModel(self)
 
-    def eventFilter(self, watched, event):
-        if watched == self.tableWidget.viewport() and event.type() == QtCore.QEvent.MouseButtonDblClick:
-            if not self.tableWidget.item(self.viewport_row(), 0):
-                self.new_item()
-        return QtWidgets.QWidget.eventFilter(self, watched, event)
+        self.proxy_filter = None
 
-    def setupTable(self):
-        header = self.tableWidget.horizontalHeader()
+        self.menu = None
+
+        self.tableView.contextMenuEvent = self.context_menu
+        self.tableView.installEventFilter(self)
+
+    def set_context_menu(self, menu=None):
+        if menu:
+            self.menu = menu
+            self.customContextMenuRequested.connect(self.context_menu)
+
+    def context_menu(self, e):
+        index = self.tableView.indexAt(e.pos())
+        if self.menu:
+            self.menu.popup(QtGui.QCursor.pos())
+            action = self.menu.exec_()
+            if self.menu.objectName() == "TemplatesMenu":
+                if action == self.menu.add:
+                    self.new_item()
+                elif action == self.menu.delete:
+                    self.delete_item(index)
+                elif action == self.menu.edit:
+                    self.edit_item(index)
+                elif action == self.menu.copy:
+                    self.copy_item(index)
+            elif self.menu.objectName() == "CatalogMenu":
+                if action == self.menu.template:
+                    print('template')
+                    tab = self.findParent(self.parent(), 'SelectorTab')
+                    tab.add_template()
+
+    def update_table(self):
+        self.table_model.setRowCount(len(self.data))
+        if len(self.data) > 0:
+            self.table_model.setColumnCount(len(self.data[0]))
+
+            for i, y in enumerate(self.data):
+                for j, x in enumerate(y):
+                    self.table_model.setItem(i, j, QtGui.QStandardItem())
+                    self.table_model.item(i, j).setData(x, QtCore.Qt.DisplayRole)
+
+        self.tableView.setModel(self.table_model)
+
+        if self.proxy_filter:
+            self.proxy_filter()
+
+    def set_header(self):
+        header = self.tableView.horizontalHeader()
         header.setSectionHidden(0, True)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         for i in range(2, header.count()):
             header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
-    def set_editable(self):
-        self.btns = True
-        idx = self.tableWidget.columnCount() + 1
-        self.tableWidget.setColumnCount(idx)
-        self.tableWidget.setHorizontalHeaderItem(idx-1, QtWidgets.QTableWidgetItem('Edit'))
-        self.update_table()
-        self.tableWidget.horizontalHeader().setSectionResizeMode(idx-1, QtWidgets.QHeaderView.ResizeToContents)
-
-        if self.tableWidget:
-            self.tableWidget.viewport().installEventFilter(self)
-            self.tableWidget.doubleClicked.connect(self.edit_item)
-
-    def add_btns(self, i):
-        if self.btns:
-            sel_btn = SelectBtn(self.model, self.editor)
-            sel_btn.delBtn.clicked.connect(self.delete_item)
-            sel_btn.editBtn.clicked.connect(self.edit_item)
-            sel_btn.copyBtn.clicked.connect(self.copy_item)
-
-            self.tableWidget.setCellWidget(i, self.tableWidget.columnCount() - 1, sel_btn)
-
-    def update_table(self):
-        self.tableWidget.setRowCount(len(self.data))
-        for i, y in enumerate(self.data):
-            for j, x in enumerate(y):
-                self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(x)))
-
-            self.add_btns(i)
-
     def viewport_row(self):
-        cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())
-        return self.tableWidget.indexAt(cursor).row()
+        cursor = self.tableView.mapFromGlobal(QtGui.QCursor().pos())
+        return self.tableView.indexAt(cursor)
 
     def set_data(self):
         self.data = []
@@ -76,37 +90,39 @@ class CatalogList(QtWidgets.QWidget):
         for i in items:
             self.data.append(i.__dict__)
 
-    def copy_item(self):
-        item = self.tableWidget.item(self.viewport_row(), 0)
-        if item:
-            id = item.text()
-            if id:
+    def copy_item(self, index):
+        index = self.tableView.model().index(index.row(), 0)
+        if index:
+            item_data = self.tableView.model().itemData(index)
+            if item_data:
                 sess = db.SessMake()
-                item = sess.query(self.model).get(id)
+                item = sess.query(self.model).get(item_data[0])
                 dlg = CatalogItemEdit(self.editor(item, 'copy'))
                 if dlg.exec_():
                     dlg.get()
                 self.set_data()
 
-    def edit_item(self):
-        item = self.tableWidget.item(self.viewport_row(), 0)
-        if item:
-            id = item.text()
-            if id:
+    def edit_item(self, index):
+        index = self.tableView.model().index(index.row(), 0)
+        if index:
+            item_data = self.tableView.model().itemData(index)
+            if item_data:
                 sess = db.SessMake()
-                item = sess.query(self.model).get(id)
+                item = sess.query(self.model).get(item_data[0])
                 dlg = CatalogItemEdit(self.editor(item, 'edit'))
                 if dlg.exec_():
                     dlg.get()
                 self.set_data()
 
-    def delete_item(self):
-        item = self.tableWidget.item(self.viewport_row(), 0)
-        if item:
-            id = item.text()
-            if id:
+    def delete_item(self, index):
+        index = self.tableView.model().index(index.row(), 0)
+        if index:
+            item_data = self.tableView.model().itemData(index)
+            print(item_data)
+            if item_data:
                 sess = db.SessMake()
-                item = sess.query(self.model).get(id)
+                item = sess.query(self.model).get(item_data[0])
+                print(item)
                 sess.delete(item)
                 sess.commit()
                 self.set_data()
@@ -116,13 +132,13 @@ class CatalogList(QtWidgets.QWidget):
         if dlg.exec_():
             dlg.get()
         self.set_data()
-
-    def edit_dialog(self):
-        pass
-
-    def sel_cur(self):
-        pass
-
+    #
+    # def edit_dialog(self):
+    #     pass
+    #
+    # def sel_cur(self):
+    #     pass
+    #
     def findParent(self, parent, objectName):
         if parent.objectName() != objectName:
             return self.findParent(parent.parent(), objectName)

@@ -356,7 +356,7 @@
       <item>
        <spacer name="horizontalSpacer_4">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -400,18 +400,12 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QSpinBox" name="twist">
+       <widget class="QDoubleSpinBox" name="twist">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>16777215</height>
-         </size>
         </property>
         <property name="font">
          <font>
@@ -420,15 +414,6 @@
         </property>
         <property name="styleSheet">
          <string notr="true"/>
-        </property>
-        <property name="suffix">
-         <string/>
-        </property>
-        <property name="maximum">
-         <number>20</number>
-        </property>
-        <property name="value">
-         <number>10</number>
         </property>
        </widget>
       </item>
@@ -485,7 +470,7 @@
       <item>
        <spacer name="horizontalSpacer_5">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>

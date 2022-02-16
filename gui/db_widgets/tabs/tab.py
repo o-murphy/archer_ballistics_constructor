@@ -10,6 +10,7 @@ class Tab(QtWidgets.QWidget):
     def __init__(self):
         super(Tab, self).__init__()
         self.setStyleSheet("""QLabel {font-size: 16px;}""")
+        self.setObjectName('SelectorTab')
 
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -20,24 +21,29 @@ class Tab(QtWidgets.QWidget):
         self.info = None
         self.table = None
         self.tools = None
-        self.filter = None
+        self.filter_widget: Filter = None
 
     def enable_filter(self):
-        self.filter = Filter()
-        self.gridLayout.addWidget(self.filter, 1, 1, 1, 1)
+        self.filter_widget = Filter()
+        self.gridLayout.addWidget(self.filter_widget, 1, 1, 1, 1)
 
     def enable_add_template(self):
         self.tools = InfoTools()
         self.tools.addTemplate.clicked.connect(self.add_template)
         self.gridLayout.addWidget(self.tools, 2, 1, 1, 1)
 
+    def eventFilter(self, sender, event) -> bool:
+        print(sender, event)
+        super().eventFilter(sender, event)
+
     def set(self):
         if self.list and self.info:
-            self.table = self.list.tableWidget
+            self.table = self.list.tableView
             self.gridLayout.addWidget(self.list, 0, 0, 3, 1)
             self.gridLayout.addWidget(self.info, 0, 1, 1, 1)
 
     def add_template(self):
+        print('add', self.info.item.name)
         if self.info.item:
             sess = db.SessMake()
 

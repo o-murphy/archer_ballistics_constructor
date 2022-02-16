@@ -65,10 +65,13 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
     def get_data(self) -> list[tuple]:
         data = []
         for i in range(self.cdf_table.columnCount()):
-            v = self.cdf_table.item(0, i).data(QtCore.Qt.EditRole)
-            c = self.cdf_table.item(1, i).data(QtCore.Qt.EditRole)
+            v_item = self.cdf_table.item(0, i)
+            c_item = self.cdf_table.item(1, i)
+            if v_item and c_item:
+                v = v_item.data(QtCore.Qt.EditRole)
+                c = c_item.data(QtCore.Qt.EditRole)
 
-            data.append((v, c))
+                data.append((v, c))
         data.sort(reverse=False)
         return data
 

@@ -1,15 +1,15 @@
-from .templates import Ui_catalogBulletList
 from .catalog_list import CatalogList
 from ..edit import CatalogBullet
 
 
-class CatalogBulletList(CatalogList, Ui_catalogBulletList):
+class CatalogBulletList(CatalogList):
     def __init__(self, model=None, attrs=None):
         super(CatalogBulletList, self).__init__(model, attrs, CatalogBullet)
-        self.setupUi(self)
 
-        self.setupTable()
         self.set_data()
+        self.table_model.setHorizontalHeaderLabels(['id', 'Name', 'Weight', 'Length', 'Diameter'])
+        self.gridLayout.addWidget(self.tableView)
+        self.set_header()
 
     def parse_data(self, items):
         self.data = []

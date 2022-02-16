@@ -39,5 +39,6 @@ venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\db_widgets\edit\drag_func_se
 venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\db_widgets\edit\drag_func_settings\templates\cdf_edit.py
 
 venv\Scripts\pyuic5 ui_templates\db_filter.ui -o gui\db_widgets\filter\templates\db_filter.py
+venv\Scripts\pyuic5 ui_templates\readonly_table.ui -o gui\db_widgets\tables\templates\readonly_table.py
 
 REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py

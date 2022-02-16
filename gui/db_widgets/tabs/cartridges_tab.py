@@ -14,6 +14,7 @@ class CartridgesTab(Tab):
         self.set()
 
     def add_template(self):
+        print('add', self.info.item.name)
         if self.info.item:
             sess = db.SessMake()
 

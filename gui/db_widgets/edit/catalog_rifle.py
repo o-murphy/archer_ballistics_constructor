@@ -19,6 +19,8 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
         if data:
             self.data = data
             self.rifleName.setText(data.name)
+
+            self.caliberName.setCurrentIndex(self.caliberName.findData(data.caliber.id))
             self.caliberName.setCurrentText(data.caliber.name)
             self.sh.setValue(data.sh)
             self.twist.setValue(data.twist)
@@ -44,6 +46,7 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
 
     def get(self):
         sess = db.SessMake()
+        print(self.caliberName.currentText(), self.caliberName.currentData())
 
         if self.call == 'edit':
             rifle = sess.query(Rifle).get(self.data.id)

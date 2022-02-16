@@ -56,3 +56,29 @@ class MuzzleVelocity(SpinDelegate):
         editor = QtWidgets.QSpinBox(parent)
         self.set_props(editor, 0, 3000, 1)
         return editor
+
+
+from gui.db_widgets.table_btns import SelectBtn
+
+class ButtonDelegate(QtWidgets.QItemDelegate):
+
+    def __init__(self, parent):
+        QtWidgets.QItemDelegate.__init__(self, parent)
+
+    def createEditor(self, parent, option, index):
+        # btn = QtWidgets.QPushButton(str(index.data()), parent)
+        btn = SelectBtn()
+        # btn.clicked.connect(self.currentIndexChanged)
+        # btn.clicked.connect(lambda *args: print('clicked', args))
+        return btn
+
+    def setEditorData(self, editor, index):
+        editor.blockSignals(True)
+        editor.blockSignals(False)
+
+    def setModelData(self, editor, model, index):
+        model.setData(index, editor.text())
+
+    @QtCore.pyqtSlot()
+    def currentIndexChanged(self):
+        self.commitData.emit(self.sender())

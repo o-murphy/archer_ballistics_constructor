@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets
 from .templates import Ui_myTabSelector
 from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
 from dbworker.models import *
+from ..db_widgets.contexts import TemplatesMenu
 
 
 class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
@@ -13,27 +14,36 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
         self.bullets = BulletsTab(Bullet, 'rw')
         self.cartridges = CartridgesTab(Cartridge, 'rw')
 
-        self.rifles.list.set_editable()
-        self.bullets.list.set_editable()
-        self.cartridges.list.set_editable()
+        self.rifles.list.set_context_menu(TemplatesMenu())
+        self.bullets.list.set_context_menu(TemplatesMenu())
+        self.cartridges.list.set_context_menu(TemplatesMenu())
+
+        self.rifles.list.tableView.doubleClicked.connect(self.rifles.list.edit_item)
+        self.bullets.list.tableView.doubleClicked.connect(self.bullets.list.edit_item)
+        self.cartridges.list.tableView.doubleClicked.connect(self.cartridges.list.edit_item)
+
 
         self.tabWidget.addTab(self.rifles, 'Rifles', )
         self.tabWidget.addTab(self.bullets, 'Bullets', )
         self.tabWidget.addTab(self.cartridges, 'Cartridges', )
 
-        self.rifles.table.clicked.connect(lambda index: self.set_info(index.row(), self.rifles.info))
-        self.rifles.table.currentCellChanged.connect(lambda row: self.set_info(row, self.rifles.info))
+        self.rifles.table.selectionModel().selectionChanged.connect(
+            lambda sel, desel: self.select(sel, desel, self.rifles.info)
+        )
 
-        self.cartridges.table.clicked.connect(lambda index: self.set_info(index.row(), self.cartridges.info))
-        self.cartridges.table.currentCellChanged.connect(lambda row: self.set_info(row, self.cartridges.info))
+        self.bullets.table.selectionModel().selectionChanged.connect(
+            lambda sel, desel: self.select(sel, desel, self.bullets.info)
+        )
 
-        self.bullets.table.clicked.connect(lambda index: self.set_info(index.row(), self.bullets.info))
-        self.bullets.table.currentCellChanged.connect(lambda row: self.set_info(row, self.bullets.info))
+        self.cartridges.table.selectionModel().selectionChanged.connect(
+            lambda sel, desel: self.select(sel, desel, self.cartridges.info)
+        )
 
-    def set_info(self, row, info: QtWidgets.QWidget):
-        if row == -1:
-            info.clear()
-        else:
-            item = self.sender().item(row, 0)
-            if item:
-                info.set(item.text())
+    def select(self, select, deselect, info: QtWidgets.QWidget):
+        if select:
+            indexes = select.first().indexes()
+            if indexes:
+                index = indexes[0]
+                item = self.sender().model().itemData(index)
+                if item:
+                    info.set(item[0])

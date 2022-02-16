@@ -1,3 +1,4 @@
 from .catalog_rifle_list import Ui_catalogRifleList
 from .catalog_cartridge_list import Ui_catalogCartridgeList
 from .catalog_bullet_list import Ui_catalogBulletList
+from .readonly_table import Ui_roTable
