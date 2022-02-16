@@ -104,7 +104,7 @@ class Ui_catalogRifle(object):
         self.label_24.setObjectName("label_24")
         self.gridLayout.addWidget(self.label_24, 4, 0, 1, 1)
         self.pushButton = QtWidgets.QPushButton(catalogRifle)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
