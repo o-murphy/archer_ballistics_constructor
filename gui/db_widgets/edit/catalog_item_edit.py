@@ -20,3 +20,8 @@ class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
 
     def get(self):
         return self.widget.get()
+
+    def accept(self) -> None:
+        if self.widget.valid():
+            return super().accept()
+        self.widget.invalid()

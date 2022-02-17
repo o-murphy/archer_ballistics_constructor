@@ -222,3 +222,10 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             for df in self.df:
                 sess.add(DragFunc(*df, bullet_id=new_bullet.id, attrs='rw'))
         sess.commit()
+
+
+    def valid(self):
+        return True
+
+    def invalid(self):
+        return False

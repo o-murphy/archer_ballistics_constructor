@@ -87,8 +87,16 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
                 self.bullet.currentData(),
                 'rw'
             ))
-
         sess.commit()
+
+    def valid(self):
+        if self.mv.value() > 0:
+            return True
+
+    def invalid(self):
+        msg = QtWidgets.QMessageBox(text="Muzzle velocity can't be 0")
+        msg.setWindowTitle('Error!')
+        msg.exec_()
 
     def add_caliber(self):
         ced = CaliberEdit()

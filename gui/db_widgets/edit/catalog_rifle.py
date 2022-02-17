@@ -68,6 +68,12 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
                 )
         sess.commit()
 
+    def valid(self):
+        return True
+
+    def invalid(self):
+        return False
+
     def add_caliber(self):
         ced = CaliberEdit()
         if ced.exec_():
