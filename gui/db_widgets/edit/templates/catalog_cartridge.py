@@ -180,7 +180,7 @@ class Ui_catalogCartridge(object):
         self.mv.setFont(font)
         self.mv.setStyleSheet("")
         self.mv.setMaximum(10000)
-        self.mv.setProperty("value", 868)
+        self.mv.setProperty("value", 0)
         self.mv.setObjectName("mv")
         self.horizontalLayout_50.addWidget(self.mv)
         self.mvQuantity = QtWidgets.QComboBox(self.horizontalWidget_16)

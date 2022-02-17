@@ -27,14 +27,14 @@ class SpinDelegate(QtWidgets.QItemDelegate):
 class Velocity(SpinDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
-        self.set_props(editor, 10, 0, 0.01, 2)
+        self.set_props(editor, 0, 10, 0.01, 2)
         return editor
 
 
 class DragCoefficient(SpinDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
-        self.set_props(editor, 1, 0, 0.0001, 4)
+        self.set_props(editor, 0, 1, 0.0001, 4)
         return editor
 
 

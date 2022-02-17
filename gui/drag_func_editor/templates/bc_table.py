@@ -41,6 +41,6 @@ class Ui_BCTable(QtWidgets.QTableWidget):
     def retranslateUi(self, Ui_BCTable):
         _translate = QtCore.QCoreApplication.translate
         item = self.horizontalHeaderItem(0)
-        item.setText(_translate("Ui_BCTable", "Speed"))
-        item = self.horizontalHeaderItem(1)
         item.setText(_translate("Ui_BCTable", "BC"))
+        item = self.horizontalHeaderItem(1)
+        item.setText(_translate("Ui_BCTable", "V"))

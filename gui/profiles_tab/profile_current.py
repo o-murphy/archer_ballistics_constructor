@@ -12,7 +12,7 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
         self.convert = BConverter()
         self.setConverter()
         self.bc_table = BCTable()
-        self.bulletGroupBox.layout().addWidget(self.bc_table, 0, 2, 6, 1)
+        self.bulletGroupBox.layout().addWidget(self.bc_table, 1, 2, 6, 1)
         self.enable_multi_bc(self.multiBC.isChecked())
 
     def setupConnects(self):
@@ -38,10 +38,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
     def enable_multi_bc(self, is_true):
         self.bc_table.setEnabled(is_true)
         self.bc.setDisabled(is_true)
-        if self.bc_table.cellWidget(0, 1).value() == 0:
-            self.bc_table.cellWidget(0, 1).setValue(self.bc.value())
-        if self.bc_table.cellWidget(0, 0).value() == -1:
-            self.bc_table.cellWidget(0, 0).setValue(self.get_cln(self.mv, self.mvQuantity))
 
     def convert_muzzle_velocity(self):
         cur_idx = self.mvQuantity.currentIndex()
@@ -71,15 +67,6 @@ class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
     @staticmethod
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
         return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
-
-    # def get_multiBC(self):
-    #     return [[self.bc_table.cellWidget(r, 0).value(), self.bc_table.cellWidget(r, 1).value()]
-    #             for r in range(self.bc_table.rowCount())]
-
-    # def set_multiBC(self, multi_bc):
-    #     for i, (v, bc) in enumerate(multi_bc):
-    #         self.bc_table.cellWidget(i, 0).setValue(v)
-    #         self.bc_table.cellWidget(i, 1).setValue(bc)
 
     def get_bullet(self):
         ret = {

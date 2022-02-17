@@ -58,6 +58,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot = DropPlot('drop_plot')
         self.drop_table_edit = DropTableEdit(self)
         self.dragTable = DragTable()
+        self.dragTable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.dragTable.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+
         self.drop_table = self.drop_table_edit.drop_table
         self.current_atmo_dlg = CurrentAtmoDialog()
 

@@ -1,6 +1,7 @@
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_DragTable
-from ..single_custom_widgets.no_wheel_sb import DisabledDoubleSpinBox
 from modules.converter import BConverter
+from gui.delegates import Velocity, DragCoefficient
 
 
 rnd = BConverter.auto_rnd
@@ -10,40 +11,18 @@ class DragTable(Ui_DragTable):
     def __init__(self):
         super().__init__()
         self.setupUI()
-        # self.setStyleSheet("""
-        #     QDoubleSpinBox:hover {
-        #         background: rgb(255, 170, 0);
-        #         color: black;
-        #     }
-        # """)
+
+        self.velocity_delegates = Velocity()
+        self.drag_coefficient = DragCoefficient()
+        self.setItemDelegateForRow(0, self.velocity_delegates)
+        self.setItemDelegateForRow(1, self.drag_coefficient)
 
     def set(self, current_data, default_data):
-        row_count = self.columnCount()
-        if not current_data:
-            if len(default_data) != row_count:
-                for i in range(self.columnCount()):
-                    self.removeColumn(0)
-
-                for i, v in enumerate(default_data):
-                    self.insertColumn(i)
-                    self.setCellWidget(0, i, DisabledDoubleSpinBox())
-                    self.setCellWidget(1, i, DisabledDoubleSpinBox())
-                    self.cellWidget(0, i).setDecimals(2)
-                    self.cellWidget(1, i).setDecimals(4)
-        else:
-            if len(current_data) != row_count:
-                for i in range(self.columnCount()):
-                    self.removeColumn(0)
-
-                for i, v in enumerate(current_data):
-                    self.insertColumn(i)
-                    self.setCellWidget(0, i, DisabledDoubleSpinBox())
-                    self.setCellWidget(1, i, DisabledDoubleSpinBox())
-                    self.cellWidget(0, i).setDecimals(2)
-                    self.cellWidget(1, i).setDecimals(4)
-
         data = current_data if current_data else default_data
         if data:
-            for i, v in enumerate(data):
-                self.cellWidget(0, i).setValue(v[0])
-                self.cellWidget(1, i).setValue(v[1])
+            self.setColumnCount(len(data))
+            for i, (v, c) in enumerate(data):
+                self.setItem(0, i, QtWidgets.QTableWidgetItem())
+                self.setItem(1, i, QtWidgets.QTableWidgetItem())
+                self.item(0, i).setData(QtCore.Qt.EditRole, rnd(v))
+                self.item(1, i).setData(QtCore.Qt.EditRole, rnd(c))

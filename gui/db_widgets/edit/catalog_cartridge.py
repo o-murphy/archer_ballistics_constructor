@@ -28,9 +28,9 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
             self.mv.setValue(self.data.mv)
             self.temp.setValue(self.data.temp)
             self.ts.setValue(self.data.ts)
-            self.caliber.setCurrentText(self.data.caliber.name + ', ' + f'{self.data.caliber.diameter.diameter:.3f}inch')
+            self.caliber.setCurrentIndex(self.caliber.findData(self.data.caliber.id))
             self.set_bullets()
-            self.bullet.setCurrentText(self.data.bullet.name)
+            self.bullet.setCurrentIndex(self.bullet.findData(self.data.bullet.id))
         else:
             self.set_bullets()
 
@@ -44,14 +44,12 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         d = sess.query(Diameter).get(caliber.diameter_id)
 
         bullets = sess.query(Bullet).filter_by(diameter_id=d.id, attrs='rw').all()
-        for i in range(self.bullet.count()):
-            self.bullet.removeItem(i)
+        self.bullet.clear()
         for b in bullets:
             self.bullet.addItem(b.name + ', ' + str(b.weight) + 'gr', b.id)
 
     def set_calibers(self):
-        for i in range(self.caliber.count()):
-            self.caliber.removeItem(i)
+        self.bullet.clear()
         sess = db.SessMake()
         calibers = sess.query(Caliber).all()
         for c in calibers:

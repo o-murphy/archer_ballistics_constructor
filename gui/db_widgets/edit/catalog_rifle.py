@@ -38,15 +38,13 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
         self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
 
     def query_calibers(self):
-        for i in range(self.caliberName.count()):
-            self.caliberName.removeItem(i)
+        self.caliberName.clear()
         sess = db.SessMake()
         for c in sess.query(Caliber).all():
             self.caliberName.addItem(c.name, c.id)
 
     def get(self):
         sess = db.SessMake()
-        print(self.caliberName.currentText(), self.caliberName.currentData())
 
         if self.call == 'edit':
             rifle = sess.query(Rifle).get(self.data.id)
@@ -73,5 +71,5 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
     def add_caliber(self):
         ced = CaliberEdit()
         if ced.exec_():
-            cal_id = ced.get()
+            ced.get()
         self.query_calibers()

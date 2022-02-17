@@ -44,7 +44,6 @@ class CatalogList(QtWidgets.QWidget, Ui_roTable):
                     self.copy_item(index)
             elif self.menu.objectName() == "CatalogMenu":
                 if action == self.menu.template:
-                    print('template')
                     tab = self.findParent(self.parent(), 'SelectorTab')
                     tab.add_template()
 
