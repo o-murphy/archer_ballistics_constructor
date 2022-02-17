@@ -4,11 +4,12 @@ from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 from modules import State, StateDidUpdate, StateDidSet
 
+from .profile_item_contents import Rifle
+
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def __init__(self, parent=None):
-        super(ProfileItem, self).__init__()
-        self.parent = parent
+        super(ProfileItem, self).__init__(parent)
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
 
@@ -25,6 +26,9 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
         self.setupWidgets()
         self.setupConnects()
+
+        self.rifle = Rifle()
+        self.parent().profile_current.tab_6.layout().addWidget(self.rifle, 0, 2, 1, 1)
 
     def setupWidgets(self):
         self.z_x.setObjectName('z_x')
@@ -47,21 +51,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             if e.key in ['rifleName', 'cartridgeName', 'caliberShort']:
                 self.findChild(QtWidgets.QWidget, e.key).setText(e.value)
 
-        # print(self.state.twist)
-        #
-        # new_state = self.state.__getstate__()
-        # new_state['twist'] = 1
-        #
-        # self.state = State(self)
-        # self.updateState(new_state)
-        # self.parent.profile_current.set_data(self.state.__dict__)
-        #
-        # print(self.state.twist)
-
-
-
     def state_did_update(self, e=None):
         if isinstance(e, StateDidUpdate):
             if e.key in ['rifleName', 'cartridgeName', 'caliberShort']:
                 self.findChild(QtWidgets.QWidget, e.key).setText(e.value)
-

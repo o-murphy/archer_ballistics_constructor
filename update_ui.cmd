@@ -44,3 +44,7 @@ venv\Scripts\pyuic5 ui_templates\readonly_table.ui -o gui\db_widgets\tables\temp
 REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
 
 venv\Scripts\pyuic5 ui_templates\drop_table.ui -o gui\drag_func_editor\templates\drop_table.py
+
+
+
+venv\Scripts\pyuic5 ui_templates\prof_rifle.ui -o gui\profiles_tab\profile_item_contents\templates\prof_rifle.py

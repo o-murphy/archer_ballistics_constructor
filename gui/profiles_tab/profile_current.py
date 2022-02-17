@@ -5,8 +5,8 @@ from ..bc_table import BCTable
 
 
 class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.setupUi(self)
         self.setupConnects()
         self.convert = BConverter()

@@ -1,12 +1,12 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 from .templates import Ui_profilesTable
 from .profile_item import ProfileItem
 from ..stylesheet import load_qss
 
 
 class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/profiles_table.qss'))
 
@@ -22,8 +22,9 @@ class ProfilesTable(QtWidgets.QWidget, Ui_profilesTable):
 
     def add_row(self, widget: ProfileItem):
         row_count = self.tableWidget.rowCount()
+
         if row_count < 21:
-            self.tableWidget.insertRow(row_count)
+            self.tableWidget.setRowCount(row_count + 1)
             self.tableWidget.setItem(row_count, 0, QtWidgets.QTableWidgetItem())
             self.tableWidget.setCellWidget(row_count, 0, widget)
             self.tableWidget.setCurrentCell(row_count, 0)

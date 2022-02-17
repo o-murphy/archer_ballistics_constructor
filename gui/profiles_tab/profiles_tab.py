@@ -31,10 +31,10 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.is_saved = True
 
         self.widget_connect_list = []
-        self.profiles_table = ProfilesTable()
+        self.profiles_table = ProfilesTable(self)
 
-        self.profiles_tools = ProfilesTools()
-        self.profile_current = ProfileCurrent()
+        self.profiles_tools = ProfilesTools(self)
+        self.profile_current = ProfileCurrent(self)
 
         self.add_btn = AddBtn()
 

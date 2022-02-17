@@ -3,8 +3,8 @@ from .templates import Ui_profilesTools
 
 
 class ProfilesTools(QtWidgets.QWidget, Ui_profilesTools):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.setupUi(self)
 
         self.saveButton.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
