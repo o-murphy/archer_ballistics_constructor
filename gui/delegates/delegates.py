@@ -58,27 +58,24 @@ class MuzzleVelocity(SpinDelegate):
         return editor
 
 
-from gui.db_widgets.table_btns import SelectBtn
-
-class ButtonDelegate(QtWidgets.QItemDelegate):
-
-    def __init__(self, parent):
-        QtWidgets.QItemDelegate.__init__(self, parent)
-
+class Distance(SpinDelegate):
     def createEditor(self, parent, option, index):
-        # btn = QtWidgets.QPushButton(str(index.data()), parent)
-        btn = SelectBtn()
-        # btn.clicked.connect(self.currentIndexChanged)
-        # btn.clicked.connect(lambda *args: print('clicked', args))
-        return btn
+        editor = QtWidgets.QSpinBox(parent)
+        self.set_props(editor, 0, 10000, 1)
+        editor.editingFinished.connect(self.parent().custom_drop_at_distance)
+        return editor
 
-    def setEditorData(self, editor, index):
-        editor.blockSignals(True)
-        editor.blockSignals(False)
 
-    def setModelData(self, editor, model, index):
-        model.setData(index, editor.text())
+class Drop(SpinDelegate):
+    def createEditor(self, parent, option, index):
+        editor = QtWidgets.QDoubleSpinBox(parent)
+        editor.setDisabled(True)
+        self.set_props(editor, -10000, 10000, 0.001, 3)
+        return editor
 
-    @QtCore.pyqtSlot()
-    def currentIndexChanged(self):
-        self.commitData.emit(self.sender())
+
+class DropCorrection(SpinDelegate):
+    def createEditor(self, parent, option, index):
+        editor = QtWidgets.QDoubleSpinBox(parent)
+        self.set_props(editor, -10000, 10000, 0.001, 3)
+        return editor

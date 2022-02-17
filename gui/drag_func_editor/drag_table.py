@@ -10,12 +10,12 @@ class DragTable(Ui_DragTable):
     def __init__(self):
         super().__init__()
         self.setupUI()
-        self.setStyleSheet("""
-            QDoubleSpinBox:hover {
-                background: rgb(255, 170, 0);
-                color: black;
-            }
-        """)
+        # self.setStyleSheet("""
+        #     QDoubleSpinBox:hover {
+        #         background: rgb(255, 170, 0);
+        #         color: black;
+        #     }
+        # """)
 
     def set(self, current_data, default_data):
         row_count = self.columnCount()

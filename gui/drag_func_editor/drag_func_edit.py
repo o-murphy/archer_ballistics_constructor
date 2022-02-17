@@ -56,7 +56,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
-        self.drop_table_edit = DropTableEdit()
+        self.drop_table_edit = DropTableEdit(self)
         self.dragTable = DragTable()
         self.drop_table = self.drop_table_edit.drop_table
         self.current_atmo_dlg = CurrentAtmoDialog()
@@ -107,9 +107,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.custom_drop_at_distance()
 
     def setWidgets(self):
-        spacer = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        # spacer = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addWidget(self.bc_table, 0, 0, 1, 1)
-        self.gridLayout.addItem(spacer, 1, 0, 1, 1)
+        # self.gridLayout.addItem(spacer, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
@@ -144,7 +144,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.holdOffQuantity.currentIndexChanged.connect(lambda: (
             self.set_hold_off_quantity(), self.cd_at_distance()
         ))
-        self.drop_table.clicked.connect(self.cd_at_distance)
+        self.drop_table.tableWidget.clicked.connect(self.cd_at_distance)
         self.drop_table_edit.addRow.clicked.connect(lambda: (
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
         ))
@@ -163,9 +163,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             e.ignore()
 
     def custom_drop_at_distance(self):
-        d = [self.drop_table.cellWidget(r, 0).value() for r in range(self.drop_table.rowCount())]
+        d = [int(self.drop_table.tableWidget.item(r, 0).text()) for r in range(self.drop_table.tableWidget.rowCount())]
         self.ballistics.get_drop_at_distance(d)
-        [self.drop_table.cellWidget(i, 1).sb.setValue(v) for i, v in enumerate(self.ballistics.drop_at_distance)]
+        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
 
     def set_hold_off_quantity(self):
         self.drop_plot.y_q_label = self.holdOffQuantity.currentText()
@@ -180,8 +180,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     """ TEMPORARY """
 
     def cd_at_distance(self):
-        self.updateState(current_distance=self.drop_table.cellWidget(self.drop_table.currentRow(), 0).value())
-        drop = self.drop_table.cellWidget(self.drop_table.currentRow(), 1).sb.value()
+        self.updateState(current_distance=self.drop_table.get_current_distance())
+        drop = self.drop_table.get_current_drop()
+
         self.ballistics.calculate_cd(distance=self.state.current_distance)
         ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
         x, y = rnd(self.ballistics.cd_at_distance), rnd(min(oy))
