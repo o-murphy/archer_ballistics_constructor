@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_bullet
 from modules import BConverter
 
@@ -7,7 +7,10 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
     def __init__(self, parent=None):
         super(Bullet, self).__init__(parent)
         self.setupUi(self)
+        self.bulletGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
         self.convert = BConverter()
+
+        self.drag_functions = []
 
         self.setConverter()
         self.setupConnects()
@@ -26,6 +29,8 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.weightSwitch.clicked.connect(self.convert_bullet_weight)
         self.lengthSwitch.clicked.connect(self.convert_bullet_length)
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
+
+        self.dragType.currentIndexChanged.connect(self.df_changed)
 
     def convert_bullet_weight(self):
         cur_idx = self.weightQuantity.currentIndex()
@@ -47,18 +52,37 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
     def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
         return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
 
+    def set(self, data):
+        self.bulletName.setText(data['bulletName'])
+        self.weight.setValue(data['weight'])
+        self.length.setValue(data['length'])
+        self.diameter.setValue(data['diameter'])
+
+        for i, df in enumerate(data['drags']):
+            self.dragType.addItem(df.drag_type, i)
+            self.drag_functions.append(df)
+
+        self.dragType.setCurrentIndex(self.dragType.findData(data['drag_idx']))
+        self.df_changed(data['drag_idx'])
+
+    def df_changed(self, idx):
+        # cur_df = self.drag_functions[self.dragType.currentIndex(idx)]
+        if self.drag_functions:
+            cur_df = self.drag_functions[idx]
+            self.dragFuncData.setText(str(cur_df.data))
+
+    def weightTile(self):
+        if self.weightQuantity.currentIndex() == 0:
+            return str(int(round(self.weight.value(), 0))) + 'gr'
+        else:
+            return str(round(self.weight.value(), 1)) + 'g'
+
     def get(self):
         ret = {
             self.bulletName.objectName(): self.bulletName.text(),
             self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
             self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
             self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
-            self.dragType.objectName(): self.dragType.currentIndex(),
-            "weightTile": str(int(round(self.weight.value(), 0))) + 'gr' if self.weightQuantity.currentIndex() == 0
-            else str(round(self.weight.value(), 1)) + 'g',
-            # self.multiBC.objectName(): self.multiBC.checkState(),
-
-            # self.bc.objectName(): self.bc.value(),
-            # self.bc_table.objectName(): self.bc_table.get_data()
+            "weightTile": self.weightTile()
         }
         return ret

@@ -87,6 +87,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def add_profile(self, data=None):  # refactored yet
         if self.profiles_table.rowCount() < 21:
             new_item = ProfileItem(self)
+
             new_item.set(data)
             self.profiles_table_widget.add_row(new_item)
 

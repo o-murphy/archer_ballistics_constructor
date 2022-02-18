@@ -6,6 +6,7 @@ from ..stylesheet import load_qss
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
 from ..drag_func_editor import DragFuncEditDialog
 
+from .default_data import get_defaults
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def __init__(self, parent=None):
@@ -34,6 +35,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.rifleName.setText(self.rifle.rifleName.text())
         self.caliberShort.setText(self.rifle.caliberShort.text())
         self.cartridgeName.setText(self.cartridge.cartridgeName.text())
+        self.weightTile.setText(self.bullet.weightTile())
 
         self.setupConnects()
 
@@ -41,6 +43,10 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
         self.cartridge.cartridgeName.textChanged.connect(lambda text: self.cartridgeName.setText(text))
         self.rifle.caliberShort.textChanged.connect(lambda text: self.caliberShort.setText(text))
+        self.bullet.weight.valueChanged.connect(lambda: self.weightTile.setText(self.bullet.weightTile()))
+        self.bullet.weightQuantity.currentIndexChanged.connect(
+            lambda: self.weightTile.setText(self.bullet.weightTile())
+        )
 
     def get(self):
         data = {}
@@ -56,7 +62,13 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         return data
 
     def set(self, data):
-        pass
+        if not data:
+            data = get_defaults()
+        if data:
+            self.rifle.set(data)
+            self.cartridge.set(data)
+            self.bullet.set(data)
+            self.conditions.set(data)
 
     def drag_func_edit(self):
 

@@ -52,7 +52,7 @@ class Ui_profileCurrent(object):
         self.gridLayout.addWidget(self.tabWidget_2, 0, 0, 1, 1)
 
         self.retranslateUi(profileCurrent)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(profileCurrent)
 
     def retranslateUi(self, profileCurrent):
