@@ -129,9 +129,15 @@ QRadioButton::indicator:disabled, QRadioButton::indicator:unchecked:disabled {
 	background-color:rgb(98, 98, 98);
 }
 
-QPushButton, QToolButton {
-	border: 0px;
+QPushButton {
+    border: 1px solid rgb(76, 76, 76);
 	font-size: 14px;
+	border-radius: 4px;
+}
+
+QToolButton {
+    border: 0;
+    font-size: 14px
 }
 
 QComboBox {

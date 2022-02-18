@@ -1,6 +1,11 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from .templates import Ui_bullet
 from modules import BConverter
+from gui.db_widgets.edit.df_type_dlg import DFTypeDlg
+from gui.db_widgets.edit.drag_func_settings import BCEdit
+from gui.db_widgets.edit.drag_func_settings import MBCEdit
+from gui.db_widgets.edit.drag_func_settings import CDFEdit
+from dbworker.models import DragFunc
 
 
 class Bullet(QtWidgets.QWidget, Ui_bullet):
@@ -31,6 +36,8 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
 
         self.dragType.currentIndexChanged.connect(self.df_changed)
+        self.addDrag.clicked.connect(self.add_drag)
+        self.dragEditor.clicked.connect(self.edit_drag)
 
     def convert_bullet_weight(self):
         cur_idx = self.weightQuantity.currentIndex()
@@ -59,17 +66,74 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.diameter.setValue(data['diameter'])
 
         for i, df in enumerate(data['drags']):
-            self.dragType.addItem(df.drag_type, i)
+            self.dragType.addItem(df.drag_type + ', ' + df.comment, i)
             self.drag_functions.append(df)
 
         self.dragType.setCurrentIndex(self.dragType.findData(data['drag_idx']))
         self.df_changed(data['drag_idx'])
 
     def df_changed(self, idx):
-        # cur_df = self.drag_functions[self.dragType.currentIndex(idx)]
         if self.drag_functions:
             cur_df = self.drag_functions[idx]
-            self.dragFuncData.setText(str(cur_df.data))
+
+            if cur_df.drag_type in ['G1', 'G7']:
+                text = f'BC: {cur_df.data:.3f}'
+            elif cur_df.drag_type.endswith('Multi-BC'):
+                count = [(bc, v) for (bc, v) in cur_df.data if bc > 0 and v >= 0]
+                text = 'Points: ' + str(len(count))
+            else:
+                text = 'DFL: ' + str(len(cur_df.data))
+
+            self.dragFuncData.setText(text)
+
+    def edit_drag(self, data=None, comment=''):
+        idx = self.dragType.currentIndex()
+        cur_df = self.drag_functions[idx]
+
+        if cur_df.drag_type in ['G1', 'G7']:
+            bc_edit = BCEdit(cur_df.data)
+            if bc_edit.exec_():
+                data = bc_edit.get()
+
+        elif cur_df.drag_type.endswith('Multi-BC'):
+            mbc_edit = MBCEdit(cur_df.data)
+            if mbc_edit.exec_():
+                data, comment = mbc_edit.get()
+        else:
+            cdf_edit = CDFEdit(cur_df.data)
+            if cdf_edit.exec_():
+                data, comment = cdf_edit.get()
+        if data:
+            cur_df.data = data
+            cur_df.comment = comment
+            self.df_changed(idx)
+            self.dragType.setCurrentText(cur_df.drag_type + ', ' + cur_df.comment)
+
+    def add_drag(self, data=None, comment=''):
+        df_type = DFTypeDlg()
+
+        if df_type.exec_():
+            drag_type = df_type.combo.currentText()
+
+            if drag_type in ['G1', 'G7']:
+                bc_edit = BCEdit(data)
+                if bc_edit.exec_():
+                    data = bc_edit.get()
+
+            elif drag_type.endswith('Multi-BC'):
+                mbc_edit = MBCEdit(data)
+                if mbc_edit.exec_():
+                    data, comment = mbc_edit.get()
+            else:
+                cdf_edit = CDFEdit(data)
+                if cdf_edit.exec_():
+                    data, comment = cdf_edit.get()
+            if data:
+                new_df = DragFunc(drag_type, data, comment, None, 'rw')
+                self.drag_functions.append(new_df)
+                idx = len(self.drag_functions)-1
+                self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
+                self.dragType.setCurrentIndex(idx)
 
     def weightTile(self):
         if self.weightQuantity.currentIndex() == 0:

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>532</width>
     <height>217</height>
    </rect>
   </property>
@@ -258,6 +258,13 @@
         </item>
        </widget>
       </item>
+      <item row="5" column="1" colspan="2">
+       <widget class="QLineEdit" name="dragFuncData">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="1">
        <widget class="QDoubleSpinBox" name="weight">
         <property name="sizePolicy">
@@ -299,7 +306,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Drag function data:</string>
+         <string>DF info:</string>
         </property>
        </widget>
       </item>
@@ -329,42 +336,6 @@
           <string>Grams</string>
          </property>
         </item>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QToolButton" name="weightSwitch">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <weight>75</weight>
-          <italic>false</italic>
-          <bold>true</bold>
-          <underline>false</underline>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../.rsrc/res/drawable/secondarybtn21a.png</normaloff>
-          <disabledoff>../.rsrc/res/drawable/secondarybtn21b.png</disabledoff>../.rsrc/res/drawable/secondarybtn21a.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
        </widget>
       </item>
       <item row="3" column="0">
@@ -453,12 +424,12 @@
          </font>
         </property>
         <property name="text">
-         <string>Drag Function:</string>
+         <string>Drag function:</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="3">
-       <widget class="QToolButton" name="dragEditor">
+      <item row="4" column="4">
+       <widget class="QToolButton" name="addDrag">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -484,19 +455,47 @@
         </property>
         <property name="icon">
          <iconset resource="../.rsrc/res.qrc">
-          <normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</normaloff>
-          <disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21b.png</disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</iconset>
+          <normaloff>:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png</normaloff>:/icons19/res/drawable-xhdpi-v4/addbtn_menu21a.png</iconset>
         </property>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QLabel" name="dragFuncData">
+      <item row="1" column="3">
+       <widget class="QToolButton" name="weightSwitch">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;font color=black&gt;Convert&lt;/font&gt;</string>
+        </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../.rsrc/res/drawable/secondarybtn21a.png</normaloff>
+          <disabledoff>../.rsrc/res/drawable/secondarybtn21b.png</disabledoff>../.rsrc/res/drawable/secondarybtn21a.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
        </widget>
       </item>
-      <item row="4" column="1" colspan="2">
+      <item row="4" column="1" colspan="3">
        <widget class="QComboBox" name="dragType">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -520,6 +519,74 @@
         </property>
         <property name="currentIndex">
          <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QPushButton" name="proDragEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;font color=black&gt;Edit drag function&lt;/font&gt;</string>
+        </property>
+        <property name="text">
+         <string>Advanced mode</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QPushButton" name="dragEditor">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;font color=black&gt;Edit drag function&lt;/font&gt;</string>
+        </property>
+        <property name="text">
+         <string>Edit</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../.rsrc/res.qrc">
+          <normaloff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</normaloff>
+          <disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21b.png</disabledoff>:/icons/res/drawable-hdpi-v4/settingsbtn_menu21a.png</iconset>
         </property>
        </widget>
       </item>
