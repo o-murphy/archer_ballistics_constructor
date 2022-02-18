@@ -1,7 +1,7 @@
 REM venv\Scripts\pyuic5 ui_templates\profiles_table.ui -o gui\profiles_tab\templates\profiles_table.py
 REM venv\Scripts\pyuic5 ui_templates\profile_item.ui -o gui\profiles_tab\templates\profile_item.py
 REM venv\Scripts\pyuic5 ui_templates\add_btn.ui -o gui\profiles_tab\templates\add_btn.py
-REM venv\Scripts\pyuic5 ui_templates\profile_current.ui -o gui\profiles_tab\templates\profile_current.py
+venv\Scripts\pyuic5 ui_templates\profile_current.ui -o gui\profiles_tab\templates\profile_current.py
 REM venv\Scripts\pyuic5 ui_templates\profiles_tab.ui -o gui\profiles_tab\templates\profiles_tab.py
 REM venv\Scripts\pyuic5 ui_templates\profiles_tools.ui -o gui\profiles_tab\templates\profiles_tools.py
 venv\Scripts\pyuic5 ui_templates\drag_func_edit.ui -o gui\drag_func_editor\templates\drag_func_edit.py
@@ -48,3 +48,6 @@ venv\Scripts\pyuic5 ui_templates\drop_table.ui -o gui\drag_func_editor\templates
 
 
 venv\Scripts\pyuic5 ui_templates\prof_rifle.ui -o gui\profiles_tab\profile_item_contents\templates\prof_rifle.py
+venv\Scripts\pyuic5 ui_templates\prof_cartridge.ui -o gui\profiles_tab\profile_item_contents\templates\prof_cartridge.py
+venv\Scripts\pyuic5 ui_templates\prof_bullet.ui -o gui\profiles_tab\profile_item_contents\templates\prof_bullet.py
+venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py

@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from .templates import Ui_profilesTab
 from .profiles_table import ProfilesTable
 from .profile_current import ProfileCurrent
@@ -6,7 +6,6 @@ from .profiles_tools import ProfilesTools
 from .profile_item import ProfileItem
 
 from .add_btn import AddBtn
-from ..drag_func_editor import DragFuncEditDialog
 from ..close_dialog import CloseDialog
 from datetime import datetime
 
@@ -30,8 +29,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.current_file = ''
         self.is_saved = True
 
-        self.widget_connect_list = []
-        self.profiles_table = ProfilesTable(self)
+        self.profiles_table_widget = ProfilesTable(self)
+        self.profiles_table = self.profiles_table_widget.tableWidget
 
         self.profiles_tools = ProfilesTools(self)
         self.profile_current = ProfileCurrent(self)
@@ -49,8 +48,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
                 pass
 
     def setupWidgets(self):
-        self.profile_current.enable_tabs(False)
-        self.gridLayout.addWidget(self.profiles_table, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.profiles_table_widget, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.profiles_tools, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.profile_current, 0, 1, 2, 1)
         self.insert_add_btn(0)
@@ -66,59 +64,11 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.saveButton.clicked.connect(self.save_file_dialog)
         self.profiles_tools.openFile.clicked.connect(self.open_file_dialog)
         self.profiles_tools.closeFile.clicked.connect(self.close_file)
+        self.profiles_table.currentCellChanged.connect(self.current_cell_changed)
 
-        self.profiles_table.tableWidget.currentCellChanged.connect(self.on_current_profile_change)
-
-        self.profile_current.dragEditor.clicked.connect(self.drag_func_edit)
-
-        children = self.profile_current.findChildren(QtWidgets.QWidget)
-
-        [self.widget_connect_list.append(i.valueChanged) for i in children if hasattr(i, 'valueChanged')]
-        [self.widget_connect_list.append(i.textEdited) for i in children if hasattr(i, 'textEdited')]
-        [self.widget_connect_list.append(i.currentIndexChanged) for i in children if hasattr(i, 'currentIndexChanged')]
-        [self.widget_connect_list.append(i.clicked) for i in children if hasattr(i, 'clicked')]
-        self.widget_connect_list.append(self.profile_current.multiBC.stateChanged)
-
-        [i.connect(self.update_profile) for i in self.widget_connect_list]
-
-    def set_current(self, e):
-        r = None
-        if isinstance(e, QtCore.QModelIndex):
-            r = e.row()
-        elif isinstance(e, int) and e >= 0:
-            r = e
-        if r >= 0:
-            cell = self.profiles_table.tableWidget.cellWidget(r, 0)
-            if cell.state.__dict__:
-                self.profile_current.set_data(cell.state.__dict__)
-
-    def enable_multi_bc(self, event):
-        self.profile_current.enable_multi_bc(event)
-
-    def on_current_profile_change(self, e):
-        if not self.profiles_table.tableWidget.currentItem():
-            self.profile_current.enable_tabs(False)
-
-        elif isinstance(e, int):
-            if e >= 0:
-                self.profile_current.enable_tabs(True)
-                cell = self.profiles_table.tableWidget.cellWidget(e, 0)
-                if cell:
-                    if not isinstance(cell, AddBtn):
-                        if cell.state:
-                            self.set_current(e)
-            else:
-                self.profile_current.enable_tabs(False)
-
-    def drag_func_edit(self):
-
-        drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
-        new_state = drag_func_dlg.__getstate__() if drag_func_dlg.exec_() else None
-
-        if new_state:
-            cell = self.profiles_table.get_current_item()
-            cell.updateState(**new_state)
-            self.profile_current.set_data(cell.state.__dict__)
+    def current_cell_changed(self, row, col, prow, pcol):
+        cur = self.profiles_table.cellWidget(row, col)
+        self.profile_current.set_current(cur)
 
     def set_is_saved(self, e: bool):
         self.is_saved = e
@@ -131,56 +81,33 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
                 self.window().setWindowTitle(self.title)
 
     def insert_add_btn(self, last_row):
-        self.profiles_table.tableWidget.insertRow(last_row)
-        self.profiles_table.tableWidget.setCellWidget(last_row, 0, self.add_btn)
+        self.profiles_table.insertRow(last_row)
+        self.profiles_table.setCellWidget(last_row, 0, self.add_btn)
 
     def add_profile(self, data=None):  # refactored yet
-        if self.profiles_table.tableWidget.rowCount() < 21:
+        if self.profiles_table.rowCount() < 21:
             new_item = ProfileItem(self)
-            new_item.updateState(**data) if data else new_item.updateState(**self.get_current_data())
+            new_item.set(data)
+            self.profiles_table_widget.add_row(new_item)
 
-            self.profiles_table.add_row(new_item)
             self.set_is_saved(False)
-            last_row = self.profiles_table.tableWidget.rowCount()
+            last_row = self.profiles_table.rowCount()
             self.insert_add_btn(last_row)
-            self.profiles_table.tableWidget.removeRow(last_row - 2)
-
-    def get_current_data(self):
-        new_profile = {}
-        z_data = {'z_x': 0, 'z_y': 0, 'z_d': 100}
-        cur_prof = self.profile_current
-        new_profile.update(**cur_prof.get_bullet(),
-                           **cur_prof.get_rifle(),
-                           **cur_prof.get_cartridge(),
-                           **cur_prof.get_conditions(),
-                           **z_data)
-        return new_profile
+            self.profiles_table.removeRow(last_row - 2)
 
     def remove_profile(self):
-        if self.profiles_table.tableWidget.rowCount() > 0:
-            self.profiles_table.remove_row()
+        if self.profiles_table.rowCount() > 0:
+            self.profiles_table_widget.remove_row()
             self.set_is_saved(False)
 
     def move_profile_up(self):
-        if self.profiles_table.tableWidget.rowCount() > 0:
-            self.profiles_table.move_up()
+        if self.profiles_table.rowCount() > 0:
+            self.profiles_table_widget.move_up()
 
     def move_profile_down(self):
-        if self.profiles_table.tableWidget.currentRow() < self.profiles_table.tableWidget.rowCount() - 2:
-            if self.profiles_table.tableWidget.rowCount() > 0:
-                self.profiles_table.move_down()
-
-    def update_profile(self, value):
-        sender = self.sender().objectName()
-        item = self.profiles_table.select()
-        if item:
-            if sender:
-                item.setState(**{sender: value})
-                if sender == 'multiBC':
-                    self.profile_current.enable_multi_bc(value)
-            else:
-                item.setState(**self.get_current_data())
-            self.set_is_saved(False)
+        if self.profiles_table.currentRow() < self.profiles_table.rowCount() - 2:
+            if self.profiles_table.rowCount() > 0:
+                self.profiles_table_widget.move_down()
 
     @staticmethod
     def get_datetime():
@@ -200,13 +127,12 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def get_recent_profile_table(self):
         profiles = []
-        for i in range(self.profiles_table.tableWidget.rowCount() - 1):
-            p = self.profiles_table.tableWidget.cellWidget(i, 0).state.__dict__
+        for i in range(self.profiles_table.rowCount() - 1):
+            p = self.profiles_table.cellWidget(i, 0).get()
             profiles.append(p)
         return profiles
 
     def save_profiles(self, fileName):
-
         import json
         with open(fileName, 'w') as fp:
             json.dump(self.get_recent_profile_table(), fp)
@@ -241,9 +167,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             import json
             data = json.load(fp)
         for d in data:
-            # self.disconnectEvts()
             self.add_profile(data=d)
-            # self.connectEvts()
 
         self.current_file = fileName
         self.set_is_saved(True)
@@ -257,7 +181,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             if choice == QtWidgets.QMessageBox.Close:
                 self.set_is_saved(True)
         if self.is_saved:
-            self.profiles_table.remove_all()
+            self.profiles_table_widget.remove_all()
             self.current_file = ''
             self.set_is_saved(True)
         return choice
