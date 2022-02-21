@@ -90,6 +90,7 @@ class Bullet(Params):
                     self.BalCoef[i] = bc
                     self.BVelocity[i] = v
             self.df_data = None
+            # print(self.BalCoef, self.BVelocity)
 
 
 class Cartridge(Params):
