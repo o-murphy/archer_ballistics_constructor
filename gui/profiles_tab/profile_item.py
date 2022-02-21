@@ -5,8 +5,10 @@ from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
 from ..drag_func_editor import DragFuncEditDialog
+from .profile_item_contents import CustomDLG
 
 from .default_data import get_defaults
+
 
 class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
     def __init__(self, parent=None):
@@ -39,6 +41,9 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
         self.setupConnects()
 
+        # self.bullet.addDrag.clicked.connect(self.add_drag)
+        self.bullet.dragEditor.clicked.connect(self.edit_drag)
+
     def setupConnects(self):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
         self.cartridge.cartridgeName.textChanged.connect(lambda text: self.cartridgeName.setText(text))
@@ -48,7 +53,39 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             lambda: self.weightTile.setText(self.bullet.weightTile())
         )
 
-    def get(self):
+    # def add_drag(self):
+    #     if self.bullet.add_drag():
+    #         state = self.get()
+    #         state['drag_idx'] = -1
+    #         state['df_data'] = None
+    #
+    #         # cdf_edit = DragFuncEditDialog(state=state)
+    #         # cdf_edit.exec_()
+    #
+    #         custom = CustomDLG()
+    #         if custom.exec_():
+    #             if custom.comboBox.currentText() == "Import by file":
+    #                 state['df_data'] = custom.data
+    #                 state['df_type'] = 'Custom'
+    #             else:
+    #                 state['df_type'] = custom.comboBox.currentText()
+    #
+    #             cdf_edit = DragFuncEditDialog(state=state)
+    #             cdf_edit.exec_()
+    #
+    def edit_drag(self):
+        if self.bullet.edit_drag():
+            state = self.get()
+            cur_df = state['drags'][state['drag_idx']]
+            # if cur_df.drag_type == 'Custom':
+            state['df_data'] = cur_df.data
+            state['df_type'] = cur_df.drag_type
+            state['df_comment'] = cur_df.comment
+
+            cdf_edit = DragFuncEditDialog(state=state)
+            cdf_edit.exec_()
+
+    def get(self) -> dict:
         data = {}
         data.update(**self.rifle.get())
         data.update(**self.bullet.get())

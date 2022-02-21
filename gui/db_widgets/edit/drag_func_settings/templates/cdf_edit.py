@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_cdfEdit(object):
     def setupUi(self, cdfEdit):
         cdfEdit.setObjectName("cdfEdit")
-        cdfEdit.resize(417, 173)
+        cdfEdit.resize(498, 173)
         self.gridLayout = QtWidgets.QGridLayout(cdfEdit)
         self.gridLayout.setObjectName("gridLayout")
         self.copyTable = QtWidgets.QPushButton(cdfEdit)
@@ -77,6 +77,9 @@ class Ui_cdfEdit(object):
         self.Clear.setFont(font)
         self.Clear.setObjectName("Clear")
         self.gridLayout.addWidget(self.Clear, 1, 4, 1, 1)
+        self.importTable = QtWidgets.QPushButton(cdfEdit)
+        self.importTable.setObjectName("importTable")
+        self.gridLayout.addWidget(self.importTable, 1, 5, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(cdfEdit)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -88,13 +91,13 @@ class Ui_cdfEdit(object):
         self.lineEdit.setFont(font)
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
-        self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 5)
+        self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 6)
         self.buttonBox = QtWidgets.QDialogButtonBox(cdfEdit)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setCenterButtons(True)
         self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 5)
+        self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 6)
 
         self.retranslateUi(cdfEdit)
         self.buttonBox.accepted.connect(cdfEdit.accept) # type: ignore
@@ -109,5 +112,6 @@ class Ui_cdfEdit(object):
         self.Add.setText(_translate("cdfEdit", "Add"))
         self.Remove.setText(_translate("cdfEdit", "Remove"))
         self.Clear.setText(_translate("cdfEdit", "Clear"))
+        self.importTable.setText(_translate("cdfEdit", "Import"))
         self.lineEdit.setPlaceholderText(_translate("cdfEdit", "Comment here"))
 import res_rc

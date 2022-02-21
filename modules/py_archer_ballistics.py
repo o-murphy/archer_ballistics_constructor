@@ -53,35 +53,43 @@ class Bullet(Params):
     def __init__(self, params):
         super().__init__(params)
 
-        self.is_mbc = True if self.params['multiBC'] == 2 else False
-        self.mbc = self.params['bcTable']
+        print(params['df_type'], params['df_data'])
+
+        # self.is_mbc = True if self.params['multiBC'] == 2 else False
+        # self.mbc = self.params['bcTable']
         self.DragFunc = self.set_drag_func_type()
 
+        self.df_data = None
         self.BalCoef = None
         self.BVelocity = None
         self.Diameter = self.params['diameter']
         self.Length = self.params['length']
         self.Weight = self.params['weight']
         self.set_bc()
-        self.df_data = self.params['df_data'] if 'df_data' in self.params else None
+        # self.df_data = self.params['df_data'] if 'df_data' in self.params else None
 
     def set_drag_func_type(self):
-        drag_func_type = [1, 7, 10]
-        if self.is_mbc:
-            drag_func_type = [11, 17, 10]
-        return drag_func_type[self.params['dragType']]
+        drag_func_type = {
+            'G1': 1,
+            'G7': 7,
+            'G1 Multi-BC': 11,
+            'G7 Multi-BC': 17,
+            'Custom': 10
+        }
+        return drag_func_type[self.params['df_type']]
 
     """Temporary"""
     def set_bc(self):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
-        self.BalCoef[0] = self.params['bc']
-        self.BVelocity[0] = self.params['mv']
-        if self.is_mbc:
-            for i, (v, bc) in enumerate(self.mbc):
+        if self.DragFunc == 10:
+            self.df_data = self.params['df_data']
+        if self.DragFunc in [10, 17]:
+            for i, (bc, v) in enumerate(self.params['df_data']):
                 if bc > 0 and v >= 0:
                     self.BalCoef[i] = bc
                     self.BVelocity[i] = v
+            self.df_data = None
 
 
 class Cartridge(Params):
@@ -114,7 +122,7 @@ class Barrel(Params):
         self.Zero = int(self.params['z_d'])
         self.H_zero = int(self.params['z_x'] * 4)
         self.V_zero = int(self.params['z_y'] * 4)
-        self.twist_value = self.params['rightTwist']
+        self.twist_value = self.params['twist']
         self.is_right = self.params['rightTwist']
         self.Twist = self.set_twist()
 

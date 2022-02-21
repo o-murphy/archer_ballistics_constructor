@@ -15,7 +15,7 @@ class DropPlot(CustomPlot):
         :param point:
         :return:
         """
-        if self.parent():
+        if self.parent() and self.x:
             self.current_point.setData()
             p = self.graphWidget.plotItem.vb.mapSceneToView(point)
             ox = self.x

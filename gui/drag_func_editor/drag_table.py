@@ -17,6 +17,11 @@ class DragTable(Ui_DragTable):
         self.setItemDelegateForRow(0, self.velocity_delegates)
         self.setItemDelegateForRow(1, self.drag_coefficient)
 
+        item = self.verticalHeaderItem(0)
+        item.setText("V")
+        item = self.verticalHeaderItem(1)
+        item.setText("CD")
+
     def set(self, current_data, default_data):
         data = current_data if current_data else default_data
         if data:
@@ -26,3 +31,7 @@ class DragTable(Ui_DragTable):
                 self.setItem(1, i, QtWidgets.QTableWidgetItem())
                 self.item(0, i).setData(QtCore.Qt.EditRole, rnd(v))
                 self.item(1, i).setData(QtCore.Qt.EditRole, rnd(c))
+
+    def readonly(self):
+        self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)

@@ -1,3 +1,5 @@
+@echo off
+
 REM venv\Scripts\pyuic5 ui_templates\profiles_table.ui -o gui\profiles_tab\templates\profiles_table.py
 REM venv\Scripts\pyuic5 ui_templates\profile_item.ui -o gui\profiles_tab\templates\profile_item.py
 REM venv\Scripts\pyuic5 ui_templates\add_btn.ui -o gui\profiles_tab\templates\add_btn.py
@@ -51,3 +53,4 @@ venv\Scripts\pyuic5 ui_templates\prof_rifle.ui -o gui\profiles_tab\profile_item_
 venv\Scripts\pyuic5 ui_templates\prof_cartridge.ui -o gui\profiles_tab\profile_item_contents\templates\prof_cartridge.py
 venv\Scripts\pyuic5 ui_templates\prof_bullet.ui -o gui\profiles_tab\profile_item_contents\templates\prof_bullet.py
 venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py
+venv\Scripts\pyuic5 ui_templates\new_custom_df.ui -o gui\profiles_tab\profile_item_contents\templates\new_custom_df.py

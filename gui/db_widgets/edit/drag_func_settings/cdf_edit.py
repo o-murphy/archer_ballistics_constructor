@@ -4,6 +4,8 @@ from gui.drag_func_editor.drag_table import DragTable
 from modules.converter import BConverter
 from gui.delegates import Velocity, DragCoefficient
 from gui.stylesheet import load_qss
+from modules.env_update import USER_RECENT
+from modules.file_parse import FileParse
 
 
 rnd = BConverter().auto_rnd
@@ -25,14 +27,16 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         # self.cdf_table.setItemDelegateForRow(0, self.velocity_delegate)
         # self.cdf_table.setItemDelegateForRow(1, self.df_delegate)
 
-        self.gridLayout.addWidget(self.cdf_table, 2, 0, 1, 5)
-        self.gridLayout.addWidget(self.buttonBox, 3, 0, 1, 5)
+        self.gridLayout.addWidget(self.cdf_table, 2, 0, 1, 6)
+        self.gridLayout.addWidget(self.buttonBox, 3, 0, 1, 6)
 
         self.copyTable.clicked.connect(self.copy_table)
         self.pasteTable.clicked.connect(self.paste_table)
         self.Add.clicked.connect(lambda: self.cdf_table.setColumnCount(self.cdf_table.columnCount() + 1))
         self.Remove.clicked.connect(lambda: self.cdf_table.removeColumn(self.cdf_table.currentColumn()))
         self.Clear.clicked.connect(self.clear_table)
+
+        self.importTable.clicked.connect(self.import_table)
 
         if data:
             self.set_data(data)
@@ -58,6 +62,40 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
         float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
         self.set_data(float_pairs)
+
+    def import_table(self):
+        options = QtWidgets.QFileDialog.Options()
+        fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "QFileDialog.getOpenFileName()",
+            USER_RECENT,
+            "Drag function (*.drg;*.snr;*.ardrg)",
+            options=options
+        )
+        if fileName:
+            from modules import FileParse
+            fp = FileParse()
+            data, comment = fp.open_format(fileFormat, fileName)
+            if data:
+                self.set_data(data)
+                self.lineEdit.setText(comment.replace('\n', ''))
+
+    def export_table(self, fileName=None):
+        data = self.get_data()
+        if data:
+
+            options = QtWidgets.QFileDialog.Options()
+            fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
+                self,
+                "QFileDialog.getSaveFileName()",
+                rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_',
+                "Drag function (*.drg;*.snr;*.ardrg)",
+                options=options
+            )
+            if fileName:
+                from modules import FileParse
+                fp = FileParse()
+                result = fp.save_format(fileFormat, fileName, data, fileName)
 
     def set_data(self, data):
         data.sort(reverse=False)

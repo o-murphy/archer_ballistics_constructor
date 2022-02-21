@@ -9,10 +9,74 @@ from .current_atmo_dialog import CurrentAtmoDialog
 from modules import ArcherBallistics, Profile
 from modules import BConverter
 from modules import State, StateDidUpdate
+from modules.env_update import USER_RECENT
 
 from ..stylesheet import load_qss
 
 rnd = BConverter.auto_rnd
+
+default_g1 = """
+0,0	0,263
+0,5	0,203
+0,6	0,203
+0,7	0,217
+0,8	0,255
+0,9	0,342
+0,95	0,408
+1,0	0,481
+1,05	0,543
+1,1	0,588
+1,2	0,639
+1,3	0,659
+1,4	0,663
+1,5	0,657
+1,6	0,647
+1,8	0,621
+2,0	0,593
+2,2	0,569
+2,5	0,54
+3,0	0,513
+3,5	0,504
+4,0	0,501
+"""
+
+DEFAULTS = {
+    'default_data': None,
+    'current_data': None,
+    'distances': None,
+    'current_distance': None,
+    'default_drop': None,
+    'current_drop': None,
+    'rifleName': 'Template',
+    'caliberName': '.308 Win',
+    'sh': 90,
+    'twist': 11,
+    'caliberShort': '',
+    'rightTwist': True,
+    'bulletName': 'Hornady ELD Match',
+    'weight': 178.0,
+    'length': 1.3,
+    'diameter': 0.308,
+    'weightTile': '178gr',
+    'drags': [],
+    'drag_idx': -1,
+    'cartridgeName': 'Template',
+    'mv': 800,
+    'temp': 15,
+    'ts': 1.55,
+    'z_pressure': 760,
+    'z_angle': 0,
+    'z_temp': 15,
+    'z_humidity': 50,
+    'z_azimuth': 270,
+    'z_latitude': 0,
+    'z_powder_temp': 15,
+    'z_d': 100,
+    'z_x': 0.0,
+    'z_y': 0.0,
+    'df_data': None,
+    'df_type': 'Custom'
+}
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
@@ -24,42 +88,21 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
 
-        """ init state"""
-        self.state = State(self, **state)
-        """ define callbacks for a state events"""
+        self.state = State(self, **DEFAULTS)
+        if state:
+            self.setState(**state)
+            self.dfComment.setText(state['df_comment'])
+
         self.onStateUpdate.connect(self.state_did_update)
         # self.onStateSet.connect(self.state_did_set)
-        """ set state attrs """
-        self.setState(
-            default_data=None,
-            current_data=None,
-            distances=None,
-            current_distance=None,
-            default_drop=None,
-            current_drop=None,
-        )
 
         self.ballistics = ArcherBallistics()
-
-        if self.state.multiBC:
-            self.bc_table = BCTable()
-            self.bc_table.set_data(self.state.bcTable)
-        else:
-            from ..single_custom_widgets.no_wheel_sb import BCSpinBox
-            self.bc_table = BCSpinBox()
-            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-            self.bc_table.setSizePolicy(sizePolicy)
-            self.bc_table.setMaximumHeight(30)
-            self.bc_table.setStyleSheet("")
-            self.bc_table.setPrefix('BC: ')
-            self.bc_table.setValue(self.state.bc)
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
         self.drop_table_edit = DropTableEdit(self)
         self.dragTable = DragTable()
-        self.dragTable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.dragTable.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.dragTable.readonly()
 
         self.drop_table = self.drop_table_edit.drop_table
         self.current_atmo_dlg = CurrentAtmoDialog()
@@ -76,15 +119,16 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             distances=[i for i in range(25, 2500, 25)]
         )
 
-        self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
-            self.state.default_data, self.state.distances)])
+        if state:
+            self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
+                self.state.default_data, self.state.distances)])
 
         self.setConnects()
 
     def setProfile(self):
         # self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
         self.ballistics.set_profile(self.profile)
-        if self.profile.DragFunc == 2 and self.profile.df_data:
+        if self.profile.DragFunc == 10 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
         self.ballistics.set_atmo(self.profile)
         self.ballistics.get_sound_speed()
@@ -111,13 +155,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def setWidgets(self):
         # spacer = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addWidget(self.bc_table, 0, 0, 1, 1)
+        # self.gridLayout.addWidget(self.bc_table, 0, 0, 1, 1)
         # self.gridLayout.addItem(spacer, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
         self.gridLayout.addWidget(self.dragTable, 5, 0, 1, 4)
-        self.gridLayout.addWidget(self.dragTableToolBox, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.dragTableToolBox, 6, 0, 1, 4)
         self.gridLayout.addWidget(self.buttonBox, 7, 0, 1, 4)
 
         self.distanceQuantity.setItemData(0, 1)
@@ -151,15 +195,18 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit.addRow.clicked.connect(lambda: (
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
         ))
-        self.Calculate.clicked.connect(
-            lambda: self.setState(bcTable=self.bc_table.get_data()) if isinstance(self.bc_table, BCTable)
-            else self.setState(bc=self.bc_table.value())
-        )
+        # self.Calculate.clicked.connect(
+        #     lambda: self.setState(bcTable=self.bc_table.get_data()) if isinstance(self.bc_table, BCTable)
+        #     else self.setState(bc=self.bc_table.value())
+        # )
         self.SetConditions.clicked.connect(self.current_atmo_dialog)
         self.buttonBox.keyPressEvent = self.keyPressEvent
 
         self.copyTable.clicked.connect(self.copy_table)
         self.pasteTable.clicked.connect(self.paste_table)
+
+        self.importDF.clicked.connect(self.import_table)
+        self.exportDF.clicked.connect(self.export_table)
 
     def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
         if e.key() == QtCore.Qt.Key_Enter:
@@ -236,10 +283,21 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         if ok:
             atmo = self.current_atmo_dlg.get_atmo()
 
+    # def copy_table(self):
+    #     datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
+    #         self.state.current_data if self.state.current_data else self.state.default_data
+    #     )])
+    #     cb = QtWidgets.QApplication.clipboard()
+    #     cb.clear(mode=cb.Clipboard)
+    #     cb.setText(datasheet, mode=cb.Clipboard)
+
     def copy_table(self):
-        datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
-            self.state.current_data if self.state.current_data else self.state.default_data
-        )])
+        data = self.state.current_data if self.state.current_data else self.state.default_data
+        datasheet = []
+        for (v, c) in data:
+            datasheet.append(f"{str(v).replace(r'.', r',')}\t{str(c).replace(r'.', r',')}")
+        datasheet = '\n'.join(datasheet)
+
         cb = QtWidgets.QApplication.clipboard()
         cb.clear(mode=cb.Clipboard)
         cb.setText(datasheet, mode=cb.Clipboard)
@@ -249,15 +307,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         lines = cb.text().split('\n')
         pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
         float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
-        float_pairs.sort(reverse=False)
         self.updateState(current_data=float_pairs)
         self.dragTable.set(self.state.current_data, self.state.default_data)
         self.append_updates()
 
     @staticmethod
     def parse_data(data: list) -> dict or None:
-        ox, oy = [i[0] for i in data], [i[1] for i in data]
-        return ox, oy if ox and oy else None
+        if data:
+            ox, oy = [i[0] for i in data], [i[1] for i in data]
+            return ox, oy if ox and oy else None
+        else:
+            return None
 
     def set_coefficient(self, side, is_up):
         ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
@@ -302,9 +362,50 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             new_state['df_data'] = self.state.default_data
 
         [new_state.pop(key) for key in ['default_data',
-                                    'current_data',
-                                    'distances',
-                                    'current_distance',
-                                    'default_drop',
-                                    'current_drop']]
+                                        'current_data',
+                                        'distances',
+                                        'current_distance',
+                                        'default_drop',
+                                        'current_drop']]
         return new_state
+
+    def import_table(self):
+        options = QtWidgets.QFileDialog.Options()
+        fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "QFileDialog.getOpenFileName()",
+            USER_RECENT,
+            "Drag function (*.drg;*.snr;*.ardrg)",
+            options=options
+        )
+        if fileName:
+            from modules import FileParse
+            fp = FileParse()
+            data, comment = fp.open_format(fileFormat, fileName)
+            if data:
+                if not self.state.default_data:
+                    self.updateState(default_data=data)
+                else:
+                    self.updateState(current_data=data)
+                self.dragTable.set(self.state.current_data, self.state.default_data)
+                self.append_updates()
+
+            print(len(comment))
+            self.dfComment.setText(comment.replace('\n', '')[:80])
+
+    def export_table(self, fileName=None):
+        data = self.state.current_data
+        if data:
+
+            options = QtWidgets.QFileDialog.Options()
+            fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
+                self,
+                "QFileDialog.getSaveFileName()",
+                rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_',
+                "Drag function (*.drg;*.snr;*.ardrg)",
+                options=options
+            )
+            if fileName:
+                from modules import FileParse
+                fp = FileParse()
+                result = fp.save_format(fileFormat, fileName, data, fileName)

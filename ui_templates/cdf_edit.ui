@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
+    <width>498</width>
     <height>173</height>
    </rect>
   </property>
@@ -134,7 +134,14 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="5">
+   <item row="1" column="5">
+    <widget class="QPushButton" name="importTable">
+     <property name="text">
+      <string>Import</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="6">
     <widget class="QLineEdit" name="lineEdit">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -155,7 +162,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="5">
+   <item row="2" column="0" colspan="6">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

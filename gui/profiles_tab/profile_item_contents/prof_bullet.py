@@ -7,8 +7,12 @@ from gui.db_widgets.edit.drag_func_settings import MBCEdit
 from gui.db_widgets.edit.drag_func_settings import CDFEdit
 from dbworker.models import DragFunc
 
+from gui.drag_func_editor import DragFuncEditDialog
+
 
 class Bullet(QtWidgets.QWidget, Ui_bullet):
+    itemEvent = QtCore.pyqtSignal(object)
+
     def __init__(self, parent=None):
         super(Bullet, self).__init__(parent)
         self.setupUi(self)
@@ -85,6 +89,7 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 text = 'DFL: ' + str(len(cur_df.data))
 
             self.dragFuncData.setText(text)
+            self.dragType.setToolTip(cur_df.comment)
 
     def edit_drag(self, data=None, comment=''):
         idx = self.dragType.currentIndex()
@@ -96,13 +101,22 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 data = bc_edit.get()
 
         elif cur_df.drag_type.endswith('Multi-BC'):
-            mbc_edit = MBCEdit(cur_df.data)
-            if mbc_edit.exec_():
-                data, comment = mbc_edit.get()
+            # mbc_edit = MBCEdit(cur_df.data)
+            # if mbc_edit.exec_():
+            #     data, comment = mbc_edit.get()
+            return cur_df
         else:
-            cdf_edit = CDFEdit(cur_df.data)
-            if cdf_edit.exec_():
-                data, comment = cdf_edit.get()
+            # cdf_edit = CDFEdit(cur_df.data)
+            # if cdf_edit.exec_():
+            #     data, comment = cdf_edit.get()
+            #
+
+            # cdf_edit = DragFuncEditDialog()
+            # cdf_edit.exec_()
+            return cur_df
+
+            pass
+
         if data:
             cur_df.data = data
             cur_df.comment = comment
@@ -128,6 +142,11 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 cdf_edit = CDFEdit(data)
                 if cdf_edit.exec_():
                     data, comment = cdf_edit.get()
+                # return drag_type
+
+                # cdf_edit = DragFuncEditDialog()
+                # cdf_edit.exec_()
+
             if data:
                 new_df = DragFunc(drag_type, data, comment, None, 'rw')
                 self.drag_functions.append(new_df)
@@ -147,6 +166,8 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
             self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
             self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
-            "weightTile": self.weightTile()
+            "weightTile": self.weightTile(),
+            "drags": self.drag_functions,
+            "drag_idx": self.dragType.currentIndex()
         }
         return ret
