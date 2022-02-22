@@ -42,6 +42,10 @@ class BallisticCoefficient(SpinDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
         self.set_props(editor, 0, 20, 0.001, 3)
+
+        if self.parent():
+            editor.editingFinished.connect(self.parent().mbc_edit)
+
         return editor
 
     def setModelData(self, editor: 'QWidget', model: QtCore.QAbstractItemModel, index: QtCore.QModelIndex) -> None:
@@ -55,6 +59,10 @@ class MuzzleVelocity(SpinDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QSpinBox(parent)
         self.set_props(editor, 0, 3000, 1)
+
+        if self.parent():
+            editor.editingFinished.connect(self.parent().mbc_edit)
+
         return editor
 
 

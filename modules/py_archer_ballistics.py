@@ -79,18 +79,18 @@ class Bullet(Params):
         return drag_func_type[self.params['df_type']]
 
     """Temporary"""
-    def set_bc(self):
+    def set_bc(self, mbc=None):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
         if self.DragFunc == 10:
             self.df_data = self.params['df_data']
-        if self.DragFunc in [10, 17]:
-            for i, (bc, v) in enumerate(self.params['df_data']):
-                if bc > 0 and v >= 0:
-                    self.BalCoef[i] = bc
-                    self.BVelocity[i] = v
-            self.df_data = None
-            # print(self.BalCoef, self.BVelocity)
+        if self.DragFunc in [11, 17]:
+            if self.params['df_data'] or mbc:
+                for i, (bc, v) in enumerate(mbc if mbc else self.params['df_data']):
+                    if bc > 0 and v >= 0:
+                        self.BalCoef[i] = bc
+                        self.BVelocity[i] = v
+            self.df_data = []
 
 
 class Cartridge(Params):

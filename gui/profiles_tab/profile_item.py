@@ -53,26 +53,19 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             lambda: self.weightTile.setText(self.bullet.weightTile())
         )
 
-    # def add_drag(self):
-    #     if self.bullet.add_drag():
-    #         state = self.get()
-    #         state['drag_idx'] = -1
-    #         state['df_data'] = None
-    #
-    #         # cdf_edit = DragFuncEditDialog(state=state)
-    #         # cdf_edit.exec_()
-    #
-    #         custom = CustomDLG()
-    #         if custom.exec_():
-    #             if custom.comboBox.currentText() == "Import by file":
-    #                 state['df_data'] = custom.data
-    #                 state['df_type'] = 'Custom'
-    #             else:
-    #                 state['df_type'] = custom.comboBox.currentText()
-    #
-    #             cdf_edit = DragFuncEditDialog(state=state)
-    #             cdf_edit.exec_()
-    #
+    def add_drag(self):
+        drag_type = self.bullet.add_drag()
+        if drag_type:
+            state = self.get()
+            state['drag_idx'] = -1
+            if drag_type.endswith('Multi-BC'):
+                state['df_data'] = None
+                state['df_type'] = drag_type
+                state['df_comment'] = drag_type
+
+            cdf_edit = DragFuncEditDialog(state=state)
+            cdf_edit.exec_()
+
     def edit_drag(self):
         if self.bullet.edit_drag():
             state = self.get()

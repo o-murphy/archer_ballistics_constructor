@@ -88,10 +88,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
 
+        self.mbc = None
+
         self.state = State(self, **DEFAULTS)
         if state:
             self.setState(**state)
             self.dfComment.setText(state['df_comment'])
+            if state['df_type'].endswith('Multi-BC'):
+                self.mbc = BCTable(self)
+                if state['df_data']:
+                    self.mbc.set_data(state['df_data'])
+                self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
 
         self.onStateUpdate.connect(self.state_did_update)
         # self.onStateSet.connect(self.state_did_set)
@@ -108,6 +115,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.current_atmo_dlg = CurrentAtmoDialog()
 
         self.profile = Profile(self.state.__dict__)
+
         self.setProfile()
         self.setWidgets()
 
@@ -124,6 +132,19 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 self.state.default_data, self.state.distances)])
 
         self.setConnects()
+
+    def mbc_edit(self):
+        mbc = self.mbc.get_data()
+        self.profile.set_bc(mbc)
+        self.setProfile()
+        self.updateState(
+            current_data=self.ballistics.get_drag_function() if self.profile else None,
+            distances=[i for i in range(25, 2500, 25)]
+        )
+        # self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
+        #     self.state.default_data, self.state.distances)])
+        self.append_updates()
+        self.custom_drop_at_distance()
 
     def setProfile(self):
         # self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
@@ -215,6 +236,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def custom_drop_at_distance(self):
         d = [int(self.drop_table.tableWidget.item(r, 0).text()) for r in range(self.drop_table.tableWidget.rowCount())]
         self.ballistics.get_drop_at_distance(d)
+        print(self.ballistics.drop_at_distance)
         [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
 
     def set_hold_off_quantity(self):

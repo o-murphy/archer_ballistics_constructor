@@ -7,8 +7,8 @@ rnd = BConverter.auto_rnd
 
 
 class BCTable(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.setObjectName("bcTable")
 
         self.gridLayout = QtWidgets.QGridLayout()
@@ -31,8 +31,8 @@ class BCTable(QtWidgets.QWidget):
         self.bc_table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.bc_table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 
-        self.ballistics_coefficient = BallisticCoefficient()
-        self.muzzle_velocity = MuzzleVelocity()
+        self.ballistics_coefficient = BallisticCoefficient(self.parent())
+        self.muzzle_velocity = MuzzleVelocity(self.parent())
         self.bc_table.setItemDelegateForColumn(0, self.ballistics_coefficient)
         self.bc_table.setItemDelegateForColumn(1, self.muzzle_velocity)
 
@@ -55,6 +55,6 @@ class BCTable(QtWidgets.QWidget):
         return ret
 
     def set_data(self, data: list[list]):
-        for i, (v, bc) in enumerate(data):
+        for i, (bc, v) in enumerate(data):
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
             self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, v)

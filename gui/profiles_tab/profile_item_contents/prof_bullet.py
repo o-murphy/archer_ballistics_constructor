@@ -101,18 +101,8 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 data = bc_edit.get()
 
         elif cur_df.drag_type.endswith('Multi-BC'):
-            # mbc_edit = MBCEdit(cur_df.data)
-            # if mbc_edit.exec_():
-            #     data, comment = mbc_edit.get()
             return cur_df
         else:
-            # cdf_edit = CDFEdit(cur_df.data)
-            # if cdf_edit.exec_():
-            #     data, comment = cdf_edit.get()
-            #
-
-            # cdf_edit = DragFuncEditDialog()
-            # cdf_edit.exec_()
             return cur_df
 
             pass
@@ -142,10 +132,9 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 cdf_edit = CDFEdit(data)
                 if cdf_edit.exec_():
                     data, comment = cdf_edit.get()
-                # return drag_type
 
-                # cdf_edit = DragFuncEditDialog()
-                # cdf_edit.exec_()
+                cdf_edit = DragFuncEditDialog()
+                cdf_edit.exec_()
 
             if data:
                 new_df = DragFunc(drag_type, data, comment, None, 'rw')
@@ -153,6 +142,8 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 idx = len(self.drag_functions)-1
                 self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
                 self.dragType.setCurrentIndex(idx)
+
+            # return drag_type
 
     def weightTile(self):
         if self.weightQuantity.currentIndex() == 0:
