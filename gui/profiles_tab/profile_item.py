@@ -66,14 +66,12 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             cdf_edit = DragFuncEditDialog(state=state)
             cdf_edit.exec_()
 
-            print(cdf_edit.state.current_data)
-
             self.bullet.save_new_df(
                 cdf_edit.state.df_type,
                 cdf_edit.state.current_data
                 if cdf_edit.state.current_data
                 else cdf_edit.state.default_data,
-                cdf_edit.state.df_comment
+                cdf_edit.dfComment.text()
             )
 
     def edit_drag(self):
@@ -86,6 +84,20 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
             cdf_edit = DragFuncEditDialog(state=state)
             cdf_edit.exec_()
+
+            if cdf_edit.state.df_type == 'Custom':
+
+                self.bullet.save_cur_df(
+                    cdf_edit.state.current_data
+                    if cdf_edit.state.current_data
+                    else cdf_edit.state.default_data,
+                    cdf_edit.dfComment.text()
+                )
+            else:
+                self.bullet.save_cur_df(
+                    cdf_edit.mbc.get_data(),
+                    cdf_edit.dfComment.text()
+                )
 
     def get(self) -> dict:
         data = {}

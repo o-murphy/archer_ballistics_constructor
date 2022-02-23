@@ -197,7 +197,6 @@ class ArcherBallistics(object):
         for (v, c) in ret:
             table += str(v) + '\t' + str(c) + '\n'
         ret.sort(reverse=False)
-        print(ret)
         return ret
 
 

@@ -87,22 +87,22 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
+        self.dfComment.setStyleSheet(
+            """
+            color: orange;
+            font-size: 14px;
+            """
+        )
 
         self.mbc = None
-
         self.state = State(self, **DEFAULTS)
 
         if state:
             self.setState(**state)
-            self.dfComment.setText(
-                self.state.df_type + ': ' + self.state.df_comment
-            )
+            self.dfType.setText(self.state.df_type + ':')
+            self.dfComment.setText(self.state.df_comment)
             if self.state.df_type.endswith('Multi-BC'):
                 self.mbc = BCTable(self)
-                # if not self.state.df_data:
-                #     self.state.df_data = [
-                #         [1, 1000], [0, 0], [0, 0], [0, 0], [0, 0]
-                #     ]
                 if self.state.df_data:
                     self.mbc.set_data(self.state.df_data)
 
@@ -110,7 +110,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
                 self.importDF.setDisabled(True)
                 self.pasteTable.setDisabled(True)
-
 
         self.onStateUpdate.connect(self.state_did_update)
         # self.onStateSet.connect(self.state_did_set)

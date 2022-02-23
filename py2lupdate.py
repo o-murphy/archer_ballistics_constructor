@@ -20,8 +20,13 @@ try:
             if search('_translate', f.read()):
                 templates.append(file)
 
+
+    templates.append(r'gui\db_widgets\edit\df_type_dlg\df_type.py')
+    templates.append(r'gui\my_tab\templates_selector.py')
+
     [print(i) for i in templates]
 
     os.system('pylupdate5 ' + ' '.join(templates) + ' -ts ' + filepath + '.ts')
-except IndexError:
-    print('wrong file path')
+except IndexError as err:
+    print(err)
+    # print('wrong file path')

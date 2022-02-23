@@ -447,15 +447,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="dfComment">
+       <widget class="QLabel" name="dfType">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="text">
          <string>Default G1 Draf-function</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="dfComment">
+        <property name="placeholderText">
+         <string>Comment here</string>
         </property>
        </widget>
       </item>

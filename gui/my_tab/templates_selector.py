@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_myTabSelector
 from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
 from dbworker.models import *
@@ -22,10 +22,9 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
         self.bullets.list.tableView.doubleClicked.connect(self.bullets.list.edit_item)
         self.cartridges.list.tableView.doubleClicked.connect(self.cartridges.list.edit_item)
 
-
-        self.tabWidget.addTab(self.rifles, 'Rifles', )
-        self.tabWidget.addTab(self.bullets, 'Bullets', )
-        self.tabWidget.addTab(self.cartridges, 'Cartridges', )
+        self.tabWidget.addTab(self.rifles, 'Rifles')
+        self.tabWidget.addTab(self.bullets, 'Bullets')
+        self.tabWidget.addTab(self.cartridges, 'Cartridges')
 
         self.rifles.table.selectionModel().selectionChanged.connect(
             lambda sel, desel: self.select(sel, desel, self.rifles.info)
@@ -39,6 +38,8 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
             lambda sel, desel: self.select(sel, desel, self.cartridges.info)
         )
 
+        self.retranslateUi(self)
+
     def select(self, select, deselect, info: QtWidgets.QWidget):
         if select:
             indexes = select.first().indexes()
@@ -47,3 +48,10 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
                 item = self.sender().model().itemData(index)
                 if item:
                     info.set(item[0])
+
+    def retranslateUi(self, catalogSelector):
+        _translate = QtCore.QCoreApplication.translate
+
+        self.tabWidget.setTabText(0, _translate('MyTabSelector', 'Rifles'))
+        self.tabWidget.setTabText(1, _translate('MyTabSelector', 'Bullets'))
+        self.tabWidget.setTabText(2, _translate('MyTabSelector', 'Cartridges'))

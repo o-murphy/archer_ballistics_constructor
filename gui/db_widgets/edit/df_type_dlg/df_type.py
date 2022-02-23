@@ -33,9 +33,18 @@ class DFTypeDlg(QtWidgets.QDialog):
         self.cancel = QtWidgets.QPushButton('Cancel')
         self.grid = QtWidgets.QGridLayout()
         self.setLayout(self.grid)
-        self.grid.addWidget(QtWidgets.QLabel("What's type of drag_func you'll use?"), 0, 0, 1, 2)
+        self.label = QtWidgets.QLabel()
+        self.grid.addWidget(self.label, 0, 0, 1, 2)
         self.grid.addWidget(self.combo, 1, 0, 1, 2)
         self.grid.addWidget(self.ok)
         self.grid.addWidget(self.cancel)
         self.ok.clicked.connect(self.accept)
         self.cancel.clicked.connect(self.reject)
+
+        self.retranslateUi(self)
+
+    def retranslateUi(self, DFTypeDlg):
+        _translate = QtCore.QCoreApplication.translate
+
+        self.label.setText(_translate('DFTypeDlg', "What's type of drag_func you'll use?"))
+
