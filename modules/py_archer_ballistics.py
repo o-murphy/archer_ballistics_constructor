@@ -78,7 +78,6 @@ class Bullet(Params):
         }
         return drag_func_type[self.params['df_type']]
 
-    """Temporary"""
     def set_bc(self, mbc=None):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
@@ -90,9 +89,7 @@ class Bullet(Params):
                     if bc > 0 and v >= 0:
                         self.BalCoef[i] = bc
                         self.BVelocity[i] = v
-            # else:
-            #     self.BalCoef[0] = 1
-            #     self.BVelocity[0] = 1000
+            print("MBC: ", self.BalCoef, self.BVelocity)
             self.df_data = []
 
 

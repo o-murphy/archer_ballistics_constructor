@@ -66,6 +66,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_tools.closeFile.clicked.connect(self.close_file)
         self.profiles_table.currentCellChanged.connect(self.current_cell_changed)
 
+        self.profiles_tools.loadBookMark.clicked.connect(self.load_bookmark)
+
     def current_cell_changed(self, row, col, prow, pcol):
         cur = self.profiles_table.cellWidget(row, col)
         self.profile_current.set_current(cur)
@@ -136,6 +138,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def save_profiles(self, fileName):
         import json
         with open(fileName, 'w') as fp:
+            print(self.get_recent_profile_table())
             json.dump(self.get_recent_profile_table(), fp)
         self.current_file = fileName
         self.set_is_saved(True)
@@ -186,3 +189,21 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
             self.current_file = ''
             self.set_is_saved(True)
         return choice
+
+    def load_bookmark(self):
+        from .profile_bookmarks import BookMarks
+        from .default_data import get_templates
+
+        rifles = BookMarks(self, 0)
+
+        if rifles.exec_():
+            rifle_id = rifles.selected
+            if rifle_id:
+                cartridges = BookMarks(self, 1, cal=rifles.cal)
+                if cartridges.exec_():
+                    cart_id = cartridges.selected
+                    if cart_id:
+                        data = get_templates(rifle_id, cart_id)
+
+                        self.add_profile(data)
+

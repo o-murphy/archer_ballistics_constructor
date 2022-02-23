@@ -70,8 +70,11 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.diameter.setValue(data['diameter'])
 
         for i, df in enumerate(data['drags']):
-            self.dragType.addItem(df.drag_type + ', ' + df.comment, i)
-            self.drag_functions.append(df)
+            if isinstance(df, DragFunc):
+                self.dragType.addItem(df.drag_type + ', ' + df.comment, i)
+                self.drag_functions.append(df)
+            else:
+                self.save_new_df(df['drag_type'], df['data'], df['comment'])
 
         self.dragType.setCurrentIndex(self.dragType.findData(data['drag_idx']))
         self.df_changed(data['drag_idx'])
@@ -156,13 +159,21 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             return str(round(self.weight.value(), 1)) + 'g'
 
     def get(self):
+        drags = []
+        for df in self.drag_functions:
+            drags.append({
+                'drag_type': df.drag_type,
+                'data': df.data,
+                'comment': df.comment
+            })
+
         ret = {
             self.bulletName.objectName(): self.bulletName.text(),
             self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
             self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
             self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
             "weightTile": self.weightTile(),
-            "drags": self.drag_functions,
-            "drag_idx": self.dragType.currentIndex()
+            "drags": drags,
+            "drag_idx": self.dragType.currentData()
         }
         return ret
