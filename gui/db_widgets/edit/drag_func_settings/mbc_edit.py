@@ -59,10 +59,17 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
                 message_box.setText('BC cannot be 0, if velocity > 0')
                 message_box.exec_()
                 return
-            else:
+            elif v != 0 and bc != 0:
                 data.append((bc, v))
+
+        if len(data) == 0:
+            message_box = QtWidgets.QMessageBox()
+            message_box.setText("BC-table can't be empty")
+            message_box.exec_()
+            return
+
         data.sort(reverse=True)
-        return data
+        return data if data else None
 
     def accept(self) -> None:
         data = self.get_data()

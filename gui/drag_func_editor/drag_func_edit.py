@@ -91,14 +91,26 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.mbc = None
 
         self.state = State(self, **DEFAULTS)
+
         if state:
             self.setState(**state)
-            self.dfComment.setText(state['df_comment'])
-            if state['df_type'].endswith('Multi-BC'):
+            self.dfComment.setText(
+                self.state.df_type + ': ' + self.state.df_comment
+            )
+            if self.state.df_type.endswith('Multi-BC'):
                 self.mbc = BCTable(self)
-                if state['df_data']:
-                    self.mbc.set_data(state['df_data'])
+                # if not self.state.df_data:
+                #     self.state.df_data = [
+                #         [1, 1000], [0, 0], [0, 0], [0, 0], [0, 0]
+                #     ]
+                if self.state.df_data:
+                    self.mbc.set_data(self.state.df_data)
+
                 self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+
+                self.importDF.setDisabled(True)
+                self.pasteTable.setDisabled(True)
+
 
         self.onStateUpdate.connect(self.state_did_update)
         # self.onStateSet.connect(self.state_did_set)
@@ -147,7 +159,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.custom_drop_at_distance()
 
     def setProfile(self):
-        # self.profile = Profile(self.state.__dict__) if self.state.__dict__ else None
         self.ballistics.set_profile(self.profile)
         if self.profile.DragFunc == 10 and self.profile.df_data:
             self.ballistics.set_drag_function(self.profile.df_data)
@@ -236,7 +247,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def custom_drop_at_distance(self):
         d = [int(self.drop_table.tableWidget.item(r, 0).text()) for r in range(self.drop_table.tableWidget.rowCount())]
         self.ballistics.get_drop_at_distance(d)
-        print(self.ballistics.drop_at_distance)
         [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
 
     def set_hold_off_quantity(self):
@@ -412,7 +422,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 self.dragTable.set(self.state.current_data, self.state.default_data)
                 self.append_updates()
 
-            print(len(comment))
             self.dfComment.setText(comment.replace('\n', '')[:80])
 
     def export_table(self, fileName=None):

@@ -41,7 +41,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
         self.setupConnects()
 
-        # self.bullet.addDrag.clicked.connect(self.add_drag)
+        self.bullet.addDrag.clicked.connect(self.add_drag)
         self.bullet.dragEditor.clicked.connect(self.edit_drag)
 
     def setupConnects(self):
@@ -55,22 +55,31 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
     def add_drag(self):
         drag_type = self.bullet.add_drag()
-        if drag_type:
+
+        if drag_type == 'Custom':
             state = self.get()
             state['drag_idx'] = -1
-            if drag_type.endswith('Multi-BC'):
-                state['df_data'] = None
-                state['df_type'] = drag_type
-                state['df_comment'] = drag_type
+            state['df_data'] = None
+            state['df_type'] = drag_type
+            state['df_comment'] = 'Default G1'
 
             cdf_edit = DragFuncEditDialog(state=state)
             cdf_edit.exec_()
+
+            print(cdf_edit.state.current_data)
+
+            self.bullet.save_new_df(
+                cdf_edit.state.df_type,
+                cdf_edit.state.current_data
+                if cdf_edit.state.current_data
+                else cdf_edit.state.default_data,
+                cdf_edit.state.df_comment
+            )
 
     def edit_drag(self):
         if self.bullet.edit_drag():
             state = self.get()
             cur_df = state['drags'][state['drag_idx']]
-            # if cur_df.drag_type == 'Custom':
             state['df_data'] = cur_df.data
             state['df_type'] = cur_df.drag_type
             state['df_comment'] = cur_df.comment

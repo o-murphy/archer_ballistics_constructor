@@ -40,7 +40,7 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
 
         self.dragType.currentIndexChanged.connect(self.df_changed)
-        self.addDrag.clicked.connect(self.add_drag)
+        # self.addDrag.clicked.connect(self.add_drag)
         self.dragEditor.clicked.connect(self.edit_drag)
 
     def convert_bullet_weight(self):
@@ -105,8 +105,6 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         else:
             return cur_df
 
-            pass
-
         if data:
             cur_df.data = data
             cur_df.comment = comment
@@ -123,27 +121,38 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 bc_edit = BCEdit(data)
                 if bc_edit.exec_():
                     data = bc_edit.get()
-
+            #
             elif drag_type.endswith('Multi-BC'):
                 mbc_edit = MBCEdit(data)
+                # mbc_edit.lineEdit.setText(drag_type.lower())
                 if mbc_edit.exec_():
                     data, comment = mbc_edit.get()
-            else:
-                cdf_edit = CDFEdit(data)
-                if cdf_edit.exec_():
-                    data, comment = cdf_edit.get()
+                    print(data)
+            # else:
+            #     cdf_edit = CDFEdit(data)
+            #     if cdf_edit.exec_():
+            #         data, comment = cdf_edit.get()
+            #
+            #     cdf_edit = DragFuncEditDialog()
+            #     cdf_edit.exec_()
 
-                cdf_edit = DragFuncEditDialog()
-                cdf_edit.exec_()
+            self.save_new_df(drag_type, data, comment)
+            # if data:
+            #     new_df = DragFunc(drag_type, data, comment, None, 'rw')
+            #     self.drag_functions.append(new_df)
+            #     idx = len(self.drag_functions)-1
+            #     self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
+            #     self.dragType.setCurrentIndex(idx)
 
-            if data:
-                new_df = DragFunc(drag_type, data, comment, None, 'rw')
-                self.drag_functions.append(new_df)
-                idx = len(self.drag_functions)-1
-                self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
-                self.dragType.setCurrentIndex(idx)
+            return drag_type
 
-            # return drag_type
+    def save_new_df(self, drag_type, data, comment):
+        if data:
+            new_df = DragFunc(drag_type, data, comment, None, 'rw')
+            self.drag_functions.append(new_df)
+            idx = len(self.drag_functions) - 1
+            self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
+            self.dragType.setCurrentIndex(idx)
 
     def weightTile(self):
         if self.weightQuantity.currentIndex() == 0:

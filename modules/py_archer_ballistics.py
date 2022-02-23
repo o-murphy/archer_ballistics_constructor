@@ -90,6 +90,9 @@ class Bullet(Params):
                     if bc > 0 and v >= 0:
                         self.BalCoef[i] = bc
                         self.BVelocity[i] = v
+            # else:
+            #     self.BalCoef[0] = 1
+            #     self.BVelocity[0] = 1000
             self.df_data = []
 
 
@@ -193,7 +196,9 @@ class ArcherBallistics(object):
         table = ''
         for (v, c) in ret:
             table += str(v) + '\t' + str(c) + '\n'
-        return ret[::-1]
+        ret.sort(reverse=False)
+        print(ret)
+        return ret
 
 
 if __name__ == '__main__':
