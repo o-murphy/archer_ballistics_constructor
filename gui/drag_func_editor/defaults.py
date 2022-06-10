@@ -58,5 +58,6 @@ DEFAULTS = {
     'z_x': 0.0,
     'z_y': 0.0,
     'df_data': None,
-    'df_type': 'Custom'
+    'df_type': 'Custom',
+    'df_comment': 'Empty'
 }

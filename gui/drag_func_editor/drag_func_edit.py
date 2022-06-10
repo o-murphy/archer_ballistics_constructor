@@ -1,19 +1,31 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from .templates import Ui_DragFuncEditDialog
-from .drag_func_plot import DragPlot
-from .drop_func_plot import DropPlot
-from .drag_table import DragTable
-from ..bc_table import BCTable
-from .drop_table_edit import DropTableEdit
-from .current_atmo_dialog import CurrentAtmoDialog
+
+try:
+    from .templates import Ui_DragFuncEditDialog
+    from .drag_func_plot import DragPlot
+    from .drop_func_plot import DropPlot
+    from .drag_table import DragTable
+    from ..bc_table import BCTable
+    from .drop_table_edit import DropTableEdit
+    from .current_atmo_dialog import CurrentAtmoDialog
+    from .defaults import DEFAULTS
+    from ..stylesheet import load_qss
+
+except Exception as exception:
+    from gui.drag_func_editor.templates import Ui_DragFuncEditDialog
+    from gui.drag_func_editor.drag_func_plot import DragPlot
+    from gui.drag_func_editor.drop_func_plot import DropPlot
+    from gui.drag_func_editor.drag_table import DragTable
+    from gui.bc_table import BCTable
+    from gui.drag_func_editor.drop_table_edit import DropTableEdit
+    from gui.drag_func_editor.current_atmo_dialog import CurrentAtmoDialog
+    from gui.drag_func_editor.defaults import DEFAULTS
+    from gui.stylesheet import load_qss
+
 from modules import ArcherBallistics, Profile
 from modules import BConverter
 from modules import State, StateDidUpdate
 from modules.env_update import USER_RECENT
-
-from .defaults import DEFAULTS
-
-from ..stylesheet import load_qss
 
 rnd = BConverter.auto_rnd
 
@@ -26,12 +38,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor')
-        self.dfComment.setStyleSheet(
-            """
-            color: orange;
-            font-size: 14px;
-            """
-        )
+        self.dfComment.setStyleSheet("""color: orange; font-size: 14px;""")
 
         self.mbc = None
         self.state = State(self, **DEFAULTS)
@@ -378,3 +385,16 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 from modules import FileParse
                 fp = FileParse()
                 result = fp.save_format(fileFormat, fileName, data, fileName)
+
+
+def main():
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    dialog = DragFuncEditDialog(DEFAULTS)
+    dialog.show()
+    dialog.exec()
+    return dialog.state
+
+
+if __name__ == '__main__':
+    main()
