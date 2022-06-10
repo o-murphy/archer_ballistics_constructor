@@ -30,6 +30,48 @@ from modules.env_update import USER_RECENT
 rnd = BConverter.auto_rnd
 
 
+class DragEditorState(State):
+    default_data = None
+    current_data = None
+    distances = None
+    current_distance = None
+    default_drop = None
+    current_drop = None
+    rifleName = 'Template'
+    caliberName = '.308 Win'
+    sh = 90
+    twist = 11
+    caliberShort = ''
+    rightTwist = True
+    bulletName = 'Hornady ELD Match'
+    weight = 178.0
+    length = 1.3
+    diameter = 0.308
+    weightTile = '178gr'
+    drags = []
+    drag_idx = -1
+    cartridgeName = 'Template'
+    mv = 800
+    temp = 15
+    ts = 1.55
+    z_pressure = 760
+    z_angle = 0
+    z_temp = 15
+    z_humidity = 50
+    z_azimuth = 270
+    z_latitude = 0
+    z_powder_temp = 15
+    z_d = 100
+    z_x = 0.0
+    z_y = 0.0
+    df_data = None
+    df_type = 'Custom'
+    df_comment = 'Empty'
+
+    def __init__(self, widget: QtWidgets.QWidget, state: dict = None, **kwargs):
+        super(DragEditorState, self).__init__(widget, state, **kwargs)
+
+
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def __init__(self, state: dict = None):
         super().__init__()
@@ -41,25 +83,22 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dfComment.setStyleSheet("""color: orange; font-size: 14px;""")
 
         self.mbc = None
-        self.state = State(self, **DEFAULTS)
 
-        if state:
-            self.setState(**state)
-            self.dfType.setText(self.state.df_type + ':')
-            self.dfComment.setText(self.state.df_comment)
-            if self.state.df_type.endswith('Multi-BC'):
-                self.mbc = BCTable(self)
-                if self.state.df_data:
-                    self.mbc.set_data(self.state.df_data)
+        self.state = DragEditorState(self, state)
 
-                self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+        self.dfType.setText(self.state.df_type + ':')
+        self.dfComment.setText(self.state.df_comment)
+        if self.state.df_type.endswith('Multi-BC'):
+            self.mbc = BCTable(self)
+            if self.state.df_data:
+                self.mbc.set_data(self.state.df_data)
 
-                self.importDF.setDisabled(True)
-                self.pasteTable.setDisabled(True)
+            self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+
+            self.importDF.setDisabled(True)
+            self.pasteTable.setDisabled(True)
 
         self.onStateUpdate.connect(self.state_did_update)
-        # self.onStateSet.connect(self.state_did_set)
-
         self.ballistics = ArcherBallistics()
 
         self.drag_plot = DragPlot('drag_plot')
@@ -81,14 +120,18 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.updateState(
             default_data=self.ballistics.get_drag_function() if self.profile else None,
-            distances=[i for i in range(25, 2500, 25)]
+            distances=self.distances_generator()
         )
 
         if state:
-            self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
-                self.state.default_data, self.state.distances)])
+            drops = self.ballistics.calculate_drop(self.state.default_data, self.state.distances)
+            default_drop = list(map(lambda i: rnd(i), drops))
+            self.updateState(default_drop=default_drop)
 
         self.setConnects()
+
+    def distances_generator(self):
+        return list(map(lambda i: i, range(25, 2500, 25)))
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
@@ -96,7 +139,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setProfile()
         self.updateState(
             current_data=self.ballistics.get_drag_function() if self.profile else None,
-            distances=[i for i in range(25, 2500, 25)]
+            distances=self.distances_generator()
         )
         # self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
         #     self.state.default_data, self.state.distances)])
@@ -190,9 +233,12 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             e.ignore()
 
     def custom_drop_at_distance(self):
-        d = [int(self.drop_table.tableWidget.item(r, 0).text()) for r in range(self.drop_table.tableWidget.rowCount())]
+        d = list(map(
+            lambda r: self.drop_table.tableWidget.item(r, 0).text(),
+            range(self.drop_table.tableWidget.rowCount())
+        ))
         self.ballistics.get_drop_at_distance(d)
-        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
+        map(lambda i, v: self.drop_table.set_item_data(i, 1, rnd(v)), enumerate(self.ballistics.drop_at_distance))
 
     def set_hold_off_quantity(self):
         self.drop_plot.y_q_label = self.holdOffQuantity.currentText()
@@ -217,10 +263,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
 
     def switch_plot_drop(self):
-        self.drag_plot.setVisible(False), self.drop_plot.setVisible(True)
+        self.drag_plot.stackUnder(self.drop_plot)
 
     def switch_plot_drag(self):
-        self.drag_plot.setVisible(True), self.drop_plot.setVisible(False)
+        self.drop_plot.stackUnder(self.drag_plot)
 
     def calculate_bullet_drop(self):
         if self.state.current_data:
