@@ -1,14 +1,6 @@
 from bin import archer_ballistics
 
 
-"""
-    'qt_spinbox_lineedit', 'tileBulletWeight', 'rifleName', 'caliberName', 'caliberShort', 'twistSpinBox', 
-    'shSpinBox', 'rightTwist', 'leftTwist', 'cartridgeName', 'mvComboBox', 'tsDoubleSpinBox', 'mvSpinBox', 
-    'temperatureSpinBox', 'bulletName', 'weightComboBox', 'lengthComboBox', 'diameterComboBox', 'dragComboBox', 
-    'bulletWeight', 'lengthDoubleSpinBox', 'diameterDoubleSpinBox', 'bcDoubleSpinBox'
-"""
-
-
 def rnd4(val: float) -> float:
     return round(val, 4)
 
@@ -29,31 +21,50 @@ class Conditions(Params):
         z_azimuth     :   Azimuth
         z_slope_angle :   Slope Angle
     """
-    def __init__(self, params):
-        super().__init__(params)
 
-        self.Temperature = self.params['z_temp']
-        self.P_Temperature = self.params['z_powder_temp']
-        self.Humidity = self.params['z_humidity']
-        self.Pressure = self.params['z_pressure']
-        self.Angle = self.params['z_angle']
-        self.Azimuth = self.params['z_azimuth']
-        self.Latitude = self.params['z_latitude']
+    z_temp = None
+    z_powder_temp = None
+    z_humidity = None
+    z_pressure = None
+    z_angle = None
+    z_azimuth = None
+    z_latitude = None
+
+    def __init__(self, params, **kwargs):
+        super().__init__(params)
+        if params:
+            kwargs.update(params)
+        [self.__setattr__(k, v) for k, v in kwargs.items()]
+        self.Temperature = self.z_temp
+        self.P_Temperature = self.z_powder_temp
+        self.Humidity = self.z_humidity
+        self.Pressure = self.z_pressure
+        self.Angle = self.z_angle
+        self.Azimuth = self.z_azimuth
+        self.Latitude = self.z_latitude
 
 
 class Bullet(Params):
     """ params:
-            bc       :   Ballistic Coefficient List
-            diameter :   Bullet Diameter
-            length   :   Bullet Length
-            weight   :   Bullet Weight
-            dragType :   Drag Func Type
+        bc       :   Ballistic Coefficient List
+        diameter :   Bullet Diameter
+        length   :   Bullet Length
+        weight   :   Bullet Weight
+        dragType :   Drag Func Type
     """
 
-    def __init__(self, params):
+    diameter = None
+    length = None
+    weight = None
+    df_type = None
+    df_data = None
+
+    def __init__(self, params, **kwargs):
         super().__init__(params)
 
-        print(params['df_type'], params['df_data'])
+        if params:
+            kwargs.update(params)
+        [self.__setattr__(k, v) for k, v in kwargs.items()]
 
         # self.is_mbc = True if self.params['multiBC'] == 2 else False
         # self.mbc = self.params['bcTable']
@@ -62,9 +73,9 @@ class Bullet(Params):
         self.df_data = None
         self.BalCoef = None
         self.BVelocity = None
-        self.Diameter = self.params['diameter']
-        self.Length = self.params['length']
-        self.Weight = self.params['weight']
+        self.Diameter = self.diameter
+        self.Length = self.length
+        self.Weight = self.weight
         self.set_bc()
         # self.df_data = self.params['df_data'] if 'df_data' in self.params else None
 
@@ -76,20 +87,19 @@ class Bullet(Params):
             'G7 Multi-BC': 17,
             'Custom': 10
         }
-        return drag_func_type[self.params['df_type']]
+        return drag_func_type[self.df_type]
 
     def set_bc(self, mbc=None):
         self.BalCoef = [0.0] * 5
         self.BVelocity = [-1] * 5
         if self.DragFunc == 10:
-            self.df_data = self.params['df_data']
+            self.df_data = self.df_data
         if self.DragFunc in [11, 17]:
-            if self.params['df_data'] or mbc:
-                for i, (bc, v) in enumerate(mbc if mbc else self.params['df_data']):
+            if self.df_data or mbc:
+                for i, (bc, v) in enumerate(mbc if mbc else self.df_data):
                     if bc > 0 and v >= 0:
                         self.BalCoef[i] = bc
                         self.BVelocity[i] = v
-            print("MBC: ", self.BalCoef, self.BVelocity)
             self.df_data = []
 
 
