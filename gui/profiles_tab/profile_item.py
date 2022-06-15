@@ -78,9 +78,13 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         if self.bullet.edit_drag():
             state = self.get()
             cur_df = state['drags'][state['drag_idx']]
-            state['df_data'] = cur_df.data
-            state['df_type'] = cur_df.drag_type
-            state['df_comment'] = cur_df.comment
+            print(cur_df)
+            # state['df_data'] = cur_df.data
+            state['df_data'] = cur_df['data']
+            # state['df_type'] = cur_df.drag_type
+            state['df_type'] = cur_df['drag_type']
+            # state['df_comment'] = cur_df.comment
+            state['df_comment'] = cur_df['comment']
 
             cdf_edit = DragFuncEditDialog(state=state)
             cdf_edit.exec_()

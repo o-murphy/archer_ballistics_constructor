@@ -125,13 +125,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         if state:
             drops = self.ballistics.calculate_drop(self.state.default_data, self.state.distances)
-            default_drop = list(map(lambda i: rnd(i), drops))
+            default_drop = [rnd(i) for i in drops]
             self.updateState(default_drop=default_drop)
 
         self.setConnects()
 
     def distances_generator(self):
-        return list(map(lambda i: i, range(25, 2500, 25)))
+        return [i for i in range(25, 2500, 25)]
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
@@ -233,12 +233,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             e.ignore()
 
     def custom_drop_at_distance(self):
-        d = list(map(
-            lambda r: self.drop_table.tableWidget.item(r, 0).text(),
-            range(self.drop_table.tableWidget.rowCount())
-        ))
+        d = [self.drop_table.tableWidget.item(r, 0).text() for r in range(self.drop_table.tableWidget.rowCount())]
+        d = [int(i) for i in d]
         self.ballistics.get_drop_at_distance(d)
-        map(lambda i, v: self.drop_table.set_item_data(i, 1, rnd(v)), enumerate(self.ballistics.drop_at_distance))
+        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
 
     def set_hold_off_quantity(self):
         self.drop_plot.y_q_label = self.holdOffQuantity.currentText()

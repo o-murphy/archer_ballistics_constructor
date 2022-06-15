@@ -6,8 +6,9 @@ def rnd4(val: float) -> float:
 
 
 class Params(object):
-    def __init__(self, params):
+    def __init__(self, params, **kwargs):
         self.params = params
+        self.kwargs = kwargs
 
 
 class Conditions(Params):
@@ -31,7 +32,7 @@ class Conditions(Params):
     z_latitude = None
 
     def __init__(self, params, **kwargs):
-        super().__init__(params)
+        super().__init__(params, **kwargs)
         if params:
             kwargs.update(params)
         [self.__setattr__(k, v) for k, v in kwargs.items()]
@@ -60,7 +61,7 @@ class Bullet(Params):
     df_data = None
 
     def __init__(self, params, **kwargs):
-        super().__init__(params)
+        super().__init__(params, **kwargs)
 
         if params:
             kwargs.update(params)
@@ -110,11 +111,20 @@ class Cartridge(Params):
         ts      :   Powder temperature sensitivity
     """
 
-    def __init__(self, params):
-        super().__init__(params)
-        self.V0 = int(self.params['mv'])
-        self.T0 = int(self.params['temp'])
-        self.PowderSens = self.params['ts']
+    mv = None
+    temp = None
+    ts = None
+
+    def __init__(self, params, **kwargs):
+        super().__init__(params, **kwargs)
+
+        if params:
+            kwargs.update(params)
+        [self.__setattr__(k, v) for k, v in kwargs.items()]
+
+        self.V0 = int(self.mv)
+        self.T0 = int(self.temp)
+        self.PowderSens = self.ts
 
 
 class Barrel(Params):
@@ -127,23 +137,36 @@ class Barrel(Params):
         rightTwist    :   is right twist
     """
 
-    def __init__(self, params):
-        super().__init__(params)
-        self.SightHeight = int(self.params['sh'])
-        self.Zero = int(self.params['z_d'])
-        self.H_zero = int(self.params['z_x'] * 4)
-        self.V_zero = int(self.params['z_y'] * 4)
-        self.twist_value = self.params['twist']
-        self.is_right = self.params['rightTwist']
-        self.Twist = self.set_twist()
+    sh = None
+    z_d = None
+    z_x = None
+    z_y = None
+    twist = None
+    rightTwist = None
+    Twist = None
+
+    def __init__(self, params, **kwargs):
+        super().__init__(params, **kwargs)
+
+        if params:
+            kwargs.update(params)
+        [self.__setattr__(k, v) for k, v in kwargs.items()]
+
+        self.SightHeight = int(self.sh)
+        self.Zero = int(self.z_d)
+        self.H_zero = int(self.z_x * 4)
+        self.V_zero = int(self.z_y * 4)
+        self.twist_value = self.twist
+        self.is_right = self.rightTwist
+        self.set_twist()
 
     def set_twist(self):
-        return self.twist_value if self.is_right else -self.twist_value
+        self.Twist = self.twist_value if self.is_right else -self.twist_value
 
 
 class Profile(Conditions, Bullet, Cartridge, Barrel):
-    def __init__(self, params):
-        super().__init__(params)
+    def __init__(self, params, **kwargs):
+        super().__init__(params, **kwargs)
 
 
 class ArcherBallistics(object):
@@ -169,6 +192,7 @@ class ArcherBallistics(object):
     def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
         if drag_function:
             self.set_drag_function(drag_function)
+        print(distances)
         self.get_drop_at_distance(distances)
         return self.drop_at_distance
 
