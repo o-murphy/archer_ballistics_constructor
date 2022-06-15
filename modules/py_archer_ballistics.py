@@ -192,7 +192,6 @@ class ArcherBallistics(object):
     def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
         if drag_function:
             self.set_drag_function(drag_function)
-        print(distances)
         self.get_drop_at_distance(distances)
         return self.drop_at_distance
 

@@ -88,18 +88,26 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.dfType.setText(self.state.df_type + ':')
         self.dfComment.setText(self.state.df_comment)
-        if self.state.df_type.endswith('Multi-BC'):
-            self.mbc = BCTable(self)
-            if self.state.df_data:
-                self.mbc.set_data(self.state.df_data)
-
-            self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
-
-            self.importDF.setDisabled(True)
-            self.pasteTable.setDisabled(True)
+        # if self.state.df_type.endswith('Multi-BC'):
+        self.mbc = BCTable(self)
+        #     if self.state.df_data:
+        #         self.mbc.set_data(self.state.df_data)
+        #
+        self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+        #
+        #     self.importDF.setDisabled(True)
+        #     self.pasteTable.setDisabled(True)
 
         self.onStateUpdate.connect(self.state_did_update)
         self.ballistics = ArcherBallistics()
+
+        self.calculation_mode = QtWidgets.QComboBox()
+        self.calculation_mode.addItem('by G1', 'G1')
+        self.calculation_mode.addItem('by G7', 'G7')
+        self.calculation_mode.addItem('by G1 Multi-BC', 'G1 Multi-BC')
+        self.calculation_mode.addItem('by G7 Multi-BC', 'G1 Multi-BC')
+        self.calculation_mode.addItem('by drag func', 'Custom')
+        self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
@@ -115,6 +123,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setProfile()
         self.setWidgets()
 
+
         self.dox = None
         self.doy = None
 
@@ -128,7 +137,25 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             default_drop = [rnd(i) for i in drops]
             self.updateState(default_drop=default_drop)
 
+        self.switch_calculation_mode()
+
         self.setConnects()
+
+    def switch_calculation_mode(self):
+        self.updateState(df_type=self.calculation_mode.currentData())
+
+        if self.state.df_type == 'Custom':
+            self.importDF.setEnabled(True)
+            self.pasteTable.setEnabled(True)
+            self.mbc.setDisabled(True)
+
+        # elif self.state.df_type.endswith('Multi-BC'):
+        else:
+            if self.state.df_data:
+                self.mbc.set_data(self.state.df_data)
+            self.mbc.setEnabled(True)
+            self.importDF.setDisabled(True)
+            self.pasteTable.setDisabled(True)
 
     def distances_generator(self):
         return [i for i in range(25, 2500, 25)]
@@ -179,6 +206,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         # self.gridLayout.addItem(spacer, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
+
+        self.gridLayout.addWidget(self.calculation_mode, 1, 0)
+
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
         self.gridLayout.addWidget(self.dragTable, 5, 0, 1, 4)
         self.gridLayout.addWidget(self.dragTableToolBox, 6, 0, 1, 4)
@@ -227,6 +257,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.importDF.clicked.connect(self.import_table)
         self.exportDF.clicked.connect(self.export_table)
+
+        self.calculation_mode.currentIndexChanged.connect(self.switch_calculation_mode)
+
 
     def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
         if e.key() == QtCore.Qt.Key_Enter:

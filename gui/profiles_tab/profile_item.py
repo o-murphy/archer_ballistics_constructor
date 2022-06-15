@@ -86,22 +86,23 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             # state['df_comment'] = cur_df.comment
             state['df_comment'] = cur_df['comment']
 
-            cdf_edit = DragFuncEditDialog(state=state)
-            cdf_edit.exec_()
-
-            if cdf_edit.state.df_type == 'Custom':
-
-                self.bullet.save_cur_df(
-                    cdf_edit.state.current_data
-                    if cdf_edit.state.current_data
-                    else cdf_edit.state.default_data,
-                    cdf_edit.dfComment.text()
-                )
-            else:
-                self.bullet.save_cur_df(
-                    cdf_edit.mbc.get_data(),
-                    cdf_edit.dfComment.text()
-                )
+            # TODO: connect DragFuncEditDialog when it would working properly
+            # cdf_edit = DragFuncEditDialog(state=state)
+            # cdf_edit.exec_()
+            #
+            # if cdf_edit.state.df_type == 'Custom':
+            #
+            #     self.bullet.save_cur_df(
+            #         cdf_edit.state.current_data
+            #         if cdf_edit.state.current_data
+            #         else cdf_edit.state.default_data,
+            #         cdf_edit.dfComment.text()
+            #     )
+            # else:
+            #     self.bullet.save_cur_df(
+            #         cdf_edit.mbc.get_data(),
+            #         cdf_edit.dfComment.text()
+            #     )
 
     def get(self) -> dict:
         data = {}
