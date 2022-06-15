@@ -10,7 +10,6 @@ try:
     from .current_atmo_dialog import CurrentAtmoDialog
     from .defaults import DEFAULTS
     from ..stylesheet import load_qss
-
     from .drag_editor_state import DragEditorState
 
 except Exception as exception:
@@ -23,7 +22,6 @@ except Exception as exception:
     from gui.drag_func_editor.current_atmo_dialog import CurrentAtmoDialog
     from gui.drag_func_editor.defaults import DEFAULTS
     from gui.stylesheet import load_qss
-
     from gui.drag_func_editor.drag_editor_state import DragEditorState
 
 from modules import BConverter
@@ -387,6 +385,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 def main():
     import sys
     app = QtWidgets.QApplication(sys.argv)
+
+    # NATIVE DARK THEME
+    # from dark_theme import DarkTheme
+    # DarkTheme().setup(app)
+
     dialog = DragFuncEditDialog(DEFAULTS)
     dialog.show()
     dialog.exec()

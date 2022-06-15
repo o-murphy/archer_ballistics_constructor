@@ -111,6 +111,11 @@ def main():
     env_update.main()
     app = QtWidgets.QApplication(sys.argv)
 
+
+    # NATIVE DARK THEME
+    # from dark_theme import DarkTheme
+    # DarkTheme().setup(app)
+
     window = ExampleApp()
     window.show()
     app.setWindowIcon(QtGui.QIcon('Icon.png'))
