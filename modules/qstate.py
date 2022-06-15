@@ -30,7 +30,7 @@ class State(QtCore.QObject):
     def __getstate__(self):
         return self.__dict__
 
-    def updateState(self, state: dict = None, **kwargs):
+    def updateState(self, state: dict = None, *args, **kwargs):
         if state:
             kwargs.update(**state)
         if kwargs:

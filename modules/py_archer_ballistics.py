@@ -67,8 +67,6 @@ class Bullet(Params):
             kwargs.update(params)
         [self.__setattr__(k, v) for k, v in kwargs.items()]
 
-        # self.is_mbc = True if self.params['multiBC'] == 2 else False
-        # self.mbc = self.params['bcTable']
         self.DragFunc = self.set_drag_func_type()
 
         self.df_data = None
