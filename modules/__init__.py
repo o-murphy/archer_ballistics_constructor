@@ -1,5 +1,5 @@
 from .converter import BConverter
 from .profile import Profile
-from .qstate import State, StateDidSet, StateDidUpdate
+from .qstate import State, StateDidUpdate  # , StateDidSet
 from .py_archer_ballistics import ArcherBallistics, Profile
 from .file_parse import FileParse

@@ -88,15 +88,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.dfType.setText(self.state.df_type + ':')
         self.dfComment.setText(self.state.df_comment)
-        # if self.state.df_type.endswith('Multi-BC'):
+
         self.mbc = BCTable(self)
-        #     if self.state.df_data:
-        #         self.mbc.set_data(self.state.df_data)
-        #
         self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
-        #
-        #     self.importDF.setDisabled(True)
-        #     self.pasteTable.setDisabled(True)
 
         self.onStateUpdate.connect(self.state_did_update)
         self.ballistics = ArcherBallistics()
@@ -127,7 +121,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.doy = None
 
         self.updateState(
-            default_drag_func=self.ballistics.get_drag_function() if self.profile else None,
+            default_drag_func=self.ballistics.drag_function if self.profile else None,
             distances=self.distances_generator()
         )
 
@@ -164,7 +158,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.profile.set_bc(mbc)
         self.setProfile()
         self.updateState(
-            current_drag_func=self.ballistics.get_drag_function() if self.profile else None,
+            current_drag_func=self.ballistics.drag_function if self.profile else None,
             distances=self.distances_generator()
         )
         # self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
@@ -173,18 +167,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.custom_drop_at_distance()
 
     def setProfile(self):
-        self.ballistics.set_profile(self.profile)
+        self.ballistics.profile = self.profile
         if self.profile.DragFunc == 10 and self.profile.df_data:
-            self.ballistics.set_drag_function(self.profile.df_data)
-        self.ballistics.set_atmo(self.profile)
+            self.ballistics.drag_function = self.profile.df_data
+        self.ballistics.atmo = self.profile
         self.ballistics.get_sound_speed()
 
     def state_did_update(self, e):
         if isinstance(e, StateDidUpdate):
-            if e.key == 'default_drag_func':
+            if hasattr(e, 'default_drag_func'):
                 self.setDrag()
-
-            if e.key == 'default_drop':
+            if hasattr(e, 'default_drop'):
                 self.setDrops()
 
     def setDrag(self):
@@ -214,8 +207,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.gridLayout.addWidget(self.buttonBox, 7, 0, 1, 4)
 
         self.distanceQuantity.setItemData(0, 1)
-        self.distanceQuantity.setItemData(1, self.ballistics.sound_speed)
-        self.distanceQuantity.setItemData(2, self.ballistics.sound_speed * 3.281)
+        self.updateState(sound_speed=self.ballistics.get_sound_speed())
+        self.distanceQuantity.setItemData(1, self.state.sound_speed)
+        self.distanceQuantity.setItemData(2, self.state.sound_speed * 3.281)
 
         self.holdOffQuantity.setItemData(0, BConverter.nothing)
         self.holdOffQuantity.setItemData(1, BConverter.cm2mil)
@@ -256,7 +250,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.calculation_mode.currentIndexChanged.connect(self.switch_calculation_mode)
 
-
     def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
         if e.key() == QtCore.Qt.Key_Enter:
             e.ignore()
@@ -264,8 +257,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def custom_drop_at_distance(self):
         d = [self.drop_table.tableWidget.item(r, 0).text() for r in range(self.drop_table.tableWidget.rowCount())]
         d = [int(i) for i in d]
-        self.ballistics.get_drop_at_distance(d)
-        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.drop_at_distance)]
+
+        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.ballistics.get_drop_at_distance(d))]
 
     def set_hold_off_quantity(self):
         self.drop_plot.y_q_label = self.holdOffQuantity.currentText()
@@ -286,7 +279,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.ballistics.calculate_cd(distance=self.state.current_distance)
         ox, oy = self.parse_data(
             self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
-        x, y = rnd(self.ballistics.cd_at_distance), rnd(min(oy))
+        x, y = rnd(self.ballistics.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
         self.drag_plot.set_cd_at_distance(x, y)
         self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
 
@@ -319,7 +312,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def append_updates(self):
         self.ballistics.drag_function = self.state.current_drag_func
-        self.ballistics.set_drag_function(self.ballistics.drag_function)
         self.update_drag_table()
         self.drag_plot.draw_current_plot(
             self.parse_data(self.state.current_drag_func)[0],
@@ -371,7 +363,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             return None
 
     def set_coefficient(self, side, is_up):
-        ox, oy = self.parse_data(self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
+        ox, oy = self.parse_data(
+            self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
         if self.Step.value() > 0:
             max_y = max(oy)
             max_y_idx = oy.index(max_y)

@@ -172,62 +172,51 @@ class Profile(Conditions, Bullet, Cartridge, Barrel):
 class ArcherBallistics(object):
     def __init__(self):
         self.ballistics = archer_ballistics
-        self.drag_function = None
-        self.drop_at_distance = None
-        self.cd_at_distance = None
-        self.atmo = None
-        self.sound_speed = None
+        self._profile: Profile
 
-    def set_drag_function(self, drag_function_data: list):
-        self.drag_function = []
-        [[self.drag_function.append(j) for j in i] for i in drag_function_data[::-1]]
-        self.ballistics.set_drag_function(self.drag_function)
-
-    def get_drop_at_distance(self, distances: list):
-        self.drop_at_distance = self.ballistics.get_drop_at_distance(distances)
-
-    def get_cd_at_distance(self, distance: list = None):
-        self.cd_at_distance = rnd4(self.ballistics.get_cd_at_distance(distance))
-
-    def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
-        if drag_function:
-            self.set_drag_function(drag_function)
-        self.get_drop_at_distance(distances)
-        return self.drop_at_distance
-
-    def calculate_cd(self, drag_function: list = None, distance: float = None) -> float:
-        if drag_function:
-            self.set_drag_function(drag_function)
-        self.get_cd_at_distance(distance)
-        return self.cd_at_distance
-
-    def set_atmo(self, conditions: Conditions):
-        self.atmo = conditions
-        if self.atmo:
-            return self.ballistics.set_atmo(self.atmo)
-
-    def get_atmo(self):
-        return self.ballistics.get_atmo() if self.atmo else None
-
-    def get_sound_speed(self):
-        if self.atmo:
-            self.sound_speed = self.ballistics.get_speed_of_sound()
-        return self.sound_speed
-
-    def set_profile(self, profile: Profile):
-        if profile:
-            return self.ballistics.set_profile(profile)
-
-    def get_profile(self):
-        return self.ballistics.get_profile()
-
-    def get_drag_function(self):
+    @property
+    def drag_function(self):
         ret = self.ballistics.get_drag_function()
         table = ''
         for (v, c) in ret:
             table += str(v) + '\t' + str(c) + '\n'
         ret.sort(reverse=False)
         return ret
+
+    @drag_function.setter
+    def drag_function(self, drag_function_data: list):
+        drag_function_data.sort(reverse=True)
+        drag_function = []
+        [[drag_function.append(j) for j in i] for i in drag_function_data]
+        self.ballistics.set_drag_function(drag_function)
+
+    def get_drop_at_distance(self, distances: list):
+        return self.ballistics.get_drop_at_distance(distances)
+
+    def get_cd_at_distance(self, distance: list = None):
+        return rnd4(self.ballistics.get_cd_at_distance(distance))
+
+    def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
+        if drag_function:
+            self.drag_function = drag_function
+        return self.get_drop_at_distance(distances)
+
+    def calculate_cd(self, drag_function: list = None, distance: float = None) -> float:
+        if drag_function:
+            self.drag_function = drag_function
+        return self.get_cd_at_distance(distance)
+
+    def get_sound_speed(self):
+        return self.ballistics.get_speed_of_sound()
+
+    @property
+    def profile(self):
+        return self.ballistics.get_profile()
+
+    @profile.setter
+    def profile(self, profile: Profile):
+        if profile:
+            self.ballistics.set_profile(profile)
 
 
 if __name__ == '__main__':
