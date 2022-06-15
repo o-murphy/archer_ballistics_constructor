@@ -31,8 +31,8 @@ rnd = BConverter.auto_rnd
 
 
 class DragEditorState(State):
-    default_data = None
-    current_data = None
+    default_drag_func = None
+    current_drag_func = None
     distances = None
     current_distance = None
     default_drop = None
@@ -123,17 +123,16 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setProfile()
         self.setWidgets()
 
-
         self.dox = None
         self.doy = None
 
         self.updateState(
-            default_data=self.ballistics.get_drag_function() if self.profile else None,
+            default_drag_func=self.ballistics.get_drag_function() if self.profile else None,
             distances=self.distances_generator()
         )
 
         if state:
-            drops = self.ballistics.calculate_drop(self.state.default_data, self.state.distances)
+            drops = self.ballistics.calculate_drop(self.state.default_drag_func, self.state.distances)
             default_drop = [rnd(i) for i in drops]
             self.updateState(default_drop=default_drop)
 
@@ -165,11 +164,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.profile.set_bc(mbc)
         self.setProfile()
         self.updateState(
-            current_data=self.ballistics.get_drag_function() if self.profile else None,
+            current_drag_func=self.ballistics.get_drag_function() if self.profile else None,
             distances=self.distances_generator()
         )
         # self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
-        #     self.state.default_data, self.state.distances)])
+        #     self.state.default_drag_func, self.state.distances)])
         self.append_updates()
         self.custom_drop_at_distance()
 
@@ -182,14 +181,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def state_did_update(self, e):
         if isinstance(e, StateDidUpdate):
-            if e.key == 'default_data':
+            if e.key == 'default_drag_func':
                 self.setDrag()
 
             if e.key == 'default_drop':
                 self.setDrops()
 
     def setDrag(self):
-        self.dox, self.doy = self.parse_data(self.state.default_data)
+        self.dox, self.doy = self.parse_data(self.state.default_drag_func)
         self.drag_plot.draw_default_plot(self.dox, self.doy)
         self.set_distance_quantity()
         self.update_drag_table()
@@ -245,10 +244,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_table_edit.addRow.clicked.connect(lambda: (
             self.drop_table_edit.add_row(), self.custom_drop_at_distance()
         ))
-        # self.Calculate.clicked.connect(
-        #     lambda: self.setState(bcTable=self.bc_table.get_data()) if isinstance(self.bc_table, BCTable)
-        #     else self.setState(bc=self.bc_table.value())
-        # )
+
         self.SetConditions.clicked.connect(self.current_atmo_dialog)
         self.buttonBox.keyPressEvent = self.keyPressEvent
 
@@ -288,7 +284,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         drop = self.drop_table.get_current_drop()
 
         self.ballistics.calculate_cd(distance=self.state.current_distance)
-        ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
+        ox, oy = self.parse_data(
+            self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
         x, y = rnd(self.ballistics.cd_at_distance), rnd(min(oy))
         self.drag_plot.set_cd_at_distance(x, y)
         self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
@@ -300,18 +297,18 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.stackUnder(self.drag_plot)
 
     def calculate_bullet_drop(self):
-        if self.state.current_data:
-            self.state.current_drop = self.ballistics.calculate_drop(self.state.current_data, self.state.distances)
+        if self.state.current_drag_func:
+            self.state.current_drop = self.ballistics.calculate_drop(self.state.current_drag_func, self.state.distances)
         if self.state.current_distance:
             self.cd_at_distance()
 
     def update_drag_table(self):
-        self.dragTable.set(self.state.current_data, self.state.default_data)
+        self.dragTable.set(self.state.current_drag_func, self.state.default_drag_func)
         self.drag_plot.current_point.setData()
         self.drag_plot.current_point_text.setText("")
 
     def reset(self):
-        self.updateState(current_data=None)
+        self.updateState(current_drag_func=None)
 
         self.update_drag_table()
         self.drag_plot.reset_current_plot()
@@ -321,12 +318,12 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.reset_current_plot()
 
     def append_updates(self):
-        self.ballistics.drag_function = self.state.current_data
+        self.ballistics.drag_function = self.state.current_drag_func
         self.ballistics.set_drag_function(self.ballistics.drag_function)
         self.update_drag_table()
         self.drag_plot.draw_current_plot(
-            self.parse_data(self.state.current_data)[0],
-            self.parse_data(self.state.current_data)[1]
+            self.parse_data(self.state.current_drag_func)[0],
+            self.parse_data(self.state.current_drag_func)[1]
         )
 
         self.calculate_bullet_drop()
@@ -339,14 +336,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     # def copy_table(self):
     #     datasheet = '\n'.join([f'{str(rnd(v)).replace(".", ",")}\t{str(rnd(i)).replace(".", ",")}' for v, i in (
-    #         self.state.current_data if self.state.current_data else self.state.default_data
+    #         self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func
     #     )])
     #     cb = QtWidgets.QApplication.clipboard()
     #     cb.clear(mode=cb.Clipboard)
     #     cb.setText(datasheet, mode=cb.Clipboard)
 
     def copy_table(self):
-        data = self.state.current_data if self.state.current_data else self.state.default_data
+        data = self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func
         datasheet = []
         for (v, c) in data:
             datasheet.append(f"{str(v).replace(r'.', r',')}\t{str(c).replace(r'.', r',')}")
@@ -361,8 +358,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         lines = cb.text().split('\n')
         pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
         float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
-        self.updateState(current_data=float_pairs)
-        self.dragTable.set(self.state.current_data, self.state.default_data)
+        self.updateState(current_drag_func=float_pairs)
+        self.dragTable.set(self.state.current_drag_func, self.state.default_drag_func)
         self.append_updates()
 
     @staticmethod
@@ -374,7 +371,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             return None
 
     def set_coefficient(self, side, is_up):
-        ox, oy = self.parse_data(self.state.current_data if self.state.current_data else self.state.default_data)
+        ox, oy = self.parse_data(self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
         if self.Step.value() > 0:
             max_y = max(oy)
             max_y_idx = oy.index(max_y)
@@ -402,21 +399,21 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 elif side == 'all':
                     oy[i] *= 1 + step
                 new_data.append([ox[i], oy[i]])
-            self.updateState(current_data=new_data)
+            self.updateState(current_drag_func=new_data)
             self.append_updates()
 
     def __getstate__(self):
         new_state = self.state.__dict__
-        is_new_data = True if self.state.current_data else False
+        is_new_data = True if self.state.current_drag_func else False
 
         if is_new_data:
-            new_state['df_data'] = self.state.current_data
+            new_state['df_data'] = self.state.current_drag_func
             new_state['dragType'] = 2
         else:
-            new_state['df_data'] = self.state.default_data
+            new_state['df_data'] = self.state.default_drag_func
 
-        [new_state.pop(key) for key in ['default_data',
-                                        'current_data',
+        [new_state.pop(key) for key in ['default_drag_func',
+                                        'current_drag_func',
                                         'distances',
                                         'current_distance',
                                         'default_drop',
@@ -437,17 +434,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             fp = FileParse()
             data, comment = fp.open_format(fileFormat, fileName)
             if data:
-                if not self.state.default_data:
-                    self.updateState(default_data=data)
+                if not self.state.default_drag_func:
+                    self.updateState(default_drag_func=data)
                 else:
-                    self.updateState(current_data=data)
-                self.dragTable.set(self.state.current_data, self.state.default_data)
+                    self.updateState(current_drag_func=data)
+                self.dragTable.set(self.state.current_drag_func, self.state.default_drag_func)
                 self.append_updates()
 
             self.dfComment.setText(comment.replace('\n', '')[:80])
 
     def export_table(self, fileName=None):
-        data = self.state.current_data
+        data = self.state.current_drag_func
         if data:
 
             options = QtWidgets.QFileDialog.Options()
@@ -461,7 +458,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             if fileName:
                 from modules import FileParse
                 fp = FileParse()
-                result = fp.save_format(fileFormat, fileName, data, fileName)
+                fp.save_format(fileFormat, fileName, data, fileName)
 
 
 def main():
