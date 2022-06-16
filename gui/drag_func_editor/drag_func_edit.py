@@ -44,6 +44,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.state = DragEditorState(self, state)
         self.onStateUpdate.connect(self.state_did_update)
 
+        print(self.state.df_data)
+
         self.dfType.setText(self.state.df_type + ':')
         self.dfComment.setText(self.state.df_comment)
 
@@ -92,8 +94,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.pasteTable.setEnabled(True)
             self.mbc.setDisabled(True)
 
-        # elif self.state.df_type.endswith('Multi-BC'):
-        else:
+        elif self.state.df_type.endswith('Multi-BC'):
             if self.state.df_data:
                 self.mbc.set_data(self.state.df_data)
             self.mbc.setEnabled(True)
@@ -389,8 +390,12 @@ def main():
     # NATIVE DARK THEME
     # from dark_theme import DarkTheme
     # DarkTheme().setup(app)
+    try:
+        from .defaults import EXAMPLE_G1
+    except ImportError as err:
+        from gui.drag_func_editor.defaults import EXAMPLE_G1
 
-    dialog = DragFuncEditDialog(DEFAULTS)
+    dialog = DragFuncEditDialog(EXAMPLE_G1)
     dialog.show()
     dialog.exec()
     return dialog.state

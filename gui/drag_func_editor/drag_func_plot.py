@@ -17,9 +17,9 @@ class DragPlot(CustomPlot):
         if self.parent():
             self.current_point.setData()
             p = self.graphWidget.plotItem.vb.mapSceneToView(point)
-            data = self.parent().state.current_data \
-                if self.parent().state.current_data \
-                else self.parent().state.default_data
+            data = self.parent().state.current_drag_func \
+                if self.parent().state.current_drag_func \
+                else self.parent().state.default_drag_func
             if data:
                 ox, oy = self.parent().parse_data(data)  # !!! temporary
 
