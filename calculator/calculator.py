@@ -1,3 +1,7 @@
+from typing import Callable, Iterator, Union, Optional
+import math
+
+
 class DragFunctions(object):
     G1 = (
         (0.000, 0.263), (0.050, 0.256), (0.100, 0.249), (0.150, 0.241), (0.200, 0.234), (0.250, 0.228), (0.300, 0.221),
@@ -29,132 +33,183 @@ class DragFunctions(object):
     )
 
 
+class Constant(object):
+    speed_of_sound = 340
+    R = 8.31446262
+    y = 7 / 5
+    tk0 = 273.15
+    tc = 15
+    tf = tc * 9 / 5 + 32
+    pmmrtst = 760
+    patm = pmmrtst/760
+    M = 0.0289645
+
+    def get_speed_of_sound(self):
+        tk = self.tk0 + self.tc
+        c = math.sqrt(self.y * self.R * tk / self.M)
+        print(c)
+        c = 331.3 * math.sqrt(1 + self.tc / 273.15)
+
+        return c
+
+
+const = Constant()
+print(const.get_speed_of_sound())
+
+
 class Calculator(object):
-    class Constant(object):
-        speed_of_sound = 340
+    def __init__(self, w: float = 90, d: float = .243, bc: Union[float, list[(float, int)]] = 0.218,
+                 df_type: Iterator[tuple[float, float]] = None):
+        self._width = w
+        self._diameter = d
+        self._bc = bc
+        self._df_type = df_type
+        self._df_data = None
+        self.calculate_df()
 
-    def __init__(self):
-        pass
+    @property
+    def width(self) -> float:
+        return self._width
 
-    @staticmethod
-    def bc_by_retardation(r_def: float, r: float) -> float:
+    @width.setter
+    def width(self, value: float):
+        self._width = value
+        self.calculate_df()
+
+    @property
+    def diameter(self) -> float:
+        return self._diameter
+
+    @diameter.setter
+    def diameter(self, value: float):
+        self._diameter = value
+        self.calculate_df()
+
+    @property
+    def bc(self) -> Union[float, list[(float, int)]]:
+        return self._bc
+
+    @bc.setter
+    def bc(self, value: Union[float, list[(float, int)]]):
+        self._bc = value
+        self.calculate_df()
+
+    @property
+    def df_type(self) -> Iterator[tuple[float, float]]:
+        return self._df_type
+
+    @df_type.setter
+    def df_type(self, value: Iterator[tuple[float, float]]):
+        self._df_type = value
+        self.calculate_df()
+
+    @property
+    def df_data(self) -> Iterator[tuple[float, int]]:
+        return self._df_data
+
+    @df_data.setter
+    def df_data(self, value: Iterator[tuple[float, float]]):
+        self._df_data = value
+        self._df_type = None
+
+    def calculate_df(self):
+        if self._df_type:
+            if isinstance(self._bc, float):
+                self.calculate_drag_function()
+            elif isinstance(self._bc, list):
+                self.calculate_drag_function_multi_bc()
+
+    def sectional_density(self) -> float:
         """ params:
-            r_def: замедление стандартной пули
-            r: замедление тестируемой пули
-        """
-        return r_def / r
-
-    @staticmethod
-    def bc_by_form_factor(sd: float = None, w: float = None, d: float = None, i: float = None) -> float:
-        """ params:
-            sd: sectional density
             w: weight in pounds
             d: diameter in inches
-            i: drag-coefficient
         """
-        if sd and i:
-            return sd / i
-        elif w and d and i:
-            return w / (i * d ** 2)
-        else:
-            raise ValueError(f'some arguments are wrong {locals()}')
+        return self._width / (self._diameter ** 2)
 
-    @staticmethod
-    def sectional_density(w: float, d: float) -> float:
-        """ params:
-            w: weight in pounds
-            d: diameter in inches
-        """
-        return w / (d ** 2)
-
-    def form_factor_by_bullet_data(self, w, d, bc):
-        return round(self.sectional_density(w, d) / 7000 / bc, 4)
+    def form_factor_by_bullet_data(self, bc):
+        return round(self.sectional_density() / 7000 / bc, 4)
 
     @staticmethod
     def counted_drag_coefficient(i, cd_def):
         return round(cd_def * i, 4)
 
-    def count_df(self, i, df_type):
+    def calculate_drag_function(self):
+        i = self.form_factor_by_bullet_data(self._bc, )
         drag_function = []
-        for v, cd_def in df_type:
+        for v, cd_def in self._df_type:
             cd = self.counted_drag_coefficient(i, cd_def)
             drag_function.append((v, cd))
-        return drag_function
+        self._df_data = drag_function
 
-    def calculate_drag_function(self, w: float, d: float, bc: float, df_type=DragFunctions.G7):
-        i = self.form_factor_by_bullet_data(w, d, bc)
-        return self.count_df(i, df_type)
-
-    def calculate_drag_function_multi_bc(self, w: float, d: float,
-                                         bc_table: list[(float, int)],
-                                         df_type=DragFunctions.G7):
+    def calculate_drag_function_multi_bc(self):
         i_table = []
-        for bc, v in bc_table:
-            i_table.append((self.form_factor_by_bullet_data(w, d, bc), v))
+        for bc, v in self._bc:
+            i_table.append((self.form_factor_by_bullet_data(bc), v))
 
         drag_function = []
 
         for idx, (i, vm) in enumerate(i_table):
+            for v, cd_def in self._df_type:
 
-            for v, cd_def in df_type:
-
-                if len(i_table) > idx > 0 and (i_table[idx - 1][1] > v * self.Constant.speed_of_sound > vm):
+                if len(i_table) > idx > 0 and (i_table[idx - 1][1] > v * Constant.speed_of_sound > vm):
                     cd = self.counted_drag_coefficient(i, cd_def)
                     drag_function.append((v, cd))
-                if idx == 0 and (v * self.Constant.speed_of_sound > vm):
+                if idx == 0 and (v * Constant.speed_of_sound > vm):
                     cd = self.counted_drag_coefficient(i, cd_def)
                     drag_function.append((v, cd))
-                if idx == len(i_table) - 1 and i_table[idx][1] > v * self.Constant.speed_of_sound > 0:
+                if idx == len(i_table) - 1 and i_table[idx][1] > v * Constant.speed_of_sound > 0:
                     cd = self.counted_drag_coefficient(i, cd_def)
                     drag_function.append((v, cd))
 
         drag_function.sort()
-        return drag_function
+        self._df_data = drag_function
 
-    def retardation(self, **kwargs):
-        """ params:
-            r_def: замедление стандартной пули
-            r: замедление тестируемой пули, футы/сек2
-            v: скорость тестируемой пули, футы/сек
-            m: степень
-            A: константа
-            BC: баллистический коэффициент
-            p: сила сопротивления воздуха
-            g: гравитационная константа
+    # @staticmethod
+    # def bc_by_retardation(r_def: float, r: float) -> float:
+    #     """ params:
+    #         r_def: замедление стандартной пули
+    #         r: замедление тестируемой пули
+    #     """
+    #     return r_def / r
 
-            r_def = a * v ** m = bc * r = pg
-            r = a * v ** m / bc
-        """
+    # @staticmethod
+    # def bc_by_form_factor(sd: float = None, w: float = None, d: float = None, i: float = None) -> float:
+    #     """ params:
+    #         sd: sectional density
+    #         w: weight in pounds
+    #         d: diameter in inches
+    #         i: drag-coefficient
+    #     """
+    #     if sd and i:
+    #         return sd / i
+    #     elif w and d and i:
+    #         return w / (i * d ** 2)
+    #     else:
+    #         raise ValueError(f'some arguments are wrong {locals()}')
 
-        return
+    # def retardation(self, **kwargs):
+    #     """ params:
+    #         r_def: замедление стандартной пули
+    #         r: замедление тестируемой пули, футы/сек2
+    #         v: скорость тестируемой пули, футы/сек
+    #         m: степень
+    #         A: константа
+    #         BC: баллистический коэффициент
+    #         p: сила сопротивления воздуха
+    #         g: гравитационная константа
+    #
+    #         r_def = a * v ** m = bc * r = pg
+    #         r = a * v ** m / bc
+    #     """
+    #
+    #     return
 
 
 def main():
-    calc = Calculator()
-    # ret = calc.calculate_drag_function(90, 0.243, 0.218)
-
-    # bct = [(0.218, 750), (0.21, 720), (0.21, 650), (0.203, 600), (0.201, 500)]
-    #
-    # sbc = calc.calculate_drag_function(90, 0.243, 0.218)
-    #
-    # mbc = calc.calculate_drag_function_multi_bc(90, 0.243, bct)
-
-    bct = [(0.218, 750), (0.21, 720), (0.21, 650), (0.203, 600), (0.201, 500)]
-
-    bct_g1 = [(x * 1.98, y) for x, y in bct]
-
-    sbc = calc.calculate_drag_function(90, 0.243, 0.4327, DragFunctions.G1)
-
-
-    mbc = calc.calculate_drag_function_multi_bc(90, 0.243, bct_g1, DragFunctions.G1)
-
-    for i, (v, mcd) in enumerate(mbc):
-        cd = sbc[i][1]
-        fstring = f'{v}\t{cd}\t{mcd}\t{round(cd - mcd, 4)}'.replace('.', ',')
-        print(fstring)
-
-        # print(str(mcd).replace('.', ','))
-
+    # calc = Calculator(w=90, d=0.243, bc=0.218, df_type=DragFunctions.G7)
+    # print(calc.df_data)
+    # calc.bc = [(0.218, 750), (0.21, 720), (0.21, 650), (0.203, 600), (0.201, 500)]
+    # print(calc.df_data)
     return
 
 

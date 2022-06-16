@@ -218,9 +218,48 @@ class ArcherBallistics(object):
 
 
 if __name__ == '__main__':
-    pass
-    # test_data = {'z_d': 100, 'z_y': 0, 'z_x': 0, 'rifleName': '', 'caliberName': '.223 Remington', 'sh': 90, 'twist': 10, 'caliberShort': '.233Rem', 'rightTwist': True, 'bulletName': '', 'weight': 69.0, 'length': 0.9, 'diameter': 0.224, 'weightTile': '69gr', 'dragType': 1, 'bc': 0.169, 'cartridgeName': '', 'mv': 868, 'temp': 15, 'ts': 1.55, 'z_temp': 15, 'z_angle': 0, 'z_pressure': 760, 'z_latitude': 0, 'z_humidity': 50, 'z_azimuth': 270, 'z_powder_temp': 15}
-    #
+    test_data = {
+        "SightHeight": 90,
+        "Zero": 100,
+        "H_zero": 0,
+        "V_zero": 0,
+        "twist_value": 11,
+        "is_right": True,
+        "Twist": 11,
+        "V0": 800,
+        "T0": 15,
+        "PowderSens": 1.55,
+        "DragFunc": 1,
+        "BalCoef": [
+            0.547,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "BVelocity": [
+            800,
+            -1,
+            -1,
+            -1,
+            -1
+        ],
+        "Diameter": 0.308,
+        "Length": 1.3,
+        "Weight": 150.0,
+        "Temperature": 15,
+        "P_Temperature": 15,
+        "Humidity": 50,
+        "Pressure": 760,
+        "Angle": 0,
+        "Azimuth": 270,
+        "Latitude": 0
+    }
+
+
+    ret = archer_ballistics.set_profile(test_data)
+    print(archer_ballistics.get_speed_of_sound())
+
     # calc = ArcherBallistics()
     #
     # profile = Profile(test_data)
