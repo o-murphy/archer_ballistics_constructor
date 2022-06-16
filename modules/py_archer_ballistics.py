@@ -214,8 +214,9 @@ class ArcherBallistics(object):
     @profile.setter
     def profile(self, profile: Profile):
         if profile:
-            self.ballistics.set_profile(profile)
-
+            print(profile.__dict__)
+            ret = self.ballistics.set_profile(profile)
+            print(ret)
 
 if __name__ == '__main__':
     test_data = {

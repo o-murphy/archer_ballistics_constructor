@@ -11,6 +11,7 @@ class DragEditorState(State):
 
         self.setProfile()
         self.sound_speed = self.get_sound_speed()
+        print(self.sound_speed)
 
     @property
     def drag_function(self):
