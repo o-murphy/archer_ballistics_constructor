@@ -6,10 +6,13 @@ class DragEditorState(State):
     def __init__(self, widget, state: dict = None, **kwargs):
         super(DragEditorState, self).__init__(widget, state, **kwargs)
 
+        self.profile = self.__dict__
         self.ballistics = ArcherBallistics()
-        self.profile = Profile(self.__dict__)
+        self.ballistics.profile = Profile(self.profile)
+        self.ballistics.atmo = self.profile
+        self.ballistics.get_sound_speed()
 
-        self.setProfile()
+        # self.setProfile()
         self.sound_speed = self.get_sound_speed()
         print(self.sound_speed)
 
@@ -41,12 +44,12 @@ class DragEditorState(State):
     def distances_generator():
         return [i for i in range(25, 2500, 25)]
 
-    def setProfile(self):
-        self.ballistics.profile = self.profile
-        if self.profile.DragFunc == 10 and self.profile.df_data:
-            self.ballistics.drag_function = self.profile.df_data
-        self.ballistics.atmo = self.profile
-        self.ballistics.get_sound_speed()
+    # def setProfile(self):
+    #     self.ballistics.profile = self.profile
+    #     if self.profile.DragFunc == 10 and self.profile.df_data:
+    #         self.ballistics.drag_function = self.profile.df_data
+    #     self.ballistics.atmo = self.profile
+    #     self.ballistics.get_sound_speed()
 
     @staticmethod
     def namestr(obj, namespace):

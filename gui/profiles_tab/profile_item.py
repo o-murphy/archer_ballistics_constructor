@@ -73,6 +73,23 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
                 else cdf_edit.state.default_data,
                 cdf_edit.dfComment.text()
             )
+        else:
+            state = self.get()
+            state['drag_idx'] = -1
+            state['df_data'] = None
+            state['df_type'] = drag_type
+            # state['df_comment'] = 'Default G1'
+
+            cdf_edit = DragFuncEditDialog(state=state)
+            cdf_edit.exec_()
+
+            self.bullet.save_new_df(
+                cdf_edit.state.df_type,
+                cdf_edit.state.current_data
+                if cdf_edit.state.current_data
+                else cdf_edit.state.default_data,
+                cdf_edit.dfComment.text()
+            )
 
     def edit_drag(self):
         if self.bullet.edit_drag():
@@ -85,6 +102,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             state['df_type'] = cur_df['drag_type']
             # state['df_comment'] = cur_df.comment
             state['df_comment'] = cur_df['comment']
+        self.add_drag()
 
             # TODO: connect DragFuncEditDialog when it would working properly
             # cdf_edit = DragFuncEditDialog(state=state)

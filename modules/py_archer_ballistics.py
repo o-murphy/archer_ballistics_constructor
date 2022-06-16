@@ -170,7 +170,7 @@ class Profile(Conditions, Bullet, Cartridge, Barrel):
 class ArcherBallistics(object):
     def __init__(self):
         self.ballistics = archer_ballistics
-        self._profile: Profile
+        # self._profile: Profile
 
     @property
     def drag_function(self):
@@ -217,6 +217,15 @@ class ArcherBallistics(object):
             print(profile.__dict__)
             ret = self.ballistics.set_profile(profile)
             print(ret)
+
+    @property
+    def atmo(self):
+        return self.ballistics.get_atmo()
+
+    @atmo.setter
+    def atmo(self, value):
+        self.ballistics.set_atmo(value)
+
 
 if __name__ == '__main__':
     test_data = {
