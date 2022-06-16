@@ -51,10 +51,38 @@ class Constant(object):
         c = 331.3 * math.sqrt(1 + self.tc / 273.15)
 
         return c
+    
 
+class SpeedOfSound(object):
+    C: float = None  # speed
+    Xc : float = None  # Mole fraction of carbon dioxide
+    Xw: float = None  # Mole fraction of water vapour
+    H: float = None  # respectively molecular concentration of water vapour
+    C1: float = None  # Intermediate calculations
+    C2: float = None
+    C3: float = None
+    ENH: float = None
+    PSV: float = None
+    PSV1: float = None
+    PSV2: float = None
+    T_kel: float = None  # ambient temperature (Kelvin)
+    StrMsg: float = None  # alert text
+    Kelvin = 273.15  # For converting to Kelvin
+    e = 2.71828182845904523536
+    
+    def __init__(self, T: float, P: float, Rh: float):
+        self.T = T  # temperature deg C
+        self.P = P  # pressure
+        self.Rh = Rh  # relative humidity
+        if Rh > 100 or Rh < 0:
+            raise ValueError("Data out of range: Relative humidity must be between 0 and 100%")
 
-const = Constant()
-print(const.get_speed_of_sound())
+    def count(self):
+        self.T_kel = self.Kelvin + self.T
+        
+
+# const = Constant()
+# print(const.get_speed_of_sound())
 
 
 class Calculator(object):
