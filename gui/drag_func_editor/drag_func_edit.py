@@ -44,9 +44,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.state = DragEditorState(self, state)
         self.onStateUpdate.connect(self.state_did_update)
 
-        from calculator.calculator import Constant
-        print(self.state.sound_speed, Constant.speed_of_sound(26, 760, 50))
-
         self.dfType.setText(self.state.df_type + ':')
         self.dfComment.setText(self.state.df_comment)
 

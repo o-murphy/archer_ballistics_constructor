@@ -6,7 +6,7 @@ class DragEditorState(State):
     def __init__(self, widget, state: dict = None, **kwargs):
         super(DragEditorState, self).__init__(widget, state, **kwargs)
 
-        print(self.__dict__)
+        # print(self.__dict__)
 
         self.profile = Profile(self.__dict__)
         self.ballistics = ArcherBallistics()
@@ -14,6 +14,11 @@ class DragEditorState(State):
         self.ballistics.atmo = self.profile
         self.ballistics.get_sound_speed()
         self.sound_speed = self.get_sound_speed()
+
+        from calculator.calculator import Constant
+        sofs0 = self.sound_speed
+        sofs1 = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
+        print(sofs0, sofs1, round(sofs0 / sofs1, 4))
 
     @property
     def drag_function(self):
