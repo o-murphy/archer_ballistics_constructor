@@ -170,7 +170,6 @@ class Profile(Conditions, Bullet, Cartridge, Barrel):
 class ArcherBallistics(object):
     def __init__(self):
         self.ballistics = archer_ballistics
-        # self._profile: Profile
 
     @property
     def drag_function(self):
@@ -214,9 +213,7 @@ class ArcherBallistics(object):
     @profile.setter
     def profile(self, profile: Profile):
         if profile:
-            print(profile.__dict__)
-            ret = self.ballistics.set_profile(profile)
-            print(ret)
+            self.ballistics.set_profile(profile)
 
     @property
     def atmo(self):
@@ -265,14 +262,3 @@ if __name__ == '__main__':
         "Azimuth": 270,
         "Latitude": 0
     }
-
-
-    ret = archer_ballistics.set_profile(test_data)
-    print(archer_ballistics.get_speed_of_sound())
-
-    # calc = ArcherBallistics()
-    #
-    # profile = Profile(test_data)
-    #
-    # archer_ballistics.set_profile(profile)
-    # print(archer_ballistics.get_drag_function())

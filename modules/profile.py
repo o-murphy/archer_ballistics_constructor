@@ -20,7 +20,6 @@ class BProfile(QtCore.QObject):
 
 
     def customEv(self, key, value):
-        print(key, value)
         pass
 
 

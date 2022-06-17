@@ -41,9 +41,6 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
         self.setupConnects()
 
-        self.bullet.addDrag.clicked.connect(self.add_drag)
-        self.bullet.dragEditor.clicked.connect(self.edit_drag)
-
     def setupConnects(self):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
         self.cartridge.cartridgeName.textChanged.connect(lambda text: self.cartridgeName.setText(text))
@@ -53,74 +50,41 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             lambda: self.weightTile.setText(self.bullet.weightTile())
         )
 
-    def add_drag(self):
+        self.bullet.addDrag.clicked.connect(self.add_drag_data)
+        self.bullet.dfDataEditor.clicked.connect(self.edit_drag_data)
+        self.bullet.dragEditor.clicked.connect(self.open_df_editor)
+
+    def add_drag_data(self):
         drag_type = self.bullet.add_drag()
 
-        if drag_type == 'Custom':
-            state = self.get()
-            state['drag_idx'] = -1
-            state['df_data'] = None
-            state['df_type'] = drag_type
-            state['df_comment'] = 'Default G1'
+    def edit_drag_data(self):
 
-            cdf_edit = DragFuncEditDialog(state=state)
-            cdf_edit.exec_()
+        state = self.get()
+        cur_df = state['drags'][state['drag_idx']]
+        df_data = cur_df['data']
+        df_type = cur_df['drag_type']
+        df_comment = cur_df['comment']
 
-            self.bullet.save_new_df(
-                cdf_edit.state.df_type,
-                cdf_edit.state.current_data
-                if cdf_edit.state.current_data
-                else cdf_edit.state.default_data,
-                cdf_edit.dfComment.text()
-            )
-        else:
-            state = self.get()
-            state['drag_idx'] = -1
-            state['df_data'] = None
-            state['df_type'] = drag_type
-            # state['df_comment'] = 'Default G1'
+        new_data = self.bullet.edit_drag(df_data, df_comment)
 
-            cdf_edit = DragFuncEditDialog(state=state)
-            cdf_edit.exec_()
+        if df_type in ['G1', 'G7']:
+            self.bullet.save_cur_df(new_data, df_comment)
 
-            self.bullet.save_new_df(
-                cdf_edit.state.df_type,
-                cdf_edit.state.current_data
-                if cdf_edit.state.current_data
-                else cdf_edit.state.default_data,
-                cdf_edit.dfComment.text()
-            )
+        elif df_type.endswith('Multi-BC'):
+            self.bullet.save_cur_df(*new_data)
 
-    def edit_drag(self):
-        if self.bullet.edit_drag():
-            state = self.get()
-            cur_df = state['drags'][state['drag_idx']]
-            print(cur_df)
-            # state['df_data'] = cur_df.data
-            state['df_data'] = cur_df['data']
-            # state['df_type'] = cur_df.drag_type
-            state['df_type'] = cur_df['drag_type']
-            # state['df_comment'] = cur_df.comment
-            state['df_comment'] = cur_df['comment']
-        self.add_drag()
+        elif df_type == 'Custom':
+            self.bullet.save_cur_df(*new_data)
 
-            # TODO: connect DragFuncEditDialog when it would working properly
-            # cdf_edit = DragFuncEditDialog(state=state)
-            # cdf_edit.exec_()
-            #
-            # if cdf_edit.state.df_type == 'Custom':
-            #
-            #     self.bullet.save_cur_df(
-            #         cdf_edit.state.current_data
-            #         if cdf_edit.state.current_data
-            #         else cdf_edit.state.default_data,
-            #         cdf_edit.dfComment.text()
-            #     )
-            # else:
-            #     self.bullet.save_cur_df(
-            #         cdf_edit.mbc.get_data(),
-            #         cdf_edit.dfComment.text()
-            #     )
+    def open_df_editor(self):
+        state = self.get()
+        cur_df = state['drags'][state['drag_idx']]
+        state['df_data'] = cur_df['data']
+        state['df_type'] = cur_df['drag_type']
+        state['df_comment'] = cur_df['comment']
+
+        cdf_edit = DragFuncEditDialog(state=state)
+        cdf_edit.exec_()
 
     def get(self) -> dict:
         data = {}

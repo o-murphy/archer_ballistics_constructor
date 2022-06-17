@@ -101,6 +101,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.importDF.setDisabled(True)
             self.pasteTable.setDisabled(True)
 
+        elif self.state.df_type in ['G1', 'G7']:
+            self.mbc.setEnabled(True)
+            self.importDF.setDisabled(True)
+            self.pasteTable.setDisabled(True)
+
+            print(self.state.df_data)
+
     def mbc_edit(self):
         mbc = self.mbc.get_data()
         self.state.profile.set_bc(mbc)

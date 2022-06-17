@@ -102,11 +102,22 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             bc_edit = BCEdit(cur_df.data)
             if bc_edit.exec_():
                 data = bc_edit.get()
+                return data
 
         elif cur_df.drag_type.endswith('Multi-BC'):
-            return cur_df
-        else:
-            return cur_df
+            bc_edit = MBCEdit(cur_df.data, comment)
+            if bc_edit.exec_():
+                data = bc_edit.get()
+                return data
+
+        elif cur_df.drag_type == 'Custom':
+            edit = CDFEdit(cur_df.data)
+            if edit.exec_():
+                data = edit.get()
+                return data
+
+        # else:
+        #     return cur_df
 
         # if data:
         #     cur_df.data = data
@@ -129,6 +140,11 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
                 mbc_edit = MBCEdit(data)
                 if mbc_edit.exec_():
                     data, comment = mbc_edit.get()
+
+            elif drag_type == 'Custom':
+                edit = CDFEdit(data)
+                if edit.exec_():
+                    data, comment = edit.get()
 
             self.save_new_df(drag_type, data, comment)
 

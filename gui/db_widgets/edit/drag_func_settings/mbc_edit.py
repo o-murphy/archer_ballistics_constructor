@@ -7,7 +7,7 @@ from gui.stylesheet import load_qss
 
 
 class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
-    def __init__(self, data=None):
+    def __init__(self, data=None, comment=None):
         super(MBCEdit, self).__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -31,11 +31,16 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
         self.bc_table.setItemDelegateForColumn(0, self.ballistics_coefficient)
         self.bc_table.setItemDelegateForColumn(1, self.muzzle_velocity)
 
+        empty_data = [(0, 0) for i in range(5)]
+
         if data:
-            self.set_data(data)
-        else:
-            data = [(0, 0) for i in range(5)]
-            self.set_data(data)
+            for i, (bc, v) in enumerate(data):
+                empty_data[i] = (bc, v)
+
+        self.set_data(empty_data)
+
+        if comment:
+            self.lineEdit.setText(comment)
 
         self.gridLayout.addWidget(self.bc_table)
         self.gridLayout.addWidget(self.buttonBox)

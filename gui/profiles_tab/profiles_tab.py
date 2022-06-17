@@ -138,7 +138,6 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def save_profiles(self, fileName):
         import json
         with open(fileName, 'w') as fp:
-            print(self.get_recent_profile_table())
             json.dump(self.get_recent_profile_table(), fp)
         self.current_file = fileName
         self.set_is_saved(True)
