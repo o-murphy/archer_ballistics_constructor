@@ -324,6 +324,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                 elif side == 'all':
                     oy[i] *= 1 + step
                 new_data.append([ox[i], oy[i]])
+            # new_data.sort(reverse=True)
+            # print('reverse')
             self.updateState(current_drag_func=new_data)
             self.append_updates()
 

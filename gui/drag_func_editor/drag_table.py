@@ -24,6 +24,7 @@ class DragTable(Ui_DragTable):
 
     def set(self, current_data, default_data):
         data = current_data if current_data else default_data
+        data.sort()
         if data:
             self.setColumnCount(len(data))
             for i, (v, c) in enumerate(data):
