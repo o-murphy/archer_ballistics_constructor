@@ -111,6 +111,11 @@ def main():
     env_update.main()
     app = QtWidgets.QApplication(sys.argv)
 
+    # _id = QtGui.QFontDatabase.addApplicationFont("Bank Gothic Light BT.ttf")
+    # fid = QtGui.QFontDatabase.applicationFontFamilies(_id)
+    # font = QtGui.QFont("BankGothic Lt BT")
+    # font = QtGui.QFont("Segoe UI Historic")
+    # app.setFont(font)
 
     # NATIVE DARK THEME
     # from dark_theme import DarkTheme

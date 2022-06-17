@@ -137,7 +137,7 @@ QPushButton {
 
 QToolButton {
     border: 0;
-    font-size: 14px
+    font-size: 14px;
 }
 
 QComboBox {
@@ -151,7 +151,7 @@ QPushButton:hover, QToolButton:hover {
 }
 
 QTabBar::tab {
-	height: 25px; width: 150px;
+	height: 25px; width: 200px;
 	font-size: 15px;
 }
 
@@ -179,7 +179,7 @@ QSpinBox {
 }
 
 QTabBar::tab {
-	height: 40px; width: 100px;
+	height: 40px; width: 180px;
 	background-color: rgb(76, 76, 76);
 	color: rgb(255, 170, 0);
 	border-top-left-radius: 10px;
@@ -217,5 +217,5 @@ QWidget QPushButton#add:hover {
 }
 
 QTabWidget QWidget#profileCurrent QTabBar::tab {
-	height: 25px; width: 150px;
+	height: 25px; width: 200px;
 }
