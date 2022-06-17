@@ -44,7 +44,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.state = DragEditorState(self, state)
         self.onStateUpdate.connect(self.state_did_update)
 
-        print(self.state.df_data)
+        from calculator.calculator import Constant
+        print(self.state.sound_speed, Constant.speed_of_sound(26, 760, 50))
 
         self.dfType.setText(self.state.df_type + ':')
         self.dfComment.setText(self.state.df_comment)
@@ -105,8 +106,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.mbc.setEnabled(True)
             self.importDF.setDisabled(True)
             self.pasteTable.setDisabled(True)
-
-            print(self.state.df_data)
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
