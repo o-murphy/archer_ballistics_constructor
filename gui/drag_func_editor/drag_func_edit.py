@@ -41,6 +41,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.setWindowTitle('ArcherBC - Drag Function Editor')
         self.dfComment.setStyleSheet("""color: orange; font-size: 14px;""")
 
+        self.defaults = state
+
         self.state = DragEditorState(self, state)
         self.onStateUpdate.connect(self.state_did_update)
 
@@ -149,7 +151,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
-        self.state.profile.set_bc(mbc)
+        # self.state.profile.set_bc(mbc)
+        self.state.df_data = mbc
+
         self.updateState(
             current_drag_func=self.state.drag_function if self.state.profile else None,
             distances=self.state.distances_generator()
@@ -159,7 +163,26 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.append_updates()
         self.custom_drop_at_distance()
 
+    def sbc_changed(self, e):
+        print(e)
+        self.state.df_data = e
+        self.updateState()
+
     def state_did_update(self, e):
+
+        self.state.setProfile()
+        self.state.current_drag_func = self.state.drag_function
+        print(self.state.drag_function[40])
+        self.update_drag_table()
+        self.drag_plot.draw_current_plot(
+            self.parse_data(self.state.current_drag_func)[0],
+            self.parse_data(self.state.current_drag_func)[1]
+        )
+
+        # self.calculate_bullet_drop()
+        # self.drop_plot.draw_custom_plot(self.state.calculate_drop)
+
+
         if hasattr(e, 'default_drag_func'):
             self.setDrag()
         if hasattr(e, 'default_drop'):
@@ -236,6 +259,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.exportDF.clicked.connect(self.export_table)
 
         self.calculation_mode.currentIndexChanged.connect(self.switch_calculation_mode)
+        self.sbc.valueChanged.connect(self.sbc_changed)
 
     def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
         if e.key() == QtCore.Qt.Key_Enter:
@@ -258,7 +282,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.set_distance_quantity()
 
     def cd_at_distance(self):
-        self.updateState(current_distance=self.drop_table.get_current_distance())
+        pass
+        self.state.current_distance = self.drop_table.get_current_distance()
         drop = self.drop_table.get_current_drop()
 
         self.state.calculate_cd(distance=self.state.current_distance)
@@ -275,8 +300,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.stackUnder(self.drag_plot)
 
     def calculate_bullet_drop(self):
-        if self.state.current_drag_func:
-            self.state.current_drop = self.state.calculate_drop
+        # if self.state.current_drag_func:
+            # self.state.current_drop = self.state.calculate_drop
         if self.state.current_distance:
             self.cd_at_distance()
 
@@ -286,13 +311,13 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.current_point_text.setText("")
 
     def reset(self):
-        self.updateState(current_drag_func=None)
+        self.updateState(self.defaults)
 
-        self.update_drag_table()
+        # self.update_drag_table()
         self.drag_plot.reset_current_plot()
 
-        self.updateState(current_drop=None)
-        self.calculate_bullet_drop()
+        # self.updateState(current_drop=None)
+        # self.calculate_bullet_drop()
         self.drop_plot.reset_current_plot()
 
     def append_updates(self):
@@ -304,7 +329,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         )
 
         self.calculate_bullet_drop()
-        self.drop_plot.draw_custom_plot(self.state.current_drop)
+        self.drop_plot.draw_custom_plot(self.state.calculate_drop)
 
     def current_atmo_dialog(self):
         ok = self.current_atmo_dlg.exec_()

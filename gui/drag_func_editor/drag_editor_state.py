@@ -6,11 +6,10 @@ class DragEditorState(State):
     def __init__(self, widget, state: dict = None, **kwargs):
         super(DragEditorState, self).__init__(widget, state, **kwargs)
 
-        # print(self.__dict__)
-
         self.profile = None
+        self.ballistics = ArcherBallistics()
         self.setProfile()
-        # self.sound_speed = self.get_sound_speed()
+        self.sound_speed = self.get_sound_speed()
 
         from calculator.calculator import Constant
         # sofs0 = self.sound_speed
@@ -21,11 +20,8 @@ class DragEditorState(State):
 
     def setProfile(self):
         self.profile = Profile(self.__dict__)
-        self.ballistics = ArcherBallistics()
         self.ballistics.profile = self.profile
         self.ballistics.atmo = self.profile
-
-        print(self.__dict__)
 
     @property
     def drag_function(self):
@@ -98,3 +94,34 @@ class DragEditorState(State):
     df_data = None
     df_type = 'Custom'
     df_comment = 'Empty'
+
+
+if __name__ == '__main__':
+    try:
+        from .defaults import EXAMPLE_G1
+    except ImportError as err:
+        from gui.drag_func_editor.defaults import EXAMPLE_G1
+
+    from PyQt5 import QtWidgets
+
+    class W(QtWidgets.QWidget):
+        def __init__(self):
+            super(W).__init__()
+            self.state = DragEditorState(self, EXAMPLE_G1)
+
+    wid = W()
+    # print(wid.state.__dict__)
+    print()
+    print(wid.state.drag_function[40])
+    print(wid.state.ballistics.profile)
+
+    wid.state.weight = 100
+    wid.state.z_temp = 26
+    wid.state.df_data = 0.3
+
+    wid.state.profile = Profile(wid.state.__dict__)
+    wid.state.setProfile()
+
+    print()
+    print(wid.state.drag_function[40])
+    print(wid.state.ballistics.profile)

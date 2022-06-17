@@ -60,6 +60,8 @@ class Bullet(Params):
     df_type = None
     df_data = None
 
+    mv = None
+
     def __init__(self, params, **kwargs):
         super().__init__(params, **kwargs)
 
@@ -69,7 +71,7 @@ class Bullet(Params):
 
         self.DragFunc = self.set_drag_func_type()
 
-        self.df_data = None
+        # self.df_data = self.df_data
         self.BalCoef = None
         self.BVelocity = None
         self.Diameter = self.diameter
@@ -80,8 +82,8 @@ class Bullet(Params):
 
     def set_drag_func_type(self):
         drag_func_type = {
-            'G1': 1,
-            'G7': 7,
+            'G1': 11,
+            'G7': 17,
             'G1 Multi-BC': 11,
             'G7 Multi-BC': 17,
             'Custom': 10
@@ -93,13 +95,19 @@ class Bullet(Params):
         self.BVelocity = [-1] * 5
         if self.DragFunc == 10:
             self.df_data = self.df_data
-        if self.DragFunc in [11, 17]:
-            if self.df_data or mbc:
-                for i, (bc, v) in enumerate(mbc if mbc else self.df_data):
-                    if bc > 0 and v >= 0:
-                        self.BalCoef[i] = bc
-                        self.BVelocity[i] = v
-            self.df_data = []
+        if self.DragFunc in [11, 17, 1, 7]:
+            if isinstance(self.df_data, float):
+                self.BalCoef[0], self.BVelocity[0] = self.df_data, self.mv
+            else:
+
+                if self.df_data or mbc:
+                    for i, (bc, v) in enumerate(mbc if mbc else self.df_data):
+                        if bc > 0 and v >= 0:
+                            self.BalCoef[i] = bc
+                            self.BVelocity[i] = v
+                # self.df_data = []
+        # if self.DragFunc in [1, 7]:
+        #     self.BalCoef[0], self.BVelocity[0] = self.df_data, self.mv
 
 
 class Cartridge(Params):
