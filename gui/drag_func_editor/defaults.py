@@ -75,10 +75,10 @@ EXAMPLE_G1 = {
     'twist': 11,
     'caliberShort': '',
     'rightTwist': True,
-    'bulletName': 'Hornady ELD Match',
-    'weight': 170.0,
-    'length': 1.3,
-    'diameter': 0.308,
+    'bulletName': 'LM',
+    'weight': 90.0,
+    'length': 1,
+    'diameter': 0.338,
     'weightTile': '178gr',
     'drags': [],
     'drag_idx': -1,
@@ -96,7 +96,7 @@ EXAMPLE_G1 = {
     'z_d': 100,
     'z_x': 0.0,
     'z_y': 0.0,
-    'df_data': 0.547,
+    'df_data': 0.218,
     'df_type': 'G7',
     'df_comment': 'Empty'
 }

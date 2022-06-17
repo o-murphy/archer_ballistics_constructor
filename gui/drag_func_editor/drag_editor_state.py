@@ -8,14 +8,8 @@ class DragEditorState(State):
 
         # print(self.__dict__)
 
-        self.profile = Profile(self.__dict__)
-        self.ballistics = ArcherBallistics()
-        self.ballistics.profile = self.profile
-        self.ballistics.atmo = self.profile
-
-        print(self.ballistics.drag_function)
-
-        self.ballistics.get_sound_speed()
+        self.profile = None
+        self.setProfile()
         # self.sound_speed = self.get_sound_speed()
 
         from calculator.calculator import Constant
@@ -24,6 +18,14 @@ class DragEditorState(State):
         # print(sofs0, sofs1, round(sofs0 / sofs1, 4))
 
         self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
+
+    def setProfile(self):
+        self.profile = Profile(self.__dict__)
+        self.ballistics = ArcherBallistics()
+        self.ballistics.profile = self.profile
+        self.ballistics.atmo = self.profile
+
+        print(self.__dict__)
 
     @property
     def drag_function(self):

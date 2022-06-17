@@ -48,13 +48,25 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dfComment.setText(self.state.df_comment)
 
         self.mbc = BCTable(self)
+        self.sbc = QtWidgets.QDoubleSpinBox(self)
+        self.sbc.setMaximum(10)
+        self.sbc.setMinimum(0.001)
+        self.sbc.setDecimals(3)
+        self.sbc.setSingleStep(0.001)
 
-        self.calculation_mode = QtWidgets.QComboBox()
-        self.calculation_mode.addItem('by G1', 'G1')
-        self.calculation_mode.addItem('by G7', 'G7')
-        self.calculation_mode.addItem('by G1 Multi-BC', 'G1 Multi-BC')
-        self.calculation_mode.addItem('by G7 Multi-BC', 'G1 Multi-BC')
-        self.calculation_mode.addItem('by drag func', 'Custom')
+        spolicy = QtWidgets.QSizePolicy()
+        spolicy.setVerticalPolicy(QtWidgets.QSizePolicy.Expanding)
+        spolicy.setHorizontalPolicy(QtWidgets.QSizePolicy.Expanding)
+
+        self.sbc.setSizePolicy(spolicy)
+
+        self.calculation_mode = QtWidgets.QComboBox(self)
+
+        self.calculation_mode.addItem('G1', 'G1')
+        self.calculation_mode.addItem('G7', 'G7')
+        self.calculation_mode.addItem('G1 Multi-BC', 'G1 Multi-BC')
+        self.calculation_mode.addItem('G7 Multi-BC', 'G1 Multi-BC')
+        self.calculation_mode.addItem('Custom drag func', 'Custom')
         self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
 
         self.drag_plot = DragPlot('drag_plot')
@@ -70,6 +82,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dox = None
         self.doy = None
 
+
+
+
         self.updateState(
             default_drag_func=self.state.drag_function if self.state.profile else None,
             distances=self.state.distances_generator()
@@ -82,6 +97,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.switch_calculation_mode()
 
+
         self.setConnects()
 
     def switch_calculation_mode(self):
@@ -91,18 +107,45 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.importDF.setEnabled(True)
             self.pasteTable.setEnabled(True)
             self.mbc.setDisabled(True)
+            self.mbc.setVisible(False)
+            self.sbc.setDisabled(True)
+            self.sbc.setVisible(False)
 
         elif self.state.df_type.endswith('Multi-BC'):
+
+            self.mbc.bc_table.setRowCount(5)
+
+            if isinstance(self.state.df_data, float):
+                self.state.df_data = ((self.state.mv, self.state.df_data), )
+
             if self.state.df_data:
                 self.mbc.set_data(self.state.df_data)
             self.mbc.setEnabled(True)
+            self.mbc.setVisible(True)
+            self.sbc.setVisible(False)
+            self.sbc.setEnabled(False)
             self.importDF.setDisabled(True)
             self.pasteTable.setDisabled(True)
 
         elif self.state.df_type in ['G1', 'G7']:
-            self.mbc.setEnabled(True)
+
+            if isinstance(self.state.df_data, tuple or list):
+                self.state.mv, self.state.df_data = sorted(self.mbc.get_data(), reverse=True)[0]
+
+            self.sbc.setValue(self.state.df_data)
+
+            self.mbc.setDisabled(True)
+            self.mbc.setVisible(False)
+            self.sbc.setVisible(True)
+            self.sbc.setEnabled(True)
+
             self.importDF.setDisabled(True)
             self.pasteTable.setDisabled(True)
+
+        # self.updateState(df_data=self.state.df_data)
+        # self.state.setProfile()
+        # self.updateState(current_drag_func=self.state.drag_function)
+        # self.append_updates()
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
@@ -142,6 +185,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
 
         self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.sbc, 0, 0, 1, 1)
+
         self.gridLayout.addWidget(self.calculation_mode, 1, 0)
 
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)

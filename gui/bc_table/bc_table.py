@@ -33,8 +33,8 @@ class BCTable(QtWidgets.QWidget):
 
         self.ballistics_coefficient = BallisticCoefficient(self.parent())
         self.muzzle_velocity = MuzzleVelocity(self.parent())
-        self.bc_table.setItemDelegateForColumn(0, self.ballistics_coefficient)
-        self.bc_table.setItemDelegateForColumn(1, self.muzzle_velocity)
+        self.bc_table.setItemDelegateForColumn(1, self.ballistics_coefficient)
+        self.bc_table.setItemDelegateForColumn(0, self.muzzle_velocity)
 
         self.gridLayout.addWidget(self.bc_table)
 
@@ -54,7 +54,7 @@ class BCTable(QtWidgets.QWidget):
         ]
         return ret
 
-    def set_data(self, data: list[list]):
+    def set_data(self, data: tuple[tuple]):
         for i, (bc, v) in enumerate(data):
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
             self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, v)

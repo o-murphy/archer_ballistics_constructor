@@ -41,7 +41,7 @@ class DragCoefficient(SpinDelegate):
 class BallisticCoefficient(SpinDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
-        self.set_props(editor, 0, 20, 0.001, 3)
+        self.set_props(editor, 0.001, 10, 0.001, 3)
 
         if self.parent():
             editor.editingFinished.connect(self.parent().mbc_edit)
