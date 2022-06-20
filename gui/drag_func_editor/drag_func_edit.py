@@ -293,7 +293,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.state.calculate_cd(distance=self.state.current_distance)
             self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
 
-
             ox, oy = self.parse_data(
                 self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
             x, y = rnd(self.state.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
