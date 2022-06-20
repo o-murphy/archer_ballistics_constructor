@@ -57,7 +57,8 @@ class DropPlot(CustomPlot):
 
         else:
             self.set_limits(self.x, y_def)
-        self.default_plot.setData(self.x, y_def)
+        # self.default_plot.setData(self.x, y_def)
+        self.init_plot.setData(self.x, y_def)
 
     def reset_current_plot(self):
         self.current_plot.setData()
@@ -71,6 +72,11 @@ class DropPlot(CustomPlot):
         self.set_quantity()
 
     def draw_default_plot(self, distances, default_drop):
+        self.x, self.def_y = distances, default_drop
+        self.current_point_text.setColor(color=(255, 255, 255))
+        self.set_quantity()
+
+    def draw_init_plot(self, distances, default_drop):
         self.x, self.def_y = distances, default_drop
         self.current_point_text.setColor(color=(255, 255, 255))
         self.set_quantity()

@@ -60,6 +60,11 @@ class DragPlot(CustomPlot):
         self.set_limits(self.def_y)
         self.default_plot.setData(self.x, self.def_y)
 
+    def draw_init_plot(self, ox, oy):
+        self.x, self.def_y = ox, oy
+        self.set_limits(self.def_y)
+        self.init_plot.setData(self.x, self.def_y)
+
     def draw_current_plot(self, ox, oy):
         self.cur_y = oy
         self.cur_x = ox
@@ -76,8 +81,8 @@ class DragPlot(CustomPlot):
         self.current_plot.setData()
         self.current_point_text.setColor(color=(255, 255, 255))
 
-    def set_cd_at_distance(self, x, y):
+    def set_cd_at_distance(self, x, y, distance):
         self.cd_at_distance.setVisible(True)
         self.cd_at_distance.setPos((x, y))
-        self.cd_at_distance_text.setText(f'{str(x * self.x_quantity)} {self.x_q_label}')
+        self.cd_at_distance_text.setText(f'{str(x * self.x_quantity)} {self.x_q_label},\n{distance}m')
         self.cd_at_distance_text.setPos(x, y)

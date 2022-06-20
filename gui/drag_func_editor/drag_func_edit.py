@@ -190,6 +190,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setDefaultDrag(self):
         from calculator.calculator import DragFunctions
 
+        self.dox, self.doy = self.parse_data(self.state.current_drag_func)
+        self.drag_plot.draw_init_plot(self.dox, self.doy)
+
         if self.state.df_type in ['G1', 'G1 Multi-BC']:
             self.dox, self.doy = self.parse_data(DragFunctions.G1)
         elif self.state.df_type in ['G7', 'G7Multi-BC']:
@@ -203,7 +206,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.update_drag_table()
 
     def setDefaultDrops(self):
-        self.drop_plot.draw_default_plot(self.state.distances, self.state.default_drop)
+        self.drop_plot.draw_init_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
         # self.drop_table_edit.drop_table.set()
         self.drop_table.set()
@@ -277,10 +280,12 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             for r in range(self.drop_table.tableWidget.rowCount())
         ]
 
-
-        print(custom_distances)
         [
-            self.drop_table.set_item_data(i, 1, rnd(self.state.calculate_drop_on_distance(v)))
+            self.drop_table.set_item_data(
+                i, 1, rnd(
+                    self.state.calculate_drop_on_distance(v)
+                )
+            )
             for i, v in enumerate(custom_distances)
         ]
 
@@ -304,7 +309,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             ox, oy = self.parse_data(
                 self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
             x, y = rnd(self.state.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
-            self.drag_plot.set_cd_at_distance(x, y)
+            self.drag_plot.set_cd_at_distance(x, y, self.state.current_distance)
 
     def switch_plot_drop(self):
         self.drag_plot.stackUnder(self.drop_plot)

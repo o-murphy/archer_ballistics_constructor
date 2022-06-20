@@ -33,6 +33,8 @@ class CustomPlot(QtWidgets.QWidget):
         self.default_plot = self.graphWidget.plot(pen=pg.mkPen(color='w'))
         self.current_plot = self.graphWidget.plot(pen=pg.mkPen(color=(255, 170, 0)))
 
+        self.init_plot = self.graphWidget.plot(pen=pg.mkPen(color='r'))
+
         self.current_point = self.graphWidget.plot()
         self.current_point_text = pg.TextItem(text="", color=(255, 255, 255), anchor=(0, 1))
 
