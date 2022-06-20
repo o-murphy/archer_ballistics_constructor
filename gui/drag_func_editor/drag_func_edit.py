@@ -296,7 +296,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             ox, oy = self.parse_data(
                 self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
             x, y = rnd(self.state.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
-            # self.drag_plot.set_cd_at_distance(x, y)
+            self.drag_plot.set_cd_at_distance(x, y)
 
     def switch_plot_drop(self):
         self.drag_plot.stackUnder(self.drop_plot)

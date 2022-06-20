@@ -26,8 +26,8 @@ class BCTable(QtWidgets.QWidget):
         self.bc_table.setRowCount(5)
         self.bc_table.setColumnCount(2)
 
-        self.bc_table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('BC'))
-        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('V'))
+        self.bc_table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('V'))
+        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('BC'))
         self.bc_table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.bc_table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 
