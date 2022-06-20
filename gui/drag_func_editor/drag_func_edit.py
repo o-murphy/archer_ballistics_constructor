@@ -26,6 +26,7 @@ except Exception as exception:
 
 from modules import BConverter
 from modules.env_update import USER_RECENT
+from calculator.calculator import DragFunctions
 
 rnd = BConverter.auto_rnd
 
@@ -168,8 +169,15 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.update_drag_table()
         self.drag_plot.draw_current_plot(*self.parse_data(self.state.current_drag_func))
 
-        if hasattr(e, 'default_drag_func'):
+        if hasattr(e, 'default_drag_func') or hasattr(e, 'standard_df'):
             self.setDefaultDrag()
+
+        # else:
+        #
+        #     if self.state.df_type in ['G7', 'G7 Multi-BC']:
+        #         self.drag_plot.draw_default_plot(*self.parse_data(DragFunctions.G7))
+        #     elif self.state.df_type in ['G1', 'G1 Multi-BC']:
+        #         self.drag_plot.draw_default_plot(*self.parse_data(DragFunctions.G1))
 
         try:
             drops = self.state.calculate_drop(self.state.current_drag_func)
@@ -188,7 +196,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.cd_at_distance()
 
     def setDefaultDrag(self):
-        from calculator.calculator import DragFunctions
 
         self.dox, self.doy = self.parse_data(self.state.current_drag_func)
         self.drag_plot.draw_init_plot(self.dox, self.doy)
@@ -198,7 +205,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         elif self.state.df_type in ['G7', 'G7Multi-BC']:
             self.dox, self.doy = self.parse_data(DragFunctions.G7)
         else:
-            self.dox, self.doy = self.parse_data(self.state.df_data)
+            self.dox, self.doy = self.draw_init_plot(self.state.df_data)
 
         self.drag_plot.draw_default_plot(self.dox, self.doy)
 
