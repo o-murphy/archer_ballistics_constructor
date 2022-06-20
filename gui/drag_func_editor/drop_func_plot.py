@@ -65,7 +65,7 @@ class DropPlot(CustomPlot):
         self.current_point_text.setColor(color=(255, 255, 255))
         self.set_quantity()
 
-    def draw_custom_plot(self, current_drop):
+    def draw_current_plot(self, current_drop):
         self.cur_y = current_drop
         self.current_point_text.setColor(color=(255, 170, 0))
         self.set_quantity()

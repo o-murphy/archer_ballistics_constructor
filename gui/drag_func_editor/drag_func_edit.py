@@ -44,9 +44,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.defaults = state
 
         self.state = DragEditorState(self, state)
+
         self.onStateUpdate.connect(self.state_did_update)
 
         self.dfType.setText(self.state.df_type + ':')
+        self.dfComment.setText(self.state.df_comment)
         self.dfComment.setText(self.state.df_comment)
 
         self.mbc = BCTable(self)
@@ -67,7 +69,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.calculation_mode.addItem('G1', 'G1')
         self.calculation_mode.addItem('G7', 'G7')
         self.calculation_mode.addItem('G1 Multi-BC', 'G1 Multi-BC')
-        self.calculation_mode.addItem('G7 Multi-BC', 'G1 Multi-BC')
+        self.calculation_mode.addItem('G7 Multi-BC', 'G7 Multi-BC')
         self.calculation_mode.addItem('Custom drag func', 'Custom')
         self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
 
@@ -84,26 +86,24 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dox = None
         self.doy = None
 
-
-
-
         self.updateState(
             default_drag_func=self.state.drag_function if self.state.profile else None,
             distances=self.state.distances_generator()
         )
 
         if state:
-            drops = self.state.calculate_drop
+            drops = self.state.calculate_drop(self.state.default_drag_func)
             default_drop = [rnd(i) for i in drops]
             self.updateState(default_drop=default_drop)
 
         self.switch_calculation_mode()
 
-
         self.setConnects()
 
     def switch_calculation_mode(self):
-        self.updateState(df_type=self.calculation_mode.currentData())
+        # self.updateState(df_type=self.calculation_mode.currentData())
+
+        self.state.df_type = self.calculation_mode.currentData()
 
         if self.state.df_type == 'Custom':
             self.importDF.setEnabled(True)
@@ -118,7 +118,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.mbc.bc_table.setRowCount(5)
 
             if isinstance(self.state.df_data, float):
-                self.state.df_data = ((self.state.mv, self.state.df_data), )
+                self.state.df_data = ((self.state.mv, self.state.df_data),)
 
             if self.state.df_data:
                 self.mbc.set_data(self.state.df_data)
@@ -131,8 +131,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         elif self.state.df_type in ['G1', 'G7']:
 
-            if isinstance(self.state.df_data, tuple or list):
-                self.state.mv, self.state.df_data = sorted(self.mbc.get_data(), reverse=True)[0]
+            if isinstance(self.state.df_data, tuple) or isinstance(self.state.df_data, list):
+                self.state.mv, self.state.df_data = self.state.df_data[0]
 
             self.sbc.setValue(self.state.df_data)
 
@@ -144,27 +144,19 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.importDF.setDisabled(True)
             self.pasteTable.setDisabled(True)
 
-        # self.updateState(df_data=self.state.df_data)
-        # self.state.setProfile()
-        # self.updateState(current_drag_func=self.state.drag_function)
-        # self.append_updates()
+        self.updateState()
 
     def mbc_edit(self):
         mbc = self.mbc.get_data()
-        # self.state.profile.set_bc(mbc)
         self.state.df_data = mbc
 
-        self.updateState(
-            current_drag_func=self.state.drag_function if self.state.profile else None,
-            distances=self.state.distances_generator()
-        )
-        # self.updateState(default_drop=[rnd(i) for i in self.ballistics.calculate_drop(
-        #     self.state.default_drag_func, self.state.distances)])
-        self.append_updates()
-        self.custom_drop_at_distance()
+        print(f'\n\ndf_data: {self.state.df_data}\n\n')
+
+        self.updateState()
+        # self.append_updates()
+        # self.custom_drop_at_distance()
 
     def sbc_changed(self, e):
-        print(e)
         self.state.df_data = e
         self.updateState()
 
@@ -172,38 +164,51 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.state.setProfile()
         self.state.current_drag_func = self.state.drag_function
-        print(self.state.drag_function[40])
+
         self.update_drag_table()
-        self.drag_plot.draw_current_plot(
-            self.parse_data(self.state.current_drag_func)[0],
-            self.parse_data(self.state.current_drag_func)[1]
-        )
-
-        # self.calculate_bullet_drop()
-        # self.drop_plot.draw_custom_plot(self.state.calculate_drop)
-
+        self.drag_plot.draw_current_plot(*self.parse_data(self.state.current_drag_func))
 
         if hasattr(e, 'default_drag_func'):
-            self.setDrag()
-        if hasattr(e, 'default_drop'):
-            self.setDrops()
+            self.setDefaultDrag()
 
-    def setDrag(self):
-        self.dox, self.doy = self.parse_data(self.state.default_drag_func)
+        try:
+            drops = self.state.calculate_drop(self.state.current_drag_func)
+            if drops:
+                self.state.current_drop = [rnd(i) for i in drops]
+                if self.state.current_drop:
+                    self.drop_plot.draw_current_plot(self.state.current_drop)
+        except TypeError as err:
+            print(err)
+
+        self.custom_drop_at_distance()
+
+        if hasattr(e, 'default_drop'):
+            self.setDefaultDrops()
+
+        self.cd_at_distance()
+
+    def setDefaultDrag(self):
+        from calculator.calculator import DragFunctions
+
+        if self.state.df_type in ['G1', 'G1 Multi-BC']:
+            self.dox, self.doy = self.parse_data(DragFunctions.G1)
+        elif self.state.df_type in ['G7', 'G7Multi-BC']:
+            self.dox, self.doy = self.parse_data(DragFunctions.G7)
+        else:
+            self.dox, self.doy = self.parse_data(self.state.df_data)
+
         self.drag_plot.draw_default_plot(self.dox, self.doy)
+
         self.set_distance_quantity()
         self.update_drag_table()
 
-    def setDrops(self):
+    def setDefaultDrops(self):
         self.drop_plot.draw_default_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
         self.drop_table_edit.drop_table.set()
         self.custom_drop_at_distance()
 
     def setWidgets(self):
-        # spacer = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        # self.gridLayout.addWidget(self.bc_table, 0, 0, 1, 1)
-        # self.gridLayout.addItem(spacer, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
 
@@ -282,16 +287,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.set_distance_quantity()
 
     def cd_at_distance(self):
-        pass
         self.state.current_distance = self.drop_table.get_current_distance()
-        drop = self.drop_table.get_current_drop()
+        if self.state.current_distance:
+            drop = self.drop_table.get_current_drop()
+            self.state.calculate_cd(distance=self.state.current_distance)
+            self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
 
-        self.state.calculate_cd(distance=self.state.current_distance)
-        ox, oy = self.parse_data(
-            self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
-        x, y = rnd(self.state.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
-        self.drag_plot.set_cd_at_distance(x, y)
-        self.drop_plot.set_cd_at_distance(self.state.current_distance, drop)
+
+            ox, oy = self.parse_data(
+                self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
+            x, y = rnd(self.state.get_cd_at_distance(self.state.current_distance)), rnd(min(oy))
+            # self.drag_plot.set_cd_at_distance(x, y)
 
     def switch_plot_drop(self):
         self.drag_plot.stackUnder(self.drop_plot)
@@ -300,8 +306,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drop_plot.stackUnder(self.drag_plot)
 
     def calculate_bullet_drop(self):
-        # if self.state.current_drag_func:
-            # self.state.current_drop = self.state.calculate_drop
         if self.state.current_distance:
             self.cd_at_distance()
 
@@ -311,14 +315,9 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.current_point_text.setText("")
 
     def reset(self):
-        self.updateState(self.defaults)
-
-        # self.update_drag_table()
         self.drag_plot.reset_current_plot()
-
-        # self.updateState(current_drop=None)
-        # self.calculate_bullet_drop()
         self.drop_plot.reset_current_plot()
+        self.updateState(self.defaults)
 
     def append_updates(self):
         self.state.drag_function = self.state.current_drag_func
@@ -329,7 +328,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         )
 
         self.calculate_bullet_drop()
-        self.drop_plot.draw_custom_plot(self.state.calculate_drop)
+        self.drop_plot.draw_current_plot(self.state.calculate_drop(self.state.current_drop))
 
     def current_atmo_dialog(self):
         ok = self.current_atmo_dlg.exec_()
@@ -468,9 +467,9 @@ def main():
     try:
         from .defaults import EXAMPLE_G1
     except ImportError as err:
-        from gui.drag_func_editor.defaults import EXAMPLE_G1
+        from gui.drag_func_editor.defaults import EXAMPLE_G7, DEFAULTS
 
-    dialog = DragFuncEditDialog(EXAMPLE_G1)
+    dialog = DragFuncEditDialog(DEFAULTS)
     dialog.show()
     dialog.exec()
     return dialog.state

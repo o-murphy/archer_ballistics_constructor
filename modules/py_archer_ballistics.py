@@ -91,23 +91,21 @@ class Bullet(Params):
         return drag_func_type[self.df_type]
 
     def set_bc(self, mbc=None):
-        self.BalCoef = [0.0] * 5
+        self.BalCoef = [-1] * 5
         self.BVelocity = [-1] * 5
         if self.DragFunc == 10:
             self.df_data = self.df_data
         if self.DragFunc in [11, 17, 1, 7]:
-            if isinstance(self.df_data, float):
+            if isinstance(self.df_data, float or int):
                 self.BalCoef[0], self.BVelocity[0] = self.df_data, self.mv
-            else:
+            elif isinstance(self.df_data, list or tuple):
+                for i, (v, bc) in enumerate(self.df_data):
+                    if bc > 0 and v >= 0:
+                        self.BalCoef[i] = bc
+                        self.BVelocity[i] = v
 
-                if self.df_data or mbc:
-                    for i, (bc, v) in enumerate(mbc if mbc else self.df_data):
-                        if bc > 0 and v >= 0:
-                            self.BalCoef[i] = bc
-                            self.BVelocity[i] = v
-                # self.df_data = []
-        # if self.DragFunc in [1, 7]:
-        #     self.BalCoef[0], self.BVelocity[0] = self.df_data, self.mv
+        print(self.df_data, self.BalCoef, self.BVelocity)
+        print('\n\n')
 
 
 class Cartridge(Params):
