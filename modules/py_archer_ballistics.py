@@ -104,9 +104,6 @@ class Bullet(Params):
                         self.BalCoef[i] = bc
                         self.BVelocity[i] = v
 
-        print(self.df_data, self.BalCoef, self.BVelocity)
-        print('\n\n')
-
 
 class Cartridge(Params):
     """ params:
@@ -199,9 +196,9 @@ class ArcherBallistics(object):
     def get_cd_at_distance(self, distance: list = None):
         return rnd4(self.ballistics.get_cd_at_distance(distance))
 
-    def calculate_drop(self, drag_function: list = None, distances: list = None) -> list:
-        if drag_function:
-            self.drag_function = drag_function
+    def calculate_drop(self, distances: list = None) -> list:
+        # if drag_function:
+        #     self.drag_function = drag_function
         return self.get_drop_at_distance(distances)
 
     def calculate_cd(self, drag_function: list = None, distance: float = None) -> float:

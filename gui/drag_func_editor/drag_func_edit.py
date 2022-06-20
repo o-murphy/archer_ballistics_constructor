@@ -205,7 +205,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setDefaultDrops(self):
         self.drop_plot.draw_default_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
-        self.drop_table_edit.drop_table.set()
+        # self.drop_table_edit.drop_table.set()
+        self.drop_table.set()
         self.custom_drop_at_distance()
 
     def setWidgets(self):
@@ -271,10 +272,17 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             e.ignore()
 
     def custom_drop_at_distance(self):
-        d = [self.drop_table.tableWidget.item(r, 0).text() for r in range(self.drop_table.tableWidget.rowCount())]
-        d = [int(i) for i in d]
+        custom_distances = [
+            int(self.drop_table.tableWidget.item(r, 0).text())
+            for r in range(self.drop_table.tableWidget.rowCount())
+        ]
 
-        [self.drop_table.set_item_data(i, 1, rnd(v)) for i, v in enumerate(self.state.drop_at_distance())]
+
+        print(custom_distances)
+        [
+            self.drop_table.set_item_data(i, 1, rnd(self.state.calculate_drop_on_distance(v)))
+            for i, v in enumerate(custom_distances)
+        ]
 
     def set_hold_off_quantity(self):
         self.drop_plot.y_q_label = self.holdOffQuantity.currentText()

@@ -32,12 +32,16 @@ class DragEditorState(State):
         self.ballistics.drag_function = drag_function
 
     def calculate_drop(self, drag_function):
-        return self.ballistics.calculate_drop(drag_function, self.distances)
+        return self.ballistics.calculate_drop(self.distances)
+
+    def calculate_drop_on_distance(self, distance):
+        drop = self.ballistics.calculate_drop([distance])[0]
+        return drop
 
     def get_sound_speed(self):
         return self.ballistics.get_sound_speed()
 
-    def drop_at_distance(self):
+    def drop_at_distances(self):
         return self.ballistics.get_drop_at_distance(self.distances)
 
     def get_cd_at_distance(self, distance):
