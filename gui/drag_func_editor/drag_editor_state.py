@@ -17,9 +17,15 @@ class DragEditorState(State):
         #                              atmo=(self.z_temp, self.z_pressure, self.z_humidity))
 
         # print(self.df_data)
-        # self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[(0.268, 800), (0.255, 700), (0.25, 500)],
-        #                              df_type=DragFunctions.G7,
-        #                              atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[
+            (0.268, 800),
+            (0.255, 700),
+            # (0.25, 500)
+        ],
+                                     df_type=DragFunctions.G7,
+                                     atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+        for v, cd in self.calculator.df_data:
+            print(cd)
 
         # from calculator.calculator import Constant
         # self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)

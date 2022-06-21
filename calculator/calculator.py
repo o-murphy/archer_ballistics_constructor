@@ -256,8 +256,6 @@ class Calculator(object):
 
         drag_function = []
 
-        print(self._speed_of_sound)
-
         for vst, cdst in self._df_type:
             v = vst * self._speed_of_sound
             for idx, (i, vm) in enumerate(i_table):
@@ -275,6 +273,7 @@ class Calculator(object):
                     drag_function.append((vst, cd))
 
         drag_function.sort()
+
         self._df_data = drag_function
 
         # @staticmethod
