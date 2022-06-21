@@ -424,13 +424,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         new_state = self.state.__dict__
         is_new_data = True if self.state.current_drag_func else False
 
-        if is_new_data:
-            new_state['df_data'] = self.state.current_drag_func
-            new_state['dragType'] = 2
-        else:
-            new_state['df_data'] = self.state.default_drag_func
+        # if is_new_data:
+        #     new_state['df_data'] = self.state.current_drag_func
+        #     new_state['dragType'] = 2
+        # else:
+        #     new_state['df_data'] = self.state.default_drag_func
 
-        [new_state.pop(key) for key in ['default_drag_func',
+        [new_state.pop(key) for key in ['ballistics',
+                                        'default_drag_func',
                                         'current_drag_func',
                                         'distances',
                                         'current_distance',

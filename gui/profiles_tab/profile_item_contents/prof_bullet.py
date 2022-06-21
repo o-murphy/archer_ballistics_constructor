@@ -158,15 +158,18 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             self.dragType.addItem(new_df.drag_type + ', ' + new_df.comment, idx)
             self.dragType.setCurrentIndex(idx)
 
-    def save_cur_df(self, data, comment):
+    def save_cur_df(self, data, comment, df_type=None):
         idx = self.dragType.currentIndex()
         cur_df = self.drag_functions[idx]
+
+        cur_df.drag_type = df_type if df_type else cur_df.drag_type
 
         if data:
             cur_df.data = data
             cur_df.comment = comment
             self.df_changed(idx)
-            self.dragType.setCurrentText(cur_df.drag_type + ', ' + cur_df.comment)
+            self.dragType.setItemText(idx, cur_df.drag_type + ', ' + cur_df.comment)
+            # self.dragType.setCurrentText(cur_df.drag_type + ', ' + cur_df.comment)
 
     def weightTile(self):
         if self.weightQuantity.currentIndex() == 0:

@@ -198,7 +198,6 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             diam = Diameter(dimeter)
             sess.add(diam)
             sess.commit()
-
         for i in range(self.tableWidget.rowCount()):
             row = [
                 self.tableWidget.item(i, 0).text(),
@@ -213,12 +212,19 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             bullet.weight = self.weight.value()
             bullet.length = self.length.value()
             bullet.diameter_id = diam.id
+
+            dfs = sess.query(DragFunc).filter_by(bullet_id=bullet.id).all()
+            print(dfs)
+            for df in dfs:
+                sess.delete(df)
+
+            for df in self.df:
+                sess.add(DragFunc(*df, bullet_id=bullet.id, attrs='rw'))
         else:
 
             new_bullet = Bullet(self.bulletName.text(), self.weight.value(), self.length.value(), diam.id, 'rw')
             sess.add(new_bullet)
             sess.commit()
-
             for df in self.df:
                 sess.add(DragFunc(*df, bullet_id=new_bullet.id, attrs='rw'))
         sess.commit()

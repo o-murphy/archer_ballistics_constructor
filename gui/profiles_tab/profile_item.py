@@ -85,7 +85,9 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         state['df_comment'] = cur_df['comment']
 
         cdf_edit = DragFuncEditDialog(state=state)
-        cdf_edit.exec_()
+        if cdf_edit.exec_():
+            edited_df = cdf_edit.__getstate__()
+            self.bullet.save_cur_df(edited_df['df_data'], edited_df['df_comment'], edited_df['df_type'])
 
     def get(self) -> dict:
         data = {}
@@ -109,12 +111,12 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             self.bullet.set(data)
             self.conditions.set(data)
 
-    def drag_func_edit(self):
-
-        drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
-        new_state = drag_func_dlg.__getstate__() if drag_func_dlg.exec_() else None
-
-        if new_state:
-            cell = self.profiles_table.get_current_item()
-            cell.updateState(**new_state)
-            self.profile_current.set_data(cell.state.__dict__)
+    # def drag_func_edit(self):
+    #
+    #     drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
+    #     new_state = drag_func_dlg.__getstate__() if drag_func_dlg.exec_() else None
+    #
+    #     if new_state:
+    #         cell = self.profiles_table.get_current_item()
+    #         cell.updateState(**new_state)
+    #         self.profile_current.set_data(cell.state.__dict__)
