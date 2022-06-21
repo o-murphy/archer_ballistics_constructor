@@ -356,6 +356,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         ok = self.current_atmo_dlg.exec_()
         if ok:
             atmo = self.current_atmo_dlg.get_atmo()
+            self.updateState(**atmo)
 
     def copy_table(self):
         data = self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func

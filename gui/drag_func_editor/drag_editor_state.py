@@ -11,12 +11,8 @@ class DragEditorState(State):
         self.setProfile()
         self.sound_speed = self.get_sound_speed()
 
-        from calculator.calculator import Constant
-        # sofs0 = self.sound_speed
-        # sofs1 = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
-        # print(sofs0, sofs1, round(sofs0 / sofs1, 4))
-
-        self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
+        # from calculator.calculator import Constant
+        # self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
 
     def setProfile(self):
         self.profile = Profile(self.__dict__)
