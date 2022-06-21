@@ -173,7 +173,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.update_drag_table()
         self.drag_plot.draw_current_plot(*self.parse_data(self.state.current_drag_func))
 
-        if hasattr(e, 'default_drag_func') or hasattr(e, 'standard_df'):
+        if hasattr(e, 'default_drag_func'):
             self.setDefaultDrag()
 
         # else:
@@ -206,7 +206,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         if self.state.df_type in ['G1', 'G1 Multi-BC']:
             self.dox, self.doy = self.parse_data(DragFunctions.G1)
-        elif self.state.df_type in ['G7', 'G7Multi-BC']:
+        elif self.state.df_type in ['G7', 'G7 Multi-BC']:
             self.dox, self.doy = self.parse_data(DragFunctions.G7)
         else:
             self.dox, self.doy = self.parse_data(self.state.df_data)

@@ -17,7 +17,7 @@ class DragEditorState(State):
         #                              atmo=(self.z_temp, self.z_pressure, self.z_humidity))
 
         print(self.df_data)
-        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[(0.275, 800), (0.26, 700), (0.25, 500)],
+        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[(0.268, 800), (0.255, 700), (0.25, 500)],
                                      df_type=DragFunctions.G7,
                                      atmo=(self.z_temp, self.z_pressure, self.z_humidity))
 
