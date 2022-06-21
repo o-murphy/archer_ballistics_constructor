@@ -119,7 +119,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.mbc.bc_table.setRowCount(5)
 
             if isinstance(self.state.df_data, float):
-                self.state.df_data = ((self.state.mv, self.state.df_data),)
+                # self.state.df_data = ((, self.state.df_data),)
+                self.state.df_data = ((self.state.df_data, self.state.mv),)
 
             if self.state.df_data:
                 self.mbc.set_data(self.state.df_data)
@@ -162,6 +163,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.updateState()
 
     def state_did_update(self, e):
+
+        print(self.state.df_data)
 
         self.state.setProfile()
         self.state.current_drag_func = self.state.drag_function

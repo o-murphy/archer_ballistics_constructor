@@ -66,15 +66,16 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         df_comment = cur_df['comment']
 
         new_data = self.bullet.edit_drag(df_data, df_comment)
+        if new_data:
 
-        if df_type in ['G1', 'G7']:
-            self.bullet.save_cur_df(new_data, df_comment)
+            if df_type in ['G1', 'G7']:
+                self.bullet.save_cur_df(new_data, df_comment)
 
-        elif df_type.endswith('Multi-BC'):
-            self.bullet.save_cur_df(*new_data)
+            elif df_type.endswith('Multi-BC'):
+                self.bullet.save_cur_df(*new_data)
 
-        elif df_type == 'Custom':
-            self.bullet.save_cur_df(*new_data)
+            elif df_type == 'Custom':
+                self.bullet.save_cur_df(*new_data)
 
     def open_df_editor(self):
         state = self.get()

@@ -99,7 +99,7 @@ class Bullet(Params):
             if isinstance(self.df_data, float or int):
                 self.BalCoef[0], self.BVelocity[0] = self.df_data, self.mv
             elif isinstance(self.df_data, list or tuple):
-                for i, (v, bc) in enumerate(self.df_data):
+                for i, (bc, v) in enumerate(self.df_data):
                     if bc > 0 and v >= 0:
                         self.BalCoef[i] = bc
                         self.BVelocity[i] = v
