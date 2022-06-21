@@ -208,7 +208,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         elif self.state.df_type in ['G7', 'G7Multi-BC']:
             self.dox, self.doy = self.parse_data(DragFunctions.G7)
         else:
-            self.dox, self.doy = self.draw_init_plot(self.state.df_data)
+            self.dox, self.doy = self.parse_data(self.state.df_data)
+            self.drag_plot.draw_init_plot(self.dox, self.doy)
 
         self.drag_plot.draw_default_plot(self.dox, self.doy)
 

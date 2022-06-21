@@ -1,5 +1,6 @@
 from modules import State
 from modules import ArcherBallistics, Profile
+from calculator import Calculator, DragFunctions
 
 
 class DragEditorState(State):
@@ -10,6 +11,26 @@ class DragEditorState(State):
         self.ballistics = ArcherBallistics()
         self.setProfile()
         self.sound_speed = self.get_sound_speed()
+
+        # self.calculator = Calculator(w=self.weight, d=self.diameter, bc=self.df_data,
+        #                              df_type=DragFunctions.G7,
+        #                              atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+
+        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=self.df_data,
+                                     df_type=DragFunctions.G7,
+                                     atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+
+        print(f'\n\nMy\n')
+
+        for i in self.calculator.df_data:
+            print(i[1])
+
+        print(f'\n\nDef\n')
+
+        for i in self.drag_function:
+            print(i[1])
+
+        print()
 
         # from calculator.calculator import Constant
         # self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
@@ -99,14 +120,16 @@ if __name__ == '__main__':
     try:
         from .defaults import EXAMPLE_G1
     except ImportError as err:
-        from gui.drag_func_editor.defaults import EXAMPLE_G1
+        from gui.drag_func_editor.defaults import EXAMPLE_G7
 
     from PyQt5 import QtWidgets
+
 
     class W(QtWidgets.QWidget):
         def __init__(self):
             super(W).__init__()
-            self.state = DragEditorState(self, EXAMPLE_G1)
+            self.state = DragEditorState(self, EXAMPLE_G7)
+
 
     wid = W()
     # print(wid.state.__dict__)
