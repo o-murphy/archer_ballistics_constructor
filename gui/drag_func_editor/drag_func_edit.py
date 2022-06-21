@@ -134,7 +134,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         elif self.state.df_type in ['G1', 'G7']:
 
             if isinstance(self.state.df_data, tuple) or isinstance(self.state.df_data, list):
-                self.state.mv, self.state.df_data = self.state.df_data[0]
+                print(self.state.df_data)
+                self.state.df_data, self.state.mv = self.state.df_data[0]
 
             self.sbc.setValue(self.state.df_data)
 

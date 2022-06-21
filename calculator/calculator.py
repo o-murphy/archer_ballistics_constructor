@@ -251,32 +251,46 @@ class Calculator(object):
     def calculate_drag_function_multi_bc(self):
         i_table = []
         for bc, v in self._bc:
+            print(bc, v)
             i_table.append((self.form_factor_by_bullet_data(bc), v))
 
         drag_function = []
 
-        for idx, (i, vm) in enumerate(i_table):
+        for vst, cdst in self._df_type:
+            v = vst * self._speed_of_sound
+            for idx, (i, vm) in enumerate(i_table):
 
-            for v, cd_def in self._df_type:
+                if idx == 0 and v > vm:
+                    cd = self.counted_drag_coefficient(i, cdst)
+                    drag_function.append((vst, cd))
 
-                # if len(i_table) > idx > 0 and (i_table[idx - 1][1] > v * self._speed_of_sound > vm):
-                #     cd = self.counted_drag_coefficient(i, cd_def)
-                #     drag_function.append((v, cd))
-                # if idx == 0 and (v * self._speed_of_sound > vm):
-                #     cd = self.counted_drag_coefficient(i, cd_def)
-                #     drag_function.append((v, cd))
-                # if idx == len(i_table) - 1 and i_table[idx][1] > v * self._speed_of_sound > 0:
-                #     cd = self.counted_drag_coefficient(i, cd_def)
-                #     drag_function.append((v, cd))
+                if idx < len(i_table) - 1 and vm > v > i_table[idx + 1][1]:
+                    cd = self.counted_drag_coefficient(i, cdst)
+                    drag_function.append((vst, cd))
 
-                if idx == 0 and v * self._speed_of_sound > i_table[idx + 1][1]:
-                    cd = self.counted_drag_coefficient(i, cd_def)
-                    drag_function.append((v, cd))
 
-                if idx == len(i_table) - 1 and i_table[idx][1] > v * self._speed_of_sound >= 0:
-                    cd = self.counted_drag_coefficient(i, cd_def)
-                    drag_function.append((v, cd))
 
+        # for idx, (i, vm) in enumerate(i_table):
+        #
+        #     for v, cd_def in self._df_type:
+        #
+        #         # if len(i_table) > idx > 0 and (i_table[idx - 1][1] > v * self._speed_of_sound > vm):
+        #         #     cd = self.counted_drag_coefficient(i, cd_def)
+        #         #     drag_function.append((v, cd))
+        #         # if idx == 0 and (v * self._speed_of_sound > vm):
+        #         #     cd = self.counted_drag_coefficient(i, cd_def)
+        #         #     drag_function.append((v, cd))
+        #         # if idx == len(i_table) - 1 and i_table[idx][1] > v * self._speed_of_sound > 0:
+        #         #     cd = self.counted_drag_coefficient(i, cd_def)
+        #         #     drag_function.append((v, cd))
+        #
+        #         if idx == 0 and v * self._speed_of_sound > i_table[idx + 1][1]:
+        #             cd = self.counted_drag_coefficient(i, cd_def)
+        #             drag_function.append((v, cd))
+        #
+        #         if idx == len(i_table) - 1 and i_table[idx][1] > v * self._speed_of_sound >= 0:
+        #             cd = self.counted_drag_coefficient(i, cd_def)
+        #             drag_function.append((v, cd))
 
         drag_function.sort()
         self._df_data = drag_function

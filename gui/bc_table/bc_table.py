@@ -48,10 +48,17 @@ class BCTable(QtWidgets.QWidget):
             self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, 0)
 
     def get_data(self):
-        ret = [
-            (self.bc_table.item(r, 1).data(QtCore.Qt.EditRole), self.bc_table.item(r, 0).data(QtCore.Qt.EditRole))
-            for r in range(self.bc_table.rowCount())
-        ]
+        ret = []
+        for r in range(self.bc_table.rowCount()):
+            bc = self.bc_table.item(r, 0).data(QtCore.Qt.EditRole)
+            v = self.bc_table.item(r, 1).data(QtCore.Qt.EditRole)
+            if bc > 0:
+                ret.append((bc, v))
+
+        # ret = [
+        #     (self.bc_table.item(r, 0).data(QtCore.Qt.EditRole), )
+        #     for r in range(self.bc_table.rowCount())
+        # ]
         return ret
 
     def set_data(self, data: tuple[tuple]):
