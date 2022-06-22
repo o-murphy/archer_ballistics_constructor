@@ -266,59 +266,15 @@ class Calculator(object):
                 cd = self.counted_drag_coefficient(i_table[2][0], cdst)
                 drag_function.append((vst, cd))
 
-            # if i_table[1][1] >= v >= i_table[2][1]:
-                # cd = self.counted_drag_coefficient(i_table[2][0], cdst)
-                #
-                # coef = (i_table[2][0] / i_table[1][0])
-                # ic = i_table[1][0] * coef
-                #
-                # cd = self.counted_drag_coefficient(ic, cdst)
-                # drag_function.append((vst, cd))
-
-
-                # if idx == len(i_table) - 1 and vm >= v:
-                #     cd = self.counted_drag_coefficient(i, cdst)
-                #     drag_function.append((vst, cd))
-
-                # elif 0 < idx <= len(i_table) - 1:
-                #
-                #     if vm > v > i_table[idx + 1][1]:
-                #         print(vm, v, i_table[idx + 1][1])
-                #
-                #         coef = (cdst / self._df_type[j + 1][1])
-                #         ic = i * coef
-                #
-                #         print(coef, ic)
-                #
-                #         cd = self.counted_drag_coefficient(ic, cdst)
-                #         drag_function.append((vst, cd))
-
-                # if idx < len(i_table)
-
-                # if idx == 0 and v >= vm:
-                #     try:
-                #         coef = (self._df_type[j - 1][1] / cdst)
-                #     except:
-                #         coef = 1
-                #
-                #     ic = i * coef
-
-                    # cd = self.counted_drag_coefficient(ic, cdst)
-                    # cd = self.counted_drag_coefficient(i, cdst)
-                    # drag_function.append((vst, cd))
-
-                # if idx <= len(i_table) - 1 and vm > v >= i_table[idx + 1][1]:
-                #
-                #
-                #     coef = (cdst / self._df_type[j + 1][1])
-                #
-                #     ic = i * coef
-                #
-                #     cd = self.counted_drag_coefficient(ic, cdst)
-                #     # cd = self.counted_drag_coefficient(i, cdst)
-                #     drag_function.append((vst, cd))
-
-
+            if i_table[1][1] >= v >= i_table[2][1]:
+                cd = self.counted_drag_coefficient(i_table[1][0], cdst)
+                drag_function.append((vst, cd))
+            #
+            #     coef = (self._df_type[j - 1][0] / vst)
+            #     ic = i_table[1][0] * coef
+            #
+            #     cd = self.counted_drag_coefficient(ic, cdst)
+            #     drag_function.append((vst, cd))
 
         drag_function.sort()
 

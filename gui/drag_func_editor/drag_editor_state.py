@@ -19,10 +19,14 @@ class DragEditorState(State):
         # print(self.df_data)
 
         self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[
-            (0.268, 800),
+            (0.275, 800),
             (0.255, 700),
             (0.25, 500)
         ], df_type=DragFunctions.G7, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+
+        # self.calculator = Calculator(w=self.weight, d=self.diameter, bc=0.275,
+        #                              df_type=DragFunctions.G7, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
+
         datasheet = '\n'.join([str(cd).replace('.', ',') for v, cd in self.calculator.df_data])
 
         from PyQt5 import QtWidgets
