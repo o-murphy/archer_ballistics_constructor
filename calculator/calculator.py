@@ -251,24 +251,38 @@ class Calculator(object):
     def calculate_drag_function_multi_bc(self):
         i_table = []
         for bc, v in self._bc:
-            print(bc, v)
             i_table.append((self.form_factor_by_bullet_data(bc), v))
 
         drag_function = []
-
-        print(i_table)
 
         for j, (vst, cdst) in enumerate(self._df_type):
             v = vst * self._speed_of_sound
             # for idx, (i, vm) in enumerate(i_table):
 
             if i_table[2][1] >= v >= 0:
+
+
                 cd = self.counted_drag_coefficient(i_table[2][0], cdst)
                 drag_function.append((vst, cd))
 
-            if i_table[1][1] >= v >= i_table[2][1]:
-                cd = self.counted_drag_coefficient(i_table[1][0], cdst)
+            if i_table[1][1] > v >= i_table[2][1]:
+
+                i = i_table[2][0] / i_table[1][0]
+
+                cd = self.counted_drag_coefficient(i, cdst)
                 drag_function.append((vst, cd))
+
+            if i_table[0][1] > v >= i_table[1][1]:
+
+                i = i_table[1][0] / i_table[0][0]
+
+                cd = self.counted_drag_coefficient(i, cdst)
+                drag_function.append((vst, cd))
+
+            if v >= i_table[0][1]:
+                cd = self.counted_drag_coefficient(i_table[0][0], cdst)
+                drag_function.append((vst, cd))
+
             #
             #     coef = (self._df_type[j - 1][0] / vst)
             #     ic = i_table[1][0] * coef
@@ -321,22 +335,20 @@ class Calculator(object):
         #     return
 
 
-def main():
-    calc = Calculator(w=90, d=0.243, bc=0.218,
-                      df_type=DragFunctions.G7, atmo=(15., 760, 50))
-
-    # calc = Calculator(w=90, d=0.243, bc=0.218,
-    #                   df_type=DragFunctions.G1, atmo=(15., 760, 50))
-    # print(calc.df_data)
-
-    for i, (v, cd) in enumerate(calc.df_data):
-        print(round(v, 4), round(cd, 4), round(calc.df_type[i][1], 4))
-
-    calc.bc = [(0.218, 750), (0.21, 720), (0.21, 650), (0.203, 600), (0.201, 500)]
-    # print()
-    # print(calc.df_data)
-    return
-
-
 if __name__ == '__main__':
-    main()
+    from PyQt5.QtWidgets import QApplication
+    import sys
+    app = QApplication(sys.argv)
+    calculator = Calculator(w=178, d=0.308, bc=[
+        (0.268, 800),
+        (0.26, 700),
+        (0.25, 500)
+    ], df_type=DragFunctions.G7, atmo=(15, 760, 50))
+
+    # calculator = Calculator(w=178, d=0.308, bc=0.268, df_type=DragFunctions.G7, atmo=(15, 760, 50))
+
+    datasheet = '\n'.join([str(cd).replace('.', ',') for v, cd in calculator.df_data])
+
+    cb = QApplication.clipboard()
+    cb.clear(mode=cb.Clipboard)
+    cb.setText(datasheet, mode=cb.Clipboard)
