@@ -259,7 +259,7 @@ class Calculator(object):
             v = vst * self._speed_of_sound
             # for idx, (i, vm) in enumerate(i_table):
 
-            if i_table[2][1] >= v >= 0:
+            if i_table[2][1] > v >= 0:
 
 
                 cd = self.counted_drag_coefficient(i_table[2][0], cdst)
@@ -267,14 +267,14 @@ class Calculator(object):
 
             if i_table[1][1] > v >= i_table[2][1]:
 
-                i = i_table[2][0] / i_table[1][0]
+                i = i_table[1][0]
 
                 cd = self.counted_drag_coefficient(i, cdst)
                 drag_function.append((vst, cd))
 
             if i_table[0][1] > v >= i_table[1][1]:
 
-                i = i_table[1][0] / i_table[0][0]
+                i = i_table[0][0]
 
                 cd = self.counted_drag_coefficient(i, cdst)
                 drag_function.append((vst, cd))
@@ -340,9 +340,9 @@ if __name__ == '__main__':
     import sys
     app = QApplication(sys.argv)
     calculator = Calculator(w=178, d=0.308, bc=[
-        (0.268, 800),
+        (0.275, 800),
         (0.26, 700),
-        (0.25, 500)
+        (0.255, 500)
     ], df_type=DragFunctions.G7, atmo=(15, 760, 50))
 
     # calculator = Calculator(w=178, d=0.308, bc=0.268, df_type=DragFunctions.G7, atmo=(15, 760, 50))
