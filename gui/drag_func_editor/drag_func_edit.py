@@ -67,10 +67,10 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         self.calculation_mode = QtWidgets.QComboBox(self)
 
-        self.calculation_mode.addItem('G1', 'G1')
         self.calculation_mode.addItem('G7', 'G7')
-        self.calculation_mode.addItem('G1 Multi-BC', 'G1 Multi-BC')
         self.calculation_mode.addItem('G7 Multi-BC', 'G7 Multi-BC')
+        self.calculation_mode.addItem('G1', 'G1')
+        self.calculation_mode.addItem('G1 Multi-BC', 'G1 Multi-BC')
         self.calculation_mode.addItem('Custom drag func', 'Custom')
         self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
 
