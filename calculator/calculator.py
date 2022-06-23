@@ -258,7 +258,7 @@ class Calculator(object):
             drag_function.append((vst, cd))
         self._df_data = drag_function
 
-    def calculate_drag_function_multi_bc(self):
+    def bc_extended(self):
 
         bc_mah = [[i[0], i[1] / self.speed_of_sound] for i in self._bc]
         bc_mah[0][1] = self._df_type[-1][0]
@@ -274,6 +274,10 @@ class Calculator(object):
             for j in range(ddf):
                 bc_extended.append(bc_max - bc_delta * j)
 
+        return bc_extended
+
+    def calculate_drag_function_multi_bc(self):
+        bc_extended = self.bc_extended()
         drag_function = []
         for i, (vst, cdst) in enumerate(self._df_type):
             bc = bc_extended[len(bc_extended) - 1 - i]
@@ -290,10 +294,11 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     calculator = Calculator(w=178, d=0.308, bc=[
-        (0.268, 800),
-        (0.255, 700),
-        (0.25, 500)
-    ], df_type=DragFunctions.G7, atmo=(15, 760, 50))
+        (0.595, 853.44),
+        (0.58, 731.52),
+        (0.575, 624.84),
+        # (0.55, 0)
+    ], df_type=DragFunctions.G1, atmo=(15, 760, 50))
 
     # calculator = Calculator(w=178, d=0.308, bc=0.268, df_type=DragFunctions.G7, atmo=(15, 760, 50))
 

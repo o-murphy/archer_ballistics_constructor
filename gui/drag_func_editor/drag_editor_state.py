@@ -12,30 +12,12 @@ class DragEditorState(State):
         self.setProfile()
         self.sound_speed = self.get_sound_speed()
 
-        # self.calculator = Calculator(w=self.weight, d=self.diameter, bc=self.df_data,
-        #                              df_type=DragFunctions.G7,
-        #                              atmo=(self.z_temp, self.z_pressure, self.z_humidity))
-
-        # print(self.df_data)
-
-        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=[
-            (0.275, 800),
-            (0.255, 700),
-            (0.25, 500)
-        ], df_type=DragFunctions.G7, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
-
-        # self.calculator = Calculator(w=self.weight, d=self.diameter, bc=0.275,
-        #                              df_type=DragFunctions.G7, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
-
-        datasheet = '\n'.join([str(cd).replace('.', ',') for v, cd in self.calculator.df_data])
-
-        from PyQt5 import QtWidgets
-        cb = QtWidgets.QApplication.clipboard()
-        cb.clear(mode=cb.Clipboard)
-        cb.setText(datasheet, mode=cb.Clipboard)
-
-        # from calculator.calculator import Constant
-        # self.sound_speed = Constant.speed_of_sound(self.z_temp, self.z_pressure, self.z_humidity)
+        if self.df_type in ['G1', 'G1 Multi-BC']:
+            df_type = DragFunctions.G1
+        else:
+            df_type = DragFunctions.G7
+        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=self.df_data,
+                                     df_type=df_type, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
 
     def setProfile(self):
         self.profile = Profile(self.__dict__)
