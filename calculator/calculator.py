@@ -10,9 +10,9 @@ class Pejsa(object):
     Adjusted_BC = None
 
     def __init__(self, BC, Bullet_wt,
-                 Temp, Altitude, Pressure,
                  Muzzle_speed,
                  Retard_Coeff_rate,
+                 Temp=0, Altitude=4600, Pressure=760,
                  Zero_range=100, Start_range=0, Special_range=585,
                  Break_Velocity=1300,
                  Standard_pressure=1000, Mayewski_constant=246,
@@ -88,7 +88,6 @@ class Pejsa(object):
                 (1 / (0 + self._Z)) - (1 / (self._FC - (0.75 + 0.00006 * self._Z) * self._N1 * self._Z)))) ** 2
 
     def speed_at_distance(self, distance):
-        print(self._V0, self._N1, self._FC, distance)
         return self._V0 * (1 - 3 * self._N1 * distance / self._FC) ** (1 / self._N1)
 
     def speed_at_zero(self):
@@ -460,30 +459,34 @@ if __name__ == '__main__':
 
     pejsa = Pejsa(
         **dict(
-            Muzzle_speed=2900,
-            Bullet_wt=105,
-            BC=0.530,
-            Special_range=585,
-            Start_range=0,
+            Muzzle_speed=2624,
+            # Muzzle_speed=2500,
+            Bullet_wt=178,
+            BC=0.547,
+            # Special_range=585,
+            # Start_range=0,
             Impact_ht=0.0,
-            Zero_range=100,
-            Wind_speed=5,
-            Wind_dir=3.0,
-            Temp=0,
-            Altitude=4600,
-            Pressure=1000,
-            Scope_ht=1.75,
+            Zero_range=100 * 1.09361,
+            Wind_speed=0,
+            Wind_dir=0,
+            Temp=15,
+            # Altitude=1000,
+            Pressure=760 / 1.333,
+            Scope_ht=3.54,
             MOA=1.05,
             Retard_Coeff_rate=0.5,
             Break_Velocity=1300,
         )
     )
 
-    distance = 100
+    distances = [100, 200, 300, 400, 500, 1000]
 
-    speed = pejsa.speed_at_distance(distance)
-    energy = pejsa.energy_at_speed(speed)
-    drop = pejsa.drop_at_distance(energy, distance)
-    path = pejsa.path_at_distance(energy, drop, distance)
+    for d in distances:
+        distance = d * 1.09361
+        speed = pejsa.speed_at_distance(distance)
+        energy = pejsa.energy_at_speed(speed)
+        drop = pejsa.drop_at_distance(energy, distance)
+        path = pejsa.path_at_distance(energy, drop, distance)
 
-    print(speed, energy, drop, path)
+        # print(speed, energy, drop, path)
+        print(speed, drop)
