@@ -25,11 +25,11 @@ class DragPlot(CustomPlot):
 
                 ix, x = min(enumerate(ox), key=lambda n: abs(p.x() - n[1]))
 
-                text = '{} {}, {}'.format(rnd(x * self.x_quantity), self.x_q_label, rnd(oy[ix]))
                 self.current_point.setData(x=[rnd(x)], y=[rnd(oy[ix])],
                                            symbolSize=10,
                                            symbolBrush=pg.mkBrush(100, 100, 255, 100))
                 self.current_point_text.setPos(rnd(x), rnd(oy[ix]))
+                text = '{} {}, {}'.format(rnd(x * self.x_quantity), self.x_q_label, rnd(oy[ix]))
                 self.current_point_text.setText(text)
 
     def set_limits(self, oy, ox=None):

@@ -1,6 +1,5 @@
 from modules import State
 from modules import ArcherBallistics, Profile
-from calculator import Calculator, DragFunctions
 
 
 class DragEditorState(State):
@@ -11,13 +10,6 @@ class DragEditorState(State):
         self.ballistics = ArcherBallistics()
         self.setProfile()
         self.sound_speed = self.get_sound_speed()
-
-        if self.df_type in ['G1', 'G1 Multi-BC']:
-            df_type = DragFunctions.G1
-        else:
-            df_type = DragFunctions.G7
-        self.calculator = Calculator(w=self.weight, d=self.diameter, bc=self.df_data,
-                                     df_type=df_type, atmo=(self.z_temp, self.z_pressure, self.z_humidity))
 
     def setProfile(self):
         self.profile = Profile(self.__dict__)

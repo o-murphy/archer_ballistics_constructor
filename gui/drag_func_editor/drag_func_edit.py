@@ -1,35 +1,22 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-try:
-    from .templates import Ui_DragFuncEditDialog
-    from .drag_func_plot import DragPlot
-    from .drop_func_plot import DropPlot
-    from .drag_table import DragTable
-    from ..bc_table import BCTable
-    from .drop_table_edit import DropTableEdit
-    from .current_atmo_dialog import CurrentAtmoDialog
-    from .defaults import DEFAULTS
-    from ..stylesheet import load_qss
-    from .drag_editor_state import DragEditorState
+from gui.drag_func_editor.templates import Ui_DragFuncEditDialog
+from gui.drag_func_editor.drag_func_plot import DragPlot
+from gui.drag_func_editor.drop_func_plot import DropPlot
+from gui.drag_func_editor.drag_table import DragTable
+from gui.bc_table import BCTable
+from gui.drag_func_editor.drop_table_edit import DropTableEdit
+from gui.drag_func_editor.current_atmo_dialog import CurrentAtmoDialog
+from gui.stylesheet import load_qss
+from gui.drag_func_editor.drag_editor_state import DragEditorState
 
-except Exception as exception:
-    from gui.drag_func_editor.templates import Ui_DragFuncEditDialog
-    from gui.drag_func_editor.drag_func_plot import DragPlot
-    from gui.drag_func_editor.drop_func_plot import DropPlot
-    from gui.drag_func_editor.drag_table import DragTable
-    from gui.bc_table import BCTable
-    from gui.drag_func_editor.drop_table_edit import DropTableEdit
-    from gui.drag_func_editor.current_atmo_dialog import CurrentAtmoDialog
-    from gui.drag_func_editor.defaults import DEFAULTS
-    from gui.stylesheet import load_qss
-    from gui.drag_func_editor.drag_editor_state import DragEditorState
+from py_ballisticcalc.drag import DRAG_TABLES, DragTableG7, DragTableG1
+from py_ballisticcalc.bmath import unit
+
+from modules.env_update import USER_RECENT
 
 from modules import BConverter
-from modules.env_update import USER_RECENT
-from calculator.calculator import DragFunctions
-
 rnd = BConverter.auto_rnd
-
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
@@ -205,9 +192,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.drag_plot.draw_init_plot(self.dox, self.doy)
 
         if self.state.df_type in ['G1', 'G1 Multi-BC']:
-            self.dox, self.doy = self.parse_data(DragFunctions.G1)
+            load = self.load_default_drag_function(DragTableG1)
+            self.dox, self.doy = self.parse_data(load)
         elif self.state.df_type in ['G7', 'G7 Multi-BC']:
-            self.dox, self.doy = self.parse_data(DragFunctions.G7)
+            load = self.load_default_drag_function(DragTableG7)
+            self.dox, self.doy = self.parse_data(load)
         else:
             self.dox, self.doy = self.parse_data(self.state.df_data)
             self.drag_plot.draw_init_plot(self.dox, self.doy)
@@ -220,7 +209,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
     def setDefaultDrops(self):
         self.drop_plot.draw_init_plot(self.state.distances, self.state.default_drop)
         self.set_hold_off_quantity()
-        # self.drop_table_edit.drop_table.set()
         self.drop_table.set()
         self.custom_drop_at_distance()
 
@@ -388,6 +376,11 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         else:
             return None
 
+    @staticmethod
+    def load_default_drag_function(drag_table: int):
+        data = DRAG_TABLES[drag_table]
+        return [(p['A'], p['B']) for p in data]
+
     def set_coefficient(self, side, is_up):
         ox, oy = self.parse_data(
             self.state.current_drag_func if self.state.current_drag_func else self.state.default_drag_func)
@@ -488,14 +481,12 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
 
     # NATIVE DARK THEME
-    # from dark_theme import DarkTheme
-    # DarkTheme().setup(app)
-    try:
-        from .defaults import EXAMPLE_G1
-    except ImportError as err:
-        from gui.drag_func_editor.defaults import EXAMPLE_G7, DEFAULTS
+    from dark_theme import DarkTheme
+    DarkTheme().setup(app)
 
-    dialog = DragFuncEditDialog(DEFAULTS)
+    from gui.drag_func_editor.defaults import EXAMPLE_G7, DEFAULTS
+
+    dialog = DragFuncEditDialog(EXAMPLE_G7)
     dialog.show()
     dialog.exec()
     return dialog.state
