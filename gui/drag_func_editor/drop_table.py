@@ -20,7 +20,7 @@ class DropTable(QtWidgets.QWidget, Ui_dropTable):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
 
     def set(self):
-        for i in range(5):
+        for i in range(21):
             self.insert_row()
 
     def insert_row(self):
@@ -30,7 +30,7 @@ class DropTable(QtWidgets.QWidget, Ui_dropTable):
         self.tableWidget.setItem(r_count, 0, QtWidgets.QTableWidgetItem())
         self.tableWidget.setItem(r_count, 1, QtWidgets.QTableWidgetItem())
         self.tableWidget.setItem(r_count, 2, QtWidgets.QTableWidgetItem())
-        self.tableWidget.item(r_count, 0).setData(QtCore.Qt.EditRole, (r_count + 1) * 100)
+        self.tableWidget.item(r_count, 0).setData(QtCore.Qt.EditRole, r_count * 100)
 
     def remove_row(self):
         if self.tableWidget.currentItem():
