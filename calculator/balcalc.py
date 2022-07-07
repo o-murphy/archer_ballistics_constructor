@@ -33,8 +33,10 @@ class DragEditorState(State):
         super(DragEditorState, self).__init__(widget, state, **kwargs)
 
         self.profile = EditorProfile(maximum_distance=(2500, unit.DistanceMeter),
-                                     distance_step=(10, unit.DistanceMeter),
-                                     sight_angle=(0, 0))
+                                     distance_step=(1, unit.DistanceMeter),
+                                     sight_angle=(0, 0),
+                                     maximum_step_size=(5, unit.DistanceFoot)
+                                     )
 
         self.mbc = None
 
