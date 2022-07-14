@@ -116,8 +116,10 @@ class DragEditorState(State):
         return self.profile.trajectory_data
 
     def calculated_drag_function(self):
-        if self.profile.trajectory_data:
-            return self.profile.calculated_drag_function
+        self.setProfile()
+        self.profile.calculate_trajectory()
+        if self.profile.trajectory_data():
+            return self.profile.calculate_drag_table()
         return None
 
     def get_calculated_drop(self):
