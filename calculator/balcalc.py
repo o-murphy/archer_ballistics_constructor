@@ -48,6 +48,7 @@ class DragEditorState(State):
         #                              )
 
         self.profile = None
+        self.trajectory_data = None
 
         self.mbc = None
 
@@ -91,7 +92,7 @@ class DragEditorState(State):
             maximum_distance=(2500, DistanceMeter),
             distance_step=(1, DistanceMeter),
             sight_angle=(0, 0),
-            maximum_step_size=(5, DistanceFoot),
+            maximum_step_size=(1, DistanceMeter),
             bullet_diameter=(self.diameter, DistanceInch),
             bullet_weight=(self.weight, WeightGrain),
             bullet_length=(self.length, DistanceInch),
@@ -112,38 +113,61 @@ class DragEditorState(State):
 
     def calculate_trajectory(self):
         self.setProfile()
-        self.profile.calculate_trajectory()
-        return self.profile.trajectory_data
+        self.trajectory_data = self.profile.calculate_trajectory()
+        return self.trajectory_data
 
     def calculated_drag_function(self):
-        self.setProfile()
-        self.profile.calculate_trajectory()
-        if self.profile.trajectory_data():
-            return self.profile.calculate_drag_table()
-        return None
+        if not self.trajectory_data:
+            self.calculate_trajectory()
+        return self.profile.calculate_drag_table()
+        # return None
 
     def get_calculated_drop(self):
-        if self.profile.trajectory_data:
-            drop = [(p.travelled_distance, p.drop) for p in self.profile.trajectory_data]
-            return drop
-        return None
+        if not self.trajectory_data:
+            self.calculate_trajectory()
+        drop = [(p.travelled_distance(), p.drop()) for p in self.trajectory_data]
+        return drop
+        # return None
 
     def _trajectory_by_distance_filter(self, point: TrajectoryData, distance: Distance):
-        if 0 <= math.fabs(point.travelled_distance.v - distance.v) <= self.profile.distance_step.v / 2:
+        units = distance.units()
+        distance_delta = math.fabs(point.travelled_distance().value(units) - distance.value(units))
+        step = self.profile.distance_step().value(units) / 2
+        if 0 <= distance_delta <= step:
             return point
         else:
             return None
 
     def get_trajectory_data_at_distance(self, distance: Distance):
-        if self.profile.trajectory_data:
-            points = filter(lambda p: self._trajectory_by_distance_filter(p, distance), self.profile.trajectory_data)
+        if self.trajectory_data:
+            points = filter(lambda p: self._trajectory_by_distance_filter(p, distance), self.trajectory_data)
             points_li = list(points)
             if points_li:
                 return points_li[0]
         return None
 
+    def get_drop_at_distances(self, distances: list):
+        from datetime import datetime
+        dt = datetime.now()
+        ret = []
+        step = self.profile.distance_step()
+        step_value = step.value(step.units()) / 2
+        drop_accuracy = 1
+
+        for p in self.trajectory_data:
+            td = p.travelled_distance().get_in(DistanceMeter)
+            for d in distances:
+                if math.fabs(td - d) < step_value:
+                    drop = p.drop().get_in(DistanceCentimeter)
+                    rounded_drop = round(drop, drop_accuracy)
+                    ret.append((int(td), rounded_drop))
+        print(datetime.now() - dt)
+
+        return ret
+
     def updateState(self, state: dict = None, *args, **kwargs):
         super().updateState(state, *args, **kwargs)
+
 
     default_drag_func = None
     current_drag_func = None
