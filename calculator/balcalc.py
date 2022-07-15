@@ -54,39 +54,37 @@ class DragEditorState(State):
 
         self.onStateUpdate.connect(self.calculate_trajectory)
 
+    def get_df_type_flags(self):
+        if self.df_type == 'G1':
+            return DragTableG1, False
+        elif self.df_type == 'G1 Multi-BC':
+            return DragTableG7, True
+        if self.df_type == 'G7':
+            return DragTableG7, False
+        elif self.df_type == 'G7 Multi-BC':
+            return DragTableG7, True
+        else:
+            return 0, False
+
     def setProfile(self):
 
         custom_df = []
-        mbc = []
-        bc_value = 0
-        drag_table = DragTableG1
+        drag_table, is_mbc = self.get_df_type_flags()
 
-        if self.df_type in ['G1', 'G1 Multi-BC']:
-
-            if isinstance(self.df_data, float):
-                drag_table = DragTableG1
-                bc_value = self.df_data
-
-            elif isinstance(self.df_data, list):
-                drag_table = DragTableG1
-                bc_value = 0
-                custom_df = []
-                mbc = self.mbc
-
-        if self.df_type in ['G7', 'G7 Multi-BC']:
-
-            if isinstance(self.df_data, float):
-                drag_table = DragTableG7
-                bc_value = self.df_data
-
-            elif isinstance(self.df_data, list):
-                drag_table = DragTableG7
-                bc_value = 0
-                custom_df = []
-                mbc = self.mbc
+        if is_mbc and drag_table != 0:
+            mbc = self.df_data
+            bc_value = 0
+        elif not is_mbc and drag_table != 0:
+            mbc = []
+            bc_value = self.df_data
+        else:
+            mbc = []
+            bc_value = 0
+            custom_df = self.df_data
 
         self.profile = Profile(
             bc_value=bc_value,
+            drag_table=drag_table,
             custom_drag_function=custom_df,
             multiple_bc_table=mbc,
             maximum_distance=(2500, DistanceMeter),
@@ -161,7 +159,6 @@ class DragEditorState(State):
                     drop = p.drop().get_in(DistanceCentimeter)
                     rounded_drop = round(drop, drop_accuracy)
                     ret.append((int(td), rounded_drop))
-        print(datetime.now() - dt)
 
         return ret
 

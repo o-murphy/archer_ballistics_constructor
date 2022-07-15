@@ -4,7 +4,8 @@ from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
-from ..drag_func_editor import DragFuncEditDialog
+# from ..drag_func_editor import DragFuncEditDialog
+from ..drag_func_editor.drag_func_edit_new import DragFuncEditDialog
 from .profile_item_contents import CustomDLG
 
 from .default_data import get_defaults
