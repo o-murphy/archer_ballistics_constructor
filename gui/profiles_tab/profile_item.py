@@ -1,11 +1,15 @@
-from PyQt5 import QtWidgets
+import sys
+
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileItem
 from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
-# from ..drag_func_editor import DragFuncEditDialog
-from ..drag_func_editor.drag_func_edit_new import DragFuncEditDialog
+
+from ..drag_func_editor import DragFuncEditDialog as DFED
+from ..drag_func_editor.drag_func_edit_new import DragFuncEditDialog as ExperimentalDFED
+
 from .profile_item_contents import CustomDLG
 
 from .default_data import get_defaults
@@ -85,7 +89,11 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         state['df_type'] = cur_df['drag_type']
         state['df_comment'] = cur_df['comment']
 
-        cdf_edit = DragFuncEditDialog(state=state)
+        app = QtCore.QCoreApplication.instance()
+        if '-experiment' in app.arguments():
+            cdf_edit = ExperimentalDFED(state=state)
+        else:
+            cdf_edit = DFED(state=state)
         if cdf_edit.exec_():
             edited_df = cdf_edit.__getstate__()
             self.bullet.save_cur_df(edited_df['df_data'], edited_df['df_comment'], edited_df['df_type'])
@@ -111,13 +119,3 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             self.cartridge.set(data)
             self.bullet.set(data)
             self.conditions.set(data)
-
-    # def drag_func_edit(self):
-    #
-    #     drag_func_dlg = DragFuncEditDialog(state=self.profiles_table.get_current_item().state.__dict__)
-    #     new_state = drag_func_dlg.__getstate__() if drag_func_dlg.exec_() else None
-    #
-    #     if new_state:
-    #         cell = self.profiles_table.get_current_item()
-    #         cell.updateState(**new_state)
-    #         self.profile_current.set_data(cell.state.__dict__)

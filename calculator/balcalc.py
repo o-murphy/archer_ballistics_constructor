@@ -1,6 +1,4 @@
 from modules import State
-# from py_ballisticcalc.extended.profile_extended import *
-# from py_ballisticcalc.extended.multiple_ballistic_coefficient import MultipleBallisticCoefficient
 
 from py_ballisticcalc.lib.profile import Profile
 from py_ballisticcalc.lib.bmath.unit import *
@@ -12,40 +10,9 @@ from py_ballisticcalc.lib.atmosphere import Atmosphere, IcaoAtmosphere
 import math
 
 
-# class EditorProfile(ProfileExtended):
-#
-#     @property
-#     def calculated_drag_function(self):
-#         if self.trajectory_data:
-#             return self._calculated_drag_function
-#         return None
-#
-#     @property
-#     def distance_step(self):
-#         return self._distance_step
-#
-#     @property
-#     def drag_table(self):
-#         return self._drag_table
-#
-#     @property
-#     def bullet_diameter(self):
-#         return self._bullet_diameter
-#
-#     @property
-#     def bullet_weight(self):
-#         return self._bullet_weight
-
-
 class DragEditorState(State):
     def __init__(self, widget, state: dict = None, **kwargs):
         super(DragEditorState, self).__init__(widget, state, **kwargs)
-
-        # self.profile = EditorProfile(maximum_distance=(2500, unit.DistanceMeter),
-        #                              distance_step=(1, unit.DistanceMeter),
-        #                              sight_angle=(0, 0),
-        #                              maximum_step_size=(5, unit.DistanceFoot)
-        #                              )
 
         self.profile = None
         self.trajectory_data = None
@@ -80,7 +47,7 @@ class DragEditorState(State):
         else:
             mbc = []
             bc_value = 0
-            custom_df = self.df_data
+            custom_df = [{'A': p[0], 'B': p[1]} for p in self.current_drag_func]
 
         self.profile = Profile(
             bc_value=bc_value,
@@ -143,6 +110,12 @@ class DragEditorState(State):
             if points_li:
                 return points_li[0]
         return None
+
+    def get_cd_ad_distance(self, distance: Distance):
+        point: TrajectoryData = self.get_trajectory_data_at_distance(distance)
+        if point:
+            mach = point.velocity().get_in(VelocityMPS) / self.sound_speed().get_in(VelocityMPS)
+            return mach
 
     def get_drop_at_distances(self, distances: list):
         from datetime import datetime

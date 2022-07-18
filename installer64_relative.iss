@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Archer BC"
-#define MyAppVersion "v0.0.7-alpha"
+#define MyAppVersion "v0.0.8-alpha"
 #define MyAppPublisher "Thermal Vision Technologies"
 #define MyAppExeName "archerbc.exe"
 #define MyAppAssocName MyAppName + " File"

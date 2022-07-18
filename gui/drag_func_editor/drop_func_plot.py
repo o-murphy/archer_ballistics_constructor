@@ -84,5 +84,5 @@ class DropPlot(CustomPlot):
     def set_cd_at_distance(self, x, y):
         self.cd_at_distance.setVisible(True)
         self.cd_at_distance.setPos((x, 0))
-        self.cd_at_distance_text.setText(f'{x} M\n{rnd(self.y_quantity(y, x))} {self.y_q_label}')
+        self.cd_at_distance_text.setText(f'{x} m\n{rnd(self.y_quantity(y, x))} {self.y_q_label}')
         self.cd_at_distance_text.setPos(x, 0)
