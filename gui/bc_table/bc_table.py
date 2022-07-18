@@ -61,7 +61,7 @@ class BCTable(QtWidgets.QWidget):
         # ]
         return ret
 
-    def set_data(self, data: tuple[tuple]):
+    def set_data(self, data: [tuple[tuple], list]):
         print(data)
         for i, (bc, v) in enumerate(data):
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
