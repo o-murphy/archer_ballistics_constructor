@@ -81,12 +81,13 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
 
         self.angleUnits.addItem('rad', AngularRadian)
         self.angleUnits.addItem('°', AngularDegree)
-
         self.angleUnits.addItem('mrad', AngularMRad)
         self.angleUnits.addItem('ths', AngularThousand)
 
         self.pathUnits.addItem('moa', AngularMOA)
         self.pathUnits.addItem('mil', AngularMil)
+        self.pathUnits.addItem('mrad', AngularMRad)
+        self.pathUnits.addItem('ths', AngularThousand)
         self.pathUnits.addItem('cm/100m', AngularCmPer100M)
         self.pathUnits.addItem('in/100yd', AngularInchesPer100Yd)
 

@@ -58,6 +58,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
 
     def setUnits(self):
         self.units = AppSettings()
+
         self.z_d.setValue(self._z_d.get_in(self.units.distUnits.currentData()))
         self.z_d.setSuffix(self.units.distUnits.currentText())
 
@@ -126,51 +127,21 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         })
         return data
 
-    def set(self, data):
-        if not data:
-            data = get_defaults()
-        if data:
-            self.rifle.set(data)
-            self.cartridge.set(data)
-            self.bullet.set(data)
-            self.conditions.set(data)
+    def set(self, input_data):
+        defaults = get_defaults()
+        if input_data:
+            defaults.update(input_data)
+            data = defaults
+        else:
+            data = defaults
+        # if data:
+        self.rifle.set(data)
+        self.cartridge.set(data)
+        self.bullet.set(data)
+        self.conditions.set(data)
 
-            self._z_d = Distance(data['z_d'], DistanceMeter)
-            self.z_x.setValue(data['z_x'])
-            self.z_y.setValue(data['z_y'])
+        self._z_d = Distance(data['z_d'], DistanceMeter)
+        self.z_x.setValue(data['z_x'])
+        self.z_y.setValue(data['z_y'])
 
-            self.setUnits()
-
-        # print(data)
-        #
-        # app_units = AppSettings()
-        #
-        # self.state = ItemProfile(
-        #     rifle_name=data['rifleName'],
-        #     caliber_name=data['caliberName'],
-        #     caliber_short=data['caliberShort'],
-        #     bullet_name=data['bulletName'],
-        #     # weight_tile=data['weightTile'],
-        #     cartridge_name=data['cartridgeName'],
-        #     twist_direction=data['rightTwist'],
-        #     ts=data['ts'],
-        #     # humidity=0.5,
-        #     # x=0,
-        #     # y=0,
-        #     drag_idx=0,
-        #     # drags=[],
-        #     sh=Distance(data['sh'], app_units.shUnits.currentData()),
-        #     twist=Distance(data['twist'], app_units.twistUnits.currentData()),
-        #     mv=Velocity(data['mv'], app_units.vUnits.currentData()),
-        #     diameter=Distance(data['diameter'], app_units.dUnits.currentData()),
-        #     length=Distance(data['diameter'], app_units.lnUnits.currentData()),
-        #     weight=Weight(data['weight'], app_units.wUnits.currentData()),
-        #     # powder_temp=None,
-        #     # latitude=None,
-        #     # azimuth=None,
-        #     # angle=None,
-        #     # zd=Distance(data['z_d'], app_units.distUnits.currentData()),
-        #     # pressure=Pressure(data['pressure'], app_units.pUnits.currentData()),
-        #     temp=Temperature(data['temp'], TemperatureCelsius),
-        #
-        # )
+        self.setUnits()
