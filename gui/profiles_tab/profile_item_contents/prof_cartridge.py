@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_cartridge
-from modules import BConverter
-from gui.delegates import MuzzleVelocity
+
+from py_ballisticcalc.lib.bmath.unit import Velocity, VelocityMPS, Temperature, TemperatureCelsius
+from gui.app_settings import AppSettings
 
 
 class Cartridge(QtWidgets.QWidget, Ui_cartridge):
@@ -10,39 +11,49 @@ class Cartridge(QtWidgets.QWidget, Ui_cartridge):
         self.setupUi(self)
         self.cartridgeGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
 
-        self.convert = BConverter()
-        self.setConverter()
+        self.mvQuantity.setVisible(False)
+        self.mvSwitch.setVisible(False)
 
-        self.mv.editingFinished.connect(self.validate_mv)
-        self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
+        self._mv = Velocity(0, VelocityMPS)
+        self._temp = Temperature(0, TemperatureCelsius)
 
-    @staticmethod
-    def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
-        return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
+        self.units = None
+        self.setUnits()
 
-    def setConverter(self):
-        self.mvQuantity.setItemData(0, self.convert.mps2fps)
-        self.mvQuantity.setItemData(1, self.convert.fps2mps)
+        self.mv.valueChanged.connect(self.validate_mv)
+        self.temp.valueChanged.connect(self.temp_changed)
 
-    def convert_muzzle_velocity(self):
-        cur_idx = self.mvQuantity.currentIndex()
-        self.mv.setValue(self.mvQuantity.itemData(cur_idx)(self.mv.value()))
-        self.mvQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
+    def temp_changed(self, value):
+        self._temp = Temperature(value, self.units.tempUnits.currentData())
 
-    def validate_mv(self):
+    def validate_mv(self, value):
         if self.mv.value() == 0:
             self.mv.setFocus()
+        else:
+            self._mv = Velocity(value, self.units.vUnits.currentData())
+
+    def setUnits(self):
+        self.units = AppSettings()
+
+        self.mv.setValue(self._mv.get_in(self.units.vUnits.currentData()))
+        self.temp.setValue(self._temp.get_in(self.units.tempUnits.currentData()))
+        self.mv.setSuffix(self.units.vUnits.currentText())
+        self.temp.setSuffix(self.units.tempUnits.currentText())
 
     def set(self, data):
-        self.mv.setValue(data['mv'])
+
+        self._mv = Velocity(data['mv'], VelocityMPS)
+        self._temp = Temperature(data['temp'], TemperatureCelsius)
+
+        self.setUnits()
+
         self.cartridgeName.setText(data['cartridgeName'])
-        self.temp.setValue(data['temp'])
         self.ts.setValue(data['ts'])
 
     def get(self):
         return {
             self.cartridgeName.objectName(): self.cartridgeName.text(),
-            self.mv.objectName(): self.get_cln(self.mv, self.mvQuantity),
-            self.temp.objectName(): self.temp.value(),
+            self.mv.objectName(): self._mv.get_in(VelocityMPS),
+            self.temp.objectName(): self._temp.get_in(TemperatureCelsius),
             self.ts.objectName(): self.ts.value(),
         }

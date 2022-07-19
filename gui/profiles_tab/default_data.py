@@ -27,7 +27,17 @@ def get_defaults():
             'length': bullet.length,
             'diameter': bullet.diameter.diameter,
             'drags': drags,
-            'drag_idx': 0
+            'drag_idx': 0,
+            'z_d': 100,
+            'z_x': 0,
+            'z_y': 0,
+            'z_pressure': 760,
+            "z_angle": 0,
+            "z_temp": 15,
+            "z_humidity": 50,
+            "z_azimuth": 270,
+            "z_latitude": 0,
+            "z_powder_temp": 15,
         }
 
         return data

@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileItem
-from ..single_custom_widgets import NoWheelSpinBox, NoWheelDoubleSpinBox
+from ..single_custom_widgets import NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
@@ -10,7 +10,8 @@ from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
 from ..drag_func_editor import DragFuncEditDialog as DFED
 from ..drag_func_editor.drag_func_edit_new import DragFuncEditDialog as ExperimentalDFED
 
-from .profile_item_contents import CustomDLG
+from gui.app_settings import AppSettings
+from py_ballisticcalc.lib.bmath.unit import Distance, DistanceMeter
 
 from .default_data import get_defaults
 
@@ -25,8 +26,8 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_x.setPrefix('X: ')
         self.z_y = NoWheelDoubleSpinBox()
         self.z_y.setPrefix('Y: ')
-        self.z_d = NoWheelSpinBox()
-        self.z_d.setSuffix(' M')
+        self.z_d = NoWheelDoubleSpinBox()
+        self.z_d.setMaximum(10000)
         self.z_x.setObjectName('z_x')
         self.z_y.setObjectName('z_y')
         self.z_d.setObjectName('z_d')
@@ -44,7 +45,21 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.cartridgeName.setText(self.cartridge.cartridgeName.text())
         self.weightTile.setText(self.bullet.weightTile())
 
+        self._z_d = Distance(100, DistanceMeter)
+
+        self.units = None
+        self.setUnits()
+
+        self.z_d.valueChanged.connect(self.z_d_changed)
         self.setupConnects()
+
+    def z_d_changed(self, value):
+        self._z_d = Distance(value, self.units.distUnits.currentData())
+
+    def setUnits(self):
+        self.units = AppSettings()
+        self.z_d.setValue(self._z_d.get_in(self.units.distUnits.currentData()))
+        self.z_d.setSuffix(self.units.distUnits.currentText())
 
     def setupConnects(self):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
@@ -105,7 +120,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         data.update(**self.cartridge.get())
         data.update(**self.conditions.get())
         data.update(**{
-            self.z_d.objectName(): self.z_d.value(),
+            self.z_d.objectName(): self._z_d.get_in(DistanceMeter),
             self.z_x.objectName(): self.z_x.value(),
             self.z_y.objectName(): self.z_y.value()
         })
@@ -119,3 +134,43 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
             self.cartridge.set(data)
             self.bullet.set(data)
             self.conditions.set(data)
+
+            self._z_d = Distance(data['z_d'], DistanceMeter)
+            self.z_x.setValue(data['z_x'])
+            self.z_y.setValue(data['z_y'])
+
+            self.setUnits()
+
+        # print(data)
+        #
+        # app_units = AppSettings()
+        #
+        # self.state = ItemProfile(
+        #     rifle_name=data['rifleName'],
+        #     caliber_name=data['caliberName'],
+        #     caliber_short=data['caliberShort'],
+        #     bullet_name=data['bulletName'],
+        #     # weight_tile=data['weightTile'],
+        #     cartridge_name=data['cartridgeName'],
+        #     twist_direction=data['rightTwist'],
+        #     ts=data['ts'],
+        #     # humidity=0.5,
+        #     # x=0,
+        #     # y=0,
+        #     drag_idx=0,
+        #     # drags=[],
+        #     sh=Distance(data['sh'], app_units.shUnits.currentData()),
+        #     twist=Distance(data['twist'], app_units.twistUnits.currentData()),
+        #     mv=Velocity(data['mv'], app_units.vUnits.currentData()),
+        #     diameter=Distance(data['diameter'], app_units.dUnits.currentData()),
+        #     length=Distance(data['diameter'], app_units.lnUnits.currentData()),
+        #     weight=Weight(data['weight'], app_units.wUnits.currentData()),
+        #     # powder_temp=None,
+        #     # latitude=None,
+        #     # azimuth=None,
+        #     # angle=None,
+        #     # zd=Distance(data['z_d'], app_units.distUnits.currentData()),
+        #     # pressure=Pressure(data['pressure'], app_units.pUnits.currentData()),
+        #     temp=Temperature(data['temp'], TemperatureCelsius),
+        #
+        # )

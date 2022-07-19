@@ -6,6 +6,7 @@ from modules.lpc_check import lpcRunThread, UsbStatusCode, check_lpc_driver
 import configparser
 import os
 from modules.env_update import CONFIG_PATH
+from .app_settings import AppSettings
 
 
 class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
@@ -30,6 +31,13 @@ class FooterWidget(QtWidgets.QWidget, Ui_FooterWidget, lpcRunThread):
 
         else:
             self.connectionStatus.setText(UsbStatusCode.DRIVER_ERROR)
+
+        self.Preferences.clicked.connect(self.open_app_settings)
+
+    def open_app_settings(self):
+        dlg = AppSettings()
+        if dlg.exec_():
+            self.window().setUnits()
 
     def setup_lpc_thread(self):
         if self.autoConnect.isChecked():

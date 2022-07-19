@@ -37,10 +37,11 @@ lines = r"""
     REM venv\Scripts\pyuic5 ui_templates\selectorBtns.ui -o gui\my_tab\templates\selectorBtns.py
     REM venv\Scripts\pyuic5 ui_templates\templateBtns.ui -o gui\my_tab\templates\templateBtns.py
     
-    venv\Scripts\pyuic5 ui_templates\bc_edit.ui -o gui\old\drag_func_settings\templates\bc_edit.py
-    venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\old\drag_func_settings\templates\mbc_edit.py
-    venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\old\drag_func_settings\templates\cdf_edit.py
+    REM venv\Scripts\pyuic5 ui_templates\bc_edit.ui -o gui\old\drag_func_settings\templates\bc_edit.py
+    REM venv\Scripts\pyuic5 ui_templates\mbc_edit.ui -o gui\old\drag_func_settings\templates\mbc_edit.py
+    REM venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\old\drag_func_settings\templates\cdf_edit.py
     
+    venv\Scripts\pyuic5 ui_templates\app_settings.ui -o gui\templates\app_settings.py
     
     REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
 """

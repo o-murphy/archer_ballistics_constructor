@@ -1,13 +1,13 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_bullet
-from modules import BConverter
 from gui.db_widgets.edit.df_type_dlg import DFTypeDlg
 from gui.db_widgets.edit.drag_func_settings import BCEdit
 from gui.db_widgets.edit.drag_func_settings import MBCEdit
 from gui.db_widgets.edit.drag_func_settings import CDFEdit
 from dbworker.models import DragFunc
 
-from gui.drag_func_editor import DragFuncEditDialog
+from py_ballisticcalc.lib.bmath.unit import Weight, WeightGrain, Distance, DistanceInch
+from gui.app_settings import AppSettings
 
 
 class Bullet(QtWidgets.QWidget, Ui_bullet):
@@ -17,57 +17,56 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         super(Bullet, self).__init__(parent)
         self.setupUi(self)
         self.bulletGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
-        self.convert = BConverter()
+
+        self.weightQuantity.setVisible(False)
+        self.weightSwitch.setVisible(False)
+        self.lengthQuantity.setVisible(False)
+        self.lengthSwitch.setVisible(False)
+        self.diameterQuantity.setVisible(False)
+        self.diameterSwitch.setVisible(False)
+
+        self._weight = Weight(0, WeightGrain)
+        self._length = Distance(0, DistanceInch)
+        self._diameter = Distance(0, DistanceInch)
+
+        self.units = None
+        self.setUnits()
 
         self.drag_functions = []
 
-        self.setConverter()
-        self.setupConnects()
-
-    def setConverter(self):
-        # self.mvQuantity.setItemData(0, self.convert.mps2fps)
-        # self.mvQuantity.setItemData(1, self.convert.fps2mps)
-        self.weightQuantity.setItemData(0, self.convert.gr_to_g)
-        self.weightQuantity.setItemData(1, self.convert.g_to_gr)
-        self.lengthQuantity.setItemData(0, self.convert.inch_to_mm)
-        self.lengthQuantity.setItemData(1, self.convert.mm_to_inch)
-        self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
-        self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
-
-    def setupConnects(self):
-        self.weightSwitch.clicked.connect(self.convert_bullet_weight)
-        self.lengthSwitch.clicked.connect(self.convert_bullet_length)
-        self.diameterSwitch.clicked.connect(self.convert_bullet_diameter)
-
+        self.weight.valueChanged.connect(self.weight_changed)
+        self.length.valueChanged.connect(self.length_changed)
+        self.diameter.valueChanged.connect(self.diameter_changed)
         self.dragType.currentIndexChanged.connect(self.df_changed)
-        # self.addDrag.clicked.connect(self.add_drag)
-        # self.dragEditor.clicked.connect(self.edit_drag)
 
-    def convert_bullet_weight(self):
-        cur_idx = self.weightQuantity.currentIndex()
-        self.weight.setValue(self.weightQuantity.itemData(cur_idx)(self.weight.value()))
-        self.weight.setSingleStep(0.01 if cur_idx == 0 else 0.1)
-        self.weightQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
+    def setUnits(self):
+        self.units = AppSettings()
 
-    def convert_bullet_length(self):
-        cur_idx = self.lengthQuantity.currentIndex()
-        self.length.setValue(self.lengthQuantity.itemData(cur_idx)(self.length.value()))
-        self.lengthQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
+        self.weight.setValue(self._weight.get_in(self.units.wUnits.currentData()))
+        self.length.setValue(self._length.get_in(self.units.lnUnits.currentData()))
+        self.diameter.setValue(self._diameter.get_in(self.units.dUnits.currentData()))
 
-    def convert_bullet_diameter(self):
-        cur_idx = self.diameterQuantity.currentIndex()
-        self.diameter.setValue(self.diameterQuantity.itemData(cur_idx)(self.diameter.value()))
-        self.diameterQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
+        self.weight.setSuffix(self.units.wUnits.currentText())
+        self.length.setSuffix(self.units.lnUnits.currentText())
+        self.diameter.setSuffix(self.units.dUnits.currentText())
 
-    @staticmethod
-    def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
-        return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
+    def weight_changed(self, value):
+        self._weight = Weight(value, self.units.wUnits.currentData())
+
+    def length_changed(self, value):
+        self._length = Distance(value, self.units.lnUnits.currentData())
+
+    def diameter_changed(self, value):
+        self._diameter = Distance(value, self.units.dUnits.currentData())
 
     def set(self, data):
         self.bulletName.setText(data['bulletName'])
-        self.weight.setValue(data['weight'])
-        self.length.setValue(data['length'])
-        self.diameter.setValue(data['diameter'])
+
+        self._weight = Weight(data['weight'], WeightGrain)
+        self._length = Distance(data['length'], DistanceInch)
+        self._diameter = Distance(data['diameter'], DistanceInch)
+
+        self.setUnits()
 
         for i, df in enumerate(data['drags']):
             if isinstance(df, DragFunc):
@@ -188,9 +187,9 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
 
         ret = {
             self.bulletName.objectName(): self.bulletName.text(),
-            self.weight.objectName(): self.get_cln(self.weight, self.weightQuantity),
-            self.length.objectName(): self.get_cln(self.length, self.lengthQuantity),
-            self.diameter.objectName(): self.get_cln(self.diameter, self.diameterQuantity),
+            'weight': self._weight.get_in(WeightGrain),
+            'length': self._length.get_in(DistanceInch),
+            'diameter': self._diameter.get_in(DistanceInch),
             "weightTile": self.weightTile(),
             "drags": drags,
             "drag_idx": self.dragType.currentData()

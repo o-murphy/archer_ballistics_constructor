@@ -29,7 +29,17 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupWidgets()
         self.setQss()
 
+        self.units = None
+        self.setUnits()
+
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
+
+    def setUnits(self):
+        self.config.read(CONFIG_PATH)
+        self.units = self.config['Units']
+        for c in self.findChildren(QtWidgets.QWidget):
+            if hasattr(c, 'setUnits'):
+                c.setUnits()
 
     def setLang(self):
         self.config.read(CONFIG_PATH)

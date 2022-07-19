@@ -86,7 +86,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.profiles_table.insertRow(last_row)
         self.profiles_table.setCellWidget(last_row, 0, self.add_btn)
 
-    def add_profile(self, data=None):  # refactored yet
+    def add_profile(self, data=None):
         if self.profiles_table.rowCount() < 21:
             new_item = ProfileItem(self)
 
