@@ -1,13 +1,18 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_dropTable
-from gui.delegates import Distance, Drop, DropCorrection
+from gui.delegates import Distance as DistanceDelegate
+from gui.delegates import Drop, DropCorrection
+
+
+from py_ballisticcalc.lib.bmath.unit import Distance, DistanceMeter
+from gui.app_settings import AppSettings
 
 
 class DropTable(QtWidgets.QWidget, Ui_dropTable):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.distance_delegate = Distance(parent)
+        self.distance_delegate = DistanceDelegate(parent)
         self.drop_delegate = Drop()
         self.correction_delegate = DropCorrection()
         self.tableWidget.setItemDelegateForColumn(0, self.distance_delegate)
@@ -18,6 +23,24 @@ class DropTable(QtWidgets.QWidget, Ui_dropTable):
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+
+        self.units = None
+        self.setUnits()
+
+        _translate = QtCore.QCoreApplication.translate
+
+        self.tableWidget.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem(
+            # f'Dist. ({self.units.distUnits.currentText().strip()})'
+            f'{_translate("dropTable", "Dist.")} (m)'
+        ))
+
+        self.tableWidget.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(
+            # f'Drop. ({self.units.dropUnits.currentText().strip()})'
+            f'{_translate("dropTable", "Drop.")} (cm)'
+        ))
+
+    def setUnits(self):
+        self.units = AppSettings()
 
     def set(self):
         for i in range(21):

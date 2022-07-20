@@ -66,17 +66,17 @@
      </attribute>
      <column>
       <property name="text">
-       <string>dist</string>
+       <string>Dist.</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>hold off</string>
+       <string>Drop.</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>correction</string>
+       <string>Correction</string>
       </property>
      </column>
     </widget>

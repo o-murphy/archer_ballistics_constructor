@@ -17,10 +17,12 @@ class DragTable(Ui_DragTable):
         self.setItemDelegateForRow(0, self.velocity_delegates)
         self.setItemDelegateForRow(1, self.drag_coefficient)
 
-        item = self.verticalHeaderItem(0)
-        item.setText("V")
-        item = self.verticalHeaderItem(1)
-        item.setText("CD")
+        # _translate = QtCore.QCoreApplication.translate
+        #
+        # item = self.verticalHeaderItem(0)
+        # item.setText(_translate("DragTable", "Velocity"))
+        # item = self.verticalHeaderItem(1)
+        # item.setText("CD")
 
     def set(self, current_data, default_data):
         data = current_data if current_data else default_data

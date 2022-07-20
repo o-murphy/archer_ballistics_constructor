@@ -29,8 +29,8 @@ class BCTable(QtWidgets.QWidget):
         self.bc_table.setRowCount(5)
         self.bc_table.setColumnCount(2)
 
-        self.bc_table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('BC'))
-        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('V'))
+        # self.bc_table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('BC'))
+        # self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('V'))
         self.bc_table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.bc_table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 
@@ -43,9 +43,8 @@ class BCTable(QtWidgets.QWidget):
 
         self.units = None
         self.setUnits()
-        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(
-            f'V ({self.units.vUnits.currentText().strip()})'
-        ))
+
+        self.retranslateUi(self)
 
         self.bc_table.setRowCount(5)
         self.set()
@@ -76,3 +75,18 @@ class BCTable(QtWidgets.QWidget):
             v = Velocity(v, VelocityMPS).get_in(self.units.vUnits.currentData())
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
             self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, round(v, 1))
+
+    def retranslateUi(self, BCTable):
+        _translate = QtCore.QCoreApplication.translate
+        BCTable.setWindowTitle(_translate("BCTable", "Form"))
+
+        bc_col_text = _translate("BCTable", "BC")
+        v_col_text = _translate("BCTable", "V")
+
+        BCTable.bc_table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem(
+            f'{bc_col_text} ({BCTable.units.vUnits.currentText().strip()})'
+        ))
+
+        BCTable.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(
+            f'{v_col_text} ({BCTable.units.vUnits.currentText().strip()})'
+        ))

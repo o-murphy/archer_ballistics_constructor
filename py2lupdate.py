@@ -23,6 +23,7 @@ for file in matches:
 
 templates.append(r'gui\db_widgets\edit\df_type_dlg\df_type.py')
 templates.append(r'gui\my_tab\templates_selector.py')
+templates.append(r'gui\bc_table\bc_table.py')
 
 [print(i) for i in templates]
 

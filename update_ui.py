@@ -48,6 +48,9 @@ lines = r"""
     venv\Scripts\pyuic5 ui_templates\prof_bullet.ui -o gui\profiles_tab\profile_item_contents\templates\prof_bullet.py
     venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py
     
+    venv\Scripts\pyuic5 ui_templates\drop_table.ui -o gui\drag_func_editor\templates\drop_table.py
+
+    
     REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
 """
 

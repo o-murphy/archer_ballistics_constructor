@@ -4,107 +4,107 @@
 <context>
     <name>AppSettings</name>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="162"/>
+        <location filename="../gui/templates/app_settings.py" line="163"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="163"/>
+        <location filename="../gui/templates/app_settings.py" line="164"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="164"/>
+        <location filename="../gui/templates/app_settings.py" line="165"/>
         <source>Українська</source>
         <translation>Українська</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="165"/>
+        <location filename="../gui/templates/app_settings.py" line="166"/>
         <source>Русский</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="166"/>
+        <location filename="../gui/templates/app_settings.py" line="167"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="167"/>
+        <location filename="../gui/templates/app_settings.py" line="168"/>
         <source>Use experimental ballistic calc API</source>
         <translation>Використовувати експерементальне API</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="168"/>
+        <location filename="../gui/templates/app_settings.py" line="169"/>
         <source>General settings</source>
         <translation>Основні</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="169"/>
+        <location filename="../gui/templates/app_settings.py" line="170"/>
         <source>Temperature</source>
         <translation>Температура</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="170"/>
+        <location filename="../gui/templates/app_settings.py" line="171"/>
         <source>Sight height</source>
         <translation>Висота прицілу</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="171"/>
+        <location filename="../gui/templates/app_settings.py" line="172"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="172"/>
+        <location filename="../gui/templates/app_settings.py" line="173"/>
         <source>Weight</source>
         <translation>Вага</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="173"/>
+        <location filename="../gui/templates/app_settings.py" line="174"/>
         <source>Energy</source>
         <translation>Енергія</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="174"/>
+        <location filename="../gui/templates/app_settings.py" line="175"/>
         <source>Distance</source>
         <translation>Дистанція</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="175"/>
+        <location filename="../gui/templates/app_settings.py" line="176"/>
         <source>Angular</source>
         <translation>Кутові величини</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="176"/>
+        <location filename="../gui/templates/app_settings.py" line="177"/>
         <source>Drop</source>
         <translation>Падіння кулі</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="177"/>
+        <location filename="../gui/templates/app_settings.py" line="178"/>
         <source>Pressure</source>
         <translation>Тиск</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="178"/>
+        <location filename="../gui/templates/app_settings.py" line="179"/>
         <source>Velocity</source>
         <translation>Швидкість</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="179"/>
+        <location filename="../gui/templates/app_settings.py" line="180"/>
         <source>Diameter</source>
         <translation>Діаметер</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="180"/>
+        <location filename="../gui/templates/app_settings.py" line="181"/>
         <source>Twist</source>
         <translation>Крок нарізів</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="181"/>
+        <location filename="../gui/templates/app_settings.py" line="182"/>
         <source>Path</source>
         <translation>Поправка</translation>
     </message>
     <message>
-        <location filename="../gui/templates/app_settings.py" line="182"/>
+        <location filename="../gui/templates/app_settings.py" line="183"/>
         <source>Units</source>
         <translation>Одиниці виміру</translation>
     </message>
@@ -120,6 +120,24 @@
         <location filename="../gui/templates/archerbc_updater_ui.py" line="111"/>
         <source>Looking for updates...</source>
         <translation>Пошук оновлень...</translation>
+    </message>
+</context>
+<context>
+    <name>BCTable</name>
+    <message>
+        <location filename="../gui/bc_table/bc_table.py" line="81"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/bc_table/bc_table.py" line="83"/>
+        <source>BC</source>
+        <translation>БК</translation>
+    </message>
+    <message>
+        <location filename="../gui/bc_table/bc_table.py" line="84"/>
+        <source>V</source>
+        <translation>Шв.</translation>
     </message>
 </context>
 <context>
@@ -722,12 +740,12 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/bc_table.py" line="44"/>
         <source>BC</source>
-        <translation>БК</translation>
+        <translation type="obsolete">БК</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/bc_table.py" line="46"/>
         <source>V</source>
-        <translation>V</translation>
+        <translation type="obsolete">V</translation>
     </message>
 </context>
 <context>
@@ -735,17 +753,27 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="29"/>
         <source>x</source>
-        <translation>x</translation>
+        <translation type="obsolete">x</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="31"/>
         <source>y</source>
-        <translation>y</translation>
+        <translation type="obsolete">y</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="27"/>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drag_table.py" line="29"/>
+        <source>Velocity</source>
+        <translation>Швидкість</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drag_table.py" line="31"/>
+        <source>CD</source>
+        <translation>CD</translation>
     </message>
 </context>
 <context>
@@ -1649,17 +1677,32 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="50"/>
         <source>dist</source>
-        <translation>Дист.</translation>
+        <translation type="obsolete">Дист.</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="52"/>
         <source>hold off</source>
-        <translation>Падіння</translation>
+        <translation type="obsolete">Падіння</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="54"/>
         <source>correction</source>
-        <translation>Коррекція</translation>
+        <translation type="obsolete">Коррекція</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drop_table.py" line="50"/>
+        <source>Dist.</source>
+        <translation>Дист.</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drop_table.py" line="52"/>
+        <source>Drop.</source>
+        <translation>Падіння</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drop_table.py" line="54"/>
+        <source>Correction</source>
+        <translation>Коррект.</translation>
     </message>
 </context>
 <context>

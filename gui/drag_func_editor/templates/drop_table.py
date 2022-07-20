@@ -47,8 +47,8 @@ class Ui_dropTable(object):
         _translate = QtCore.QCoreApplication.translate
         dropTable.setWindowTitle(_translate("dropTable", "Form"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("dropTable", "dist"))
+        item.setText(_translate("dropTable", "Dist."))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("dropTable", "hold off"))
+        item.setText(_translate("dropTable", "Drop."))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("dropTable", "correction"))
+        item.setText(_translate("dropTable", "Correction"))

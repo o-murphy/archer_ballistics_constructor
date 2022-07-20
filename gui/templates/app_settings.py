@@ -63,6 +63,7 @@ class Ui_AppSettings(object):
         self.line.setObjectName("line")
         self.gridLayout_3.addWidget(self.line, 1, 0, 1, 2)
         self.xdfed = QtWidgets.QCheckBox(self.tabGeneral)
+        self.xdfed.setChecked(True)
         self.xdfed.setObjectName("xdfed")
         self.gridLayout_3.addWidget(self.xdfed, 2, 0, 1, 2)
         self.tabSettings.addTab(self.tabGeneral, "")
