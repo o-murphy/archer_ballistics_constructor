@@ -5,6 +5,9 @@ from typing import Optional
 from gui.stylesheet import load_qss
 
 
+from gui.app_settings import AppSettings
+from py_ballisticcalc.lib.bmath import Velocity, VelocityMPS
+
 
 class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
     def __init__(self, data=None, comment=None):
@@ -31,6 +34,13 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
         self.bc_table.setItemDelegateForColumn(0, self.ballistics_coefficient)
         self.bc_table.setItemDelegateForColumn(1, self.muzzle_velocity)
 
+        self.units = None
+        self.setUnits()
+
+        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(
+            f'V ({self.units.vUnits.currentText().strip()})'
+        ))
+
         empty_data = [(0, 0) for i in range(5)]
 
         if data:
@@ -45,20 +55,25 @@ class MBCEdit(QtWidgets.QDialog, Ui_mbcEdit):
         self.gridLayout.addWidget(self.bc_table)
         self.gridLayout.addWidget(self.buttonBox)
 
+    def setUnits(self):
+        self.units = AppSettings()
+
     def set_data(self, data):
         data.sort(reverse=True)
         self.bc_table.setRowCount(len(data))
         for i, (bc, v) in enumerate(data):
+            v = Velocity(v, VelocityMPS).get_in(self.units.vUnits.currentData())
             self.bc_table.setItem(i, 0, QtWidgets.QTableWidgetItem())
             self.bc_table.setItem(i, 1, QtWidgets.QTableWidgetItem())
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
-            self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, v)
+            self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, round(v, 1))
 
     def get_data(self) -> Optional[list[tuple]]:
         data = []
         for i in range(self.bc_table.rowCount()):
             bc = self.bc_table.item(i, 0).data(QtCore.Qt.EditRole)
             v = self.bc_table.item(i, 1).data(QtCore.Qt.EditRole)
+            v = Velocity(v, self.units.vUnits.currentData()).get_in(VelocityMPS)
             if v > 0 and bc == 0:
                 message_box = QtWidgets.QMessageBox()
                 message_box.setText('BC cannot be 0, if velocity > 0')

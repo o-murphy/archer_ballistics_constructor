@@ -3,7 +3,10 @@ from modules.converter import BConverter
 from gui.delegates import BallisticCoefficient, MuzzleVelocity
 
 
-rnd = BConverter.auto_rnd
+# rnd = BConverter.auto_rnd
+
+from gui.app_settings import AppSettings
+from py_ballisticcalc.lib.bmath import Velocity, VelocityMPS
 
 
 class BCTable(QtWidgets.QWidget):
@@ -38,7 +41,16 @@ class BCTable(QtWidgets.QWidget):
 
         self.gridLayout.addWidget(self.bc_table)
 
+        self.units = None
+        self.setUnits()
+        self.bc_table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(
+            f'V ({self.units.vUnits.currentText().strip()})'
+        ))
+
         self.set()
+
+    def setUnits(self):
+        self.units = AppSettings()
 
     def set(self):
         for i in range(self.bc_table.rowCount()):
@@ -52,6 +64,7 @@ class BCTable(QtWidgets.QWidget):
         for r in range(self.bc_table.rowCount()):
             bc = self.bc_table.item(r, 0).data(QtCore.Qt.EditRole)
             v = self.bc_table.item(r, 1).data(QtCore.Qt.EditRole)
+            v = Velocity(v, self.units.vUnits.currentData()).get_in(VelocityMPS)
             if bc > 0:
                 ret.append((bc, v))
 
@@ -64,5 +77,6 @@ class BCTable(QtWidgets.QWidget):
     def set_data(self, data: [tuple[tuple], list]):
         print(data)
         for i, (bc, v) in enumerate(data):
+            v = Velocity(v, VelocityMPS).get_in(self.units.vUnits.currentData())
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
-            self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, v)
+            self.bc_table.item(i, 1).setData(QtCore.Qt.EditRole, round(v, 1))

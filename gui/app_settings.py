@@ -72,9 +72,9 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
             self.Language.setItemData(i, lang)
 
     def init_units_tab(self):
+        self.shUnits.addItem(*mm)
         self.shUnits.addItem(*inch)
         self.shUnits.addItem(*cm)
-        self.shUnits.addItem(*mm)
         self.shUnits.addItem(*ln)
 
         self.twistUnits.addItem(*inch)
@@ -123,16 +123,16 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         self.pUnits.addItem(*hpa)
         self.pUnits.addItem(*psi)
 
-        self.dropUnits.addItem(*inch)
         self.dropUnits.addItem(*cm)
+        self.dropUnits.addItem(*inch)
         self.dropUnits.addItem(*mm)
         self.dropUnits.addItem(*ln)
         self.dropUnits.addItem(*m)
         self.dropUnits.addItem(*yd)
         self.dropUnits.addItem(*ft)
 
-        self.angleUnits.addItem(*rad)
         self.angleUnits.addItem(*deg)
+        self.angleUnits.addItem(*rad)
         self.angleUnits.addItem(*mrad)
         self.angleUnits.addItem(*ths)
 
