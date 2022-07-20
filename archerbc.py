@@ -16,6 +16,20 @@ import os
 
 
 class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
+    """
+    TODO: fix update df data for archer_ballistics.pyd
+    TODO: unify API methods for each of ballistic calculator extensions
+    TODO: rebuild wrong ui templates
+    TODO: rewrite "retranslateUI" methods if needed
+    TODO: update transtations
+    TODO: update dbwidgets for units convertor
+    TODO: update dbworker filters
+    TODO: clean project from unused references, libraries
+    TODO: add dynamic imports of extensions
+    TODO: add reticle designer extension
+    TODO: add device settings extension
+    TODO: add developer settings extension
+    """
     def __init__(self):
         super().__init__()
 
