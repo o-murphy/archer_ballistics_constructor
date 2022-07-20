@@ -134,6 +134,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.Down.setVisible(True)
             self.EndUp.setVisible(True)
             self.EndDown.setVisible(True)
+            self.Step.setVisible(True)
+            self.labelStep.setVisible(True)
 
         elif self.state.df_type.endswith('Multi-BC'):
 
@@ -270,6 +272,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.Down.setVisible(False)
         self.EndUp.setVisible(False)
         self.EndDown.setVisible(False)
+        self.Step.setVisible(False)
+        self.labelStep.setVisible(False)
 
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
@@ -470,25 +474,24 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             # self.updateState(current_drag_func=new_data)
             # self.append_updates()
 
-    #
-    # def __getstate__(self):
-    #     new_state = self.state.__dict__
-    #     is_new_data = True if self.state.current_drag_func else False
-    #
-    #     # if is_new_data:
-    #     #     new_state['df_data'] = self.state.current_drag_func
-    #     #     new_state['dragType'] = 2
-    #     # else:
-    #     #     new_state['df_data'] = self.state.default_drag_func
-    #
-    #     [new_state.pop(key) for key in ['ballistics',
-    #                                     'default_drag_func',
-    #                                     'current_drag_func',
-    #                                     'distances',
-    #                                     'current_distance',
-    #                                     'default_drop',
-    #                                     'current_drop']]
-    #     return new_state
+    def __getstate__(self):
+        new_state = self.state.__dict__
+        is_new_data = True if self.state.current_drag_func else False
+
+        # if is_new_data:
+        #     new_state['df_data'] = self.state.current_drag_func
+        #     new_state['dragType'] = 2
+        # else:
+        #     new_state['df_data'] = self.state.default_drag_func
+
+        [new_state.pop(key) for key in ['ballistics',
+                                        'default_drag_func',
+                                        'current_drag_func',
+                                        'distances',
+                                        'current_distance',
+                                        'default_drop',
+                                        'current_drop']]
+        return new_state
 
     def import_table(self):
         options = QtWidgets.QFileDialog.Options()

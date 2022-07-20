@@ -2,6 +2,114 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="uk_UA">
 <context>
+    <name>AppSettings</name>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="162"/>
+        <source>Settings</source>
+        <translation>Налаштування</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="163"/>
+        <source>English</source>
+        <translation>English</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="164"/>
+        <source>Українська</source>
+        <translation>Українська</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="165"/>
+        <source>Русский</source>
+        <translation>Русский</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="166"/>
+        <source>Language</source>
+        <translation>Мова</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="167"/>
+        <source>Use experimental ballistic calc API</source>
+        <translation>Використовувати експерементальне API</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="168"/>
+        <source>General settings</source>
+        <translation>Основні</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="169"/>
+        <source>Temperature</source>
+        <translation>Температура</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="170"/>
+        <source>Sight height</source>
+        <translation>Висота прицілу</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="171"/>
+        <source>Length</source>
+        <translation>Довжина</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="172"/>
+        <source>Weight</source>
+        <translation>Вага</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="173"/>
+        <source>Energy</source>
+        <translation>Енергія</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="174"/>
+        <source>Distance</source>
+        <translation>Дистанція</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="175"/>
+        <source>Angular</source>
+        <translation>Кутові величини</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="176"/>
+        <source>Drop</source>
+        <translation>Падіння кулі</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="177"/>
+        <source>Pressure</source>
+        <translation>Тиск</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="178"/>
+        <source>Velocity</source>
+        <translation>Швидкість</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="179"/>
+        <source>Diameter</source>
+        <translation>Діаметер</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="180"/>
+        <source>Twist</source>
+        <translation>Крок нарізів</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="181"/>
+        <source>Path</source>
+        <translation>Поправка</translation>
+    </message>
+    <message>
+        <location filename="../gui/templates/app_settings.py" line="182"/>
+        <source>Units</source>
+        <translation>Одиниці виміру</translation>
+    </message>
+</context>
+<context>
     <name>ArcheBCUpdate</name>
     <message>
         <location filename="../gui/templates/archerbc_updater_ui.py" line="110"/>
@@ -242,7 +350,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="257"/>
         <source>Copy Table</source>
-        <translation>Копыювати</translation>
+        <translation>Копіювати</translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="258"/>
@@ -253,12 +361,12 @@ Do you want to save changes?</source>
 <context>
     <name>FooterWidget</name>
     <message>
-        <location filename="../gui/templates/footer.py" line="70"/>
+        <location filename="../gui/templates/footer.py" line="52"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="72"/>
+        <location filename="../gui/templates/footer.py" line="53"/>
         <source>No DFU device found</source>
         <translation>Пристрій не підключено</translation>
     </message>
@@ -268,7 +376,7 @@ Do you want to save changes?</source>
         <translation type="obsolete">&amp;lt;font color=black&amp;gt;Налаштування&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="71"/>
+        <location filename="../gui/templates/footer.py" line="54"/>
         <source>Auto search</source>
         <translation>Авто пошук</translation>
     </message>
@@ -280,25 +388,25 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/templates/footer.py" line="75"/>
         <source>English</source>
-        <translation>English</translation>
+        <translation type="obsolete">English</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="76"/>
         <source>Українська</source>
-        <translation>Українська</translation>
+        <translation type="obsolete">Українська</translation>
     </message>
     <message>
         <location filename="../gui/templates/footer.py" line="77"/>
         <source>Русский</source>
-        <translation>Русский</translation>
+        <translation type="obsolete">Русский</translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="74"/>
+        <location filename="../gui/templates/footer.py" line="56"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../gui/templates/footer.py" line="73"/>
+        <location filename="../gui/templates/footer.py" line="55"/>
         <source>Preferences</source>
         <translation>Налаштування</translation>
     </message>
@@ -589,17 +697,17 @@ Do you want to save changes?</source>
 <context>
     <name>MyTabSelector</name>
     <message>
-        <location filename="../gui/my_tab/templates_selector.py" line="27"/>
+        <location filename="../gui/my_tab/templates_selector.py" line="55"/>
         <source>Rifles</source>
         <translation>Гвинтівки</translation>
     </message>
     <message>
-        <location filename="../gui/my_tab/templates_selector.py" line="28"/>
+        <location filename="../gui/my_tab/templates_selector.py" line="56"/>
         <source>Bullets</source>
         <translation>Кулі</translation>
     </message>
     <message>
-        <location filename="../gui/my_tab/templates_selector.py" line="29"/>
+        <location filename="../gui/my_tab/templates_selector.py" line="57"/>
         <source>Cartridges</source>
         <translation>Набої</translation>
     </message>
@@ -674,84 +782,89 @@ Do you want to save changes?</source>
 <context>
     <name>bullet</name>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="323"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="199"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="324"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="200"/>
         <source>Bullet</source>
         <translation>Куля</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="341"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
-        <translation>&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
+        <translation type="obsolete">&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="329"/>
         <source>Inches</source>
-        <translation>Дюйми</translation>
+        <translation type="obsolete">Дюйми</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="330"/>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation type="obsolete">мм</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="331"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="207"/>
         <source>DF info:</source>
         <translation>Інфо:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="332"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="208"/>
         <source>Diameter:</source>
         <translation>Діаметер:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="333"/>
         <source>Grains</source>
-        <translation>Грани</translation>
+        <translation type="obsolete">Грани</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="334"/>
         <source>Grams</source>
-        <translation>Грами</translation>
+        <translation type="obsolete">Грами</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="342"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="211"/>
         <source>&lt;font color=black&gt;Edit drag function&lt;/font&gt;</source>
         <translation>&amp;lt;font color=black&amp;gt;Редагувати драг-функцію&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="336"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="204"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="337"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="205"/>
         <source>Name:</source>
         <translation>Назва:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="338"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="202"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="339"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="206"/>
         <source>Weight:</source>
         <translation>Вага:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="340"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="201"/>
         <source>Drag function:</source>
-        <translation>Драг-функція</translation>
+        <translation>Драг-функція:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="343"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="212"/>
         <source>Edit</source>
         <translation>Редагувати</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_bullet.py" line="210"/>
+        <source>Drag function editor</source>
+        <translation>Редактор драг-функції</translation>
     </message>
 </context>
 <context>
@@ -780,59 +893,59 @@ Do you want to save changes?</source>
 <context>
     <name>cartridge</name>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="190"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="129"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="191"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="130"/>
         <source>Cartridge</source>
         <translation>Набій</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="192"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="136"/>
         <source> °C</source>
         <translation> °C</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="193"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="132"/>
         <source>Muzzle Velocity:</source>
         <translation>Початкова швидкість:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="194"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="131"/>
         <source>Name:</source>
         <translation>Назва:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="195"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="133"/>
         <source>Temperature:</source>
         <translation>Температура:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="196"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="134"/>
         <source> %</source>
         <translation> %</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="197"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="135"/>
         <source>Temperature sensitivity:</source>
         <translation>Температурна чутливість:</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="198"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
-        <translation>&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
+        <translation type="obsolete">&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="199"/>
         <source>m/s</source>
-        <translation>м/с</translation>
+        <translation type="obsolete">м/с</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_cartridge.py" line="200"/>
         <source>fps</source>
-        <translation>фт/с</translation>
+        <translation type="obsolete">фт/с</translation>
     </message>
 </context>
 <context>
@@ -1413,67 +1526,67 @@ Do you want to save changes?</source>
 <context>
     <name>conditions</name>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="313"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="245"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="314"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="246"/>
         <source>Zeroing conditions </source>
         <translation>Умови пристрілки </translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="315"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="247"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="316"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="248"/>
         <source> mmHg</source>
         <translation> мм рт.ст</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="321"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="253"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="322"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="254"/>
         <source> °C</source>
         <translation> °C</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="319"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="251"/>
         <source> %</source>
         <translation> %</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="323"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="255"/>
         <source>Latitude</source>
         <translation>Широта</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="324"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="256"/>
         <source>Azimuth:</source>
         <translation>Азимут:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="325"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="257"/>
         <source>Pressure:</source>
         <translation>Тиск:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="326"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="258"/>
         <source>Humidity:</source>
         <translation>Вологість:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="327"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="259"/>
         <source>Powder Temperature:</source>
         <translation>Температура пороху:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="328"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_conditions.py" line="260"/>
         <source>Temperature:</source>
         <translation>Температура:</translation>
     </message>
@@ -1498,32 +1611,32 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="57"/>
         <source>G1 Multi-BC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="58"/>
         <source>G7 Multi-BC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="59"/>
         <source>Import by file</source>
-        <translation type="unfinished"></translation>
+        <translation>З файлу</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="60"/>
         <source>Import from file</source>
-        <translation type="unfinished"></translation>
+        <translation>З файлу</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="61"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/new_custom_df.py" line="62"/>
         <source>What&apos;s drag function you&apos;ll use as reference?</source>
-        <translation type="unfinished"></translation>
+        <translation>Яку драг-функцію ви використовуватимете як шаблон?</translation>
     </message>
 </context>
 <context>
@@ -1531,7 +1644,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="48"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="50"/>
@@ -1791,7 +1904,7 @@ Do you want to save changes?</source>
         <translation type="obsolete">Мульти БК</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/templates/profile_current.py" line="61"/>
+        <location filename="../gui/profiles_tab/templates/profile_current.py" line="66"/>
         <source>Current profile</source>
         <translation>Поточний профіль</translation>
     </message>
@@ -1836,7 +1949,7 @@ Do you want to save changes?</source>
         <translation type="obsolete">Азимут:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/templates/profile_current.py" line="62"/>
+        <location filename="../gui/profiles_tab/templates/profile_current.py" line="67"/>
         <source>Zeroing conditions</source>
         <translation>Умови пристрілки</translation>
     </message>
@@ -1846,7 +1959,7 @@ Do you want to save changes?</source>
         <translation type="obsolete">Дистанції</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/templates/profile_current.py" line="60"/>
+        <location filename="../gui/profiles_tab/templates/profile_current.py" line="65"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -2279,62 +2392,62 @@ Do you want to save changes?</source>
 <context>
     <name>rifle</name>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="211"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="160"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="212"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="161"/>
         <source>Rifle</source>
         <translation>Гвинтівка</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="213"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="162"/>
         <source>Sight height:</source>
         <translation>Висота прицілу:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="214"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="163"/>
         <source>Name:</source>
         <translation>Назва:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="215"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="164"/>
         <source>Caliber:</source>
         <translation>Калібр:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="216"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="165"/>
         <source>Twist:</source>
         <translation>Крок нарізів:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="217"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="166"/>
         <source> mm</source>
         <translation> мм</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="218"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="167"/>
         <source>Right</source>
         <translation>Правий</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="219"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="168"/>
         <source>Left</source>
         <translation>Лівий</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="220"/>
         <source>Tile:</source>
-        <translation>Скор:</translation>
+        <translation type="obsolete">Скор:</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="221"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="169"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
         <translation>&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="222"/>
+        <location filename="../gui/profiles_tab/profile_item_contents/templates/prof_rifle.py" line="170"/>
         <source>Auto</source>
         <translation>Авто</translation>
     </message>

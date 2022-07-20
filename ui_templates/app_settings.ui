@@ -118,6 +118,9 @@
          <property name="text">
           <string>Use experimental ballistic calc API</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
       </layout>
