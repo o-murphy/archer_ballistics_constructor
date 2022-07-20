@@ -1,6 +1,7 @@
 QWidget {
 	background-color: rgb(51, 51, 51);
 	color: rgb(255, 255, 255);
+    font-size: 14px;
 }
 
 QSpinBox::up-button, QDoubleSpinBox::up-button {
@@ -25,6 +26,7 @@ QDoubleSpinBox::down-button:disabled, QDoubleSpinBox::up-button:disabled {
 QSpinBox, QDoubleSpinBox {
 	background-color: rgb(40, 40, 40);
 	color: rgb(255, 255, 255);
+    alternate-background-color: rgb(40, 40, 40);
 }
 
 QComboBox {
@@ -49,12 +51,18 @@ QComboBox::drop-down:disabled {
 QLineEdit {
 	border: 0px solid rgb(128,128,128);
 	background-color: rgb(40, 40, 40);
+	font-size: 14px;
+}
+
+QLabel {
+	font-size: 14px;
 }
 
 QGroupBox {
 	color: rgb(255, 255, 255);
 	border: 1px solid rgb(78, 78, 78);
 	padding-top: 25px;
+    font-size: 14px;
 }
 
 QGroupBox::title {
@@ -63,6 +71,7 @@ QGroupBox::title {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	background-color: rgb(40, 40, 40);
+    font-size: 14px;
 }
 
 QTableWidget, QTableView {
@@ -137,11 +146,7 @@ QPushButton {
 
 QToolButton {
     border: 0;
-    font-size: 14px;
-}
-
-QComboBox {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 QPushButton:hover, QToolButton:hover {
@@ -157,29 +162,24 @@ QTabBar::tab {
 
 QWidget:disabled {
 	color: rgb(160, 160, 160);
+	font-size: 14px;
 }
-
 QCheckBox::indicator:checked {
     background: rgb(255, 170, 0);
 }
 QCheckBox::indicator:unchecked {
     background: white;
 }
-QCheckBox {
-    font-size: 14px;
-    color: white;
-}
 QComboBox {
     background-color: rgb(40, 40, 40);
+    color: white;
+    font-size: 14px;
 }
 
-QSpinBox {
-    background-color: rgb(40, 40, 40);
-    alternate-background-color: rgb(40, 40, 40);
-}
+
 
 QTabBar::tab {
-	height: 40px; width: 180px;
+	height: 35px; width: 180px;
 	background-color: rgb(76, 76, 76);
 	color: rgb(255, 170, 0);
 	border-top-left-radius: 10px;

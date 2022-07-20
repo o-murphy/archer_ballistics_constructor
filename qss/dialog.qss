@@ -343,3 +343,32 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
+QTabBar {
+    background-color: rgb(76, 76, 76);
+    border: 0px solid rgb(76, 76, 76);
+}
+
+QTabBar::tab {
+	height: 20px; width: 100px;
+	background-color: rgb(76, 76, 76);
+	color: rgb(255, 170, 0);
+	border: 0px solid rgb(76, 76, 76);
+}
+
+QTabBar::tab:!selected {
+	border: 1px solid rgb(76, 76, 76);
+	background-color:rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
+}
+
+QTabBar::tab:hover {
+	border: 0px solid rgb(51, 51, 51);
+}
+
+QTabBar::tab:!hover {
+	border: 1px solid rgb(51, 51, 51);
+}
+
+QTabWidget::pane {
+	border: 2px solid rgb(76, 76, 76);
+}

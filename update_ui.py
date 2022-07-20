@@ -1,16 +1,16 @@
 import os
 
 lines = r"""
-    REM venv\Scripts\pyuic5 ui_templates\profiles_table.ui -o gui\profiles_tab\templates\profiles_table.py
-    REM venv\Scripts\pyuic5 ui_templates\profile_item.ui -o gui\profiles_tab\templates\profile_item.py
-    REM venv\Scripts\pyuic5 ui_templates\add_btn.ui -o gui\profiles_tab\templates\add_btn.py
-    REM venv\Scripts\pyuic5 ui_templates\profile_current.ui -o gui\profiles_tab\templates\profile_current.py
-    REM venv\Scripts\pyuic5 ui_templates\profiles_tab.ui -o gui\profiles_tab\templates\profiles_tab.py
-    REM venv\Scripts\pyuic5 ui_templates\profiles_tools.ui -o gui\profiles_tab\templates\profiles_tools.py
+    venv\Scripts\pyuic5 ui_templates\profiles_table.ui -o gui\profiles_tab\templates\profiles_table.py
+    venv\Scripts\pyuic5 ui_templates\profile_item.ui -o gui\profiles_tab\templates\profile_item.py
+    venv\Scripts\pyuic5 ui_templates\add_btn.ui -o gui\profiles_tab\templates\add_btn.py
+    venv\Scripts\pyuic5 ui_templates\profile_current.ui -o gui\profiles_tab\templates\profile_current.py
+    venv\Scripts\pyuic5 ui_templates\profiles_tab.ui -o gui\profiles_tab\templates\profiles_tab.py
+    venv\Scripts\pyuic5 ui_templates\profiles_tools.ui -o gui\profiles_tab\templates\profiles_tools.py
     REM venv\Scripts\pyuic5 ui_templates\drag_func_edit.ui -o gui\drag_func_editor\templates\drag_func_edit.py
     REM venv\Scripts\pyuic5 ui_templates\current_atmo_dialog.ui -o gui\drag_func_editor\templates\current_atmo_dialog.py
-    REM venv\Scripts\pyuic5 ui_templates\footer.ui -o gui\templates\footer.py
-    REM venv\Scripts\pyuic5 ui_templates\main_gui.ui -o gui\templates\main_gui.py
+    venv\Scripts\pyuic5 ui_templates\footer.ui -o gui\templates\footer.py
+    venv\Scripts\pyuic5 ui_templates\main_gui.ui -o gui\templates\main_gui.py
     
     
     venv\Scripts\pyuic5 ui_templates\catalog_tab.ui -o gui\catalog_tab\templates\catalog_tab.py
@@ -42,6 +42,11 @@ lines = r"""
     REM venv\Scripts\pyuic5 ui_templates\cdf_edit.ui -o gui\old\drag_func_settings\templates\cdf_edit.py
     
     venv\Scripts\pyuic5 ui_templates\app_settings.ui -o gui\templates\app_settings.py
+    
+    venv\Scripts\pyuic5 ui_templates\prof_rifle.ui -o gui\profiles_tab\profile_item_contents\templates\prof_rifle.py
+    venv\Scripts\pyuic5 ui_templates\prof_cartridge.ui -o gui\profiles_tab\profile_item_contents\templates\prof_cartridge.py
+    venv\Scripts\pyuic5 ui_templates\prof_bullet.ui -o gui\profiles_tab\profile_item_contents\templates\prof_bullet.py
+    venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py
     
     REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py
 """

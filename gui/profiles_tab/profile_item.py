@@ -43,7 +43,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.rifleName.setText(self.rifle.rifleName.text())
         self.caliberShort.setText(self.rifle.caliberShort.text())
         self.cartridgeName.setText(self.cartridge.cartridgeName.text())
-        self.weightTile.setText(self.bullet.weightTile())
+        # self.weightTile.setText(self.bullet.weightTile())
 
         self._z_d = Distance(100, DistanceMeter)
 
@@ -66,9 +66,11 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
         self.cartridge.cartridgeName.textChanged.connect(lambda text: self.cartridgeName.setText(text))
         self.rifle.caliberShort.textChanged.connect(lambda text: self.caliberShort.setText(text))
-        self.bullet.weight.valueChanged.connect(lambda: self.weightTile.setText(self.bullet.weightTile()))
-        self.bullet.weightQuantity.currentIndexChanged.connect(
-            lambda: self.weightTile.setText(self.bullet.weightTile())
+
+        self.bullet.weight.valueChanged.connect(
+            lambda: self.weightTile.setText(
+                f'{round(self.bullet.weight.value(), 1)}{self.bullet.weight.suffix().strip()}'
+            )
         )
 
         self.bullet.addDrag.clicked.connect(self.add_drag_data)
@@ -106,7 +108,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         state['df_comment'] = cur_df['comment']
 
         app = QtCore.QCoreApplication.instance()
-        if '-experiment' in app.arguments():
+        if '-experiment' in app.arguments() or self.units.xdfed.isChecked():
             cdf_edit = ExperimentalDFED(state=state)
         else:
             cdf_edit = DFED(state=state)
@@ -121,9 +123,10 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         data.update(**self.cartridge.get())
         data.update(**self.conditions.get())
         data.update(**{
-            self.z_d.objectName(): self._z_d.get_in(DistanceMeter),
-            self.z_x.objectName(): self.z_x.value(),
-            self.z_y.objectName(): self.z_y.value()
+            'z_d': self._z_d.get_in(DistanceMeter),
+            'z_x': self.z_x.value(),
+            'z_y': self.z_y.value(),
+            'weightTile': self.weightTile.text()
         })
         return data
 

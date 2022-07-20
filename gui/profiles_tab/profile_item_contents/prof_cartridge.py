@@ -11,9 +11,6 @@ class Cartridge(QtWidgets.QWidget, Ui_cartridge):
         self.setupUi(self)
         self.cartridgeGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
 
-        self.mvQuantity.setVisible(False)
-        self.mvSwitch.setVisible(False)
-
         self._mv = Velocity(0, VelocityMPS)
         self._temp = Temperature(0, TemperatureCelsius)
 

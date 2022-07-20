@@ -18,13 +18,6 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         self.setupUi(self)
         self.bulletGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
 
-        self.weightQuantity.setVisible(False)
-        self.weightSwitch.setVisible(False)
-        self.lengthQuantity.setVisible(False)
-        self.lengthSwitch.setVisible(False)
-        self.diameterQuantity.setVisible(False)
-        self.diameterSwitch.setVisible(False)
-
         self._weight = Weight(0, WeightGrain)
         self._length = Distance(0, DistanceInch)
         self._diameter = Distance(0, DistanceInch)
@@ -42,13 +35,13 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
     def setUnits(self):
         self.units = AppSettings()
 
-        self.weight.setValue(self._weight.get_in(self.units.wUnits.currentData()))
-        self.length.setValue(self._length.get_in(self.units.lnUnits.currentData()))
-        self.diameter.setValue(self._diameter.get_in(self.units.dUnits.currentData()))
-
         self.weight.setSuffix(self.units.wUnits.currentText())
         self.length.setSuffix(self.units.lnUnits.currentText())
         self.diameter.setSuffix(self.units.dUnits.currentText())
+
+        self.weight.setValue(self._weight.get_in(self.units.wUnits.currentData()))
+        self.length.setValue(self._length.get_in(self.units.lnUnits.currentData()))
+        self.diameter.setValue(self._diameter.get_in(self.units.dUnits.currentData()))
 
     def weight_changed(self, value):
         self._weight = Weight(value, self.units.wUnits.currentData())
@@ -170,11 +163,11 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             self.dragType.setItemText(idx, cur_df.drag_type + ', ' + cur_df.comment)
             # self.dragType.setCurrentText(cur_df.drag_type + ', ' + cur_df.comment)
 
-    def weightTile(self):
-        if self.weightQuantity.currentIndex() == 0:
-            return str(int(round(self.weight.value(), 0))) + 'gr'
-        else:
-            return str(round(self.weight.value(), 1)) + 'g'
+    # def weightTile(self):
+    #     if self.weightQuantity.currentIndex() == 0:
+    #         return str(int(round(self.weight.value(), 0))) + 'gr'
+    #     else:
+    #         return str(round(self.weight.value(), 1)) + 'g'
 
     def get(self):
         drags = []
@@ -190,7 +183,7 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             'weight': self._weight.get_in(WeightGrain),
             'length': self._length.get_in(DistanceInch),
             'diameter': self._diameter.get_in(DistanceInch),
-            "weightTile": self.weightTile(),
+            # "weightTile": self.weightTile(),
             "drags": drags,
             "drag_idx": self.dragType.currentData()
         }
