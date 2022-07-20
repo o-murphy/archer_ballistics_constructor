@@ -274,6 +274,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.Step.setVisible(False)
         self.labelStep.setVisible(False)
 
+        self.calculation_mode.setEnabled(True)
+
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
 
@@ -302,7 +304,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.radioDrop.clicked.connect(self.switch_plot_drop)
         self.radioDrag.clicked.connect(self.switch_plot_drag)
         #
-        #     self.buttonBox.button(QtWidgets.QDialogButtonBox.Reset).clicked.connect(self.reset)
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Reset).clicked.connect(self.reset)
         self.buttonBox.accepted.connect(self.accept)  # type: ignore
         self.buttonBox.rejected.connect(self.reject)  # type: ignore
         #
@@ -379,12 +381,20 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                     x, y = rnd(cd), rnd(min(oy))
                     self.drag_plot.set_cd_at_distance(x, y, distance_in_meter)
 
-    #
-    # def reset(self):
-    #     self.drag_plot.reset_current_plot()
-    #     self.drop_plot.reset_current_plot()
-    #     self.updateState(self.defaults)
-    #
+
+    def reset(self):
+        # self.drag_plot.reset_current_plot()
+        # self.drop_plot.reset_current_plot()
+
+        self.onStateUpdate.disconnect(self.state_did_update)
+
+        self.state = DragEditorState(self, self.defaults)
+        self.onStateUpdate.connect(self.state_did_update)
+        self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
+        self.setWidgets()
+        # self.updateState(self.defaults)
+        self.switch_calculation_mode()
+
     # def append_updates(self):
     #     self.state.drag_function = self.state.current_drag_func
     #     self.update_drag_table()
