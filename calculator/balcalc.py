@@ -78,14 +78,21 @@ class DragEditorState(State):
 
     def calculate_trajectory(self):
         self.setProfile()
-        self.trajectory_data = self.profile.calculate_trajectory()
-        return self.trajectory_data
+        try:
+            trajectory = self.profile.calculate_trajectory()
+            self.trajectory_data = trajectory
+            return self.trajectory_data
+        except ZeroDivisionError:
+            return []
 
     def calculated_drag_function(self):
         if not self.trajectory_data:
             self.calculate_trajectory()
-        return self.profile.calculate_drag_table()
-        # return None
+        try:
+            table = self.profile.calculate_drag_table()
+            return table
+        except ZeroDivisionError:
+            return []
 
     def get_calculated_drop(self):
         if not self.trajectory_data:

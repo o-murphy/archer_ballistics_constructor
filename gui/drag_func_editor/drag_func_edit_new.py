@@ -139,7 +139,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
         elif self.state.df_type.endswith('Multi-BC'):
 
-            self.mbc.bc_table.setRowCount(5)
+            # if self.mbc.bc_table.rowCount() <= 4:
+            # self.mbc.bc_table.setRowCount(5)
 
             if isinstance(self.state.df_data, float):
                 self.state.df_data = [(self.state.df_data, self.state.mv), ]
@@ -154,7 +155,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             self.pasteTable.setDisabled(True)
 
         elif self.state.df_type in ['G1', 'G7']:
-
             if isinstance(self.state.df_data, tuple) or isinstance(self.state.df_data, list):
                 self.state.df_data, self.state.mv = self.state.df_data[0]
 
@@ -163,7 +163,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
             self.mbc.setDisabled(True)
             self.mbc.setVisible(False)
-            self.mbc.bc_table.setRowCount(1)
             self.sbc.setVisible(True)
             self.sbc.setEnabled(True)
 
@@ -304,8 +303,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.radioDrag.clicked.connect(self.switch_plot_drag)
         #
         #     self.buttonBox.button(QtWidgets.QDialogButtonBox.Reset).clicked.connect(self.reset)
-        #     self.buttonBox.accepted.connect(self.accept)  # type: ignore
-        #     self.buttonBox.rejected.connect(self.reject)  # type: ignore
+        self.buttonBox.accepted.connect(self.accept)  # type: ignore
+        self.buttonBox.rejected.connect(self.reject)  # type: ignore
         #
         self.distanceQuantity.currentIndexChanged.connect(self.set_distance_quantity)
         self.holdOffQuantity.currentIndexChanged.connect(lambda: (
@@ -476,6 +475,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
     def __getstate__(self):
         new_state = self.state.__dict__
+        new_state['df_comment'] = self.dfComment.text()
+
         is_new_data = True if self.state.current_drag_func else False
 
         # if is_new_data:
@@ -484,13 +485,21 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         # else:
         #     new_state['df_data'] = self.state.default_drag_func
 
-        [new_state.pop(key) for key in ['ballistics',
-                                        'default_drag_func',
-                                        'current_drag_func',
-                                        'distances',
-                                        'current_distance',
-                                        'default_drop',
-                                        'current_drop']]
+        #     # 'current_distance',
+        #     'default_drop',
+        #     # 'ballistics',
+        #     # 'default_drag_func',
+
+        [new_state.pop(key) for key in [
+            'current_drag_func',
+            'distances',
+            'profile',
+            'default_drop',
+            'current_drop',
+            'trajectory_data',
+            'drags',
+            'drag_idx'
+        ] if key in new_state]
         return new_state
 
     def import_table(self):

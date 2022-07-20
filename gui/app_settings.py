@@ -71,6 +71,8 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         for i, lang in enumerate(self.languages):
             self.Language.setItemData(i, lang)
 
+        self.xdfed.setChecked(True)
+
     def init_units_tab(self):
         self.shUnits.addItem(*mm)
         self.shUnits.addItem(*inch)

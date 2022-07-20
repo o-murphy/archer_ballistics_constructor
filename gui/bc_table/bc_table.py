@@ -47,6 +47,7 @@ class BCTable(QtWidgets.QWidget):
             f'V ({self.units.vUnits.currentText().strip()})'
         ))
 
+        self.bc_table.setRowCount(5)
         self.set()
 
     def setUnits(self):
@@ -65,17 +66,12 @@ class BCTable(QtWidgets.QWidget):
             bc = self.bc_table.item(r, 0).data(QtCore.Qt.EditRole)
             v = self.bc_table.item(r, 1).data(QtCore.Qt.EditRole)
             v = Velocity(v, self.units.vUnits.currentData()).get_in(VelocityMPS)
-            if bc > 0:
+            if bc > 0 and v > 0:
                 ret.append((bc, v))
 
-        # ret = [
-        #     (self.bc_table.item(r, 0).data(QtCore.Qt.EditRole), )
-        #     for r in range(self.bc_table.rowCount())
-        # ]
         return ret
 
     def set_data(self, data: [tuple[tuple], list]):
-        print(data)
         for i, (bc, v) in enumerate(data):
             v = Velocity(v, VelocityMPS).get_in(self.units.vUnits.currentData())
             self.bc_table.item(i, 0).setData(QtCore.Qt.EditRole, bc)
