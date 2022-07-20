@@ -152,21 +152,27 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         if 'Locale' in config:
             locale = config['Locale']['current']
             self.Language.setCurrentIndex(self.languages.index(locale))
+        else:
+            self.save_language_settings()
 
         if 'General' in config:
             exp_dfed = True if config['General']['exp_dfed'] == 'True' else False
             self.xdfed.setChecked(exp_dfed)
+        else:
+            self.save_exp_dfed()
 
     def load_unit_settings(self):
         config = configparser.ConfigParser()
         config.read(CONFIG_PATH)
 
         widgets = self.findChildren(QtWidgets.QComboBox)
-
-        for i in config['Units']:
-            for w in widgets:
-                if i == w.objectName().lower():
-                    w.setCurrentIndex(w.findData(config['Units'][i]))
+        if 'Units' in config:
+            for i in config['Units']:
+                for w in widgets:
+                    if i == w.objectName().lower():
+                        w.setCurrentIndex(w.findData(config['Units'][i]))
+        else:
+            self.save_units_settings()
 
     def save_exp_dfed(self):
         exp_dfed = self.xdfed.isChecked()

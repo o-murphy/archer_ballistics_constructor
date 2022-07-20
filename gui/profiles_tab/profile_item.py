@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_profileItem
-from ..single_custom_widgets import NoWheelDoubleSpinBox
+from ..single_custom_widgets import NoWheelDoubleSpinBox, NoWheelSpinBox
 from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
@@ -23,6 +23,7 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.setStyleSheet(load_qss('qss/profile_item.qss'))
 
         self.z_x = NoWheelDoubleSpinBox()
+        self.z_x = NoWheelDoubleSpinBox()
         self.z_x.setPrefix('X: ')
         self.z_y = NoWheelDoubleSpinBox()
         self.z_y.setPrefix('Y: ')
@@ -31,6 +32,12 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_x.setObjectName('z_x')
         self.z_y.setObjectName('z_y')
         self.z_d.setObjectName('z_d')
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        self.z_d.setSizePolicy(sizePolicy)
+        self.z_d.resize(90, 50)
+        self.z_d.setDecimals(1)
+
         self.gridLayout.addWidget(self.z_x, 0, 2, 1, 1)
         self.gridLayout.addWidget(self.z_y, 1, 2, 1, 1)
         self.gridLayout.addWidget(self.z_d, 0, 3, 2, 1)

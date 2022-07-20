@@ -47,9 +47,9 @@ class Ui_profilesTable(object):
         self.tableWidget.horizontalHeader().setDefaultSectionSize(415)
         self.tableWidget.horizontalHeader().setMinimumSectionSize(415)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
-        self.tableWidget.verticalHeader().setDefaultSectionSize(60)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(50)
         self.tableWidget.verticalHeader().setHighlightSections(True)
-        self.tableWidget.verticalHeader().setMinimumSectionSize(60)
+        self.tableWidget.verticalHeader().setMinimumSectionSize(50)
         self.tableWidget.verticalHeader().setStretchLastSection(True)
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 

@@ -13,6 +13,7 @@ class Rifle(QtWidgets.QWidget, Ui_rifle):
         super(Rifle, self).__init__(parent)
         self.setupUi(self)
         self.rifleGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
+        self.caliberShort.setPlaceholderText('Tile text:')
         self.autoTile.clicked.connect(self.auto_tile)
 
         self._sh = Distance(0, DistanceMillimeter)

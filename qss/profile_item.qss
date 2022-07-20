@@ -1,6 +1,6 @@
 QWidget {
 	border: 1px solid rgb(78, 78, 78);
-	font-size: 15px;
+	font-size: 14px;
 }
 
 QLabel {
@@ -31,7 +31,7 @@ QDoubleSpinBox::down-button:hover, QDoubleSpinBox::up-button:hover {
 
 QWidget#tile {
     background-color: black;
-    font-size: 16px;
+    font-size: 14px;
     color: black;
     font-family: "Bahnschrift Light Condensed";
 }

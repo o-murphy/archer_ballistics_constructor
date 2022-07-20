@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 class NoWheelDoubleSpinBox(QtWidgets.QDoubleSpinBox):
     def __init__(self):
         super(NoWheelDoubleSpinBox, self).__init__()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
