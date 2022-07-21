@@ -1,10 +1,12 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_catalogCartridgeInfo
 from dbworker import db
 from dbworker.models import *
 
 
-class CatalogCartridgeInfo(QtWidgets.QWidget, Ui_catalogCartridgeInfo):
+class CatalogCartridgeInfo(QWidget, Ui_catalogCartridgeInfo):
     def __init__(self):
         super(CatalogCartridgeInfo, self).__init__()
         self.setupUi(self)
@@ -26,10 +28,14 @@ class CatalogCartridgeInfo(QtWidgets.QWidget, Ui_catalogCartridgeInfo):
                 )
 
     def clear(self):
+
+        _translate = QCoreApplication.translate
+        empty = _translate('catalogCartridgeInfo', 'Empty')
+
         self.item = None
-        self.cartridgeName.setText('Empty')
-        self.mv.setText('Empty')
-        self.temp.setText('Empty')
-        self.ts.setText('Empty')
-        self.bullet.setText('Empty')
-        self.caliber.setText('Empty')
+        self.cartridgeName.setText(empty)
+        self.mv.setText(empty)
+        self.temp.setText(empty)
+        self.ts.setText(empty)
+        self.bullet.setText(empty)
+        self.caliber.setText(empty)

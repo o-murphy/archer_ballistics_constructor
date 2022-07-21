@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QWidget
+
 from .templates import Ui_catalogItemEdit
 from gui.stylesheet import load_qss
 
 
-class CatalogItemEdit(QtWidgets.QDialog, Ui_catalogItemEdit):
-    def __init__(self, widget: QtWidgets.QWidget):
+class CatalogItemEdit(QDialog, Ui_catalogItemEdit):
+    def __init__(self, widget: QWidget):
         super(CatalogItemEdit, self).__init__()
         self.setupUi(self)
 

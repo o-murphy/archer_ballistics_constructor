@@ -1,17 +1,20 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QComboBox, QDialog, QSizePolicy, QPushButton, QLabel, QGridLayout
+
 from gui.stylesheet import load_qss
 
 
-class DFCombo(QtWidgets.QComboBox):
+class DFCombo(QComboBox):
     def __init__(self):
         super(DFCombo, self).__init__()
         self.addItems(['G1', 'G7', 'G1 Multi-BC', 'G7 Multi-BC', 'Custom'])
 
 
-class DFTypeDlg(QtWidgets.QDialog):
+class DFTypeDlg(QDialog):
     def __init__(self):
         super(DFTypeDlg, self).__init__()
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint)
 
         self.setStyleSheet(load_qss('qss/dialog.qss') + """
             QDialog {border: 1px solid rgb(76, 76, 76)}
@@ -19,21 +22,21 @@ class DFTypeDlg(QtWidgets.QDialog):
 
         self.combo = DFCombo()
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.combo.sizePolicy().hasHeightForWidth())
         self.combo.setSizePolicy(sizePolicy)
 
-        font = QtGui.QFont()
+        font = QFont()
         font.setPointSize(12)
         self.combo.setFont(font)
 
-        self.ok = QtWidgets.QPushButton('OK')
-        self.cancel = QtWidgets.QPushButton('Cancel')
-        self.grid = QtWidgets.QGridLayout()
+        self.ok = QPushButton('OK')
+        self.cancel = QPushButton('Cancel')
+        self.grid = QGridLayout()
         self.setLayout(self.grid)
-        self.label = QtWidgets.QLabel()
+        self.label = QLabel()
         self.grid.addWidget(self.label, 0, 0, 1, 2)
         self.grid.addWidget(self.combo, 1, 0, 1, 2)
         self.grid.addWidget(self.ok)
@@ -41,10 +44,8 @@ class DFTypeDlg(QtWidgets.QDialog):
         self.ok.clicked.connect(self.accept)
         self.cancel.clicked.connect(self.reject)
 
-        self.retranslateUi(self)
+        self.retranslateUi()
 
-    def retranslateUi(self, DFTypeDlg):
-        _translate = QtCore.QCoreApplication.translate
-
+    def retranslateUi(self):
+        _translate = QCoreApplication.translate
         self.label.setText(_translate('DFTypeDlg', "What's type of drag_func you'll use?"))
-

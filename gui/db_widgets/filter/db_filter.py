@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_filter
 from dbworker import db
 from dbworker.models import *
 
 
-class Filter(QtWidgets.QWidget, Ui_filter):
+class Filter(QWidget, Ui_filter):
     def __init__(self):
         super(Filter, self).__init__()
         self.setupUi(self)

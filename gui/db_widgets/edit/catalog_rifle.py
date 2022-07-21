@@ -1,15 +1,16 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_catalogRifle
 from dbworker import db
 from dbworker.models import *
 from .caliber_edit import CaliberEdit
 
 
-class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
+class CatalogRifle(QWidget, Ui_catalogRifle):
     def __init__(self, data=None, call=None):
         super(CatalogRifle, self).__init__()
         self.setupUi(self)
-        self.title = 'Rifle Edit'
 
         self.data = data
         self.call = call
@@ -79,3 +80,8 @@ class CatalogRifle(QtWidgets.QWidget, Ui_catalogRifle):
         if ced.exec_():
             ced.get()
         self.query_calibers()
+
+    def retranslateUi(self, catalogRifle):
+        super(CatalogRifle, self).retranslateUi(catalogRifle)
+        _translate = QCoreApplication.translate
+        catalogRifle.setWindowTitle(_translate("catalogRifle", 'Rifle Edit'))

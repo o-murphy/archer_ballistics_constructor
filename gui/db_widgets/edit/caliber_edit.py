@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog
+
 from .templates import Ui_caliberEdit
 from dbworker import db
 from dbworker.models import Caliber, Diameter
 
 
-class CaliberEdit(QtWidgets.QDialog, Ui_caliberEdit):
+class CaliberEdit(QDialog, Ui_caliberEdit):
     def __init__(self):
         super(CaliberEdit, self).__init__()
         self.setupUi(self)

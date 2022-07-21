@@ -1,10 +1,12 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_catalogBulletInfo
 from dbworker import db
 from dbworker.models import *
 
 
-class CatalogBulletInfo(QtWidgets.QWidget, Ui_catalogBulletInfo):
+class CatalogBulletInfo(QWidget, Ui_catalogBulletInfo):
     def __init__(self):
         super(CatalogBulletInfo, self).__init__()
         self.setupUi(self)
@@ -23,14 +25,22 @@ class CatalogBulletInfo(QtWidgets.QWidget, Ui_catalogBulletInfo):
 
                 g1 = sess.query(DragFunc).filter_by(bullet_id=id).filter_by(drag_type='G1').first()
                 g7 = sess.query(DragFunc).filter_by(bullet_id=id).filter_by(drag_type='G7').first()
-                self.g1.setText(f'{g1.data:.3f}' if g1 else 'Empty')
-                self.g7.setText(f'{g7.data:.3f}' if g7 else 'Empty')
+
+                _translate = QCoreApplication.translate
+                empty = _translate('catalogBulletInfo', 'Empty')
+
+                self.g1.setText(f'{g1.data:.3f}' if g1 else empty)
+                self.g7.setText(f'{g7.data:.3f}' if g7 else empty)
 
     def clear(self):
+
+        _translate = QCoreApplication.translate
+        empty = _translate('catalogBulletInfo', 'Empty')
+
+        self.bulletName.setText(empty)
+        self.diameter.setText(empty)
+        self.lenght.setText(empty)
+        self.weight.setText(empty)
+        self.g1.setText(empty)
+        self.g7.setText(empty)
         self.item = None
-        self.bulletName.setText('Empty')
-        self.diameter.setText('Empty')
-        self.lenght.setText('Empty')
-        self.weight.setText('Empty')
-        self.g1.setText('Empty')
-        self.g7.setText('Empty')

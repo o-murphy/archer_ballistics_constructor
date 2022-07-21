@@ -1,11 +1,13 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget, QMessageBox
+
 from .templates import Ui_catalogCartridge
 from dbworker import db
 from dbworker.models import *
 from .caliber_edit import CaliberEdit
 
 
-class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
+class CatalogCartridge(QWidget, Ui_catalogCartridge):
     def __init__(self, data: Cartridge = None, call=None):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
@@ -16,6 +18,8 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         self.data = data
 
         self.set_calibers()
+
+        self.msg = QMessageBox()
 
         if self.data:
             self.cartridgeName.setText(self.data.name)
@@ -78,12 +82,18 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
             return True
 
     def invalid(self):
-        msg = QtWidgets.QMessageBox(text="Muzzle velocity can't be 0")
-        msg.setWindowTitle('Error!')
-        msg.exec_()
+        # msg = QMessageBox(text="Muzzle velocity can't be 0")
+        self.retranslateUi(self)
+        self.msg.exec_()
 
     def add_caliber(self):
         ced = CaliberEdit()
         if ced.exec_():
             cal_id = ced.get()
         self.set_calibers()
+
+    def retranslateUi(self, catalogCartridge):
+        super(CatalogCartridge, self).retranslateUi(catalogCartridge)
+        _translate = QCoreApplication.translate
+        self.msg.setText(_translate('catalogCartridge', "Muzzle velocity can't be 0"))
+        self.msg.setWindowTitle(_translate('catalogCartridge', 'Error!'))
