@@ -1,4 +1,7 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+# from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDoubleSpinBox, QDialog, QSizePolicy, QComboBox, QGridLayout, QLabel, QDialogButtonBox, \
+    QApplication, QFileDialog
 
 from gui.drag_func_editor.templates import Ui_DragFuncEditDialog
 from gui.drag_func_editor.drag_func_plot import DragPlot
@@ -17,15 +20,17 @@ from modules.env_update import USER_RECENT
 
 from modules.converter import BConverter
 
+rnd = BConverter.auto_rnd
 
-class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
+
+class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
 
     def __init__(self, state: dict = None):
         super().__init__()
         self.setupUi(self)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
 
-        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, True)
+        self.setWindowFlag(Qt.WindowMaximizeButtonHint, True)
         self.setWindowTitle('ArcherBC - Drag Function Editor (experimental)')
         self.dfComment.setStyleSheet("""color: orange; font-size: 14px;""")
 
@@ -39,19 +44,19 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.dfComment.setText(self.state.df_comment)
 
         self.mbc = BCTable(self)
-        self.sbc = QtWidgets.QDoubleSpinBox(self)
+        self.sbc = QDoubleSpinBox(self)
         self.sbc.setMaximum(10)
         self.sbc.setMinimum(0.001)
         self.sbc.setDecimals(3)
         self.sbc.setSingleStep(0.001)
 
-        spolicy = QtWidgets.QSizePolicy()
-        spolicy.setVerticalPolicy(QtWidgets.QSizePolicy.Expanding)
-        spolicy.setHorizontalPolicy(QtWidgets.QSizePolicy.Expanding)
+        spolicy = QSizePolicy()
+        spolicy.setVerticalPolicy(QSizePolicy.Expanding)
+        spolicy.setHorizontalPolicy(QSizePolicy.Expanding)
 
         self.sbc.setSizePolicy(spolicy)
 
-        self.calculation_mode = QtWidgets.QComboBox(self)
+        self.calculation_mode = QComboBox(self)
 
         self.calculation_mode.addItem('G7', 'G7')
         self.calculation_mode.addItem('G7 Multi-BC', 'G7 Multi-BC')
@@ -101,14 +106,14 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                                  'You will lost multi bc table\n' \
                                  'Do you really want to submit it?'
 
-                alert = QtWidgets.QDialog()
-                alert.setLayout(QtWidgets.QGridLayout())
-                alert.layout().addWidget(QtWidgets.QLabel(alert_text))
-                btnbox = QtWidgets.QDialogButtonBox(alert)
+                alert = QDialog()
+                alert.setLayout(QGridLayout())
+                alert.layout().addWidget(QLabel(alert_text))
+                btnbox = QDialogButtonBox(alert)
                 alert.layout().addWidget(btnbox)
-                btnbox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel)
-                btnbox.button(QtWidgets.QDialogButtonBox.Ok).clicked.connect(alert.accept)
-                btnbox.button(QtWidgets.QDialogButtonBox.Cancel).clicked.connect(alert.reject)
+                btnbox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+                btnbox.button(QDialogButtonBox.Ok).clicked.connect(alert.accept)
+                btnbox.button(QDialogButtonBox.Cancel).clicked.connect(alert.reject)
 
                 al = alert.exec_()
                 if al == 0:
@@ -303,7 +308,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.radioDrop.clicked.connect(self.switch_plot_drop)
         self.radioDrag.clicked.connect(self.switch_plot_drag)
         #
-        self.buttonBox.button(QtWidgets.QDialogButtonBox.Reset).clicked.connect(self.reset)
+        self.buttonBox.button(QDialogButtonBox.Reset).clicked.connect(self.reset)
         self.buttonBox.accepted.connect(self.accept)  # type: ignore
         self.buttonBox.rejected.connect(self.reject)  # type: ignore
         #
@@ -335,8 +340,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         self.EndUp.clicked.connect(lambda: self.set_coefficient('end', 1))
         self.EndDown.clicked.connect(lambda: self.set_coefficient('end', -1))
 
-    # def keyPressEvent(self, e: QtGui.QKeyEvent) -> None:
-    #     if e.key() == QtCore.Qt.Key_Enter:
+    # def keyPressEvent(self, e: QKeyEvent) -> None:
+    #     if e.key() == Qt.Key_Enter:
     #         e.ignore()
 
     def custom_drop_at_distance(self):
@@ -380,7 +385,6 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
                     x, y = rnd(cd), rnd(min(oy))
                     self.drag_plot.set_cd_at_distance(x, y, distance_in_meter)
 
-
     def reset(self):
         # self.drag_plot.reset_current_plot()
         # self.drop_plot.reset_current_plot()
@@ -418,12 +422,12 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
             datasheet.append(f"{str(v).replace(r'.', r',')}\t{str(c).replace(r'.', r',')}")
         datasheet = '\n'.join(datasheet)
 
-        cb = QtWidgets.QApplication.clipboard()
+        cb = QApplication.clipboard()
         cb.clear(mode=cb.Clipboard)
         cb.setText(datasheet, mode=cb.Clipboard)
 
     def paste_table(self):
-        cb = QtWidgets.QApplication.clipboard()
+        cb = QApplication.clipboard()
         lines = cb.text().split('\n')
         pairs = [i.split('\t') for i in lines if len(i.split('\t')) == 2]
         float_pairs = [[float(i.replace(',', '.')), float(j.replace(',', '.'))] for i, j in pairs]
@@ -512,8 +516,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         return new_state
 
     def import_table(self):
-        options = QtWidgets.QFileDialog.Options()
-        fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
+        options = QFileDialog.Options()
+        fileName, fileFormat = QFileDialog.getOpenFileName(
             self,
             "QFileDialog.getOpenFileName()",
             USER_RECENT,
@@ -541,8 +545,8 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
         data = self.state.current_drag_func
         if data:
 
-            options = QtWidgets.QFileDialog.Options()
-            fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
+            options = QFileDialog.Options()
+            fileName, fileFormat = QFileDialog.getSaveFileName(
                 self,
                 "QFileDialog.getSaveFileName()",
                 rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_',
@@ -557,7 +561,7 @@ class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):
 
 def main():
     import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     # NATIVE DARK THEME
     from dark_theme import DarkTheme

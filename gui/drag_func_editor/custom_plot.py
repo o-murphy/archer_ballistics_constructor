@@ -1,14 +1,15 @@
-from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QSizePolicy, QHBoxLayout
 import pyqtgraph as pg
 
 
-class CustomPlot(QtWidgets.QWidget):
+class CustomPlot(QWidget):
     def __init__(self, name):
         super().__init__()
         self.setObjectName(name)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setSizePolicy(sizePolicy)
-        self.verticalLayout = QtWidgets.QHBoxLayout(self)
+        self.verticalLayout = QHBoxLayout(self)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(4)
         self.graphWidget = pg.PlotWidget()
@@ -28,17 +29,17 @@ class CustomPlot(QtWidgets.QWidget):
         self.graphWidget.showGrid(x=True, y=True, alpha=0.3)
 
         self.default_plot = self.graphWidget.plot(pen=pg.mkPen(color='w'))
-        self.init_plot = self.graphWidget.plot(pen=pg.mkPen(color='r', style=QtCore.Qt.DotLine))
+        self.init_plot = self.graphWidget.plot(pen=pg.mkPen(color='r', style=Qt.DotLine))
         self.current_plot = self.graphWidget.plot(pen=pg.mkPen(color=(255, 170, 0)))
 
         self.current_point = self.graphWidget.plot()
         self.current_point_text = pg.TextItem(text="", color=(255, 255, 255), anchor=(0, 1))
 
         self.text_item = pg.TextItem(text="", color=(0, 255, 255), anchor=(1, 1))
-        self.peak_line = pg.InfiniteLine(pen=pg.mkPen(color='w', style=QtCore.Qt.DotLine))
+        self.peak_line = pg.InfiniteLine(pen=pg.mkPen(color='w', style=Qt.DotLine))
         self.peak_line.setVisible(False)
 
-        self.cd_at_distance = pg.InfiniteLine(pen=pg.mkPen(color='r', style=QtCore.Qt.DashLine))
+        self.cd_at_distance = pg.InfiniteLine(pen=pg.mkPen(color='r', style=Qt.DashLine))
         self.cd_at_distance.setVisible(False)
         self.cd_at_distance_text = pg.TextItem(text="", color='r', anchor=(0, 1))
 

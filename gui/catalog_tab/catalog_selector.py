@@ -1,11 +1,12 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_catalogSelector
 from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
 from dbworker.models import *
 from ..db_widgets.contexts import CatalogMenu
 
 
-class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
+class CatalogSelector(QWidget, Ui_catalogSelector):
     def __init__(self):
         super(CatalogSelector, self).__init__()
         self.setupUi(self)
@@ -34,7 +35,7 @@ class CatalogSelector(QtWidgets.QWidget, Ui_catalogSelector):
             lambda sel, desel: self.select(sel, desel, self.cartridges.info)
         )
 
-    def select(self, select, deselect, info: QtWidgets.QWidget):
+    def select(self, select, deselect, info: QWidget):
         if select:
             indexes = select.first().indexes()
             if indexes:

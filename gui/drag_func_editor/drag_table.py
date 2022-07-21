@@ -1,4 +1,6 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QTableWidgetItem, QAbstractItemView
+
 from .templates import Ui_DragTable
 from gui.delegates import Velocity, DragCoefficient
 
@@ -19,11 +21,11 @@ class DragTable(Ui_DragTable):
         if data:
             self.setColumnCount(len(data))
             for i, (v, c) in enumerate(data):
-                self.setItem(0, i, QtWidgets.QTableWidgetItem())
-                self.setItem(1, i, QtWidgets.QTableWidgetItem())
-                self.item(0, i).setData(QtCore.Qt.EditRole, round(v, 2))
-                self.item(1, i).setData(QtCore.Qt.EditRole, round(c, 4))
+                self.setItem(0, i, QTableWidgetItem())
+                self.setItem(1, i, QTableWidgetItem())
+                self.item(0, i).setData(Qt.EditRole, round(v, 2))
+                self.item(1, i).setData(Qt.EditRole, round(c, 4))
 
     def readonly(self):
-        self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.setSelectionMode(QAbstractItemView.SingleSelection)

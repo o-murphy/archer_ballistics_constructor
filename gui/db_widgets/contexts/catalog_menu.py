@@ -1,10 +1,16 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMenu, QAction
+from PyQt5.QtCore import QCoreApplication
 
 
-class CatalogMenu(QtWidgets.QMenu):
+class CatalogMenu(QMenu):
     def __init__(self):
         super(CatalogMenu, self).__init__()
 
         self.setObjectName('CatalogMenu')
-        self.template = QtWidgets.QAction('Add template', self)
+        self.template = QAction('Add template', self)
         self.addAction(self.template)
+        self.retranslateUi()
+
+    def retranslateUi(self):
+        _translate = QCoreApplication.translate
+        self.template.setText(_translate('CatalogMenu', 'Add template'))

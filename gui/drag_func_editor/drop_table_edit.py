@@ -1,9 +1,9 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget
 from .templates.drop_table_edit import Ui_dropTableEdit
 from .drop_table import DropTable
 
 
-class DropTableEdit(QtWidgets.QWidget, Ui_dropTableEdit):
+class DropTableEdit(QWidget, Ui_dropTableEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)

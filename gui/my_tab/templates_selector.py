@@ -1,11 +1,12 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget
 from .templates import Ui_myTabSelector
 from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
 from dbworker.models import *
 from ..db_widgets.contexts import TemplatesMenu
 
 
-class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
+class MyTabSelector(QWidget, Ui_myTabSelector):
     def __init__(self):
         super(MyTabSelector, self).__init__()
         self.setupUi(self)
@@ -40,7 +41,7 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
 
         self.retranslateUi(self)
 
-    def select(self, select, deselect, info: QtWidgets.QWidget):
+    def select(self, select, deselect, info: QWidget):
         if select:
             indexes = select.first().indexes()
             if indexes:
@@ -50,8 +51,9 @@ class MyTabSelector(QtWidgets.QWidget, Ui_myTabSelector):
                     info.set(item[0])
 
     def retranslateUi(self, catalogSelector):
-        _translate = QtCore.QCoreApplication.translate
+        _translate = QCoreApplication.translate
 
         self.tabWidget.setTabText(0, _translate('MyTabSelector', 'Rifles'))
         self.tabWidget.setTabText(1, _translate('MyTabSelector', 'Bullets'))
         self.tabWidget.setTabText(2, _translate('MyTabSelector', 'Cartridges'))
+        super(MyTabSelector, self).retranslateUi(catalogSelector)

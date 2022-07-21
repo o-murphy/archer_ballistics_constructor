@@ -1,11 +1,13 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_catalogTab
 from .catalog_selector import CatalogSelector
 
 from gui.stylesheet import load_qss
 
 
-class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
+class CatalogTab(QWidget, Ui_catalogTab):
     def __init__(self):
         super(CatalogTab, self).__init__()
         self.setupUi(self)
@@ -34,5 +36,5 @@ class CatalogTab(QtWidgets.QWidget, Ui_catalogTab):
                            )
 
         self.selector = CatalogSelector()
-        self.gridLayout.setAlignment(QtCore.Qt.AlignLeft)
+        self.gridLayout.setAlignment(Qt.AlignLeft)
         self.gridLayout.addWidget(self.selector, 0, 0, 1, 1)
