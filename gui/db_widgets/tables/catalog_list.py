@@ -1,20 +1,22 @@
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QStandardItem, QCursor, QStandardItemModel
+from PyQt5.QtWidgets import QHeaderView, QWidget
+
 from dbworker import db
 from .templates import Ui_roTable
 from ..edit import CatalogItemEdit
 
 
-class CatalogList(QtWidgets.QWidget, Ui_roTable):
+class CatalogList(QWidget, Ui_roTable):
     def __init__(self, model=None, attrs=None, editor=None):
         super(CatalogList, self).__init__()
         self.setupUi(self)
 
-        # self.tableWidget: QtWidgets.QTableWidget = None
         self.data = []
         self.model = model
         self.attrs = attrs
         self.editor = editor
-        self.table_model = QtGui.QStandardItemModel(self)
+        self.table_model = QStandardItemModel(self)
 
         self.proxy_filter = None
 
@@ -31,7 +33,7 @@ class CatalogList(QtWidgets.QWidget, Ui_roTable):
     def context_menu(self, e):
         index = self.tableView.indexAt(e.pos())
         if self.menu:
-            self.menu.popup(QtGui.QCursor.pos())
+            self.menu.popup(QCursor.pos())
             action = self.menu.exec_()
             if self.menu.objectName() == "TemplatesMenu":
                 if action == self.menu.add:
@@ -54,8 +56,8 @@ class CatalogList(QtWidgets.QWidget, Ui_roTable):
 
             for i, y in enumerate(self.data):
                 for j, x in enumerate(y):
-                    self.table_model.setItem(i, j, QtGui.QStandardItem())
-                    self.table_model.item(i, j).setData(x, QtCore.Qt.DisplayRole)
+                    self.table_model.setItem(i, j, QStandardItem())
+                    self.table_model.item(i, j).setData(x, Qt.DisplayRole)
 
         self.tableView.setModel(self.table_model)
 
@@ -65,12 +67,12 @@ class CatalogList(QtWidgets.QWidget, Ui_roTable):
     def set_header(self):
         header = self.tableView.horizontalHeader()
         header.setSectionHidden(0, True)
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
         for i in range(2, header.count()):
-            header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+            header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
 
     def viewport_row(self):
-        cursor = self.tableView.mapFromGlobal(QtGui.QCursor().pos())
+        cursor = self.tableView.mapFromGlobal(QCursor().pos())
         return self.tableView.indexAt(cursor)
 
     def set_data(self):

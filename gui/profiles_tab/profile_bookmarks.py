@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
-from PyQt5.QtWidgets import QDialog, QGridLayout, QPushButton, QMessageBox, QSizePolicy
+from PyQt5.QtWidgets import QDialog
 from gui.db_widgets.tables.catalog_rifle_list import CatalogRifleList
 from gui.db_widgets.tables.catalog_cartridge_list import CatalogCartridgeList
 from dbworker.models import *

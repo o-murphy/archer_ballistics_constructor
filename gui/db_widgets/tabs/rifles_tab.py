@@ -1,4 +1,5 @@
-from PyQt5 import QtCore
+from PyQt5.QtCore import Qt, QRegExp
+
 from .tab import Tab
 from ..tables import CatalogRifleList
 from ..info import CatalogRifleInfo
@@ -30,7 +31,7 @@ class RiflesTab(Tab):
     def apply_filter(self):
         text = self.filter_widget.name.text()
         if text:
-            regexp = QtCore.QRegExp(text, QtCore.Qt.CaseInsensitive)
+            regexp = QRegExp(text, Qt.CaseInsensitive)
             self.list.proxy_model1.setFilterRegExp(regexp)
 
         value = self.filter_widget.diameter.value()

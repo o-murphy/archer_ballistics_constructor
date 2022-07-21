@@ -1,9 +1,11 @@
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QWidget
 
 from .templates import Ui_catalogSelector
 from ..db_widgets.tabs import RiflesTab, CartridgesTab, BulletsTab
 from dbworker.models import *
 from ..db_widgets.contexts import CatalogMenu
+from ..my_tab.templates_selector import MyTabSelector
 
 
 class CatalogSelector(QWidget, Ui_catalogSelector):
@@ -35,6 +37,8 @@ class CatalogSelector(QWidget, Ui_catalogSelector):
             lambda sel, desel: self.select(sel, desel, self.cartridges.info)
         )
 
+        self.retranslateUi(self)
+
     def select(self, select, deselect, info: QWidget):
         if select:
             indexes = select.first().indexes()
@@ -43,3 +47,11 @@ class CatalogSelector(QWidget, Ui_catalogSelector):
                 item = self.sender().model().itemData(index)
                 if item:
                     info.set(item[0])
+
+    def retranslateUi(self, catalogSelector):
+        _translate = QCoreApplication.translate
+
+        self.tabWidget.setTabText(0, _translate('CatalogSelector', 'Rifles'))
+        self.tabWidget.setTabText(1, _translate('CatalogSelector', 'Bullets'))
+        self.tabWidget.setTabText(2, _translate('CatalogSelector', 'Cartridges'))
+        super(CatalogSelector, self).retranslateUi(catalogSelector)

@@ -12,7 +12,7 @@ class CatalogCartridge(QWidget, Ui_catalogCartridge):
         super(CatalogCartridge, self).__init__()
         self.setupUi(self)
 
-        self.title = 'Cartridge Edit'
+        self.title = ''
 
         self.call = call
         self.data = data
@@ -34,6 +34,8 @@ class CatalogCartridge(QWidget, Ui_catalogCartridge):
 
         self.caliber.currentIndexChanged.connect(self.set_bullets)
         self.pushButton.clicked.connect(self.add_caliber)
+
+        self.retranslateUi(self)
 
     def set_bullets(self):
         sess = db.SessMake()
@@ -95,5 +97,7 @@ class CatalogCartridge(QWidget, Ui_catalogCartridge):
     def retranslateUi(self, catalogCartridge):
         super(CatalogCartridge, self).retranslateUi(catalogCartridge)
         _translate = QCoreApplication.translate
-        self.msg.setText(_translate('catalogCartridge', "Muzzle velocity can't be 0"))
-        self.msg.setWindowTitle(_translate('catalogCartridge', 'Error!'))
+        self.title = _translate("catalogCartridge", 'Cartridge Edit')
+        if hasattr(self, 'img'):
+            self.msg.setText(_translate('catalogCartridge', "Muzzle velocity can't be 0"))
+            self.msg.setWindowTitle(_translate('catalogCartridge', 'Error!'))

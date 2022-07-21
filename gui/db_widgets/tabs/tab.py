@@ -1,4 +1,6 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QGridLayout, QWidget
+
 from ..toolbar import InfoTools
 from dbworker import db
 
@@ -6,15 +8,15 @@ from ..tables.catalog_list import CatalogList
 from ..filter import Filter
 
 
-class Tab(QtWidgets.QWidget):
+class Tab(QWidget):
     def __init__(self):
         super(Tab, self).__init__()
         self.setStyleSheet("""QLabel {font-size: 16px;}""")
         self.setObjectName('SelectorTab')
 
-        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout = QGridLayout()
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setAlignment(QtCore.Qt.AlignTop)
+        self.gridLayout.setAlignment(Qt.AlignTop)
         self.setLayout(self.gridLayout)
 
         self.list = None

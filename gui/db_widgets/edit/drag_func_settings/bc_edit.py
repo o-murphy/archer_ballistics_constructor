@@ -39,4 +39,5 @@ class BCEdit(QDialog, Ui_bcEdit):
     def retranslateUi(self, bcEdit):
         super(BCEdit, self).retranslateUi(bcEdit)
         _translate = QCoreApplication.translate
-        self.message_box.setText(_translate('bcEdit', 'BC cannot be 0'))
+        if hasattr(bcEdit, 'message_box'):
+            self.message_box.setText(_translate('bcEdit', 'BC cannot be 0'))

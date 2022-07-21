@@ -20,7 +20,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
     TODO: fix update df data for archer_ballistics.pyd
     TODO: unify API methods for each of ballistic calculator extensions
     TODO: rebuild wrong ui templates
-    TODO: rewrite "retranslateUI" methods if needed
+    # TODO: rewrite "retranslateUI" methods if needed
     TODO: update transtations
     TODO: update dbwidgets for units convertor
     TODO: update dbworker filters
@@ -105,6 +105,8 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tabWidget.addTab(self.my_tab, QtGui.QIcon(), 'Templates')
         self.tabWidget.addTab(self.catalog_tab, QtGui.QIcon(), 'Catalog')
 
+        self.retranslate_tabs()
+
         footer_widget = FooterWidget(self)
         self.__setattr__('footer_widget', footer_widget)
         self.gridLayout.addWidget(self.footer_widget, 1, 0, 1, 1)
@@ -127,6 +129,12 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         # if hasattr(self, 'profiles_tab'):
         #     self.profiles_tab.save_backup()
         # sys.exit()
+
+    def retranslate_tabs(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.tabWidget.setTabText(0, _translate("MainWindow", 'Profiles'))
+        self.tabWidget.setTabText(1, _translate("MainWindow", 'Templates'))
+        self.tabWidget.setTabText(2, _translate("MainWindow", 'Catalog'))
 
 
 def main():

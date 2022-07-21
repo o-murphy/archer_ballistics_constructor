@@ -78,9 +78,7 @@ class MBCEdit(QDialog, Ui_mbcEdit):
             v = self.bc_table.item(i, 1).data(Qt.EditRole)
             v = Velocity(v, self.units.vUnits.currentData()).get_in(VelocityMPS)
             if v > 0 and bc == 0:
-                message_box = QMessageBox()
-                message_box.setText('BC cannot be 0, if velocity > 0')
-                message_box.exec_()
+                self.message_box.exec_()
                 return
             elif v != 0 and bc != 0:
                 data.append((bc, v))
@@ -106,4 +104,5 @@ class MBCEdit(QDialog, Ui_mbcEdit):
     def retranslateUi(self, mbcEdit):
         super(MBCEdit, self).retranslateUi(mbcEdit)
         _translate = QCoreApplication.translate
-        self.message_box.setText(_translate('mbcEdit', "BC-table can't be empty"))
+        if hasattr(mbcEdit, 'message_box'):
+            self.message_box.setText(_translate('mbcEdit', "BC-table can't be empty"))

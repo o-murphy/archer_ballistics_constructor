@@ -31,6 +31,8 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
         super(CatalogBullet, self).__init__()
         self.setupUi(self)
 
+        self.title = ''
+
         self.data = data
         self.call = call
 
@@ -69,6 +71,8 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
         self.Add.clicked.connect(self.add)
         self.tableWidget.clicked.connect(self.set_cell_data)
+
+        self.retranslateUi(self)
 
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QCursor().pos())
@@ -222,7 +226,8 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
     def retranslateUi(self, catalogBullet):
         super(CatalogBullet, self).retranslateUi(catalogBullet)
         _translate = QCoreApplication.translate
-        catalogBullet.setWindowTitle(_translate("catalogBullet", 'Bullet Edit'))
+        print(self.window())
+        self.title = _translate("catalogBullet", 'Bullet Edit')
         self._ch_df_text = {
             'bc': _translate("bullet", 'BC'),
             'points': _translate("bullet", 'Points'),

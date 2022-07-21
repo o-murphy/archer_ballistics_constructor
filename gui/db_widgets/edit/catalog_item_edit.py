@@ -9,7 +9,6 @@ class CatalogItemEdit(QDialog, Ui_catalogItemEdit):
         super(CatalogItemEdit, self).__init__()
         self.setupUi(self)
 
-        self.setWindowTitle(widget.title)
         self.setStyleSheet(load_qss('qss/dialog.qss'))
         self.widget = widget
         self.widget.setStyleSheet(load_qss('qss/application.qss'))
@@ -18,6 +17,8 @@ class CatalogItemEdit(QDialog, Ui_catalogItemEdit):
 
         self.gridLayout.addWidget(self.widget)
         self.gridLayout.addWidget(self.buttonBox)
+
+        self.setWindowTitle(self.widget.title)
 
     def get(self):
         return self.widget.get()

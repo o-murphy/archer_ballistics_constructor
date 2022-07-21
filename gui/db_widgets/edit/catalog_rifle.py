@@ -12,6 +12,8 @@ class CatalogRifle(QWidget, Ui_catalogRifle):
         super(CatalogRifle, self).__init__()
         self.setupUi(self)
 
+        self.title = ''
+
         self.data = data
         self.call = call
 
@@ -29,6 +31,8 @@ class CatalogRifle(QWidget, Ui_catalogRifle):
             self.caliberShort.setText(data.tile)
 
         self.pushButton.clicked.connect(self.add_caliber)
+
+        self.retranslateUi(self)
 
     def setConverter(self):
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)
@@ -84,4 +88,4 @@ class CatalogRifle(QWidget, Ui_catalogRifle):
     def retranslateUi(self, catalogRifle):
         super(CatalogRifle, self).retranslateUi(catalogRifle)
         _translate = QCoreApplication.translate
-        catalogRifle.setWindowTitle(_translate("catalogRifle", 'Rifle Edit'))
+        self.title = _translate("catalogRifle", 'Rifle Edit')

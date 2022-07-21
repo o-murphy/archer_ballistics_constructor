@@ -47,9 +47,13 @@ class DragEditorState(State):
         else:
             mbc = []
             bc_value = 0
-            if not self.current_drag_func:
-                self.current_drag_func = self.df_data
+            # if not self.default_drag_func:
+            self.default_drag_func = self.df_data
+            custom_df = [{'A': p[0], 'B': p[1]} for p in self.default_drag_func]
+
+            if self.current_drag_func:
                 custom_df = [{'A': p[0], 'B': p[1]} for p in self.current_drag_func]
+
             # else:
             #     self.default_drag_func = self.df_data
             #     custom_df = [{'A': p[0], 'B': p[1]} for p in self.default_drag_func]

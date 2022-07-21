@@ -141,6 +141,9 @@ class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
             self.Step.setVisible(True)
             self.labelStep.setVisible(True)
 
+            self.state.current_drag_func = self.state.calculated_drag_function()
+
+
         elif self.state.df_type.endswith('Multi-BC'):
 
             # if self.mbc.bc_table.rowCount() <= 4:
