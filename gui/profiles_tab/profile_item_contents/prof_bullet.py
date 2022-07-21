@@ -1,4 +1,6 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt, pyqtSignal, QCoreApplication
+
 from .templates import Ui_bullet
 from gui.db_widgets.edit.df_type_dlg import DFTypeDlg
 from gui.db_widgets.edit.drag_func_settings import BCEdit
@@ -10,17 +12,19 @@ from py_ballisticcalc.lib.bmath.unit import Weight, WeightGrain, Distance, Dista
 from gui.app_settings import AppSettings
 
 
-class Bullet(QtWidgets.QWidget, Ui_bullet):
-    itemEvent = QtCore.pyqtSignal(object)
+class Bullet(QWidget, Ui_bullet):
+    itemEvent = pyqtSignal(object)
 
     def __init__(self, parent=None):
         super(Bullet, self).__init__(parent)
         self.setupUi(self)
-        self.bulletGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
+        self.bulletGroupBox.layout().setAlignment(Qt.AlignLeft)
 
         self._weight = Weight(0, WeightGrain)
         self._length = Distance(0, DistanceInch)
         self._diameter = Distance(0, DistanceInch)
+
+        self._ch_df_text = {}
 
         self.units = None
         self.setUnits()
@@ -75,13 +79,15 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
         if self.drag_functions:
             cur_df = self.drag_functions[idx]
 
+            self.retranslateUi(self)
+
             if cur_df.drag_type in ['G1', 'G7']:
-                text = f'BC: {cur_df.data:.3f}'
+                text = f'{self._ch_df_text["bc"]}: {cur_df.data:.3f}'
             elif cur_df.drag_type.endswith('Multi-BC'):
                 count = [(bc, v) for (bc, v) in cur_df.data if bc > 0 and v >= 0]
-                text = 'Points: ' + str(len(count))
+                text = f'{self._ch_df_text["points"]}: ' + str(len(count))
             else:
-                text = 'DFL: ' + str(len(cur_df.data))
+                text = f'{self._ch_df_text["dfl"]}: ' + str(len(cur_df.data))
 
             self.dragFuncData.setText(text)
             self.dragType.setToolTip(cur_df.comment)
@@ -188,3 +194,12 @@ class Bullet(QtWidgets.QWidget, Ui_bullet):
             "drag_idx": self.dragType.currentData()
         }
         return ret
+    
+    def retranslateUi(self, bullet):
+        _translate = QCoreApplication.translate
+        self._ch_df_text = {
+            'bc': _translate("bullet", 'BC'),
+            'points': _translate("bullet", 'Points'),
+            'dfl': _translate("bullet", 'DFL')
+        }
+        super(Bullet, self).retranslateUi(bullet)

@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
 from .templates import Ui_profilesTab
 from .profiles_table import ProfilesTable
 from .profile_current import ProfileCurrent
@@ -19,7 +19,7 @@ class CurrentState(object):
         self.profiles_file = profiles_file
 
 
-class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
+class EmptyProfilesTab(QWidget, Ui_profilesTab):
     def __init__(self, *args):
         super().__init__()
         self.setupUi(self)
@@ -117,8 +117,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         return datetime.now().strftime("%y-%m-%d_%H-%M-%S")
 
     def save_as_file_dialog(self, fileName=None):
-        options = QtWidgets.QFileDialog.Options()
-        fileName, fileFormat = QtWidgets.QFileDialog.getSaveFileName(
+        options = QFileDialog.Options()
+        fileName, fileFormat = QFileDialog.getSaveFileName(
             self,
             "QFileDialog.getSaveFileName()",
             rf'{USER_RECENT}\{fileName}' if fileName else rf'{USER_RECENT}\recent_{self.get_datetime()}',
@@ -154,8 +154,8 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
     def open_file_dialog(self):
         self.close_file()
         if self.is_saved:
-            options = QtWidgets.QFileDialog.Options()
-            fileName, fileFormat = QtWidgets.QFileDialog.getOpenFileName(
+            options = QFileDialog.Options()
+            fileName, fileFormat = QFileDialog.getOpenFileName(
                 self,
                 "QFileDialog.getOpenFileName()",
                 USER_RECENT,
@@ -176,12 +176,12 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
         self.set_is_saved(True)
 
     def close_file(self):
-        choice = QtWidgets.QMessageBox.Cancel
+        choice = QMessageBox.Cancel
         if not self.is_saved:
             choice = CloseDialog().exec_()
-            if choice == QtWidgets.QMessageBox.Save:
+            if choice == QMessageBox.Save:
                 self.save_file_dialog()
-            if choice == QtWidgets.QMessageBox.Close:
+            if choice == QMessageBox.Close:
                 self.set_is_saved(True)
         if self.is_saved:
             self.profiles_table_widget.remove_all()
@@ -191,7 +191,7 @@ class EmptyProfilesTab(QtWidgets.QWidget, Ui_profilesTab):
 
     def load_bookmark(self):
         from .profile_bookmarks import BookMarks
-        from .default_data import get_templates
+        from dbworker import get_templates
 
         rifles = BookMarks(self, 0)
 

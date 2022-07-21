@@ -26,6 +26,7 @@ lines = r"""
     
     venv\Scripts\pyuic5 ui_templates\catalog_rifle.ui -o gui\db_widgets\edit\templates\catalog_rifle.py
     venv\Scripts\pyuic5 ui_templates\catalog_cartridge.ui -o gui\db_widgets\edit\templates\catalog_cartridge.py
+    venv\Scripts\pyuic5 ui_templates\catalog_bullet.ui -o gui\db_widgets\edit\templates\catalog_bullet.py
     
     REM venv\Scripts\pyuic5 ui_templates\catalog_caliber_list.ui -o gui\db_widgets\tables\templates\catalog_caliber_list.py
     venv\Scripts\pyuic5 ui_templates\catalog_bullet_list.ui -o gui\db_widgets\tables\templates\catalog_bullet_list.py
@@ -49,6 +50,8 @@ lines = r"""
     venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py
     
     venv\Scripts\pyuic5 ui_templates\drop_table.ui -o gui\drag_func_editor\templates\drop_table.py
+    
+    venv\Scripts\pyuic5 ui_templates\smt.ui -o gui\recent_dialog\templates\recent_dlg.py
 
     
     REM venv\Scripts\pyrcc5 .rsrc\res.qrc -o res_rc.py

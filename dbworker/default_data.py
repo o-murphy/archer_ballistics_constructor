@@ -5,7 +5,6 @@ from dbworker.models import *
 def get_defaults():
     try:
         sess = db.SessMake()
-        # rifle: Rifle = sess.query(Rifle).filter_by(attrs='r').first()
         rifle: Rifle = sess.query(Rifle).get(0)
         cart: Cartridge = sess.query(Cartridge).filter_by(caliber_id=rifle.caliber_id, attrs='r').first()
         bullet = sess.query(Bullet).get(cart.bullet_id)

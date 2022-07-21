@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from .templates import Ui_catalogBullet
-from modules import BConverter
 
 from .drag_func_settings import BCEdit
 from .drag_func_settings import MBCEdit
@@ -30,7 +29,6 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         self.setupUi(self)
         self.title = 'Bullet Edit'
 
-        self.convert = BConverter()
         self.data = data
         self.call = call
 
@@ -47,7 +45,7 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
             self.length.setValue(self.data.length)
             self.diameter.setValue(self.data.diameter.diameter)
 
-            sess = db.SessMake()
+            # sess = db.SessMake()
             self.drags = self.data.drag_func
 
         if self.drags:
@@ -65,30 +63,8 @@ class CatalogBullet(QtWidgets.QWidget, Ui_catalogBullet):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
 
-        self.weightQuantity.setItemData(0, self.convert.gr_to_g)
-        self.weightQuantity.setItemData(1, self.convert.g_to_gr)
-        self.lengthQuantity.setItemData(0, self.convert.inch_to_mm)
-        self.lengthQuantity.setItemData(1, self.convert.mm_to_inch)
-        self.diameterQuantity.setItemData(0, self.convert.inch_to_mm)
-        self.diameterQuantity.setItemData(1, self.convert.mm_to_inch)
-
-        self.weightSwitch.clicked.connect(lambda: self.convert_values(self.weight, self.weightQuantity))
-        self.lengthSwitch.clicked.connect(lambda: self.convert_values(self.length, self.lengthQuantity))
-        self.diameterSwitch.clicked.connect(lambda: self.convert_values(self.diameter, self.diameterQuantity))
         self.Add.clicked.connect(self.add)
         self.tableWidget.clicked.connect(self.set_cell_data)
-
-    @staticmethod
-    def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
-        return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
-
-    @staticmethod
-    def convert_values(spin: QtWidgets.QSpinBox or QtWidgets.QDoubleSpinBox, combo: QtWidgets.QComboBox):
-        cur_idx = combo.currentIndex()
-        spin.setValue(combo.itemData(cur_idx)(spin.value()))
-        combo.setCurrentIndex(1 if cur_idx == 0 else 0)
-        if spin.objectName() == 'weight':
-            spin.setSingleStep(0.01 if cur_idx == 0 else 0.1)
 
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QtGui.QCursor().pos())

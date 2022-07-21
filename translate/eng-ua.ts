@@ -125,17 +125,17 @@
 <context>
     <name>BCTable</name>
     <message>
-        <location filename="../gui/bc_table/bc_table.py" line="81"/>
+        <location filename="../gui/bc_table/bc_table.py" line="78"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gui/bc_table/bc_table.py" line="83"/>
+        <location filename="../gui/bc_table/bc_table.py" line="80"/>
         <source>BC</source>
         <translation>БК</translation>
     </message>
     <message>
-        <location filename="../gui/bc_table/bc_table.py" line="84"/>
+        <location filename="../gui/bc_table/bc_table.py" line="81"/>
         <source>V</source>
         <translation>Шв.</translation>
     </message>
@@ -240,12 +240,42 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/recent_dialog/templates/recent_dlg.py" line="49"/>
         <source>Dialog</source>
-        <translation>Діалог</translation>
+        <translation type="obsolete">Діалог</translation>
     </message>
     <message>
         <location filename="../gui/recent_dialog/templates/recent_dlg.py" line="50"/>
         <source>Change recent</source>
         <translation>Останні файли</translation>
+    </message>
+    <message>
+        <location filename="../gui/recent_dialog/templates/recent_dlg.py" line="49"/>
+        <source>ArcherBC (Recent files)</source>
+        <translation>Останні файли</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profile_bookmarks.py" line="31"/>
+        <source>Next</source>
+        <translation>Далі</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profile_bookmarks.py" line="32"/>
+        <source>Cancel</source>
+        <translation>Відміна</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profile_bookmarks.py" line="34"/>
+        <source>Rifle templates not found</source>
+        <translation>Шаблони гвинтівок не знайдено</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profile_bookmarks.py" line="36"/>
+        <source>Cartridge templates not found</source>
+        <translation>Шаблони патронів не знайдено</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profile_bookmarks.py" line="30"/>
+        <source>Open from database</source>
+        <translation>Завантажити з бази даних</translation>
     </message>
 </context>
 <context>
@@ -979,77 +1009,77 @@ Do you want to save changes?</source>
 <context>
     <name>catalogBullet</name>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="311"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="180"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="312"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="181"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="313"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="192"/>
         <source>Bullet name</source>
         <translation>Назва кулі</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="314"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="193"/>
         <source>Weight:</source>
         <translation>Вага:</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="315"/>
         <source>Grains</source>
-        <translation>Грани</translation>
+        <translation type="obsolete">Грани</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="316"/>
         <source>Grams</source>
-        <translation>Грами</translation>
+        <translation type="obsolete">Грами</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="327"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="183"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
         <translation>&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="318"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="190"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="323"/>
         <source>Inches</source>
-        <translation>Дюйми</translation>
+        <translation type="obsolete">Дюйми</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="324"/>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation type="obsolete">мм</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="322"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="191"/>
         <source>Diameter:</source>
         <translation>Діаметер:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="326"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="182"/>
         <source>Drag function settings:</source>
         <translation>Налаштування драг функції</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="329"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="185"/>
         <source>Drag function</source>
         <translation>Драг-функція</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="331"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="187"/>
         <source>BC</source>
         <translation>БК</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="333"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_bullet.py" line="189"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
@@ -1153,74 +1183,74 @@ Do you want to save changes?</source>
 <context>
     <name>catalogCartridge</name>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="242"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="196"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="243"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="197"/>
         <source>Bullet:</source>
         <translation>Куля:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="244"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="198"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="245"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="199"/>
         <source> °C</source>
         <translation> °C</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="246"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="200"/>
         <source>Muzzle Velocity:</source>
         <translation>Початкова швидкість:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="247"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="201"/>
         <source>Temperature:</source>
         <translation>Температура:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="248"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="202"/>
         <source>Temperature sensitivity:</source>
         <translation>Температурна чутливість:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="249"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="203"/>
         <source>Caliber:</source>
         <translation>Калібр:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="250"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="204"/>
         <source> %</source>
         <translation> %</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="251"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="205"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="252"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="206"/>
         <source>Cartridge name</source>
         <translation>Назва патрону</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="253"/>
         <source>m/s</source>
-        <translation>м/с</translation>
+        <translation type="obsolete">м/с</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="254"/>
         <source>fps</source>
-        <translation>фт/с</translation>
+        <translation type="obsolete">фт/с</translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/edit/templates/catalog_cartridge.py" line="255"/>
         <source>&lt;font color=black&gt;Convert&lt;/font&gt;</source>
-        <translation>&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
+        <translation type="obsolete">&amp;lt;font color=black&amp;gt;Конвертувати&amp;lt;/font&amp;gt;</translation>
     </message>
 </context>
 <context>
@@ -1361,57 +1391,57 @@ Do you want to save changes?</source>
 <context>
     <name>catalogRifle</name>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="241"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="199"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="242"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="200"/>
         <source>Sight height:</source>
         <translation>Висота прицілу:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="243"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="201"/>
         <source>Caliber:</source>
         <translation>Калібр:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="244"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="205"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="245"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="204"/>
         <source>Twist:</source>
         <translation>Крок нарізів:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="246"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="206"/>
         <source>Tile:</source>
         <translation>Скор.:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="247"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="207"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="248"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="203"/>
         <source>Rifle name</source>
         <translation>Назва гвинтівки</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="249"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="202"/>
         <source> mm</source>
         <translation> мм</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="250"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="209"/>
         <source>Right</source>
         <translation>Правий</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="251"/>
+        <location filename="../gui/db_widgets/edit/templates/catalog_rifle.py" line="208"/>
         <source>Left</source>
         <translation>Лівий</translation>
     </message>
@@ -1764,7 +1794,7 @@ Do you want to save changes?</source>
 <context>
     <name>mbcEdit</name>
     <message>
-        <location filename="../gui/old/templates/mbc_edit.py" line="34"/>
+        <location filename="../gui/db_widgets/edit/drag_func_settings/templates/mbc_edit.py" line="46"/>
         <source>BC Edit</source>
         <translation>Редагувати БК</translation>
     </message>
@@ -2025,12 +2055,12 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_progress.py" line="49"/>
         <source>%p%</source>
-        <translation>%p%</translation>
+        <translation type="obsolete">%p%</translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_progress.py" line="48"/>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="obsolete">Форма</translation>
     </message>
 </context>
 <context>
@@ -2494,6 +2524,11 @@ Do you want to save changes?</source>
         <source>Auto</source>
         <translation>Авто</translation>
     </message>
+    <message>
+        <location filename="../gui/profiles_tab/profile_item_contents/prof_rifle.py" line="68"/>
+        <source>Tile text:</source>
+        <translation>Скорочено</translation>
+    </message>
 </context>
 <context>
     <name>roTable</name>
@@ -2529,7 +2564,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/old/templates/templateBtns.py" line="52"/>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="obsolete">Форма</translation>
     </message>
 </context>
 </TS>

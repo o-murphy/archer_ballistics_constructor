@@ -1,8 +1,7 @@
-import sys
-
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import QCoreApplication
 from .templates import Ui_profileItem
-from ..single_custom_widgets import NoWheelDoubleSpinBox, NoWheelSpinBox
+from ..single_custom_widgets import NoWheelDoubleSpinBox
 from ..stylesheet import load_qss
 
 from .profile_item_contents import Bullet, Cartridge, Rifle, Conditions
@@ -13,10 +12,10 @@ from ..drag_func_editor.drag_func_edit_new import DragFuncEditDialog as Experime
 from gui.app_settings import AppSettings
 from py_ballisticcalc.lib.bmath.unit import Distance, DistanceMeter
 
-from .default_data import get_defaults
+from dbworker import get_defaults
 
 
-class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
+class ProfileItem(QWidget, Ui_profileItem):
     def __init__(self, parent=None):
         super(ProfileItem, self).__init__(parent)
         self.setupUi(self)
@@ -32,9 +31,6 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.z_x.setObjectName('z_x')
         self.z_y.setObjectName('z_y')
         self.z_d.setObjectName('z_d')
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        self.z_d.setSizePolicy(sizePolicy)
         self.z_d.resize(90, 50)
         self.z_d.setDecimals(1)
 
@@ -46,28 +42,26 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         self.cartridge = Cartridge()
         self.bullet = Bullet()
         self.conditions = Conditions()
+        self._z_d = Distance(100, DistanceMeter)
 
         self.rifleName.setText(self.rifle.rifleName.text())
         self.caliberShort.setText(self.rifle.caliberShort.text())
         self.cartridgeName.setText(self.cartridge.cartridgeName.text())
-        # self.weightTile.setText(self.bullet.weightTile())
 
-        self._z_d = Distance(100, DistanceMeter)
-
-        self.units = None
+        self.app_settings = None
         self.setUnits()
 
         self.z_d.valueChanged.connect(self.z_d_changed)
         self.setupConnects()
 
     def z_d_changed(self, value):
-        self._z_d = Distance(value, self.units.distUnits.currentData())
+        self._z_d = Distance(value, self.app_settings.distUnits.currentData())
 
     def setUnits(self):
-        self.units = AppSettings()
+        self.app_settings = AppSettings()
 
-        self.z_d.setValue(self._z_d.get_in(self.units.distUnits.currentData()))
-        self.z_d.setSuffix(self.units.distUnits.currentText())
+        self.z_d.setValue(self._z_d.get_in(self.app_settings.distUnits.currentData()))
+        self.z_d.setSuffix(self.app_settings.distUnits.currentText())
 
     def setupConnects(self):
         self.rifle.rifleName.textChanged.connect(lambda text: self.rifleName.setText(text))
@@ -114,8 +108,8 @@ class ProfileItem(QtWidgets.QWidget, Ui_profileItem):
         state['df_type'] = cur_df['drag_type']
         state['df_comment'] = cur_df['comment']
 
-        app = QtCore.QCoreApplication.instance()
-        if '-experiment' in app.arguments() or self.units.xdfed.isChecked():
+        app = QCoreApplication.instance()
+        if '-experiment' in app.arguments() or self.app_settings.xdfed.isChecked():
             cdf_edit = ExperimentalDFED(state=state)
         else:
             cdf_edit = DFED(state=state)

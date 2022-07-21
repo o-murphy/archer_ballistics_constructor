@@ -1,14 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_cdfEdit
 from gui.drag_func_editor.drag_table import DragTable
-from modules.converter import BConverter
-from gui.delegates import Velocity, DragCoefficient
 from gui.stylesheet import load_qss
 from modules.env_update import USER_RECENT
-from modules.file_parse import FileParse
-
-
-rnd = BConverter().auto_rnd
 
 
 class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
@@ -22,10 +16,6 @@ class CDFEdit(QtWidgets.QDialog, Ui_cdfEdit):
         """)
 
         self.cdf_table = DragTable()
-        # self.velocity_delegate = Velocity()
-        # self.df_delegate = DragCoefficient()
-        # self.cdf_table.setItemDelegateForRow(0, self.velocity_delegate)
-        # self.cdf_table.setItemDelegateForRow(1, self.df_delegate)
 
         self.gridLayout.addWidget(self.cdf_table, 2, 0, 1, 6)
         self.gridLayout.addWidget(self.buttonBox, 3, 0, 1, 6)

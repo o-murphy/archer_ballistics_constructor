@@ -1,10 +1,8 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from .templates import Ui_catalogCartridge
-from modules import BConverter
 from dbworker import db
 from dbworker.models import *
 from .caliber_edit import CaliberEdit
-
 
 
 class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
@@ -13,10 +11,6 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         self.setupUi(self)
 
         self.title = 'Cartridge Edit'
-
-        self.convert = BConverter()
-        self.mvQuantity.setItemData(0, self.convert.mps2fps)
-        self.mvQuantity.setItemData(1, self.convert.fps2mps)
 
         self.call = call
         self.data = data
@@ -35,7 +29,6 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
             self.set_bullets()
 
         self.caliber.currentIndexChanged.connect(self.set_bullets)
-        self.mvSwitch.clicked.connect(self.convert_muzzle_velocity)
         self.pushButton.clicked.connect(self.add_caliber)
 
     def set_bullets(self):
@@ -54,15 +47,6 @@ class CatalogCartridge(QtWidgets.QWidget, Ui_catalogCartridge):
         calibers = sess.query(Caliber).all()
         for c in calibers:
             self.caliber.addItem(c.name + ', ' + f'{c.diameter.diameter:.3f}inch', c.id)
-
-    @staticmethod
-    def get_cln(spin: QtWidgets.QSpinBox, combo: QtWidgets.QComboBox):
-        return spin.value() if combo.currentIndex() == 0 else combo.currentData()(spin.value())
-
-    def convert_muzzle_velocity(self):
-        cur_idx = self.mvQuantity.currentIndex()
-        self.mv.setValue(self.mvQuantity.itemData(cur_idx)(self.mv.value()))
-        self.mvQuantity.setCurrentIndex(1 if cur_idx == 0 else 0)
 
     def get(self):
 

@@ -11,7 +11,6 @@ from gui.stylesheet import load_qss
 from gui.drag_func_editor.drag_editor_state import DragEditorState
 
 from py_ballisticcalc.drag import DRAG_TABLES, DragTableG7, DragTableG1
-from py_ballisticcalc.bmath import unit
 
 from modules.env_update import USER_RECENT
 

@@ -1,19 +1,16 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt, QCoreApplication
 from .templates import Ui_rifle
-import configparser
-import os
-from modules.env_update import CONFIG_PATH
 
 from py_ballisticcalc.lib.bmath.unit import Distance, DistanceMillimeter, DistanceInch
 from gui.app_settings import AppSettings
 
 
-class Rifle(QtWidgets.QWidget, Ui_rifle):
+class Rifle(QWidget, Ui_rifle):
     def __init__(self, parent=None):
         super(Rifle, self).__init__(parent)
         self.setupUi(self)
-        self.rifleGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
-        self.caliberShort.setPlaceholderText('Tile text:')
+        self.rifleGroupBox.layout().setAlignment(Qt.AlignLeft)
         self.autoTile.clicked.connect(self.auto_tile)
 
         self._sh = Distance(0, DistanceMillimeter)
@@ -65,3 +62,8 @@ class Rifle(QtWidgets.QWidget, Ui_rifle):
             self.caliberShort.objectName(): self.caliberShort.text(),
             self.rightTwist.objectName(): self.rightTwist.isChecked(),
         }
+
+    def retranslateUi(self, rifle):
+        _translate = QCoreApplication.translate
+        self.caliberShort.setPlaceholderText(_translate("rifle", 'Tile text:'))
+        super(Rifle, self).retranslateUi(rifle)

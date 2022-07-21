@@ -1,8 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
 import pyqtgraph as pg
-from modules.converter import BConverter
-
-rnd = BConverter.auto_rnd
 
 
 class CustomPlot(QtWidgets.QWidget):

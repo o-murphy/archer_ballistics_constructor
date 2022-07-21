@@ -1,4 +1,7 @@
-from .custom_plot import CustomPlot, pg, rnd
+from .custom_plot import CustomPlot, pg
+from modules.converter import BConverter
+
+rnd = BConverter.auto_rnd
 
 
 class DragPlot(CustomPlot):

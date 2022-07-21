@@ -1,15 +1,16 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt
 from .templates import Ui_cartridge
 
 from py_ballisticcalc.lib.bmath.unit import Velocity, VelocityMPS, Temperature, TemperatureCelsius
 from gui.app_settings import AppSettings
 
 
-class Cartridge(QtWidgets.QWidget, Ui_cartridge):
+class Cartridge(QWidget, Ui_cartridge):
     def __init__(self, parent=None):
         super(Cartridge, self).__init__(parent)
         self.setupUi(self)
-        self.cartridgeGroupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
+        self.cartridgeGroupBox.layout().setAlignment(Qt.AlignLeft)
 
         self._mv = Velocity(0, VelocityMPS)
         self._temp = Temperature(0, TemperatureCelsius)

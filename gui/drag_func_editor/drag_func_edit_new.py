@@ -13,10 +13,9 @@ from calculator import DragEditorState
 from py_ballisticcalc.lib.drag import DragTableG7, DragTableG1, TableG1, TableG7
 from py_ballisticcalc.lib.bmath.unit import *
 
-from modules import BConverter
 from modules.env_update import USER_RECENT
 
-rnd = BConverter.auto_rnd
+from modules.converter import BConverter
 
 
 class DragFuncEditDialog(QtWidgets.QDialog, Ui_DragFuncEditDialog):

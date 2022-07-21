@@ -1,9 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
-from modules.converter import BConverter
 from gui.delegates import BallisticCoefficient, MuzzleVelocity
 
-
-# rnd = BConverter.auto_rnd
 
 from gui.app_settings import AppSettings
 from py_ballisticcalc.lib.bmath import Velocity, VelocityMPS

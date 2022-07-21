@@ -1,10 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from .templates import Ui_DragTable
-from modules.converter import BConverter
 from gui.delegates import Velocity, DragCoefficient
-
-
-rnd = BConverter.auto_rnd
 
 
 class DragTable(Ui_DragTable):
@@ -17,13 +13,6 @@ class DragTable(Ui_DragTable):
         self.setItemDelegateForRow(0, self.velocity_delegates)
         self.setItemDelegateForRow(1, self.drag_coefficient)
 
-        # _translate = QtCore.QCoreApplication.translate
-        #
-        # item = self.verticalHeaderItem(0)
-        # item.setText(_translate("DragTable", "Velocity"))
-        # item = self.verticalHeaderItem(1)
-        # item.setText("CD")
-
     def set(self, current_data, default_data):
         data = current_data if current_data else default_data
         data.sort()
@@ -32,8 +21,8 @@ class DragTable(Ui_DragTable):
             for i, (v, c) in enumerate(data):
                 self.setItem(0, i, QtWidgets.QTableWidgetItem())
                 self.setItem(1, i, QtWidgets.QTableWidgetItem())
-                self.item(0, i).setData(QtCore.Qt.EditRole, rnd(v))
-                self.item(1, i).setData(QtCore.Qt.EditRole, rnd(c))
+                self.item(0, i).setData(QtCore.Qt.EditRole, round(v, 2))
+                self.item(1, i).setData(QtCore.Qt.EditRole, round(c, 4))
 
     def readonly(self):
         self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)

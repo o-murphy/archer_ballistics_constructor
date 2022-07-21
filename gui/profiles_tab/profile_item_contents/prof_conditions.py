@@ -1,4 +1,6 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget
+
 from .templates import Ui_conditions
 
 from py_ballisticcalc.lib.bmath.unit import Pressure, PressureMmHg, Temperature, TemperatureCelsius
@@ -6,12 +8,12 @@ from py_ballisticcalc.lib.bmath.unit import Angular, AngularDegree
 from gui.app_settings import AppSettings
 
 
-class Conditions(QtWidgets.QWidget, Ui_conditions):
+class Conditions(QWidget, Ui_conditions):
     def __init__(self, parent=None):
         super(Conditions, self).__init__(parent)
         self.setupUi(self)
 
-        self.groupBox.layout().setAlignment(QtCore.Qt.AlignLeft)
+        self.groupBox.layout().setAlignment(Qt.AlignLeft)
 
         self._z_pressure = Pressure(0, PressureMmHg)
         self._z_temp = Temperature(0, TemperatureCelsius)

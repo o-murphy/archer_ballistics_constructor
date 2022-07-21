@@ -1,4 +1,5 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt
 from .templates import Ui_profileCurrent
 from modules import BConverter
 from ..bc_table import BCTable
@@ -6,15 +7,15 @@ from .profile_item_contents import Bullet, Rifle, Cartridge, Conditions
 from .add_btn import AddBtn
 
 
-class ProfileCurrent(QtWidgets.QWidget, Ui_profileCurrent):
+class ProfileCurrent(QWidget, Ui_profileCurrent):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.convert = BConverter()
         self.bc_table = BCTable()
 
-        self.tab_6.layout().setAlignment(QtCore.Qt.AlignTop)
-        self.tab_7.layout().setAlignment(QtCore.Qt.AlignTop)
+        self.tab_6.layout().setAlignment(Qt.AlignTop)
+        self.tab_7.layout().setAlignment(Qt.AlignTop)
 
     def set_current(self, cur):
         [r.hide() for r in self.findChildren(Rifle)]
