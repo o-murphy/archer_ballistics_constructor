@@ -45,6 +45,7 @@ templates.append(r'gui\db_widgets\tables\catalog_cartridge_list.py')
 templates.append(r'gui\db_widgets\tables\catalog_rifle_list.py')
 templates.append(r'gui\close_dialog\close_dlg.py')
 templates.append(r'gui\catalog_tab\catalog_selector.py')
+templates.append(r'gui\app_settings.py')
 templates.append(r'archerbc.py')
 
 [print(i) for i in templates]

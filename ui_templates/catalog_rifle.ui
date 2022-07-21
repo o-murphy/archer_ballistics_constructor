@@ -34,11 +34,6 @@
        <height>0</height>
       </size>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>Sight height:</string>
      </property>
@@ -57,11 +52,6 @@
        <width>120</width>
        <height>0</height>
       </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
      </property>
      <property name="text">
       <string>Caliber:</string>
@@ -87,11 +77,6 @@
        <width>100</width>
        <height>16777215</height>
       </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
@@ -124,11 +109,6 @@
        <height>16777215</height>
       </size>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
@@ -156,11 +136,6 @@
        <width>200</width>
        <height>0</height>
       </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
@@ -193,11 +168,6 @@
        <height>0</height>
       </size>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>Twist:</string>
      </property>
@@ -216,11 +186,6 @@
        <width>120</width>
        <height>0</height>
       </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
      </property>
      <property name="text">
       <string>Name:</string>
@@ -241,11 +206,6 @@
        <height>0</height>
       </size>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>Tile:</string>
      </property>
@@ -264,11 +224,6 @@
        <width>100</width>
        <height>16777215</height>
       </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
      </property>
      <property name="styleSheet">
       <string notr="true"/>

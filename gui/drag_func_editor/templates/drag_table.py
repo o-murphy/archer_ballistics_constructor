@@ -26,6 +26,6 @@ class Ui_DragTable(QtWidgets.QTableWidget):
         _translate = QtCore.QCoreApplication.translate
         Ui_DragTable.setWindowTitle(_translate("Ui_DragTable", "Form"))
         item = self.verticalHeaderItem(0)
-        item.setText(_translate("Ui_DragTable", "Velocity"))
+        item.setText(_translate("Ui_DragTable", "M"))
         item = self.verticalHeaderItem(1)
         item.setText(_translate("Ui_DragTable", "CD"))

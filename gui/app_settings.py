@@ -1,6 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*u.- coding: utf-8 -*u.-
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QCoreApplication, QLocale
+from PyQt5.QtWidgets import QDialog, QComboBox
+
 from gui.templates import Ui_AppSettings
 import configparser
 import os
@@ -11,50 +13,7 @@ from gui.stylesheet import load_qss
 from py_ballisticcalc.lib.bmath.unit import *
 
 
-inch = (' inch', DistanceInch)
-
-ln = (' ln', DistanceLine)
-yd = (' yd', DistanceYard)
-ft = (' ft', DistanceFoot)
-mm = (' mm', DistanceMillimeter)
-cm = (' cm', DistanceCentimeter)
-m = (' m', DistanceMeter)
-km = (' km', DistanceKilometer)
-mi = (' mi', DistanceMile)
-nm = (' nm', DistanceNauticalMile)
-rad = (' rad', AngularRadian)
-deg = (' °', AngularDegree)
-mrad = (' mrad', AngularMRad)
-ths = (' ths', AngularThousand)
-mil = (' mil', AngularMil)
-moa = (' moa', AngularMOA)
-cm100m = (' cm/100m', AngularCmPer100M)
-in100yd = (' in/100yd', AngularInchesPer100Yd)
-ftlb = (' ft*lb', EnergyFootPound)
-j = (' J', EnergyJoule)
-mmhg = (' mmHg', PressureMmHg)
-inhg = (' inHg', PressureInHg)
-bar = (' bar', PressureBar)
-hpa = (' hPa', PressureHP)
-psi = (' psi', PressurePSI)
-gr = (' gr', WeightGrain)
-g = (' g', WeightGram)
-kg = (' kg', WeightKilogram)
-lb = (' lb', WeightPound)
-n = (' N', WeightNewton)
-oz = (' oz', WeightOunce)
-c = (' °C', TemperatureCelsius)
-f = (' °F', TemperatureFahrenheit)
-k = (' °K', TemperatureKelvin)
-r = (' °R', TemperatureRankin)
-mps = (' m/s', VelocityMPS)
-kmh = (' km/h', VelocityKMH)
-fps = (' ft/s', VelocityFPS)
-mph = (' mph', VelocityMPH)
-kt = (' kt', VelocityKT)
-
-
-class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
+class AppSettings(QDialog, Ui_AppSettings):
 
     def __init__(self):
         super(AppSettings, self).__init__()
@@ -74,79 +33,82 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         self.xdfed.setChecked(True)
 
     def init_units_tab(self):
-        self.shUnits.addItem(*mm)
-        self.shUnits.addItem(*inch)
-        self.shUnits.addItem(*cm)
-        self.shUnits.addItem(*ln)
 
-        self.twistUnits.addItem(*inch)
-        self.twistUnits.addItem(*cm)
-        self.twistUnits.addItem(*mm)
-        self.twistUnits.addItem(*ln)
+        u = self
 
-        self.vUnits.addItem(*mps)
-        self.vUnits.addItem(*kmh)
-        self.vUnits.addItem(*fps)
-        self.vUnits.addItem(*mph)
-        self.vUnits.addItem(*kt)
+        self.shUnits.addItem(*u.mm)
+        self.shUnits.addItem(*u.inch)
+        self.shUnits.addItem(*u.cm)
+        self.shUnits.addItem(*u.ln)
 
-        self.distUnits.addItem(*m)
-        self.distUnits.addItem(*ft)
-        self.distUnits.addItem(*yd)
-        self.distUnits.addItem(*km)
-        self.distUnits.addItem(*mi)
-        self.distUnits.addItem(*nm)
+        self.twistUnits.addItem(*u.inch)
+        self.twistUnits.addItem(*u.cm)
+        self.twistUnits.addItem(*u.mm)
+        self.twistUnits.addItem(*u.ln)
 
-        self.tempUnits.addItem(*c)
-        self.tempUnits.addItem(*f)
-        self.tempUnits.addItem(*k)
-        self.tempUnits.addItem(*r)
+        self.vUnits.addItem(*u.mps)
+        self.vUnits.addItem(*u.kmh)
+        self.vUnits.addItem(*u.fps)
+        self.vUnits.addItem(*u.mph)
+        self.vUnits.addItem(*u.kt)
 
-        self.wUnits.addItem(*gr)
-        self.wUnits.addItem(*g)
-        self.wUnits.addItem(*kg)
-        self.wUnits.addItem(*lb)
-        # self.wUnits.addItem(*n)
-        # self.wUnits.addItem(*oz)
+        self.distUnits.addItem(*u.m)
+        self.distUnits.addItem(*u.ft)
+        self.distUnits.addItem(*u.yd)
+        self.distUnits.addItem(*u.km)
+        self.distUnits.addItem(*u.mi)
+        self.distUnits.addItem(*u.nm)
 
-        self.lnUnits.addItem(*inch)
-        self.lnUnits.addItem(*cm)
-        self.lnUnits.addItem(*mm)
-        self.lnUnits.addItem(*ln)
+        self.tempUnits.addItem(*u.c)
+        self.tempUnits.addItem(*u.f)
+        self.tempUnits.addItem(*u.k)
+        self.tempUnits.addItem(*u.r)
 
-        self.dUnits.addItem(*inch)
-        self.dUnits.addItem(*cm)
-        self.dUnits.addItem(*mm)
-        self.dUnits.addItem(*ln)
+        self.wUnits.addItem(*u.gr)
+        self.wUnits.addItem(*u.g)
+        self.wUnits.addItem(*u.kg)
+        self.wUnits.addItem(*u.lb)
+        # self.wUnits.addItem(*u.n)
+        # self.wUnits.addItem(*u.oz)
 
-        self.pUnits.addItem(*mmhg)
-        self.pUnits.addItem(*inhg)
-        self.pUnits.addItem(*bar)
-        self.pUnits.addItem(*hpa)
-        self.pUnits.addItem(*psi)
+        self.lnUnits.addItem(*u.inch)
+        self.lnUnits.addItem(*u.cm)
+        self.lnUnits.addItem(*u.mm)
+        self.lnUnits.addItem(*u.ln)
 
-        self.dropUnits.addItem(*cm)
-        self.dropUnits.addItem(*inch)
-        self.dropUnits.addItem(*mm)
-        self.dropUnits.addItem(*ln)
-        self.dropUnits.addItem(*m)
-        self.dropUnits.addItem(*yd)
-        self.dropUnits.addItem(*ft)
+        self.dUnits.addItem(*u.inch)
+        self.dUnits.addItem(*u.cm)
+        self.dUnits.addItem(*u.mm)
+        self.dUnits.addItem(*u.ln)
 
-        self.angleUnits.addItem(*deg)
-        self.angleUnits.addItem(*rad)
-        self.angleUnits.addItem(*mrad)
-        self.angleUnits.addItem(*ths)
+        self.pUnits.addItem(*u.mmhg)
+        self.pUnits.addItem(*u.inhg)
+        self.pUnits.addItem(*u.bar)
+        self.pUnits.addItem(*u.hpa)
+        self.pUnits.addItem(*u.psi)
 
-        self.pathUnits.addItem(*mil)
-        self.pathUnits.addItem(*moa)
-        self.pathUnits.addItem(*mrad)
-        self.pathUnits.addItem(*ths)
-        self.pathUnits.addItem(*cm100m)
-        self.pathUnits.addItem(*in100yd)
+        self.dropUnits.addItem(*u.cm)
+        self.dropUnits.addItem(*u.inch)
+        self.dropUnits.addItem(*u.mm)
+        self.dropUnits.addItem(*u.ln)
+        self.dropUnits.addItem(*u.m)
+        self.dropUnits.addItem(*u.yd)
+        self.dropUnits.addItem(*u.ft)
 
-        self.eUnits.addItem(*ftlb)
-        self.eUnits.addItem(*j)
+        self.angleUnits.addItem(*u.deg)
+        self.angleUnits.addItem(*u.rad)
+        self.angleUnits.addItem(*u.mrad)
+        self.angleUnits.addItem(*u.ths)
+
+        self.pathUnits.addItem(*u.mil)
+        self.pathUnits.addItem(*u.moa)
+        self.pathUnits.addItem(*u.mrad)
+        self.pathUnits.addItem(*u.ths)
+        self.pathUnits.addItem(*u.cm100m)
+        self.pathUnits.addItem(*u.in100yd)
+
+        self.eUnits.addItem(*u.ftlb)
+        self.eUnits.addItem(*u.j)
 
     def load_general_settings(self):
         config = configparser.ConfigParser()
@@ -167,7 +129,7 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         config = configparser.ConfigParser()
         config.read(CONFIG_PATH)
 
-        widgets = self.findChildren(QtWidgets.QComboBox)
+        widgets = self.findChildren(QComboBox)
         if 'Units' in config:
             for i in config['Units']:
                 for w in widgets:
@@ -190,13 +152,13 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         locale = self.Language.currentData()
         config = configparser.ConfigParser()
         config.read(CONFIG_PATH)
-        config.set('Locale', 'system', QtCore.QLocale.system().name().split('_')[1].lower())
+        config.set('Locale', 'system', QLocale.system().name().split('_')[1].lower())
         if locale != 'en':
             if os.path.isfile(f'translate/eng-{locale}.qm'):
-                config.set('Locale', 'current', locale)
+                self.config.set('Locale', 'current', locale)
             else:
-                locale = config['Locale']['system']
-                config.set('Locale', 'current', locale)
+                self.locale = config['Locale']['system']
+                self.config.set('Locale', 'current', locale)
         else:
             config.set('Locale', 'current', locale)
         with open(CONFIG_PATH, 'w') as fp:
@@ -207,7 +169,7 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         config.read(CONFIG_PATH)
         if 'Units' not in config:
             config.add_section('Units')
-        for w in self.tabUnits.findChildren(QtWidgets.QComboBox):
+        for w in self.tabUnits.findChildren(QComboBox):
             config.set('Units', w.objectName(), str(w.currentData()))
         with open(CONFIG_PATH, 'w') as fp:
             config.write(fp)
@@ -216,4 +178,48 @@ class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
         self.save_language_settings()
         self.save_exp_dfed()
         self.save_units_settings()
-        super().accept()
+        self.super().accept()
+
+    def retranslateUi(self, AppSettings):
+        super().retranslateUi(AppSettings)
+        _translate = QCoreApplication.translate
+        self.inch = (_translate('AppSettings', ' inch'), DistanceInch)
+        self.ln = (_translate('AppSettings', ' ln'), DistanceLine)
+        self.yd = (_translate('AppSettings', ' yd'), DistanceYard)
+        self.ft = (_translate('AppSettings', ' ft'), DistanceFoot)
+        self.mm = (_translate('AppSettings', ' mm'), DistanceMillimeter)
+        self.cm = (_translate('AppSettings', ' cm'), DistanceCentimeter)
+        self.m = (_translate('AppSettings', ' m'), DistanceMeter)
+        self.km = (_translate('AppSettings', ' km'), DistanceKilometer)
+        self.mi = (_translate('AppSettings', ' mi'), DistanceMile)
+        self.nm = (_translate('AppSettings', ' nm'), DistanceNauticalMile)
+        self.rad = (_translate('AppSettings', ' rad'), AngularRadian)
+        self.deg = (_translate('AppSettings', ' °'), AngularDegree)
+        self.mrad = (_translate('AppSettings', ' mrad'), AngularMRad)
+        self.ths = (_translate('AppSettings', ' ths'), AngularThousand)
+        self.mil = (_translate('AppSettings', ' mil'), AngularMil)
+        self.moa = (_translate('AppSettings', ' moa'), AngularMOA)
+        self.cm100m = (_translate('AppSettings', ' cm/100m'), AngularCmPer100M)
+        self.in100yd = (_translate('AppSettings', ' in/100yd'), AngularInchesPer100Yd)
+        self.ftlb = (_translate('AppSettings', ' ft*lb'), EnergyFootPound)
+        self.j = (_translate('AppSettings', ' J'), EnergyJoule)
+        self.mmhg = (_translate('AppSettings', ' mmHg'), PressureMmHg)
+        self.inhg = (_translate('AppSettings', ' inHg'), PressureInHg)
+        self.bar = (_translate('AppSettings', ' bar'), PressureBar)
+        self.hpa = (_translate('AppSettings', ' hPa'), PressureHP)
+        self.psi = (_translate('AppSettings', ' psi'), PressurePSI)
+        self.gr = (_translate('AppSettings', ' gr'), WeightGrain)
+        self.g = (_translate('AppSettings', ' g'), WeightGram)
+        self.kg = (_translate('AppSettings', ' kg'), WeightKilogram)
+        self.lb = (_translate('AppSettings', ' lb'), WeightPound)
+        self.n = (_translate('AppSettings', ' N'), WeightNewton)
+        self.oz = (_translate('AppSettings', ' oz'), WeightOunce)
+        self.c = (_translate('AppSettings', ' °C'), TemperatureCelsius)
+        self.f = (_translate('AppSettings', ' °F'), TemperatureFahrenheit)
+        self.k = (_translate('AppSettings', ' °K'), TemperatureKelvin)
+        self.r = (_translate('AppSettings', ' °R'), TemperatureRankin)
+        self.mps = (_translate('AppSettings', ' m/s'), VelocityMPS)
+        self.kmh = (_translate('AppSettings', ' km/h'), VelocityKMH)
+        self.fps = (_translate('AppSettings', ' ft/s'), VelocityFPS)
+        self.mph = (_translate('AppSettings', ' mph'), VelocityMPH)
+        self.kt = (_translate('AppSettings', ' kt'), VelocityKT)
