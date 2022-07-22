@@ -17,6 +17,8 @@ class Tab(QWidget):
         self.gridLayout = QGridLayout()
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setAlignment(Qt.AlignTop)
+        self.gridLayout.setColumnStretch(0, 2)
+        self.gridLayout.setColumnStretch(1, 1)
         self.setLayout(self.gridLayout)
 
         self.list = None

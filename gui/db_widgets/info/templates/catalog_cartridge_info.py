@@ -15,7 +15,7 @@ class Ui_catalogCartridgeInfo(object):
     def setupUi(self, catalogCartridgeInfo):
         catalogCartridgeInfo.setObjectName("catalogCartridgeInfo")
         catalogCartridgeInfo.resize(473, 253)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogCartridgeInfo.sizePolicy().hasHeightForWidth())

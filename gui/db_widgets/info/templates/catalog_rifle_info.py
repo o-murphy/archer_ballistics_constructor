@@ -15,7 +15,7 @@ class Ui_catalogRifleInfo(object):
     def setupUi(self, catalogRifleInfo):
         catalogRifleInfo.setObjectName("catalogRifleInfo")
         catalogRifleInfo.resize(473, 276)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogRifleInfo.sizePolicy().hasHeightForWidth())

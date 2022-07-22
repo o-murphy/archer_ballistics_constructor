@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_bullet(object):
     def setupUi(self, bullet):
         bullet.setObjectName("bullet")
-        bullet.resize(500, 200)
+        bullet.resize(500, 188)
         self.gridLayout = QtWidgets.QGridLayout(bullet)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
         self.bulletGroupBox = QtWidgets.QGroupBox(bullet)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bulletGroupBox.sizePolicy().hasHeightForWidth())

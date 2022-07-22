@@ -15,7 +15,7 @@ class Ui_catalogBulletInfo(object):
     def setupUi(self, catalogBulletInfo):
         catalogBulletInfo.setObjectName("catalogBulletInfo")
         catalogBulletInfo.resize(473, 321)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(catalogBulletInfo.sizePolicy().hasHeightForWidth())
