@@ -1,0 +1,352 @@
+{
+  "name": "___",
+  "multiplier": 10,
+  "template": [
+    {
+      "type": "cross",
+      "margin": 1,
+      "size": 4,
+      "mask": 15,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1
+    },
+    {
+      "type": "cross",
+      "margin": 0.25,
+      "size": 0.5,
+      "mask": 15,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1
+    },
+    {
+      "type": "cross",
+      "margin": 0.35,
+      "size": 1.1,
+      "mask": 15,
+      "bind": true,
+      "zoomed": false,
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1
+    },
+    {
+      "type": "cross",
+      "margin": 1,
+      "size": 10,
+      "mask": 2,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1
+    },
+    {
+      "type": "hruler",
+      "a": 1,
+      "b": 5,
+      "step": 1,
+      "w": 0.2,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1,
+      "mirror_y": true
+    },
+    {
+      "type": "vruler",
+      "a": -5,
+      "b": 10,
+      "step": 1,
+      "w": 0.2,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1,
+      "exclude_0": true
+    },
+    {
+      "type": "cross",
+      "margin": 5,
+      "size": 2,
+      "mask": 12,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1,
+      "x_offset": 0,
+      "y_offset": 0.2
+    },
+    {
+      "type": "cross",
+      "margin": 5,
+      "size": 2,
+      "mask": 12,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1,
+      "x_offset": 0,
+      "y_offset": -0.2
+    },
+    {
+      "type": "cross",
+      "margin": 0,
+      "size": 1,
+      "mask": 3,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1,
+      "x_offset": 0.2,
+      "y_offset": -6
+    },
+    {
+      "type": "cross",
+      "margin": 0,
+      "size": 1,
+      "mask": 3,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1,
+      "x_offset": -0.2,
+      "y_offset": -6
+    },
+    {
+      "type": "hruler",
+      "a": 1,
+      "b": 5,
+      "step": 1,
+      "w": 0.3,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 1,
+      "max_zoom": 1,
+      "pen": 1,
+      "mirror_y": true
+    },
+    {
+      "type": "vruler",
+      "a": -5,
+      "b": 10,
+      "step": 1,
+      "w": 0.3,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 1,
+      "max_zoom": 1,
+      "pen": 1,
+      "exclude_0": true
+    },
+    {
+      "type": "hruler",
+      "a": 1,
+      "b": 4,
+      "step": 0.5,
+      "w": 0.15,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1,
+      "mirror_y": true
+    },
+    {
+      "type": "vruler",
+      "a": 1,
+      "b": 10,
+      "step": 0.5,
+      "w": 0.15,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1,
+      "exclude_0": true
+    },
+    {
+      "type": "vruler",
+      "a": -4,
+      "b": -1,
+      "step": 0.5,
+      "w": 0.15,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "grid",
+      "min_zoom": 2,
+      "max_zoom": 6,
+      "pen": 1,
+      "exclude_0": true
+    },
+    {
+      "type": "cross",
+      "margin": 0,
+      "size": 0.4,
+      "mask": 12,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "pen": 1,
+      "x_offset": 0,
+      "y_offset": 5
+    },
+    {
+      "type": "hruler",
+      "a": 4,
+      "b": 5,
+      "step": 0.2,
+      "w": 1,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "cross",
+      "min_zoom": 3,
+      "max_zoom": 6,
+      "pen": 1,
+      "mirror_y": true,
+      "cross": {
+        "margin": 0,
+        "size": 0.3,
+        "mask": 1,
+        "bind": false,
+        "zoomed": true,
+        "pen": 1
+      }
+    },
+    {
+      "type": "vruler",
+      "a": -5,
+      "b": -4,
+      "step": 0.2,
+      "w": 1,
+      "x_offset": 0,
+      "y_offset": 0,
+      "mode": "cross",
+      "min_zoom": 3,
+      "max_zoom": 6,
+      "pen": 1,
+      "cross": {
+        "margin": 0,
+        "size": 0.3,
+        "mask": 4,
+        "bind": false,
+        "zoomed": true,
+        "pen": 1
+      }
+    },
+    {
+      "type": "line",
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "x_offset": 5,
+      "y_offset": 7.5,
+      "p1": [
+        0,
+        0
+      ],
+      "p2": [
+        3,
+        0
+      ],
+      "pen": 1,
+      "zoomed": true
+    },
+    {
+      "type": "line",
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "x_offset": 1,
+      "y_offset": 8.3,
+      "p1": [
+        0,
+        0
+      ],
+      "p2": [
+        3,
+        0
+      ],
+      "pen": 1,
+      "zoomed": true
+    },
+    {
+      "type": "line",
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "x_offset": -4,
+      "y_offset": 8.75,
+      "p1": [
+        0,
+        0
+      ],
+      "p2": [
+        3,
+        0
+      ],
+      "pen": 1,
+      "zoomed": true
+    },
+    {
+      "type": "line",
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "x_offset": -8,
+      "y_offset": 9,
+      "p1": [
+        0,
+        0
+      ],
+      "p2": [
+        3,
+        0
+      ],
+      "pen": 1,
+      "zoomed": true
+    },
+    {
+      "type": "line",
+      "min_zoom": 1,
+      "max_zoom": 6,
+      "x_offset": 0,
+      "y_offset": 10,
+      "p1": [
+        -8,
+        0
+      ],
+      "p2": [
+        8,
+        0
+      ],
+      "pen": 1,
+      "zoomed": true
+    },
+        {
+      "type": "cross",
+      "margin": 5,
+      "size": 2,
+      "mask": 15,
+      "bind": true,
+      "zoomed": true,
+      "min_zoom": 1,
+      "max_zoom": 1,
+      "pen": 1
+    }
+  ]
+}

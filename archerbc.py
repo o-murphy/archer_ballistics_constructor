@@ -136,9 +136,9 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def retranslate_tabs(self):
         _translate = QtCore.QCoreApplication.translate
-        self.tabWidget.setTabText(0, _translate("MainWindow", 'Profiles'))
-        self.tabWidget.setTabText(1, _translate("MainWindow", 'Templates'))
-        self.tabWidget.setTabText(2, _translate("MainWindow", 'Catalog'))
+        self.tabWidget.setTabText(0, _translate("ReticlesTab", 'Profiles'))
+        self.tabWidget.setTabText(1, _translate("ReticlesTab", 'Templates'))
+        self.tabWidget.setTabText(2, _translate("ReticlesTab", 'Catalog'))
 
 
 def main():

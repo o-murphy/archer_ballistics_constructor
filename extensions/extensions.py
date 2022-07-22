@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 import logging
 
-logging.basicConfig(level=logging.INFO, filename="extension_importer.log")
+logging.basicConfig(level=logging.INFO, filename="extensions/extension_importer.log", filemode='w')
 log = logging.getLogger('xextension importer')
 
 
