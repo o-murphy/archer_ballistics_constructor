@@ -127,7 +127,7 @@ class Bullet(QWidget, Ui_bullet):
         df_type = DFTypeDlg()
 
         if df_type.exec_():
-            drag_type = df_type.combo.currentText()
+            drag_type = df_type.combo.currentData()
 
             if drag_type in ['G1', 'G7']:
                 bc_edit = BCEdit(data)

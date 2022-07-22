@@ -105,7 +105,7 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
                 idx = self.add_row()
 
-                drag_type = df_type.combo.currentText()
+                drag_type = df_type.combo.currentData()
                 self.tableWidget.item(idx, 0).setText(drag_type)
                 self.tableWidget.item(idx, 1).state = None
                 if drag_type in ['G1', 'G7']:

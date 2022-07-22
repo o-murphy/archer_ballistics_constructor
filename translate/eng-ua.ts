@@ -459,11 +459,39 @@ Do you want to save changes?</source>
     </message>
 </context>
 <context>
+    <name>DFCombo</name>
+    <message>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="19"/>
+        <source>G7</source>
+        <translation>G7</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="20"/>
+        <source>G1</source>
+        <translation>G1</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="21"/>
+        <source>G7 Multi-BC</source>
+        <translation>G7 Мульти БК</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="22"/>
+        <source>G1 Multi-BC</source>
+        <translation>G1 Мульти-БК</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="23"/>
+        <source>Custom</source>
+        <translation>Спеціальна</translation>
+    </message>
+</context>
+<context>
     <name>DFTypeDlg</name>
     <message>
-        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="51"/>
+        <location filename="../gui/db_widgets/edit/df_type_dlg/df_type.py" line="68"/>
         <source>What&apos;s type of drag_func you&apos;ll use?</source>
-        <translation>Оберіть драг-функцію</translation>
+        <translation>Оберіть тип драг-функції</translation>
     </message>
 </context>
 <context>
@@ -1090,7 +1118,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/drag_table.py" line="29"/>
         <source>M</source>
-        <translation type="unfinished">M</translation>
+        <translation>M</translation>
     </message>
 </context>
 <context>
