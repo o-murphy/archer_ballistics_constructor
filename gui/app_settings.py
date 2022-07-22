@@ -21,9 +21,11 @@ class AppSettings(QDialog, Ui_AppSettings):
         self.setStyleSheet(load_qss('qss/dialog.qss'))
         self.init_general_tab()
         self.init_units_tab()
+        self.init_extension_tab()
 
         self.load_general_settings()
         self.load_unit_settings()
+        self.load_extension_settings()
 
     def init_general_tab(self):
         self.languages = ['en', 'ua', 'ru']
@@ -31,6 +33,12 @@ class AppSettings(QDialog, Ui_AppSettings):
             self.Language.setItemData(i, lang)
 
         self.xdfed.setChecked(True)
+
+    def init_extension_tab(self):
+        pass
+
+    def load_extension_settings(self):
+        pass
 
     def init_units_tab(self):
 

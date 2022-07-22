@@ -295,7 +295,7 @@ class EmptyTab(QWidget, Ui_ReticlesTab):
 
         self.label.setPixmap(canvas)
 
-        self.label.pixmap().save(f'{self.zoom}_{self.reticle["name"]}.bmp', "BMP")
+        # self.label.pixmap().save(f'{self.zoom}_{self.reticle["name"]}.bmp', "BMP")
         self.enable_grid()
         self.draw_watermark()
         self.info_label.setText(
