@@ -12,6 +12,9 @@ from .df_type_dlg import DFTypeDlg
 from dbworker.models import *
 from dbworker import db
 
+from py_ballisticcalc.lib.bmath.unit import Distance, DistanceInch, Weight, WeightGrain
+from gui.app_settings import AppSettings
+
 
 class DFDelBtn(QPushButton):
     def __init__(self):
@@ -27,6 +30,7 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
         add multi_bc
         add drag_func_editor
     """
+
     def __init__(self, data: Bullet = None, call=None):
         super(CatalogBullet, self).__init__()
         self.setupUi(self)
@@ -35,6 +39,8 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
         self.data = data
         self.call = call
+
+        self.units = AppSettings()
 
         self.n = None
         self.w = None
@@ -45,14 +51,7 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
         self._ch_df_text = {}
 
-        if self.data:
-            self.bulletName.setText(self.data.name)
-            self.weight.setValue(self.data.weight)
-            self.length.setValue(self.data.length)
-            self.diameter.setValue(self.data.diameter.diameter)
-
-            # sess = db.SessMake()
-            self.drags = self.data.drag_func
+        self.set_widget_data()
 
         if self.drags:
             if len(self.drags) > 0:
@@ -74,13 +73,27 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
         self.retranslateUi(self)
 
+    def set_widget_data(self):
+        if self.data:
+            self.bulletName.setText(self.data.name)
+            self.weight.setValue(Weight(self.data.weight, WeightGrain).get_in(self.units.wUnits.currentData()))
+            self.length.setValue(Distance(self.data.length, DistanceInch).get_in(self.units.lnUnits.currentData()))
+            self.diameter.setValue(
+                Distance(self.data.diameter.diameter, DistanceInch).get_in(self.units.dUnits.currentData()))
+            self.weight.setSuffix(self.units.wUnits.currentText())
+            self.length.setSuffix(self.units.lnUnits.currentText())
+            self.diameter.setSuffix(self.units.dUnits.currentText())
+
+            # sess = db.SessMake()
+            self.drags = self.data.drag_func
+
     def viewport_row(self):
         cursor = self.tableWidget.viewport().mapFromGlobal(QCursor().pos())
         return self.tableWidget.indexAt(cursor).row()
 
     def add_row(self):
         idx = self.tableWidget.rowCount()
-        self.tableWidget.setRowCount(idx+1)
+        self.tableWidget.setRowCount(idx + 1)
         self.tableWidget.setItem(idx, 0, QTableWidgetItem(''))
         self.tableWidget.setItem(idx, 1, QTableWidgetItem(''))
         self.tableWidget.setItem(idx, 2, QTableWidgetItem(''))
@@ -96,8 +109,6 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
 
     def add(self, df=None):
 
-        self.retranslateUi(self)
-
         if not df:
             df_type = DFTypeDlg()
 
@@ -111,7 +122,7 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
                 if drag_type in ['G1', 'G7']:
                     self.tableWidget.item(idx, 1).setText(f'{self._ch_df_text["bc"]}: {0.1:.3f}')
                 elif drag_type.endswith('Multi-BC'):
-                    self.tableWidget.item(idx, 1).setText(f'{self._ch_df_text["point"]}: 0')
+                    self.tableWidget.item(idx, 1).setText(f'{self._ch_df_text["points"]}: 0')
                 else:
                     self.tableWidget.item(idx, 1).setText(f'{self._ch_df_text["dfl"]}: 0')
 
@@ -124,7 +135,7 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
                 bc = f'{data:.3f}' if data else f'{self._ch_df_text["bc"]}: {0.1:.3f}'
             elif df.drag_type.endswith('Multi-BC'):
                 bc = 'Points: ' + str(len([(bc, v) for (bc, v) in df.data if bc > 0 and v >= 0])) \
-                    if isinstance(df.data, list) else f'{self._ch_df_text["point"]}: 0'
+                    if isinstance(df.data, list) else f'{self._ch_df_text["points"]}: 0'
             else:
                 bc = 'DFL: ' + str(len(df.data)) if isinstance(df.data, list) else f'{self._ch_df_text["dfl"]}: 0'
 
@@ -179,10 +190,11 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
     def get(self):
         sess = db.SessMake()
 
-        dimeter = self.get_cln(self.diameter, self.diameterQuantity)
-        diam = sess.query(Diameter).filter_by(diameter=dimeter).first()
+        # dimeter = self.get_cln(self.diameter, self.diameterQuantity)
+        diameter = Distance(self.diameter.value(), self.units.dUnits.currentData()).get_in(DistanceInch)
+        diam = sess.query(Diameter).filter_by(diameter=diameter).first()
         if not diam:
-            diam = Diameter(dimeter)
+            diam = Diameter(diameter)
             sess.add(diam)
             sess.commit()
         for i in range(self.tableWidget.rowCount()):
@@ -196,12 +208,11 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
         if self.call == 'edit':
             bullet = sess.query(Bullet).get(self.data.id)
             bullet.name = self.bulletName.text()
-            bullet.weight = self.weight.value()
-            bullet.length = self.length.value()
+            bullet.weight = Weight(self.weight.value(), self.units.wUnits.currentData()).get_in(WeightGrain)
+            bullet.length = Distance(self.length.value(), self.units.lnUnits.currentData()).get_in(DistanceInch)
             bullet.diameter_id = diam.id
 
             dfs = sess.query(DragFunc).filter_by(bullet_id=bullet.id).all()
-            print(dfs)
             for df in dfs:
                 sess.delete(df)
 
@@ -216,7 +227,6 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
                 sess.add(DragFunc(*df, bullet_id=new_bullet.id, attrs='rw'))
         sess.commit()
 
-
     def valid(self):
         return True
 
@@ -226,7 +236,6 @@ class CatalogBullet(QWidget, Ui_catalogBullet):
     def retranslateUi(self, catalogBullet):
         super(CatalogBullet, self).retranslateUi(catalogBullet)
         _translate = QCoreApplication.translate
-        print(self.window())
         self.title = _translate("catalogBullet", 'Bullet Edit')
         self._ch_df_text = {
             'bc': _translate("bullet", 'BC'),

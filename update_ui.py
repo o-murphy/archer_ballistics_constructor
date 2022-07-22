@@ -50,6 +50,7 @@ lines = r"""
     venv\Scripts\pyuic5 ui_templates\prof_conditions.ui -o gui\profiles_tab\profile_item_contents\templates\prof_conditions.py
     
     venv\Scripts\pyuic5 ui_templates\drop_table.ui -o gui\drag_func_editor\templates\drop_table.py
+    venv\Scripts\pyuic5 ui_templates\drop_table_edit.ui -o gui\drag_func_editor\templates\drop_table_edit.py
     
     venv\Scripts\pyuic5 ui_templates\smt.ui -o gui\recent_dialog\templates\recent_dlg.py
 

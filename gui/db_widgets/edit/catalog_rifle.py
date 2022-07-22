@@ -7,6 +7,10 @@ from dbworker.models import *
 from .caliber_edit import CaliberEdit
 
 
+from py_ballisticcalc.lib.bmath.unit import Distance, DistanceInch, DistanceMillimeter
+from gui.app_settings import AppSettings
+
+
 class CatalogRifle(QWidget, Ui_catalogRifle):
     def __init__(self, data=None, call=None):
         super(CatalogRifle, self).__init__()
@@ -19,20 +23,37 @@ class CatalogRifle(QWidget, Ui_catalogRifle):
 
         self.query_calibers()
 
-        if data:
-            self.data = data
-            self.rifleName.setText(data.name)
+        self.units = AppSettings()
 
-            self.caliberName.setCurrentIndex(self.caliberName.findData(data.caliber.id))
-            self.caliberName.setCurrentText(data.caliber.name)
-            self.sh.setValue(data.sh)
-            self.twist.setValue(data.twist)
-            self.rightTwist.setChecked(data.is_right)
-            self.caliberShort.setText(data.tile)
+        # if data:
+        #     self.data = data
+        #     self.rifleName.setText(data.name)
+        #
+        #     self.caliberName.setCurrentIndex(self.caliberName.findData(data.caliber.id))
+        #     self.caliberName.setCurrentText(data.caliber.name)
+        #     self.sh.setValue(data.sh)
+        #     self.twist.setValue(data.twist)
+        #     self.rightTwist.setChecked(data.is_right)
+        #     self.caliberShort.setText(data.tile)
+
+        self.set_widget_data()
 
         self.pushButton.clicked.connect(self.add_caliber)
 
         self.retranslateUi(self)
+
+    def set_widget_data(self):
+        if self.data:
+            self.rifleName.setText(self.data.name)
+            self.caliberName.setCurrentIndex(self.caliberName.findData(self.data.caliber.id))
+            self.caliberName.setCurrentText(self.data.caliber.name)
+            self.rightTwist.setChecked(self.data.is_right)
+            self.caliberShort.setText(self.data.tile)
+
+            self.sh.setValue(Distance(self.data.sh, DistanceMillimeter).get_in(self.units.shUnits.currentData()))
+            self.twist.setValue(Distance(self.data.twist, DistanceInch).get_in(self.units.twistUnits.currentData()))
+            self.sh.setSuffix(self.units.shUnits.currentText())
+            self.twist.setSuffix(self.units.twistUnits.currentText())
 
     def setConverter(self):
         self.weightQuantity.setItemData(0, self.convert.gr_to_g)
@@ -55,8 +76,8 @@ class CatalogRifle(QWidget, Ui_catalogRifle):
             rifle = sess.query(Rifle).get(self.data.id)
             rifle.name = self.rifleName.text()
             rifle.caliber_id = self.caliberName.currentData()
-            rifle.sh = self.sh.value()
-            rifle.twist = self.twist.value()
+            rifle.sh = Distance(self.sh.value(), self.units.shUnits.currentData()).get_in(DistanceMillimeter)
+            rifle.twist = Distance(self.twist.value(), self.units.twistUnits.currentData()).get_in(DistanceInch)
             rifle.is_right = self.rightTwist.isChecked()
             rifle.tile = self.caliberShort.text()
         else:

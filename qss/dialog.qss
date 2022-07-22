@@ -376,3 +376,16 @@ QTabWidget::pane {
 QToolButton, QPushButton {
     color: white;
 }
+
+QPushButton, QToolButton {
+    border: 1px solid rgb(76, 76, 76);
+	font-size: 14px;
+	border-radius: 4px;
+	padding: 2px 10px 2px 10px;
+}
+
+QPushButton:hover, QToolButton:hover {
+	border: 1px solid rgb(76, 76, 76);
+	border-radius: 4px;
+	background-color: rgb(76, 76, 76);
+}

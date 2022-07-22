@@ -1,7 +1,7 @@
 # from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize, QCoreApplication
 from PyQt5.QtWidgets import QDoubleSpinBox, QDialog, QSizePolicy, QComboBox, QGridLayout, QLabel, QDialogButtonBox, \
-    QApplication, QFileDialog
+    QApplication, QFileDialog, QWidget
 
 from gui.drag_func_editor.templates import Ui_DragFuncEditDialog
 from gui.drag_func_editor.drag_func_plot import DragPlot
@@ -10,6 +10,7 @@ from gui.drag_func_editor.drag_table import DragTable
 from gui.bc_table import BCTable
 from gui.drag_func_editor.drop_table_edit import DropTableEdit
 from gui.drag_func_editor.current_atmo_dialog import CurrentAtmoDialog
+from gui.db_widgets.edit.df_type_dlg import DFCombo
 from gui.stylesheet import load_qss
 
 from calculator import DragEditorState
@@ -45,6 +46,11 @@ class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
 
         self.mbc = BCTable(self)
         self.sbc = QDoubleSpinBox(self)
+        self.sbc.setMinimumSize(QSize(140, 0))
+        self.sbc.setMaximumSize(QSize(140, 16777215))
+        # self.sbc.setAlignment(Qt.AlignCenter)
+        self.sbc.setStyleSheet("""font-size: 14px""")
+
         self.sbc.setMaximum(10)
         self.sbc.setMinimum(0.001)
         self.sbc.setDecimals(3)
@@ -55,15 +61,12 @@ class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
         spolicy.setHorizontalPolicy(QSizePolicy.Expanding)
 
         self.sbc.setSizePolicy(spolicy)
+        self.retranslate()
 
-        self.calculation_mode = QComboBox(self)
-
-        self.calculation_mode.addItem('G7', 'G7')
-        self.calculation_mode.addItem('G7 Multi-BC', 'G7 Multi-BC')
-        self.calculation_mode.addItem('G1', 'G1')
-        self.calculation_mode.addItem('G1 Multi-BC', 'G1 Multi-BC')
-        self.calculation_mode.addItem('Custom drag func', 'Custom')
+        self.calculation_mode = DFCombo()
         self.calculation_mode.setCurrentIndex(self.calculation_mode.findData(self.state.df_type))
+        self.calculation_mode.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        self.calculation_mode.setStyleSheet("""font-size: 14px""")
 
         self.drag_plot = DragPlot('drag_plot')
         self.drop_plot = DropPlot('drop_plot')
@@ -82,6 +85,11 @@ class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
         self.setConnects()
         self.state_did_update(None)
         self.onStateUpdate.connect(self.state_did_update)
+
+    def retranslate(self):
+        if hasattr(self, 'sbc'):
+            _translate = QCoreApplication.translate
+            self.sbc.setPrefix(_translate('DragFuncEditDialog', 'BC: '))
 
     def setInputs(self):
         self.switch_calculation_mode()
@@ -286,10 +294,18 @@ class DragFuncEditDialog(QDialog, Ui_DragFuncEditDialog):
         self.gridLayout.addWidget(self.drag_plot, 0, 1, 2, 2)
         self.gridLayout.addWidget(self.drop_plot, 0, 1, 2, 2)
 
-        self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
-        self.gridLayout.addWidget(self.sbc, 0, 0, 1, 1)
+        self.calc_mode_widget = QWidget()
+        self.calc_mode_grid_layout = QGridLayout()
+        self.calc_mode_widget.setLayout(self.calc_mode_grid_layout)
+        self.calc_mode_grid_layout.addWidget(self.calculation_mode, 0, 0, 1, 1)
+        self.calc_mode_grid_layout.addWidget(self.mbc, 1, 0, 1, 1)
+        self.calc_mode_grid_layout.addWidget(self.sbc, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.calc_mode_widget, 0, 0, 2, 1)
 
-        self.gridLayout.addWidget(self.calculation_mode, 1, 0)
+        # self.gridLayout.addWidget(self.mbc, 0, 0, 1, 1)
+        # self.gridLayout.addWidget(self.sbc, 0, 0, 1, 1)
+        #
+        # self.gridLayout.addWidget(self.calculation_mode, 1, 0)
 
         self.gridLayout.addWidget(self.drop_table_edit, 0, 3, 2, 1)
         self.gridLayout.addWidget(self.dragTable, 5, 0, 1, 4)

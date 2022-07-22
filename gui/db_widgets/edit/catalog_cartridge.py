@@ -6,6 +6,9 @@ from dbworker import db
 from dbworker.models import *
 from .caliber_edit import CaliberEdit
 
+from py_ballisticcalc.lib.bmath.unit import Temperature, TemperatureCelsius, Velocity, VelocityMPS
+from gui.app_settings import AppSettings
+
 
 class CatalogCartridge(QWidget, Ui_catalogCartridge):
     def __init__(self, data: Cartridge = None, call=None):
@@ -17,25 +20,33 @@ class CatalogCartridge(QWidget, Ui_catalogCartridge):
         self.call = call
         self.data = data
 
+        self.units = AppSettings()
+
         self.set_calibers()
 
         self.msg = QMessageBox()
 
-        if self.data:
-            self.cartridgeName.setText(self.data.name)
-            self.mv.setValue(self.data.mv)
-            self.temp.setValue(self.data.temp)
-            self.ts.setValue(self.data.ts)
-            self.caliber.setCurrentIndex(self.caliber.findData(self.data.caliber.id))
-            self.set_bullets()
-            self.bullet.setCurrentIndex(self.bullet.findData(self.data.bullet.id))
-        else:
-            self.set_bullets()
+        self.set_widget_data()
 
         self.caliber.currentIndexChanged.connect(self.set_bullets)
         self.pushButton.clicked.connect(self.add_caliber)
 
         self.retranslateUi(self)
+
+    def set_widget_data(self):
+        if self.data:
+            self.cartridgeName.setText(self.data.name)
+            self.caliber.setCurrentIndex(self.caliber.findData(self.data.caliber.id))
+            self.mv.setValue(Velocity(self.data.mv, VelocityMPS).get_in(self.units.vUnits.currentData()))
+            self.temp.setValue(
+                Temperature(self.data.temp, TemperatureCelsius).get_in(self.units.tempUnits.currentData()))
+            self.mv.setSuffix(self.units.vUnits.currentText())
+            self.temp.setSuffix(self.units.tempUnits.currentText())
+            self.ts.setValue(self.data.ts)
+            self.set_bullets()
+            self.bullet.setCurrentIndex(self.bullet.findData(self.data.bullet.id))
+        else:
+            self.set_bullets()
 
     def set_bullets(self):
         sess = db.SessMake()
@@ -61,8 +72,8 @@ class CatalogCartridge(QWidget, Ui_catalogCartridge):
         if self.call == 'edit':
             cart: Cartridge = sess.query(Cartridge).get(self.data.id)
             cart.name = self.cartridgeName.text()
-            cart.mv = self.mv.value()
-            cart.temp = self.temp.value()
+            cart.mv = Velocity(self.mv.value(), self.units.vUnits.currentData()).get_in(VelocityMPS)
+            cart.temp = Temperature(self.temp.value(), self.units.tempUnits.currentData()).get_in(TemperatureCelsius)
             cart.ts = self.ts.value()
             cart.bullet_id = self.bullet.currentData()
             cart.caliber_id = self.caliber.currentData()

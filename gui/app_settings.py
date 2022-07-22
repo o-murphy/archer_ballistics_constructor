@@ -155,10 +155,10 @@ class AppSettings(QDialog, Ui_AppSettings):
         config.set('Locale', 'system', QLocale.system().name().split('_')[1].lower())
         if locale != 'en':
             if os.path.isfile(f'translate/eng-{locale}.qm'):
-                self.config.set('Locale', 'current', locale)
+                config.set('Locale', 'current', locale)
             else:
-                self.locale = config['Locale']['system']
-                self.config.set('Locale', 'current', locale)
+                locale = config['Locale']['system']
+                config.set('Locale', 'current', locale)
         else:
             config.set('Locale', 'current', locale)
         with open(CONFIG_PATH, 'w') as fp:
@@ -178,7 +178,7 @@ class AppSettings(QDialog, Ui_AppSettings):
         self.save_language_settings()
         self.save_exp_dfed()
         self.save_units_settings()
-        self.super().accept()
+        super().accept()
 
     def retranslateUi(self, AppSettings):
         super().retranslateUi(AppSettings)

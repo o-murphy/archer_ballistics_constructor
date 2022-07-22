@@ -14,9 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_dropTableEdit(object):
     def setupUi(self, dropTableEdit):
         dropTableEdit.setObjectName("dropTableEdit")
-        dropTableEdit.resize(200, 318)
-        dropTableEdit.setMinimumSize(QtCore.QSize(200, 0))
-        dropTableEdit.setMaximumSize(QtCore.QSize(200, 16777215))
+        dropTableEdit.resize(300, 318)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(dropTableEdit.sizePolicy().hasHeightForWidth())
+        dropTableEdit.setSizePolicy(sizePolicy)
+        dropTableEdit.setMinimumSize(QtCore.QSize(250, 0))
         self.gridLayout = QtWidgets.QGridLayout(dropTableEdit)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")

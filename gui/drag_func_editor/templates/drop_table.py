@@ -21,7 +21,6 @@ class Ui_dropTable(object):
         self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(dropTable)
         self.tableWidget.setMinimumSize(QtCore.QSize(200, 0))
-        self.tableWidget.setMaximumSize(QtCore.QSize(140, 16777215))
         self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)

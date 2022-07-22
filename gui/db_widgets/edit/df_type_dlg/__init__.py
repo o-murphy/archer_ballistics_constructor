@@ -1,1 +1,1 @@
-from .df_type import DFTypeDlg
+from .df_type import DFTypeDlg, DFCombo

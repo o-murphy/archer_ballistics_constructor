@@ -45,6 +45,7 @@ templates.append(r'gui\close_dialog\close_dlg.py')
 templates.append(r'gui\catalog_tab\catalog_selector.py')
 templates.append(r'gui\app_settings.py')
 templates.append(r'gui\db_widgets\edit\df_type_dlg\df_type.py')
+templates.append(r'gui\drag_func_editor\drag_func_edit_new.py')
 templates.append(r'archerbc.py')
 
 [print(i) for i in templates]
