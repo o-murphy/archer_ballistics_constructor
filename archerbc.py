@@ -11,6 +11,8 @@ from gui import MyTab
 from gui.stylesheet import load_qss
 from modules.env_update import CONFIG_PATH
 
+from extensions import Extend
+
 import configparser
 import os
 
@@ -43,6 +45,8 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.units = None
         self.setUnits()
+
+        self.extend = Extend(self)
 
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
 
@@ -98,6 +102,8 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.profiles_tab = EmptyProfilesTab(*sys.argv)
         self.my_tab = MyTab()
         self.catalog_tab = CatalogTab()
+
+        self.tabWidget.setObjectName('MainWindowTabWidget')
 
         self.tabWidget.addTab(self.profiles_tab, QtGui.QIcon(), 'Profiles')
         self.tabWidget.addTab(self.my_tab, QtGui.QIcon(), 'Templates')
