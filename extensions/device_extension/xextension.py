@@ -24,7 +24,7 @@ class EmptyTab(QWidget):
         self.setLayout(self.gridLayout)
         self.label = QLabel()
         self.label.setAlignment(Qt.AlignCenter)
-        self.label.setText('Extension currently unavailable')
+        self.label.setText('Extension will be available soon')
         self.layout().addWidget(self.label)
 
 

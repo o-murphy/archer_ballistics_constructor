@@ -4,7 +4,7 @@ import json
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QLine, QCoreApplication, QTranslator
 from PyQt5.QtGui import QPainter, QPen, QPixmap
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QTabWidget
 
 from .click_calc import ClickCalc
 from .layer import ReticleLayer, MagnifierEvent
@@ -12,6 +12,8 @@ from .reticle_types import Click
 
 from .widgets import dump_reticles
 from .templates import Ui_ReticlesTab
+
+from gui.stylesheet import load_qss
 
 
 XROOT_PATH = os.path.dirname(__file__)
@@ -24,11 +26,11 @@ DEFAULT_RET = {"name": "Cross", "multiplier": 10, "template": [
 
 class EmptyTab(QWidget, Ui_ReticlesTab):
 
-    def __init__(self, main_window):
-        super().__init__()
-        self.main_window = main_window
+    def __init__(self, parent):
+        super().__init__(parent=parent)
         self.lang = None
         self.translator = None
+        self.setObjectName('ReticlesTab')
 
         self.top = 300
         self.left = 300
@@ -71,6 +73,9 @@ class EmptyTab(QWidget, Ui_ReticlesTab):
         self.table.clicked.connect(self.table_clicked)
         self.btn.clicked.connect(self.btn_zoom)
         self.installEventFilter(self)
+
+        self.click_calc = ClickCalc()
+        self.click_calc.setStyleSheet(load_qss('qss\dialog.qss'))
 
         self.retranslateUi(self)
 
@@ -173,10 +178,10 @@ class EmptyTab(QWidget, Ui_ReticlesTab):
         self.load_table()
 
     def click_calculator(self):
-        dlg = ClickCalc()
-        ret = dlg.exec_()
+
+        ret = self.click_calc.exec_()
         if ret:
-            click = dlg.get_click()
+            click = self.click_calc.get_click()
             self.spin_x.setValue(click.x)
             self.spin_y.setValue(click.y)
             self.draw_layers()
@@ -300,3 +305,16 @@ class EmptyTab(QWidget, Ui_ReticlesTab):
             _translate('ReticlesTab', 'Hide')
         ])
 
+        tab_widget = self.window().findChild(QTabWidget, 'MainWindowTabWidget')
+
+        page = tab_widget.findChild(QWidget, self.objectName())
+        index = tab_widget.indexOf(page)
+        tab_widget.setTabText(index, _translate("ReticlesTab", 'Reticles'))
+
+        self.click_calc.setWindowTitle(_translate('ReticlesTab', 'Click Calculator'))
+        self.click_calc.label_crx.setText(_translate('ReticlesTab', 'Core horizontal resolution:'))
+        self.click_calc.label_cry.setText(_translate('ReticlesTab', 'Core vertical resolution:'))
+        self.click_calc.label_pxs.setText(_translate('ReticlesTab', 'Core pixel size (um):'))
+        self.click_calc.label_lf.setText(_translate('ReticlesTab', 'Lens focus:'))
+        self.click_calc.label_orx.setText(_translate('ReticlesTab', 'Output horizontal resolution'))
+        self.click_calc.label_ory.setText(_translate('ReticlesTab', 'Output vertical resolution:'))

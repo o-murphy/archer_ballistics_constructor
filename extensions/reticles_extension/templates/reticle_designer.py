@@ -60,15 +60,17 @@ class Ui_ReticlesTab(object):
         self.gridLayout.addWidget(self.spin_x, 2, 0, 1, 1)
         self.gridLayout.addWidget(self.spin_y, 2, 1, 1, 1)
 
-        self.combo = QtWidgets.QComboBox()
+        self.edit_click = QtWidgets.QPushButton('Click Calculator')
+        self.gridLayout.addWidget(self.edit_click, 2, 2, 1, 1)
 
-        self.gridLayout.addWidget(self.combo, 2, 2, 1, 1)
+        self.combo = QtWidgets.QComboBox()
+        self.gridLayout.addWidget(self.combo, 3, 3, 1, 1)
+
         self.mk_reticle2_x4 = QtWidgets.QPushButton('Сreate 4-zoom reticle2')
         self.gridLayout.addWidget(self.mk_reticle2_x4, 3, 0, 1, 1)
+
         self.progress = QtWidgets.QProgressBar()
         self.gridLayout.addWidget(self.progress, 3, 1, 1, 2)
-        self.edit_click = QtWidgets.QPushButton('Click Calculator')
-        self.gridLayout.addWidget(self.edit_click, 3, 3, 1, 1)
 
         self.item_adder = ItemAdder(self)
         self.item_adder.setText('Add')

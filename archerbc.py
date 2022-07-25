@@ -11,7 +11,7 @@ from gui import MyTab
 from gui.stylesheet import load_qss
 from modules.env_update import CONFIG_PATH
 
-from extensions import Extend
+from extensions import ExtendAll
 
 import configparser
 import os
@@ -36,6 +36,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.translator_custom = QtCore.QTranslator()
         self.translator_qt = QtCore.QTranslator()
 
+        self.lang = None
         self.config = configparser.ConfigParser()
         self.setupDriverCheck()
         self.setupUi(self)
@@ -46,7 +47,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.units = None
         self.setUnits()
 
-        self.extend = Extend(self)
+        self.extend = ExtendAll(self)
 
         self.setLang()
 
@@ -142,7 +143,6 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tabWidget.setTabText(0, _translate("MainWindow", 'Profiles'))
         self.tabWidget.setTabText(1, _translate("MainWindow", 'Templates'))
         self.tabWidget.setTabText(2, _translate("MainWindow", 'Catalog'))
-
 
 def main():
     os.chdir(os.path.dirname(__file__))

@@ -9,8 +9,9 @@ class XExtension(Extension):
     def include(self):
         if self.enter_point:
             ch: QTabWidget = self.enter_point.findChild(QTabWidget, 'MainWindowTabWidget')
-            tab = EmptyTab(self.enter_point)
+            tab = EmptyTab(ch)
             ch.addTab(tab, QIcon(), 'Reticles')
+
 
 
 if __name__ == '__main__':
