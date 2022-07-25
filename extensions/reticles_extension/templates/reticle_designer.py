@@ -8,11 +8,8 @@ from ..widgets import ReticleTable, ItemAdder
 class Ui_ReticlesTab(object):
     def setupUi(self, ReticlesTab):
         ReticlesTab.setObjectName("ReticlesTab")
-        # self.centralwidget = QtWidgets.QWidget(ReticlesTab)
-        # self.centralwidget.setObjectName("centralwidget")
 
         self.gridLayout = QtWidgets.QGridLayout(self)
-        # self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
 
         self.background = PixmapLayer(self.pm_width, self.pm_height, QtCore.Qt.gray)
@@ -73,11 +70,6 @@ class Ui_ReticlesTab(object):
         self.edit_click = QtWidgets.QPushButton('Click Calculator')
         self.gridLayout.addWidget(self.edit_click, 3, 3, 1, 1)
 
-        # self.preview = QtWidgets.QPushButton('Preview')
-        # self.gridLayout.addWidget(self.preview)
-
         self.item_adder = ItemAdder(self)
         self.item_adder.setText('Add')
         self.gridLayout.addWidget(self.item_adder, 2, 3)
-
-        # ReticlesTab.setCentralWidget(self.centralwidget)

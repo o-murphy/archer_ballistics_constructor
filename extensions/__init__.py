@@ -1,1 +1,1 @@
-from .extensions import Extension, Extend
+from .extension_importer import Extension, Extend

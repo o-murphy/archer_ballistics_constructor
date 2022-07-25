@@ -109,197 +109,197 @@
         <translation>Одиниці виміру</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="186"/>
+        <location filename="../gui/app_settings.py" line="194"/>
         <source> inch</source>
         <translation> дюйм</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="187"/>
+        <location filename="../gui/app_settings.py" line="195"/>
         <source> ln</source>
         <translation> лін.</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="188"/>
+        <location filename="../gui/app_settings.py" line="196"/>
         <source> yd</source>
         <translation> ярд.</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="189"/>
+        <location filename="../gui/app_settings.py" line="197"/>
         <source> ft</source>
         <translation> фут</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="190"/>
+        <location filename="../gui/app_settings.py" line="198"/>
         <source> mm</source>
         <translation> мм</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="191"/>
+        <location filename="../gui/app_settings.py" line="199"/>
         <source> cm</source>
         <translation> см</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="192"/>
+        <location filename="../gui/app_settings.py" line="200"/>
         <source> m</source>
         <translation> м</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="193"/>
+        <location filename="../gui/app_settings.py" line="201"/>
         <source> km</source>
         <translation> км</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="194"/>
+        <location filename="../gui/app_settings.py" line="202"/>
         <source> mi</source>
         <translation> миля</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="195"/>
+        <location filename="../gui/app_settings.py" line="203"/>
         <source> nm</source>
         <translation> м. миля</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="196"/>
+        <location filename="../gui/app_settings.py" line="204"/>
         <source> rad</source>
         <translation> рад</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="198"/>
+        <location filename="../gui/app_settings.py" line="206"/>
         <source> mrad</source>
         <translation> мрад</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="199"/>
+        <location filename="../gui/app_settings.py" line="207"/>
         <source> ths</source>
         <translation> тис</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="200"/>
+        <location filename="../gui/app_settings.py" line="208"/>
         <source> mil</source>
         <translation> mil</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="201"/>
+        <location filename="../gui/app_settings.py" line="209"/>
         <source> moa</source>
         <translation> moa</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="205"/>
+        <location filename="../gui/app_settings.py" line="213"/>
         <source> J</source>
         <translation> Дж</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="206"/>
+        <location filename="../gui/app_settings.py" line="214"/>
         <source> mmHg</source>
         <translation> мм рт. ст.</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="207"/>
+        <location filename="../gui/app_settings.py" line="215"/>
         <source> inHg</source>
         <translation> дюйм. рт. ст.</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="208"/>
+        <location filename="../gui/app_settings.py" line="216"/>
         <source> bar</source>
         <translation> бар</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="209"/>
+        <location filename="../gui/app_settings.py" line="217"/>
         <source> hPa</source>
         <translation> гПа</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="210"/>
+        <location filename="../gui/app_settings.py" line="218"/>
         <source> psi</source>
         <translation> psi</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="211"/>
+        <location filename="../gui/app_settings.py" line="219"/>
         <source> gr</source>
         <translation> гр</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="212"/>
+        <location filename="../gui/app_settings.py" line="220"/>
         <source> g</source>
         <translation> г</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="213"/>
+        <location filename="../gui/app_settings.py" line="221"/>
         <source> kg</source>
         <translation> кг</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="214"/>
+        <location filename="../gui/app_settings.py" line="222"/>
         <source> lb</source>
         <translation> фунт</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="215"/>
+        <location filename="../gui/app_settings.py" line="223"/>
         <source> N</source>
         <translation> Н</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="216"/>
+        <location filename="../gui/app_settings.py" line="224"/>
         <source> oz</source>
         <translation> унц</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="217"/>
+        <location filename="../gui/app_settings.py" line="225"/>
         <source> °C</source>
         <translation> °C</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="218"/>
+        <location filename="../gui/app_settings.py" line="226"/>
         <source> °F</source>
         <translation> °F</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="219"/>
+        <location filename="../gui/app_settings.py" line="227"/>
         <source> °K</source>
         <translation> °K</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="220"/>
+        <location filename="../gui/app_settings.py" line="228"/>
         <source> °R</source>
         <translation> °R</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="221"/>
+        <location filename="../gui/app_settings.py" line="229"/>
         <source> m/s</source>
         <translation> м/с</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="222"/>
+        <location filename="../gui/app_settings.py" line="230"/>
         <source> km/h</source>
         <translation> км/год</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="223"/>
+        <location filename="../gui/app_settings.py" line="231"/>
         <source> ft/s</source>
         <translation> фут/с</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="224"/>
+        <location filename="../gui/app_settings.py" line="232"/>
         <source> mph</source>
         <translation> миль/год</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="225"/>
+        <location filename="../gui/app_settings.py" line="233"/>
         <source> kt</source>
         <translation> кт</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="197"/>
+        <location filename="../gui/app_settings.py" line="205"/>
         <source> °</source>
         <translation> °</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="202"/>
+        <location filename="../gui/app_settings.py" line="210"/>
         <source> cm/100m</source>
         <translation> см/100м</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="203"/>
+        <location filename="../gui/app_settings.py" line="211"/>
         <source> in/100yd</source>
         <translation> дюйм/100ярд</translation>
     </message>
@@ -309,7 +309,7 @@
         <translation type="obsolete">фут*фунт</translation>
     </message>
     <message>
-        <location filename="../gui/app_settings.py" line="204"/>
+        <location filename="../gui/app_settings.py" line="212"/>
         <source> ft*lb</source>
         <translation>фут*фунт</translation>
     </message>
@@ -330,11 +330,6 @@
 <context>
     <name>BCTable</name>
     <message>
-        <location filename="../gui/bc_table/bc_table.py" line="80"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/bc_table/bc_table.py" line="82"/>
         <source>BC</source>
         <translation>БК</translation>
@@ -343,6 +338,11 @@
         <location filename="../gui/bc_table/bc_table.py" line="83"/>
         <source>V</source>
         <translation>Шв.</translation>
+    </message>
+    <message>
+        <location filename="../gui/bc_table/bc_table.py" line="80"/>
+        <source>Form</source>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -455,7 +455,7 @@ Do you want to save changes?</source>
     <message>
         <location filename="../gui/drag_func_editor/templates/current_atmo_dialog.py" line="391"/>
         <source>Angle:</source>
-        <translation></translation>
+        <translation>Кут:</translation>
     </message>
 </context>
 <context>
@@ -620,21 +620,6 @@ Do you want to save changes?</source>
         <translation>Підняти кінець</translation>
     </message>
     <message>
-        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="240"/>
-        <source>Mach</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="244"/>
-        <source>MIL</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="245"/>
-        <source>MOA</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="253"/>
         <source>Export</source>
         <translation>Експорт</translation>
@@ -670,9 +655,24 @@ Do you want to save changes?</source>
         <translation type="obsolete">БК</translation>
     </message>
     <message>
-        <location filename="../gui/drag_func_editor/drag_func_edit_new.py" line="89"/>
+        <location filename="../gui/drag_func_editor/drag_func_edit_new.py" line="92"/>
         <source>BC: </source>
         <translation>БК: </translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="240"/>
+        <source>Mach</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="244"/>
+        <source>MIL</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drag_func_edit.py" line="245"/>
+        <source>MOA</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -731,14 +731,14 @@ Do you want to save changes?</source>
 <context>
     <name>LPC_dialog</name>
     <message>
-        <location filename="../gui/lpc_install_dialog/lpc_dlg.py" line="56"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/lpc_install_dialog/lpc_dlg.py" line="57"/>
         <source>Do you want to install driver?</source>
         <translation>Чи хочете ви встановити драйвери?</translation>
+    </message>
+    <message>
+        <location filename="../gui/lpc_install_dialog/lpc_dlg.py" line="56"/>
+        <source>Form</source>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -1024,17 +1024,17 @@ Do you want to save changes?</source>
         <translation type="obsolete">Лівий</translation>
     </message>
     <message>
-        <location filename="../archerbc.py" line="133"/>
+        <location filename="../archerbc.py" line="141"/>
         <source>Profiles</source>
         <translation>Профілі</translation>
     </message>
     <message>
-        <location filename="../archerbc.py" line="134"/>
+        <location filename="../archerbc.py" line="142"/>
         <source>Templates</source>
         <translation>Шаблони</translation>
     </message>
     <message>
-        <location filename="../archerbc.py" line="135"/>
+        <location filename="../archerbc.py" line="143"/>
         <source>Catalog</source>
         <translation>Каталог</translation>
     </message>
@@ -1055,6 +1055,29 @@ Do you want to save changes?</source>
         <location filename="../gui/my_tab/templates_selector.py" line="58"/>
         <source>Cartridges</source>
         <translation>Набої</translation>
+    </message>
+</context>
+<context>
+    <name>ReticlesTab</name>
+    <message>
+        <location filename="../archerbc.py" line="141"/>
+        <source>Profiles</source>
+        <translation type="obsolete">Профілі</translation>
+    </message>
+    <message>
+        <location filename="../archerbc.py" line="142"/>
+        <source>Templates</source>
+        <translation type="obsolete">Шаблони</translation>
+    </message>
+    <message>
+        <location filename="../archerbc.py" line="143"/>
+        <source>Catalog</source>
+        <translation type="obsolete">Каталог</translation>
+    </message>
+    <message>
+        <location filename="../extensions/reticles_extension/main.py" line="280"/>
+        <source>Zoom</source>
+        <translation type="obsolete">Зум</translation>
     </message>
 </context>
 <context>
@@ -1462,11 +1485,6 @@ Do you want to save changes?</source>
         <translation>Вага:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/info/templates/catalog_bullet_info.py" line="161"/>
-        <source>weight</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/db_widgets/info/templates/catalog_bullet_info.py" line="162"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
@@ -1501,6 +1519,11 @@ Do you want to save changes?</source>
         <source>Empty</source>
         <translation>Нема даних</translation>
     </message>
+    <message>
+        <location filename="../gui/db_widgets/info/templates/catalog_bullet_info.py" line="161"/>
+        <source>weight</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>catalogBulletList</name>
@@ -1508,11 +1531,6 @@ Do you want to save changes?</source>
         <location filename="../gui/db_widgets/tables/templates/catalog_bullet_list.py" line="58"/>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-    <message>
-        <location filename="../gui/db_widgets/tables/templates/catalog_bullet_list.py" line="61"/>
-        <source>id</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/tables/templates/catalog_bullet_list.py" line="63"/>
@@ -1533,6 +1551,11 @@ Do you want to save changes?</source>
         <location filename="../gui/db_widgets/tables/templates/catalog_bullet_list.py" line="69"/>
         <source>Diameter</source>
         <translation>Діаметер</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/tables/templates/catalog_bullet_list.py" line="61"/>
+        <source>id</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1646,26 +1669,6 @@ Do you want to save changes?</source>
         <translation>Куля:</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="155"/>
-        <source>ts</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="156"/>
-        <source>Cartridge name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="157"/>
-        <source>mv</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="158"/>
-        <source>t</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="159"/>
         <source>Temperature sensitivity:</source>
         <translation>Температурна чутливість:</translation>
@@ -1700,6 +1703,26 @@ Do you want to save changes?</source>
         <source>Empty</source>
         <translation>Нема даних</translation>
     </message>
+    <message>
+        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="155"/>
+        <source>ts</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="156"/>
+        <source>Cartridge name</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="157"/>
+        <source>mv</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/info/templates/catalog_cartridge_info.py" line="158"/>
+        <source>t</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>catalogCartridgeList</name>
@@ -1707,11 +1730,6 @@ Do you want to save changes?</source>
         <location filename="../gui/db_widgets/tables/templates/catalog_cartridge_list.py" line="53"/>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-    <message>
-        <location filename="../gui/db_widgets/tables/templates/catalog_cartridge_list.py" line="56"/>
-        <source>id</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../gui/db_widgets/tables/templates/catalog_cartridge_list.py" line="58"/>
@@ -1732,6 +1750,11 @@ Do you want to save changes?</source>
         <location filename="../gui/db_widgets/tables/templates/catalog_cartridge_list.py" line="64"/>
         <source>Velocity</source>
         <translation>Швидкість</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/tables/templates/catalog_cartridge_list.py" line="56"/>
+        <source>id</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1887,11 +1910,6 @@ Do you want to save changes?</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gui/db_widgets/tables/templates/catalog_rifle_list.py" line="58"/>
-        <source>id</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/db_widgets/tables/templates/catalog_rifle_list.py" line="60"/>
         <source>Name</source>
         <translation>Назва</translation>
@@ -1910,6 +1928,11 @@ Do you want to save changes?</source>
         <location filename="../gui/db_widgets/tables/templates/catalog_rifle_list.py" line="66"/>
         <source>Twist</source>
         <translation>Крок нарізів</translation>
+    </message>
+    <message>
+        <location filename="../gui/db_widgets/tables/templates/catalog_rifle_list.py" line="58"/>
+        <source>id</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2075,11 +2098,6 @@ Do you want to save changes?</source>
 <context>
     <name>dropTable</name>
     <message>
-        <location filename="../gui/drag_func_editor/templates/drop_table.py" line="47"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="50"/>
         <source>dist</source>
         <translation type="obsolete">Дист.</translation>
@@ -2108,6 +2126,11 @@ Do you want to save changes?</source>
         <location filename="../gui/drag_func_editor/templates/drop_table.py" line="53"/>
         <source>Correction</source>
         <translation>Коррекція</translation>
+    </message>
+    <message>
+        <location filename="../gui/drag_func_editor/templates/drop_table.py" line="47"/>
+        <source>Form</source>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -2792,19 +2815,9 @@ Do you want to save changes?</source>
         <translation>Ctrl+Del</translation>
     </message>
     <message>
-        <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="160"/>
-        <source>Move up (CTRL+Up)</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="161"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Up</translation>
-    </message>
-    <message>
-        <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="158"/>
-        <source>Move down (CTRL+Up)</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="150"/>
@@ -2840,6 +2853,16 @@ Do you want to save changes?</source>
         <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="155"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="158"/>
+        <source>Move down (CTRL+Up)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gui/profiles_tab/templates/profiles_tools.py" line="160"/>
+        <source>Move up (CTRL+Up)</source>
+        <translation></translation>
     </message>
 </context>
 <context>

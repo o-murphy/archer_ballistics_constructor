@@ -1,5 +1,6 @@
 from construct import Struct, Container, Const, Int32ul, Int32sl, BitStruct, BitsInteger, ByteSwapped
 from PyQt5.QtGui import QImage
+import os
 
 
 HEADER = Struct(
@@ -41,6 +42,7 @@ class ImgMap(object):
     def __init__(self, img: QImage):
         self._img = img
         self.data = None
+        # if self._img.size().height() > 0 and self._img.size().width() > 0:
         self._parse()
 
     def _parse(self):
@@ -245,67 +247,17 @@ class PXL4(object):
             RETICLE_H2_D2 = Struct('header' / HEADER_H2, *reticle_2)
             reticle_h2_d2 = RETICLE_H2_D2.parse(data)
 
-            # print(dict(reticle_h2_d2.header))
-
-            # point0 = reticle_h2_d2['small_ret_0[0]']
-            # point1 = reticle_h2_d2['small_ret_0[1]']
-            # point0_bytes = point0.to_bytes(4, 'little')
-            # point1_bytes = point1.to_bytes(4, 'little')
-            #
-            # p_struct = ByteSwapped(BitStruct(
-            #     'x' / BitsInteger(12),
-            #     'y' / BitsInteger(10),
-            #     'q' / BitsInteger(10),
-            # ))
-            #
-            # print(print(point0_bytes), p_struct.parse(point0_bytes))
-            # print(print(point1_bytes), p_struct.parse(point1_bytes))
-
-# ret0 = [ImgMap(QImage(f'reticle_templates/small.bmp'))]
+XROOT_PATH = os.path.dirname(__file__)
 
 SMALL_RETS = [
-    Reticle4z(ImgMap(QImage(f'reticle_templates/small.bmp')))
+    Reticle4z(ImgMap(QImage(f'{XROOT_PATH}/reticle_templates/small.bmp')))
 ]
 
 LRF_RETS = [
-    Reticle4z(ImgMap(QImage('reticle_templates/lrf1.bmp'))),
-    Reticle4z(ImgMap(QImage('reticle_templates/lrf2.bmp'))),
-    Reticle4z(ImgMap(QImage('reticle_templates/lrf3.bmp')))
+    Reticle4z(ImgMap(QImage(f'{XROOT_PATH}/reticle_templates/lrf1.bmp'))),
+    Reticle4z(ImgMap(QImage(f'{XROOT_PATH}/reticle_templates/lrf2.bmp'))),
+    Reticle4z(ImgMap(QImage(f'{XROOT_PATH}/reticle_templates/lrf3.bmp')))
 ]
 
 if __name__ == '__main__':
-
-    ret1 = [ImgMap(QImage(f'_1_7x1_7_z1.bmp'))]
-
-    ret2 = []
-    ret3 = []
-    ret4 = []
-    ret5 = []
-    ret6 = []
-
-    for i in range(1, 5):
-        ret2.append(ImgMap(QImage(f'3 MIL-R_1_7x1_7_z{i}.bmp')))
-
-    for i in range(1, 5):
-        ret3.append(ImgMap(QImage(f'MIL-XT_1_7x1_7_z{i}.bmp')))
-
-    for i in range(1, 5):
-        ret4.append(ImgMap(QImage(f'MRAD_1_7x1_7_z{i}.bmp')))
-
-    for i in range(1, 5):
-        ret5.append(ImgMap(QImage(f'MSR2_1_7x1_7_z{i}.bmp')))
-
-    for i in range(1, 5):
-        ret6.append(ImgMap(QImage(f'____1_7x1_7_z{i}.bmp')))
-
-    BASE_RETS = [
-        Reticle4z(*ret1),
-        Reticle4z(*ret2),
-        Reticle4z(*ret3),
-        Reticle4z(*ret4),
-        Reticle4z(*ret5),
-        Reticle4z(*ret6),
-    ]
-
-    new_dump = PXL4.dump(SMALL_RETS, [], BASE_RETS, LRF_RETS)
-    file_data = PXL4.build(new_dump)
+    pass

@@ -37,16 +37,18 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.translator_qt = QtCore.QTranslator()
 
         self.config = configparser.ConfigParser()
-        self.setLang()
         self.setupDriverCheck()
         self.setupUi(self)
         self.setupWidgets()
+
         self.setQss()
 
         self.units = None
         self.setUnits()
 
         self.extend = Extend(self)
+
+        self.setLang()
 
         # self.setWindowIcon(QtGui.QIcon('Icon.png'))
 
@@ -67,26 +69,26 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
             with open(CONFIG_PATH, 'w') as fp:
                 self.config.write(fp)
 
-        self.locale = self.config['Locale']['current']
+        self.lang = self.config['Locale']['current']
 
         app = QtCore.QCoreApplication.instance()
         app.removeTranslator(self.translator_qt)
         app.removeTranslator(self.translator_custom)
 
-        if self.locale != 'en':
-            if not os.path.isfile(f'translate/eng-{self.locale}.qm'):
-                self.locale = self.config['Locale']['system']
-                self.config.set('Locale', 'current', self.locale)
+        if self.lang != 'en':
+            if not os.path.isfile(f'translate/eng-{self.lang}.qm'):
+                self.lang = self.config['Locale']['system']
+                self.config.set('Locale', 'current', self.lang)
 
             with open(CONFIG_PATH, 'w') as fp:
                 self.config.write(fp)
-            if self.locale != 'en':
+            if self.lang != 'en':
 
                 self.translator_custom = QtCore.QTranslator()
-                self.translator_custom.load(f'translate/eng-{self.locale}.qm')
+                self.translator_custom.load(f'translate/eng-{self.lang}.qm')
 
                 self.translator_qt = QtCore.QTranslator()
-                self.translator_qt.load(f'translate/qtbase_{self.locale}.qm')
+                self.translator_qt.load(f'translate/qtbase_{self.lang}.qm')
 
                 app.installTranslator(self.translator_qt)
                 app.installTranslator(self.translator_custom)
@@ -94,6 +96,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         for c in self.findChildren(QtWidgets.QWidget):
             if hasattr(c, 'retranslateUi'):
                 c.retranslateUi(c)
+        self.retranslate_tabs()
 
     def setupDriverCheck(self):
         self.lpc_dialog = LPC_dialog()
@@ -109,7 +112,7 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tabWidget.addTab(self.my_tab, QtGui.QIcon(), 'Templates')
         self.tabWidget.addTab(self.catalog_tab, QtGui.QIcon(), 'Catalog')
 
-        self.retranslate_tabs()
+        # self.retranslate_tabs()
 
         footer_widget = FooterWidget(self)
         self.__setattr__('footer_widget', footer_widget)
@@ -136,9 +139,9 @@ class ExampleApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def retranslate_tabs(self):
         _translate = QtCore.QCoreApplication.translate
-        self.tabWidget.setTabText(0, _translate("ReticlesTab", 'Profiles'))
-        self.tabWidget.setTabText(1, _translate("ReticlesTab", 'Templates'))
-        self.tabWidget.setTabText(2, _translate("ReticlesTab", 'Catalog'))
+        self.tabWidget.setTabText(0, _translate("MainWindow", 'Profiles'))
+        self.tabWidget.setTabText(1, _translate("MainWindow", 'Templates'))
+        self.tabWidget.setTabText(2, _translate("MainWindow", 'Catalog'))
 
 
 def main():

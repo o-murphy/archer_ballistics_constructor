@@ -48,6 +48,8 @@ templates.append(r'gui\db_widgets\edit\df_type_dlg\df_type.py')
 templates.append(r'gui\drag_func_editor\drag_func_edit_new.py')
 templates.append(r'archerbc.py')
 
+# templates.append(r'extensions/reticles_extension/main.py')
+
 [print(i) for i in templates]
 
 os.system('pylupdate5 ' + ' '.join(templates) + ' -ts ' + filepath + '.ts')
