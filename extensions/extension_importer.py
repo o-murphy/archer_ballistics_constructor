@@ -2,11 +2,12 @@ import importlib
 import os
 from pathlib import Path
 from PyQt5.QtWidgets import QMainWindow, QWidget
+from modules.env_update import USER_ARCHERBC
 
 import logging
 
 logging.basicConfig(level=logging.INFO,
-                    filename="extensions/extension_importer.log",
+                    filename=f"{USER_ARCHERBC}/x_importer.log",
                     filemode='w',
                     format='%(asctime)s [%(name)-10s] %(levelname)-8s %(message)s')
 log = logging.getLogger('x_importer')
