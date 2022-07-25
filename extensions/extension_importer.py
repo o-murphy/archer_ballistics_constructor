@@ -34,23 +34,23 @@ class ExtendAll(object):
                 lib = None
                 try:
                     lib = importlib.import_module('extensions.' + p.name, package=str(p))
-                    log.info(f'[{lib.__name__}]\timport OK')
+                    log.info(f'[{lib.__name__}] import OK')
                     extension = lib.XExtension(self.enter_point)
-                    log.info(f'[{lib.__name__}.{type(extension).__name__}]\tload OK')
+                    log.info(f'[{lib.__name__}.{type(extension).__name__}] load OK')
                     extension.include()
                 except ImportError as error:
                     log.warning(error)
                 except AttributeError as error:
                     if lib:
-                        log.warning(f'[{lib.__name__}]\t{error.__class__.__name__}:\t{error}')
+                        log.warning(f'[{lib.__name__}] {error.__class__.__name__}: {error}')
                     else:
-                        log.warning(f'[RuntimeWarning]\t{error.__class__.__name__}:\t{error}')
+                        log.warning(f'[RuntimeWarning] {error.__class__.__name__}: {error}')
 
                 except Exception as error:
                     if lib:
-                        log.warning(f'[{lib.__name__}]\t{error.__class__.__name__}:\t{error}')
+                        log.warning(f'[{lib.__name__}] {error.__class__.__name__}: {error}')
                     else:
-                        log.warning(f'[RuntimeWarning]\t{error.__class__.__name__}:\t{error}')
+                        log.warning(f'[RuntimeWarning] {error.__class__.__name__}: {error}')
 
     def import_extension(self):
         pass
